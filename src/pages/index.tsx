@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Row } from "@/components/Row";
+import { Button } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function Home() {
             <Row.li>2</Row.li>
             <Row.li>3</Row.li>
             <Row.li>4</Row.li>
-            <Row.li>5</Row.li>
+            <Row.li>
+              <Button filled="contained">asdasd</Button>
+            </Row.li>
           </Row.ul>
         </div>
       </main>
