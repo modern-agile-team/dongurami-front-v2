@@ -2,25 +2,10 @@
 
 ### 인덕대학교 학생들을 동아리 서비스
 
-> v1 개발 일자 : 2021.08.01 ~ 2022.1.31
+> v1 개발 일자 : 2021.08.01 ~ 2022.1.31 <br/>
 > v2 개발 일자 : 2023.11.14 ~
 
-</br>
-
-* <a href="#-기술-스택">기술 스택</a>  
-
-* <a href="#-Git-Flow">Git Flow</a> 
-
-* <a href="#-데이터베이스-ERD">ERD</a> 
-
-* <a href="#-커밋-전략">커밋</a>  
-  
-* <a href="#-협업">협업</a> 
-
-* <a href="https://lovelyoch.notion.site/Dongurami-b5054bb288994d9c90d2d88a1642cb50">Notion</a>
-<br/>
-
-<br/>
+<br/> 
 <br/>
 
 ## 👨‍💻 기술 스택
@@ -29,10 +14,11 @@
   FrontEnd
 </h3>
 <p align="center">  
-  <img src="https://img.shields.io/badge/HTML-white?logo=html5"/>
-  <img src= "https://img.shields.io/badge/CSS-blue?logo=css3"/> 
-  <img src= "https://img.shields.io/badge/Next-blue?logo=react"/>
-  <img src= "https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript"/> 
+  <img src= "https://img.shields.io/badge/Next-black?logo=nextdotjs"/>
+  <img src= "https://img.shields.io/badge/Typescript-black?logo=typescript"/> 
+  <img src= "https://img.shields.io/badge/Emotion-black"/> 
+  <img src= "https://img.shields.io/badge/ReactQuery-black?logo=reactquery"/> 
+  <img src= "https://img.shields.io/badge/recoil-black?logo=recoil"/> 
 </p>
 
 <h3 align="center">  
