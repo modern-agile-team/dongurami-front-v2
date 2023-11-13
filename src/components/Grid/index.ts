@@ -4,4 +4,4 @@
  * Copyright (c) 2023 Your Company
  */
 
-export { default } from "./domElement";
+export { default as Grid } from "./Grid";
