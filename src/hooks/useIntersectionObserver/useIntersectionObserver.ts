@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
  * @param dependencies 의존성 배열
  * @param options IntersectionObserver 옵션
  * @returns ```tsx
- * 	type observerRef = (node: Element) => void; // 감지를 원하는 dom에 주입할 ref
+ * 	type observerRef =  RefObject<E>; // 감지를 원하는 dom에 주입할 ref
  *  type isShow = boolean; // 해당 dom이 화면에 렌더됐는지 여부
  *
  * 	examples
