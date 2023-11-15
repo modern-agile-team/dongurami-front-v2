@@ -4,10 +4,14 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { Row } from "@/components/Row";
 import { Button } from "@/components";
+import { SwitchCase } from "@/lib";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [condition, setCondition] = useState(0);
+
   return (
     <>
       <Head>
@@ -18,6 +22,19 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
+          <Button filled="contained" onClick={() => setCondition(condition + 1)}>
+            condition +1
+          </Button>
+          <span>{condition}</span>
+          <SwitchCase
+            condition={condition}
+            cases={{
+              0: <div>현재 조건은 0</div>,
+              1: <div>현재 조건은 1</div>,
+              2: <div>현재 조건은 2</div>,
+            }}
+            defaultCase={<div>예외 케이스</div>}
+          />
           <Row.ul gap={4}>
             <Row.li>1</Row.li>
             <Row.li>2</Row.li>

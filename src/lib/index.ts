@@ -8,3 +8,4 @@ export * from "./createStyled";
 export * from "./breakPoint";
 export { default as domElementList } from "./domElement";
 export * from "./filterHTMLAttribute";
+export * from "./SwitchCase";
