@@ -2,9 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Row } from "@/components/Row";
-import { Button } from "@/components";
-import { SwitchCase } from "@/lib";
+import { Button, Row, SwitchCase } from "@/components";
 import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
