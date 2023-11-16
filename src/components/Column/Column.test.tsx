@@ -1,18 +1,8 @@
-/**
- * @copyright (C) 2023, Rsupport. All rights reserved
+/*
+ * Created on Thu Nov 16 2023
  *
- * @license
- * This software and/or source code may be used, copied and/or disseminated only
- * with the written permission of Rsupport, or in accordance with the terms
- * and conditions stipulated in the agreement/contract under which the software
- * and/or source code has been supplied by Rsupport or its affiliates.
- * Unauthorized use, copying, or dissemination of this file, via any medium, is
- * strictly prohibited, and will constitute an infringement of copyright.
- *
- * @description
- *
- * @created at Thu Aug 17 2023
- **/
+ * Copyright (c) 2023 Your Company
+ */
 
 import { useRef } from "react";
 import { render, renderHook } from "@testing-library/react";
