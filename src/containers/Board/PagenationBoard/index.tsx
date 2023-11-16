@@ -32,16 +32,16 @@ export default function PagenationBoard() {
 
   const router = useRouter();
 
-  function onClickButton(ev: React.MouseEvent<HTMLButtonElement>) {
+  function handleClickButton(ev: React.MouseEvent<HTMLButtonElement>) {
     const target = ev.currentTarget as HTMLButtonElement;
     router.push({
       query: { page: target.dataset.num },
     });
   }
 
-  function onClickPost() {
+  function handleClickPost() {
     router.push({
-      //
+      //todo
     });
   }
   return (
@@ -49,7 +49,7 @@ export default function PagenationBoard() {
       <Grid tag="div" column={1}>
         {dummyData.map((el, idx) => {
           return (
-            <div key={idx} onClick={onClickPost}>
+            <div key={idx} onClick={handleClickPost}>
               {el.author} | {el.title} | {el.date} | {el.view}
             </div>
           );
@@ -65,7 +65,7 @@ export default function PagenationBoard() {
               shape="circle"
               size="xs"
               filled="contained"
-              onClick={onClickButton}
+              onClick={handleClickButton}
             >
               {el}
             </Button>
