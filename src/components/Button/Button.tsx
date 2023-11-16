@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { Theme, useTheme } from "@emotion/react";
+import { Theme } from "@emotion/react";
 
 import * as S from "./emotion";
 
@@ -25,15 +25,8 @@ export default function Button({
   backgroundColor = "primary",
   ...rest
 }: Partial<ButtonProps>) {
-  const theme = useTheme();
   return (
-    <S.ButtonContainer
-      css={[S.ButtonCSS({ theme, filled, shape, size, backgroundColor })]}
-      verticalAlign="center"
-      gap={4}
-      role="button"
-      {...rest}
-    >
+    <S.ButtonContainer verticalAlign="center" gap={4} role="button" {...rest}>
       {rest.startEnhancer && <div>{rest.startEnhancer}</div>}
       {rest.children}
       {rest.endEnhancer && <div>{rest.endEnhancer}</div>}
