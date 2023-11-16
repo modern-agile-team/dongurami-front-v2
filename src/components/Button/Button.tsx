@@ -26,7 +26,16 @@ export default function Button({
   ...rest
 }: Partial<ButtonProps>) {
   return (
-    <S.ButtonContainer verticalAlign="center" gap={4} role="button" {...rest}>
+    <S.ButtonContainer
+      verticalAlign="center"
+      gap={4}
+      role="button"
+      sizes={size}
+      shape={shape}
+      filled={filled}
+      backgroundColor={backgroundColor}
+      {...rest}
+    >
       {rest.startEnhancer && <div>{rest.startEnhancer}</div>}
       {rest.children}
       {rest.endEnhancer && <div>{rest.endEnhancer}</div>}
