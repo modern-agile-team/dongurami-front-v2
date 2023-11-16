@@ -10,9 +10,10 @@ import styled from "@emotion/styled";
 import React, { AllHTMLAttributes, forwardRef } from "react";
 
 type RowProps = {
-  verticalAlign?: "center" | "top" | "bottom" | "distribute";
+  verticalAlign?: "center" | "top" | "bottom";
   horizonAlign?: "center" | "left" | "right" | "distribute";
   gap?: number | string;
+  reverse?: boolean;
 };
 type RowBaseType = React.ForwardRefExoticComponent<
   React.ComponentProps<typeof StyledRow> & React.RefAttributes<unknown>
@@ -25,34 +26,32 @@ interface CreateRow extends RowBaseType, RowTagsType {}
 
 const RowCSS = (props?: RowProps) => css`
   display: flex;
+  flex-direction: ${(() => (props?.reverse ? "row-reverse" : "row"))()};
+  align-items: space-between;
   justify-content: ${(() => {
-    if (props?.horizonAlign) {
-      switch (props.horizonAlign) {
-        case "center":
-          return "center";
-        case "left":
-          return "flex-start";
-        case "right":
-          return "flex-end";
-        case "distribute":
-          return "space-between";
-      }
-    } else {
-      return "flex-start";
+    switch (props?.horizonAlign) {
+      case "center":
+        return "center";
+      case "left":
+        return props.reverse ? "flex-end" : "flex-start";
+      case "right":
+        return props.reverse ? "flex-start" : "flex-end";
+      case "distribute":
+        return "space-between";
+      default:
+        return props?.reverse ? "flex-end" : "flex-start";
     }
   })()};
   align-items: ${(() => {
-    if (props?.verticalAlign) {
-      switch (props.verticalAlign) {
-        case "center":
-          return "center";
-        case "top":
-          return "flex-start";
-        case "bottom":
-          return "flex-end";
-      }
-    } else {
-      return "flex-start";
+    switch (props?.verticalAlign) {
+      case "center":
+        return "center";
+      case "top":
+        return "flex-start";
+      case "bottom":
+        return "flex-end";
+      default:
+        return "flex-start";
     }
   })()};
   gap: ${(() => {
@@ -83,7 +82,7 @@ const RowBase: RowBaseType = forwardRef(({ ...rest }: React.ComponentProps<typeo
 
 /**
  * @param tag HTML 태그명 ex) div | form | ul
- * @param verticalAlign 상하 정렬 방식 ["center" | "top" | "bottom" | "distribute"]
+ * @param verticalAlign 상하 정렬 방식 ["center" | "top" | "bottom"]
  * @param horizonAlign 좌우 정렬 방식 ["center" | "left" | "right" | "distribute"]
  * @param gap Row의 자식들간의 간격
  */
