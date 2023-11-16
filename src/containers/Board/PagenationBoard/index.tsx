@@ -60,7 +60,7 @@ export default function PagenationBoard() {
         {dummyPage.map((el, idx) => {
           return (
             <Button
-              key={el}
+              key={idx}
               data-num={el}
               shape="circle"
               size="xs"

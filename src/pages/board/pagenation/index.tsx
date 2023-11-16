@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { PagenationBoard } from "@/components/Board";
+import { PagenationBoard } from "@/containers/Board";
 
 export default function PagenationTestPage() {
   return <PagenationBoard />;

@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { InfinityScrollBoard } from "@/components/Board";
+import { InfinityScrollBoard } from "@/containers/Board";
 
 export default function InfinityTestPage() {
   return <InfinityScrollBoard />;
