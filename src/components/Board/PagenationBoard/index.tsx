@@ -33,8 +33,9 @@ export default function PagenationBoard() {
   const router = useRouter();
 
   function onClickButton(ev: React.MouseEvent<HTMLButtonElement>) {
+    const target = ev.currentTarget as HTMLButtonElement;
     router.push({
-      query: { page: ev.target.innerHTML },
+      query: { page: target.dataset.num },
     });
   }
 
@@ -59,7 +60,8 @@ export default function PagenationBoard() {
         {dummyPage.map((el, idx) => {
           return (
             <Button
-              key={idx}
+              key={el}
+              data-num={el}
               shape="circle"
               size="xs"
               filled="contained"
