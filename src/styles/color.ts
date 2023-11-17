@@ -7,7 +7,7 @@
 import { Theme } from "@emotion/react";
 
 const colorTheme: Theme["color"] = {
-  primary: "#fff",
+  primary: "#6ec2f7",
 };
 
 export default colorTheme;
