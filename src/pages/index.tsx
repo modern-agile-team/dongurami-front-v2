@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Button, Row, SwitchCase } from "@/components";
+import { Button, Row, SwitchCase, WhatIF } from "@/components";
 import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +20,9 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
+          <WhatIF condition={condition === 0}>
+            <div>0입니다.</div>
+          </WhatIF>
           <Button filled="contained" onClick={() => setCondition(condition + 1)}>
             condition +1
           </Button>
