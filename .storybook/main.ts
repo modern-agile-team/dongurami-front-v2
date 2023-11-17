@@ -18,8 +18,10 @@ const config: StorybookConfig = {
   },
 
   webpackFinal: async (config) => {
-    //@ts-ignore todo: undefined check
-    config.resolve.alias["@"] = path.resolve(__dirname, "../src/");
+    if (config.resolve?.alias) {
+      config.resolve.alias["@"] = path.resolve(__dirname, "../src/");
+      return config;
+    }
     return config;
   },
 };
