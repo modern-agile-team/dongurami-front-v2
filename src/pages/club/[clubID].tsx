@@ -11,12 +11,12 @@ import { Button, Row, SwitchCase } from "@/components";
 import { Club } from "@/containers";
 
 const CLUB_TABS = {
-  HOME: "홈",
-  NOTICE: "공지",
-  ACTIVITIES: "활동",
-  SCHEDULE: "일정",
-  REVIEW: "후기",
-  APPLY: "지원서 작성",
+  home: "홈",
+  notice: "공지",
+  activity: "활동",
+  schedule: "일정",
+  review: "후기",
+  apply: "지원서 작성",
 };
 
 export default function ClubPage() {
@@ -52,7 +52,7 @@ export default function ClubPage() {
   useEffect(() => {
     if (!clubID) return;
     if (!currentTab || !CLUB_TABS[currentTab]) {
-      changeTab("HOME");
+      changeTab("home");
     }
   }, [clubID, currentTab]);
 
@@ -75,12 +75,12 @@ export default function ClubPage() {
       <SwitchCase
         condition={currentTab}
         cases={{
-          HOME: <Club.Home />,
-          NOTICE: <Club.Notice />,
-          ACTIVITIES: <Club.Activity />,
-          SCHEDULE: <Club.Schedule />,
-          REVIEW: <Club.Review />,
-          APPLY: <Club.Apply />,
+          home: <Club.Home />,
+          notice: <Club.Notice />,
+          activity: <Club.Activity />,
+          schedule: <Club.Schedule />,
+          review: <Club.Review />,
+          apply: <Club.Apply />,
         }}
       />
     </div>
