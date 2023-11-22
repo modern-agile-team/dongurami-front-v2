@@ -4,9 +4,19 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Button, Grid } from "@/components";
+import { Button, Grid, Row } from "@/components";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import {
+  BoardBody,
+  ButtonWrapper,
+  PageButton,
+  PostAuthor,
+  PostDate,
+  PostTitle,
+  PostView,
+  PostWrapper,
+  Wrap,
+} from "./emotion";
 
 export default function PagenationBoard() {
   interface PostData {
@@ -20,14 +30,30 @@ export default function PagenationBoard() {
   const dummyPage: number[] = [1, 2, 3];
   const dummyData: PostData[] = [
     { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
-    { author: "jbh", date: "23.11.13", title: "ㅎㅇgd", view: 11, postNum: 0 },
-    {
-      author: "skm",
-      date: "23.11.12",
-      title: "ㅎㅇㅎㅇ",
-      view: 22,
-      postNum: 0,
-    },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 0 },
   ];
 
   const router = useRouter();
@@ -45,21 +71,31 @@ export default function PagenationBoard() {
     });
   }
   return (
-    <div>
-      <Grid tag="div" column={1}>
-        {dummyData.map((el, idx) => {
+    <Wrap>
+      <BoardBody>
+        <PostWrapper>
+          <PostAuthor>작성자</PostAuthor>
+          <PostTitle>제목</PostTitle>
+          <PostView>조회수</PostView>
+          <PostDate>작성일</PostDate>
+        </PostWrapper>
+        {dummyData.map((el) => {
           return (
-            <div key={idx} onClick={handleClickPost}>
-              {el.author} | {el.title} | {el.date} | {el.view}
-            </div>
+            <PostWrapper key={el.postNum}>
+              <PostAuthor>{el.author}</PostAuthor>
+              <PostTitle>{el.title}</PostTitle>
+              <PostView>{el.view}</PostView>
+              <PostDate>{el.date}</PostDate>
+            </PostWrapper>
           );
         })}
-      </Grid>
+      </BoardBody>
 
-      <div>
+      <ButtonWrapper>
+        <button>prev</button>
         {dummyPage.map((el, idx) => {
           return (
-            <Button
+            <PageButton
               key={idx}
               data-num={el}
               shape="circle"
@@ -68,10 +104,11 @@ export default function PagenationBoard() {
               onClick={handleClickButton}
             >
               {el}
-            </Button>
+            </PageButton>
           );
         })}
-      </div>
-    </div>
+        <button>next</button>
+      </ButtonWrapper>
+    </Wrap>
   );
 }
