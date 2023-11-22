@@ -8,6 +8,7 @@ import React, { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 
 import { Button, Row, SwitchCase } from "@/components";
+import { Club } from "@/containers";
 
 const CLUB_TABS = {
   HOME: "HOME",
@@ -77,7 +78,7 @@ export default function ClubPage() {
           HOME: <div>홈</div>,
           NOTICE: <div>공지</div>,
           ACTIVITIES: <div>활동</div>,
-          CALENDAR: <div>일정</div>,
+          CALENDAR: <Club.Schedule />,
           REVIEW: <div>후기</div>,
           APPLY: <div>지원</div>,
         }}

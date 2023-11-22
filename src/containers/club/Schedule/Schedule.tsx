@@ -4,4 +4,6 @@
  * Copyright (c) 2023 Your Company
  */
 
-export * from "./Schedule";
+export default function Schedule() {
+  return <div>일정</div>;
+}

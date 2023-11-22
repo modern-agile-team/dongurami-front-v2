@@ -4,4 +4,4 @@
  * Copyright (c) 2023 Your Company
  */
 
-export * from "./Schedule";
+export * as Club from "./club";
