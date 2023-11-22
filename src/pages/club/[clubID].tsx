@@ -20,8 +20,14 @@ const CLUB_TABS = {
 
 export default function ClubPage() {
   const router = useRouter();
-  const clubID = useMemo(() => router.query.clubID as string | undefined, [router.query.clubID]);
-  const currentTab = useMemo(() => router.query.tab as keyof typeof CLUB_TABS | undefined, [router.query.tab]);
+  const clubID = useMemo(
+    () => router.query.clubID as string | undefined,
+    [router.query.clubID]
+  );
+  const currentTab = useMemo(
+    () => router.query.tab as keyof typeof CLUB_TABS | undefined,
+    [router.query.tab]
+  );
 
   const changeTab = (to: keyof typeof CLUB_TABS) => {
     router.push(
@@ -55,7 +61,11 @@ export default function ClubPage() {
       <Row.ul>
         {Object.values(CLUB_TABS).map((tab) => (
           <Row.li key={tab}>
-            <Button data-tab={tab} filled="contained" onClick={handleClickTabButton}>
+            <Button
+              data-tab={tab}
+              filled="contained"
+              onClick={handleClickTabButton}
+            >
               {tab}
             </Button>
           </Row.li>
