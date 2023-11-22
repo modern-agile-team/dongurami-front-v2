@@ -11,12 +11,12 @@ import { Button, Row, SwitchCase } from "@/components";
 import { Club } from "@/containers";
 
 const CLUB_TABS = {
-  HOME: "HOME",
-  NOTICE: "NOTICE",
-  ACTIVITIES: "ACTIVITIES",
-  CALENDAR: "CALENDAR",
-  REVIEW: "REVIEW",
-  APPLY: "APPLY",
+  HOME: "홈",
+  NOTICE: "공지",
+  ACTIVITIES: "활동",
+  SCHEDULE: "일정",
+  REVIEW: "후기",
+  APPLY: "지원서 작성",
 };
 
 export default function ClubPage() {
@@ -59,15 +59,15 @@ export default function ClubPage() {
   if (!currentTab) return;
   return (
     <div>
-      <Row.ul>
-        {Object.values(CLUB_TABS).map((tab) => (
-          <Row.li key={tab}>
+      <Row.ul gap={8}>
+        {Object.entries(CLUB_TABS).map(([tabKey, tabValue]) => (
+          <Row.li key={tabKey}>
             <Button
-              data-tab={tab}
+              data-tab={tabKey}
               filled="contained"
               onClick={handleClickTabButton}
             >
-              {tab}
+              {tabValue}
             </Button>
           </Row.li>
         ))}
@@ -75,12 +75,12 @@ export default function ClubPage() {
       <SwitchCase
         condition={currentTab}
         cases={{
-          HOME: <div>홈</div>,
-          NOTICE: <div>공지</div>,
-          ACTIVITIES: <div>활동</div>,
-          CALENDAR: <Club.Schedule />,
-          REVIEW: <div>후기</div>,
-          APPLY: <div>지원</div>,
+          HOME: <Club.Home />,
+          NOTICE: <Club.Notice />,
+          ACTIVITIES: <Club.Activity />,
+          SCHEDULE: <Club.Schedule />,
+          REVIEW: <Club.Review />,
+          APPLY: <Club.Apply />,
         }}
       />
     </div>
