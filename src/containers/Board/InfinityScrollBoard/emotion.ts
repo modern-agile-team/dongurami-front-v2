@@ -17,9 +17,7 @@ export const BoardGrid = styled(Grid)`
   width: 100%;
 `;
 
-export const GridItem = styled.div`
-  height: 25vh;
-  width: 15vw;
+export const GridItem = styled.li`
   border: 1px solid white;
   margin: 0 auto;
 `;
