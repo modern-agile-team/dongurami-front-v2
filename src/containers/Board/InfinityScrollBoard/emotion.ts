@@ -11,7 +11,7 @@ export const Wrap = styled.div`
   width: 80vw;
 `;
 
-export const BoardGrid = styled(Grid)`
+export const BoardGrid = styled(Grid.ul)`
   border: 1px solid yellow;
   padding: 3px;
   width: 100%;
