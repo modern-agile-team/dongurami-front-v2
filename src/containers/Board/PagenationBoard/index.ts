@@ -1,3 +1,1 @@
-import PagenationBoard from "./PagenationBoard";
-
-export default PagenationBoard;
+export { default as PagenationBoard } from "./PagenationBoard";
