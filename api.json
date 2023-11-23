@@ -1,0 +1,4673 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "ok" },
+                    "info": {
+                      "type": "object",
+                      "example": { "database": { "status": "up" } },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": { "status": { "type": "string" } },
+                        "additionalProperties": { "type": "string" }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": { "status": { "type": "string" } },
+                        "additionalProperties": { "type": "string" }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": { "database": { "status": "up" } },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": { "status": { "type": "string" } },
+                        "additionalProperties": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "error" },
+                    "info": {
+                      "type": "object",
+                      "example": { "database": { "status": "up" } },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": { "status": { "type": "string" } },
+                        "additionalProperties": { "type": "string" }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": { "status": { "type": "string" } },
+                        "additionalProperties": { "type": "string" }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": { "status": "up" },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": { "status": { "type": "string" } },
+                        "additionalProperties": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["health"]
+      }
+    },
+    "/api/v1/auth/profile": {
+      "get": {
+        "operationId": "AuthController_getProfile",
+        "summary": "로그인한 유저 프로필",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["auth"]
+      }
+    },
+    "/api/v1/auth/sign-in": {
+      "post": {
+        "operationId": "AuthController_signIn",
+        "summary": "로그인",
+        "description": "cookie 를 통해 session 을 제어합니다.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SignInDtoRequestBody" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["auth"]
+      }
+    },
+    "/api/v1/auth/sign-out": {
+      "post": {
+        "operationId": "AuthController_signOut",
+        "summary": "로그아웃",
+        "description": "cookie 를 제거하여 session 을 제거합니다.",
+        "parameters": [],
+        "responses": {
+          "204": { "description": "" },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["auth"]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "summary": "refresh token 을 이용한 access token 재발급",
+        "description": "cookie 내에 refresh token 을 이용하여 access token 을 갱신합니다.",
+        "parameters": [],
+        "responses": {
+          "204": { "description": "" },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["auth"]
+      }
+    },
+    "/api/v1/auth/set-token/{userId}": {
+      "post": {
+        "operationId": "AuthController_setAccessTokenForDevelop",
+        "summary": "개발용으로 생성된 access token 발급 api",
+        "description": "상용 서버에서는 존재하지 않습니다. id 를 기준으로 cookie 에 token 을 추가합니다.",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "" },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["auth"]
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "operationId": "UsersController_findAllAndCount",
+        "summary": "유저 리스트 조회",
+        "description": "pagination",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "페이지번호",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "페이지당 아이템 수",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "user 고유 Id",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "loginType",
+            "required": false,
+            "in": "query",
+            "description": "로그인 타입",
+            "schema": {
+              "enum": ["EMAIL", "KAKAO", "NAVER", "GOOGLE", "APPLE", "GITHUB"],
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "required": false,
+            "in": "query",
+            "description": "이메일",
+            "schema": { "format": "email", "type": "string" }
+          },
+          {
+            "name": "nickname",
+            "required": false,
+            "in": "query",
+            "description": "nickname",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "description": "정렬 필드<br>공백을 제거한 csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: id loginType email nickname",
+            "example": "-id,updatedAt",
+            "schema": { "default": "id", "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPaginationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "post": {
+        "operationId": "UsersController_create",
+        "summary": "유저 생성(회원가입)",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      }
+    },
+    "/api/v1/users/{userId}": {
+      "get": {
+        "operationId": "UsersController_findOne",
+        "summary": "유저 단일 조회",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "patch": {
+        "operationId": "UsersController_patchUpdate",
+        "summary": "유저 부분 수정",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUpdateUserRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "put": {
+        "operationId": "UsersController_putUpdate",
+        "summary": "유저 수정",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutUpdateUserRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      },
+      "delete": {
+        "operationId": "UsersController_remove",
+        "summary": "유저 삭제",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDeleteResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["users"]
+      }
+    },
+    "/api/v1/posts": {
+      "get": {
+        "operationId": "PostsController_findAllAndCount",
+        "summary": "post 전체 조회",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "페이지번호",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "페이지당 아이템 수",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "posts 고유 Id",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "userId",
+            "required": false,
+            "in": "query",
+            "description": "게시한 유저 고유 id",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "description": "title",
+            "schema": { "maxLength": 255, "type": "string" }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "description": "description",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "description": "정렬 필드<br>공백을 제거한 csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: id title userId createdAt updatedAt",
+            "example": "-id,updatedAt",
+            "schema": { "default": "id", "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostsPaginationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      },
+      "post": {
+        "operationId": "PostsController_create",
+        "summary": "post 생성",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/posts/{postId}": {
+      "get": {
+        "operationId": "PostsController_findOne",
+        "summary": "post 상세 조회",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      },
+      "put": {
+        "operationId": "PostsController_putUpdate",
+        "summary": "post 수정",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PutUpdatePostBodyDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "PostsController_patchUpdate",
+        "summary": "post 부분 수정",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUpdatePostBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "PostsController_remove",
+        "summary": "post 삭제",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDeleteResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/posts/{postId}/hit": {
+      "put": {
+        "operationId": "PostsController_increaseHit",
+        "summary": "조회수 증가",
+        "description": "조회수를 1 증가시킵니다.",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "" },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["posts"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/posts/{postId}/post-comments": {
+      "get": {
+        "operationId": "PostCommentsController_findAllAndCount",
+        "summary": "post comment 전체 조회",
+        "description": "페이지네이션",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "페이지번호",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "페이지당 아이템 수",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "postComment 고유 Id",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "userId",
+            "required": false,
+            "in": "query",
+            "description": "게시한 유저 고유 id",
+            "schema": { "format": "integer", "type": "number" }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "description": "description",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "description": "정렬 필드<br>공백을 제거한 csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: id description postId userId createdAt updatedAt",
+            "example": "-id,updatedAt",
+            "schema": { "default": "id", "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCommentsPaginationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["postComments"],
+        "security": [{ "bearer": [] }]
+      },
+      "post": {
+        "operationId": "PostCommentsController_create",
+        "summary": "postComment 생성",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePostCommentRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCommentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["postComments"],
+        "security": [{ "bearer": [] }]
+      }
+    },
+    "/api/v1/posts/{postId}/post-comments/{postCommentId}": {
+      "get": {
+        "operationId": "PostCommentsController_findOne",
+        "summary": "postComment 단일 조회",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "postCommentId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCommentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["postComments"],
+        "security": [{ "bearer": [] }]
+      },
+      "put": {
+        "operationId": "PostCommentsController_putUpdate",
+        "summary": "postComment 수정",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "postCommentId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutUpdatePostCommentRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCommentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["postComments"],
+        "security": [{ "bearer": [] }]
+      },
+      "patch": {
+        "operationId": "PostCommentsController_patchUpdate",
+        "summary": "postComment 부분 수정",
+        "parameters": [
+          {
+            "name": "postId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "postCommentId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUpdatePostCommentRequestBodyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCommentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["postComments"],
+        "security": [{ "bearer": [] }]
+      },
+      "delete": {
+        "operationId": "PostCommentsController_remove",
+        "summary": "postComment 삭제",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCommentDeleteResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 400
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE003",
+                      "enum": ["CODE003"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid request parameter",
+                      "enum": ["invalid request parameter"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 401
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE004",
+                      "enum": ["CODE004"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "invalid token",
+                      "enum": ["invalid token"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 403
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE006",
+                      "enum": ["CODE006"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "permission denied",
+                      "enum": ["permission denied"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 404
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE005",
+                      "enum": ["CODE005"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "resource not found",
+                      "enum": ["resource not found"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "에러 발생 시각"
+                    },
+                    "statusCode": {
+                      "type": "number",
+                      "format": "integer",
+                      "description": "http status code",
+                      "minimum": 400,
+                      "example": 500
+                    },
+                    "errorCode": {
+                      "type": "string",
+                      "description": "error code",
+                      "example": "CODE001",
+                      "enum": ["CODE001"]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "description": "error reason",
+                      "example": "server error",
+                      "enum": ["server error"]
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "detail error message",
+                      "example": "detail error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["postComments"],
+        "security": [{ "bearer": [] }]
+      }
+    }
+  },
+  "info": {
+    "title": "nestjs boiler plate",
+    "description": "nestjs boiler plate",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "고유 ID", "minimum": 1 },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "생성일자"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "수정일자"
+          },
+          "loginType": {
+            "type": "string",
+            "description": "로그인 타입",
+            "enum": ["EMAIL", "KAKAO", "NAVER", "GOOGLE", "APPLE", "GITHUB"]
+          },
+          "email": {
+            "type": "string",
+            "description": "이메일",
+            "format": "email"
+          },
+          "nickname": {
+            "type": "string",
+            "description": "닉네임",
+            "minLength": 2,
+            "maxLength": 255
+          }
+        },
+        "required": ["id", "createdAt", "updatedAt", "loginType", "email", "nickname"]
+      },
+      "UserDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [{ "$ref": "#/components/schemas/UserResponseDto" }]
+          }
+        },
+        "required": ["user"]
+      },
+      "SignInDtoRequestBody": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "description": "이메일" },
+          "password": { "type": "string", "description": "패스워드" }
+        },
+        "required": ["email", "password"]
+      },
+      "UsersPaginationResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "number",
+            "description": "총 페이지 수",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "한 요청에 대한 data 수",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "currentPage": {
+            "type": "number",
+            "description": "현재 페이지 번호",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "nextPage": {
+            "type": "number",
+            "description": "다음 페이지 번호, 다음 페이지가 없다면 null 반환",
+            "minimum": 2,
+            "format": "integer",
+            "nullable": true
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "다음 페이지 존재 여부",
+            "minimum": 1
+          },
+          "lastPage": {
+            "type": "number",
+            "description": "마지막 페이지 번호",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "users": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/UserResponseDto" }
+          }
+        },
+        "required": ["totalCount", "pageSize", "currentPage", "nextPage", "hasNext", "lastPage", "users"]
+      },
+      "CreateUserRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "loginType": {
+            "type": "string",
+            "description": "로그인 타입",
+            "enum": ["EMAIL", "KAKAO", "NAVER", "GOOGLE", "APPLE", "GITHUB"]
+          },
+          "password": {
+            "type": "string",
+            "example": "password",
+            "description": "user password"
+          },
+          "email": {
+            "type": "string",
+            "example": "example@example.com",
+            "description": "user email",
+            "format": "email"
+          },
+          "nickname": {
+            "type": "string",
+            "example": "홍길동",
+            "description": "user 닉네임",
+            "minLength": 2,
+            "maxLength": 255
+          }
+        },
+        "required": ["loginType", "password", "email", "nickname"]
+      },
+      "PatchUpdateUserRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "example@example.com",
+            "description": "user email",
+            "format": "email"
+          },
+          "nickname": {
+            "type": "string",
+            "example": "홍길동",
+            "description": "users 이름",
+            "minLength": 2,
+            "maxLength": 255
+          }
+        }
+      },
+      "PutUpdateUserRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "example@example.com",
+            "description": "user email",
+            "format": "email"
+          },
+          "nickname": {
+            "type": "string",
+            "example": "홍길동",
+            "description": "user 닉네임",
+            "minLength": 2,
+            "maxLength": 255
+          }
+        },
+        "required": ["email", "nickname"]
+      },
+      "UserDeleteResponseDto": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number",
+            "description": "삭제된 리소스 개수",
+            "format": "integer"
+          }
+        },
+        "required": ["count"]
+      },
+      "PostResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "고유 ID", "minimum": 1 },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "생성일자"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "수정일자"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "user 고유 ID",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "title",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": { "type": "string", "description": "description" },
+          "hit": {
+            "type": "number",
+            "description": "조회수",
+            "format": "integer"
+          }
+        },
+        "required": ["id", "createdAt", "updatedAt", "userId", "title", "description", "hit"]
+      },
+      "PostsPaginationResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "number",
+            "description": "총 페이지 수",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "한 요청에 대한 data 수",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "currentPage": {
+            "type": "number",
+            "description": "현재 페이지 번호",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "nextPage": {
+            "type": "number",
+            "description": "다음 페이지 번호, 다음 페이지가 없다면 null 반환",
+            "minimum": 2,
+            "format": "integer",
+            "nullable": true
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "다음 페이지 존재 여부",
+            "minimum": 1
+          },
+          "lastPage": {
+            "type": "number",
+            "description": "마지막 페이지 번호",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "posts": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PostResponseDto" }
+          }
+        },
+        "required": ["totalCount", "pageSize", "currentPage", "nextPage", "hasNext", "lastPage", "posts"]
+      },
+      "PostDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "allOf": [{ "$ref": "#/components/schemas/PostResponseDto" }]
+          }
+        },
+        "required": ["post"]
+      },
+      "CreatePostRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": { "type": "string", "description": "description" }
+        },
+        "required": ["title", "description"]
+      },
+      "PutUpdatePostBodyDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": { "type": "string", "description": "description" }
+        },
+        "required": ["title", "description"]
+      },
+      "PatchUpdatePostBodyDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": { "type": "string", "description": "description" }
+        }
+      },
+      "PostDeleteResponseDto": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number",
+            "description": "삭제된 리소스 개수",
+            "format": "integer"
+          }
+        },
+        "required": ["count"]
+      },
+      "PostCommentResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "description": "고유 ID", "minimum": 1 },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "생성일자"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "수정일자"
+          },
+          "postId": {
+            "type": "integer",
+            "description": "post 고유 ID",
+            "minimum": 1
+          },
+          "userId": {
+            "type": "integer",
+            "description": "user 고유 ID",
+            "minimum": 1
+          },
+          "description": { "type": "string", "description": "내용" }
+        },
+        "required": ["id", "createdAt", "updatedAt", "postId", "userId", "description"]
+      },
+      "PostCommentsPaginationResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "number",
+            "description": "총 페이지 수",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "한 요청에 대한 data 수",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "currentPage": {
+            "type": "number",
+            "description": "현재 페이지 번호",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "nextPage": {
+            "type": "number",
+            "description": "다음 페이지 번호, 다음 페이지가 없다면 null 반환",
+            "minimum": 2,
+            "format": "integer",
+            "nullable": true
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "다음 페이지 존재 여부",
+            "minimum": 1
+          },
+          "lastPage": {
+            "type": "number",
+            "description": "마지막 페이지 번호",
+            "minimum": 1,
+            "format": "integer"
+          },
+          "postComments": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/PostCommentResponseDto" }
+          }
+        },
+        "required": ["totalCount", "pageSize", "currentPage", "nextPage", "hasNext", "lastPage", "postComments"]
+      },
+      "PostCommentDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "postComment": {
+            "allOf": [{ "$ref": "#/components/schemas/PostCommentResponseDto" }]
+          }
+        },
+        "required": ["postComment"]
+      },
+      "CreatePostCommentRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string", "description": "description" }
+        },
+        "required": ["description"]
+      },
+      "PutUpdatePostCommentRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string", "description": "description" }
+        },
+        "required": ["description"]
+      },
+      "PatchUpdatePostCommentRequestBodyDto": {
+        "type": "object",
+        "properties": {
+          "description": { "type": "string", "description": "description" }
+        }
+      },
+      "PostCommentDeleteResponseDto": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number",
+            "description": "삭제된 리소스 개수",
+            "format": "integer"
+          }
+        },
+        "required": ["count"]
+      }
+    }
+  }
+}
