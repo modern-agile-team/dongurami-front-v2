@@ -42,12 +42,14 @@ const GridCss = (props?: GridProps) => css`
   display: grid;
   grid-template-columns: ${(() => {
     if (!props?.column) return null;
-    if (typeof props.column === "number") return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
+    if (typeof props.column === "number")
+      return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
     return `repeat(${props?.column.xl}, ${props.repeatSize || "1fr"})`;
   })()};
   grid-template-rows: ${(() => {
     if (!props?.row) return null;
-    if (typeof props.row === "number") return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
+    if (typeof props.row === "number")
+      return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
     return `repeat(${props?.row.xl}, ${props.repeatSize || "1fr"})`;
   })()};
   grid-row-gap: ${(() => {
@@ -65,19 +67,23 @@ const GridCss = (props?: GridProps) => css`
     if (typeof props.gridGap === "string") return `${props.gridGap}`;
 
     if (!props.gridGap.column) return null;
-    if (typeof props.gridGap.column === "number") return `${props.gridGap.column}px`;
-    if (typeof props.gridGap.column === "string") return `${props.gridGap.column}`;
+    if (typeof props.gridGap.column === "number")
+      return `${props.gridGap.column}px`;
+    if (typeof props.gridGap.column === "string")
+      return `${props.gridGap.column}`;
   })()};
 
   ${createBreakPoint(breakPoint.xl).breakPointDown} {
     grid-template-columns: ${(() => {
       if (!props?.column) return null;
-      if (typeof props.column === "number") return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.column === "number")
+        return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.column.xl}, ${props.repeatSize || "1fr"})`;
     })()};
     grid-template-rows: ${(() => {
       if (!props?.row) return null;
-      if (typeof props.row === "number") return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.row === "number")
+        return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.row.xl}, ${props.repeatSize || "1fr"})`;
     })()};
   }
@@ -85,12 +91,14 @@ const GridCss = (props?: GridProps) => css`
   ${createBreakPoint(breakPoint.l).breakPointDown} {
     grid-template-columns: ${(() => {
       if (!props?.column) return null;
-      if (typeof props.column === "number") return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.column === "number")
+        return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.column.l}, ${props.repeatSize || "1fr"})`;
     })()};
     grid-template-rows: ${(() => {
       if (!props?.row) return null;
-      if (typeof props.row === "number") return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.row === "number")
+        return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.row.l}, ${props.repeatSize || "1fr"})`;
     })()};
   }
@@ -98,12 +106,14 @@ const GridCss = (props?: GridProps) => css`
   ${createBreakPoint(breakPoint.m).breakPointDown} {
     grid-template-columns: ${(() => {
       if (!props?.column) return null;
-      if (typeof props.column === "number") return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.column === "number")
+        return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.column.m}, ${props.repeatSize || "1fr"})`;
     })()};
     grid-template-rows: ${(() => {
       if (!props?.row) return null;
-      if (typeof props.row === "number") return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.row === "number")
+        return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.row.m}, ${props.repeatSize || "1fr"})`;
     })()};
   }
@@ -111,12 +121,14 @@ const GridCss = (props?: GridProps) => css`
   ${createBreakPoint(breakPoint.s).breakPointDown} {
     grid-template-columns: ${(() => {
       if (!props?.column) return null;
-      if (typeof props.column === "number") return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.column === "number")
+        return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.column.s}, ${props.repeatSize || "1fr"})`;
     })()};
     grid-template-rows: ${(() => {
       if (!props?.row) return null;
-      if (typeof props.row === "number") return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.row === "number")
+        return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.row.s}, ${props.repeatSize || "1fr"})`;
     })()};
   }
@@ -124,31 +136,40 @@ const GridCss = (props?: GridProps) => css`
   ${createBreakPoint(breakPoint.xs).breakPointDown} {
     grid-template-columns: ${(() => {
       if (!props?.column) return null;
-      if (typeof props.column === "number") return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.column === "number")
+        return `repeat(${props?.column}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.column.xs}, ${props.repeatSize || "1fr"})`;
     })()};
     grid-template-rows: ${(() => {
       if (!props?.row) return null;
-      if (typeof props.row === "number") return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
+      if (typeof props.row === "number")
+        return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
       return `repeat(${props?.row.xs}, ${props.repeatSize || "1fr"})`;
     })()};
   }
 `;
 
 const StyledGrid = styled(
-  forwardRef((props: { tag?: keyof JSX.IntrinsicElements } & GridProps & AllHTMLAttributes<HTMLElement>, ref) => {
-    const { tag = "div", ...rest } = props;
+  forwardRef(
+    (
+      props: { tag?: keyof JSX.IntrinsicElements } & GridProps &
+        AllHTMLAttributes<HTMLElement>,
+      ref
+    ) => {
+      const { tag = "div", ...rest } = props;
 
-    const htmlAttrs = filterHTMLAttribute(rest);
+      const htmlAttrs = filterHTMLAttribute(rest);
 
-    return React.createElement(tag, { ...htmlAttrs, ref });
-  })
+      return React.createElement(tag, { ...htmlAttrs, ref });
+    }
+  )
 )`
   ${(props) => GridCss(props)}
 `;
 
-const GridBase: GridBaseType = forwardRef(({ ...rest }: React.ComponentProps<typeof StyledGrid>, ref) =>
-  createStyled(StyledGrid)({ ...rest, ref })
+const GridBase: GridBaseType = forwardRef(
+  ({ ...rest }: React.ComponentProps<typeof StyledGrid>, ref) =>
+    createStyled(StyledGrid)({ ...rest, ref })
 );
 
 /**
