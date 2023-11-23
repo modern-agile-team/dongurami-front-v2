@@ -4,7 +4,5 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { InfinityScrollBoard } from "./InfinityScrollBoard";
-import { PagenationBoard } from "./PagenationBoard";
-
-export { InfinityScrollBoard, PagenationBoard };
+export * from "./InfinityScrollBoard";
+export * from "./PagenationBoard";
