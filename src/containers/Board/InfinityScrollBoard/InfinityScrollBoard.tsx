@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { BoardGrid, GridItem, Wrap } from "./emotion";
+import * as S from "./emotion";
 
 export default function InfinityScrollBoard() {
   const dummyData = [
@@ -45,16 +45,16 @@ export default function InfinityScrollBoard() {
     },
   ];
   return (
-    <Wrap>
-      <BoardGrid column={3} gridGap={15}>
+    <S.Wrap>
+      <S.BoardGrid column={3} gridGap={15}>
         {dummyData.map((el) => {
           return (
-            <GridItem key={el.postNum}>
+            <S.GridItem key={el.postNum}>
               <img src={el.thumbNail} alt="썸네일" />
-            </GridItem>
+            </S.GridItem>
           );
         })}
-      </BoardGrid>
-    </Wrap>
+      </S.BoardGrid>
+    </S.Wrap>
   );
 }

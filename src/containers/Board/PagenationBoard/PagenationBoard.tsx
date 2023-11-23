@@ -4,19 +4,8 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Button, Grid, Row } from "@/components";
 import { useRouter } from "next/router";
-import {
-  BoardBody,
-  ButtonWrapper,
-  PageButton,
-  PostAuthor,
-  PostDate,
-  PostTitle,
-  PostView,
-  PostWrapper,
-  Wrap,
-} from "./emotion";
+import * as S from "./emotion";
 
 export default function PagenationBoard() {
   interface PostData {
@@ -71,31 +60,31 @@ export default function PagenationBoard() {
     });
   }
   return (
-    <Wrap>
-      <BoardBody>
-        <PostWrapper>
-          <PostAuthor>작성자</PostAuthor>
-          <PostTitle>제목</PostTitle>
-          <PostView>조회수</PostView>
-          <PostDate>작성일</PostDate>
-        </PostWrapper>
+    <S.Wrap>
+      <S.BoardBody>
+        <S.PostWrapper>
+          <S.PostAuthor>작성자</S.PostAuthor>
+          <S.PostTitle>제목</S.PostTitle>
+          <S.PostView>조회수</S.PostView>
+          <S.PostDate>작성일</S.PostDate>
+        </S.PostWrapper>
         {dummyData.map((el) => {
           return (
-            <PostWrapper key={el.postNum}>
-              <PostAuthor>{el.author}</PostAuthor>
-              <PostTitle>{el.title}</PostTitle>
-              <PostView>{el.view}</PostView>
-              <PostDate>{el.date}</PostDate>
-            </PostWrapper>
+            <S.PostWrapper key={el.postNum}>
+              <S.PostAuthor>{el.author}</S.PostAuthor>
+              <S.PostTitle>{el.title}</S.PostTitle>
+              <S.PostView>{el.view}</S.PostView>
+              <S.PostDate>{el.date}</S.PostDate>
+            </S.PostWrapper>
           );
         })}
-      </BoardBody>
+      </S.BoardBody>
 
-      <ButtonWrapper>
+      <S.ButtonWrapper>
         <button>prev</button>
         {dummyPage.map((el, idx) => {
           return (
-            <PageButton
+            <S.PageButton
               key={idx}
               data-num={el}
               shape="circle"
@@ -104,11 +93,11 @@ export default function PagenationBoard() {
               onClick={handleClickButton}
             >
               {el}
-            </PageButton>
+            </S.PageButton>
           );
         })}
         <button>next</button>
-      </ButtonWrapper>
-    </Wrap>
+      </S.ButtonWrapper>
+    </S.Wrap>
   );
 }
