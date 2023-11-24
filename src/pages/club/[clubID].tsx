@@ -21,25 +21,19 @@ const CLUB_TABS = {
 
 export default function ClubPage() {
   const router = useRouter();
-  const clubID = useMemo(
-    () => router.query.clubID as string | undefined,
-    [router.query.clubID]
-  );
+  const { clubID, tab } = router.query;
+
   const currentTab = useMemo(
-    () => router.query.tab as keyof typeof CLUB_TABS | undefined,
-    [router.query.tab]
+    () =>
+      typeof tab === "string" ? (tab as keyof typeof CLUB_TABS) : undefined,
+    [tab]
   );
 
   const changeTab = (to: keyof typeof CLUB_TABS) => {
     router.push(
-      {
-        pathname: router.pathname,
-        query: { ...router.query, tab: to },
-      },
+      { pathname: router.pathname, query: { ...router.query, tab: to } },
       undefined,
-      {
-        shallow: true,
-      }
+      { shallow: true }
     );
   };
 
