@@ -10,3 +10,4 @@ export * from "./Grid";
 export * from "./Row";
 export * from "./SwitchCase";
 export * from "./WhatIF";
+export * from "./Provider";
