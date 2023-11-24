@@ -52,7 +52,7 @@ const GridCss = (props?: GridProps) => css`
       return `repeat(${props?.row}, ${props.repeatSize || "1fr"})`;
     return `repeat(${props?.row.xl}, ${props.repeatSize || "1fr"})`;
   })()};
-  grid-row-gap: ${(() => {
+  row-gap: ${(() => {
     if (!props?.gridGap) return null;
     if (typeof props.gridGap === "number") return `${props.gridGap}px`;
     if (typeof props.gridGap === "string") return `${props.gridGap}`;
@@ -61,7 +61,7 @@ const GridCss = (props?: GridProps) => css`
     if (typeof props.gridGap.row === "number") return `${props.gridGap.row}px`;
     if (typeof props.gridGap.row === "string") return `${props.gridGap.row}`;
   })()};
-  grid-column-gap: ${(() => {
+  column-gap: ${(() => {
     if (!props?.gridGap) return null;
     if (typeof props.gridGap === "number") return `${props.gridGap}px`;
     if (typeof props.gridGap === "string") return `${props.gridGap}`;
