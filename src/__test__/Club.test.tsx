@@ -31,7 +31,7 @@ describe("동아리 페이지 테스트", () => {
     expect(mockRouter.query.tab).toBe("notice");
   });
 
-  it("3. 잘못된 탭으로 접근시 home 탭으로 이동한다.", async () => {
+  it("3. URL을 통해 잘못된 탭으로 접근시 home 탭으로 이동한다.", async () => {
     mockRouter.query = { ...mockRouter.query, tab: "wrong_tab" };
     render(
       <TestProvider router={mockRouter}>
