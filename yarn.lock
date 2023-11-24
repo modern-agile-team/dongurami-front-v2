@@ -7140,6 +7140,7 @@ __metadata:
     jest-environment-jsdom: "npm:^29.7.0"
     lodash: "npm:^4.17.21"
     next: "npm:14.0.2"
+    next-router-mock: "npm:^0.9.10"
     prettier: "npm:^3.1.0"
     react: "npm:^18"
     react-dom: "npm:^18"
@@ -10581,6 +10582,16 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: c2f5a604a54a8ec5438a342e1f356dff4bc33ccccdb6dc668d94fe8e5eccfc9d2c2eea6064b0967a767ba63b33763f51ccf2cd2441b461a7322656c1f06b3f5d
+  languageName: node
+  linkType: hard
+
+"next-router-mock@npm:^0.9.10":
+  version: 0.9.10
+  resolution: "next-router-mock@npm:0.9.10"
+  peerDependencies:
+    next: ">=10.0.0"
+    react: ">=17.0.0"
+  checksum: b56b2050c37420f467a84369eca4bf126102203a4484437160cff9de8017d53fd21ad4ddb3d198315dccf2505924987c25e37d6c9659c6127d35a01e9978b004
   languageName: node
   linkType: hard
 
