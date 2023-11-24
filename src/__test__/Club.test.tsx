@@ -1,10 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import mockRouter from "next-router-mock";
-import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import userEvent from "@testing-library/user-event";
 
-import { DonguramiProvider } from "@/components";
 import ClubPage from "@/pages/club/[clubID]";
+import { TestProvider } from "./utils";
 
 describe("동아리 페이지 테스트", () => {
   beforeEach(() => {
@@ -13,11 +12,9 @@ describe("동아리 페이지 테스트", () => {
   });
   it("동아리 페이지에서는 홈이 먼저 표시된다.", async () => {
     render(
-      <RouterContext.Provider value={mockRouter}>
-        <DonguramiProvider>
-          <ClubPage />
-        </DonguramiProvider>
-      </RouterContext.Provider>
+      <TestProvider router={mockRouter}>
+        <ClubPage />
+      </TestProvider>
     );
 
     expect(mockRouter.query.tab).toBe("home");
@@ -25,11 +22,9 @@ describe("동아리 페이지 테스트", () => {
 
   it("탭 전환 버튼을 클릭하면 쿼리스트링이 바뀐다.", async () => {
     render(
-      <RouterContext.Provider value={mockRouter}>
-        <DonguramiProvider>
-          <ClubPage />
-        </DonguramiProvider>
-      </RouterContext.Provider>
+      <TestProvider router={mockRouter}>
+        <ClubPage />
+      </TestProvider>
     );
     const noticeButton = await screen.findByRole("button", { name: "공지" });
     await userEvent.click(noticeButton);
