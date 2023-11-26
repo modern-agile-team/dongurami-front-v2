@@ -10,16 +10,25 @@ import { Theme, ThemeProvider } from "@emotion/react";
 
 import colorTheme from "@/styles/color";
 import fontTheme from "@/styles/font";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const theme: Theme = {
   color: colorTheme,
   font: fontTheme,
 };
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5000,
+    },
+  },
+});
 export default function DonguramiProvider(props: HTMLAttributes<HTMLElement>) {
   return (
-    <RecoilRoot>
-      <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }
