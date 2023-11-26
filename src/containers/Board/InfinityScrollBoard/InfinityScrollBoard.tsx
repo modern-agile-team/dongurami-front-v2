@@ -36,7 +36,7 @@ export default function InfinityScrollBoard() {
     retry: false,
   });
 
-  const { observerRef } = useIntersectionObserver(fetchNextPage);
+  const { observerRef }: any = useIntersectionObserver(() => fetchNextPage);
 
   useEffect(() => {
     async () => {
