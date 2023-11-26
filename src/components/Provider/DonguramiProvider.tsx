@@ -19,7 +19,7 @@ const theme: Theme = {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      staleTime: 5000,
     },
   },
 });
