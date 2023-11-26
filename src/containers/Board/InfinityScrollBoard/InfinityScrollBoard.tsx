@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import * as S from "./emotion";
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useIntersectionObserver } from "@/hooks";
 
 export default function InfinityScrollBoard() {
   const testImg =
@@ -35,6 +36,8 @@ export default function InfinityScrollBoard() {
     retry: false,
   });
 
+  const { observerRef } = useIntersectionObserver(fetchNextPage);
+
   useEffect(() => {
     async () => {
       if (!data) return null;
@@ -54,13 +57,8 @@ export default function InfinityScrollBoard() {
           });
         })}
       </S.BoardGrid>
-      <button
-        onClick={() => {
-          fetchNextPage();
-        }}
-      >
-        Lead More
-      </button>
+      <div ref={observerRef} />
+      {/* Todo : fetchNextPage 타이밍 앞당겨서 UX 향상시키기 */}
     </S.Wrap>
   );
 }
