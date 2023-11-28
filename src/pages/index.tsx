@@ -16,7 +16,7 @@ export default function Home() {
 
     switch (id) {
       case "sign-in": {
-        router.push("sign-in");
+        router.push("login");
         break;
       }
       case "sign-up": {
