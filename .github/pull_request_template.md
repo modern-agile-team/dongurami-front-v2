@@ -1,8 +1,10 @@
 # Pull Request
 
-## 이슈번호
+## 티켓
 
-- #1 (번호만 수정)
+티켓명과 url은 수정해주세요.
+
+[QYOG-1](https://dongurami.atlassian.net/browse/QYOG-1)
 
 ## 작업 내용
 
