@@ -44,7 +44,7 @@ export default function Form() {
           id="password"
           onChange={handleChange}
           value={loginInfo.password}
-          type="text"
+          type="password"
           placeholder="비밀번호를 입력하세요"
         />
       </Column.label>
