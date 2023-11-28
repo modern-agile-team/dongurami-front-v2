@@ -4,6 +4,12 @@
  * Copyright (c) 2023 Your Company
  */
 
+import { Login } from "@/containers";
+
 export default function LoginPage() {
-  return <div>로그인 페이지</div>;
+  return (
+    <Login.Layout>
+      <Login.Form />
+    </Login.Layout>
+  );
 }
