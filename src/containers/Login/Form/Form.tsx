@@ -27,7 +27,7 @@ export default function Form() {
   };
 
   return (
-    <S.FormLayout gap={10} onSubmit={handleLoginSubmit}>
+    <S.FormLayout gap={10} onSubmit={handleLoginSubmit} role="form">
       <Column.label>
         <span>아이디</span>
         <input
