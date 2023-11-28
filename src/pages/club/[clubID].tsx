@@ -8,31 +8,32 @@ import React, { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 
 import { Button, Row, SwitchCase } from "@/components";
+import { Club } from "@/containers";
 
 const CLUB_TABS = {
-  HOME: "HOME",
-  NOTICE: "NOTICE",
-  ACTIVITIES: "ACTIVITIES",
-  CALENDAR: "CALENDAR",
-  REVIEW: "REVIEW",
-  APPLY: "APPLY",
+  home: "홈",
+  notice: "공지",
+  activity: "활동",
+  schedule: "일정",
+  review: "후기",
+  apply: "지원서 작성",
 };
 
 export default function ClubPage() {
   const router = useRouter();
-  const clubID = useMemo(() => router.query.clubID as string | undefined, [router.query.clubID]);
-  const currentTab = useMemo(() => router.query.tab as keyof typeof CLUB_TABS | undefined, [router.query.tab]);
+  const { clubID, tab } = router.query;
+
+  const currentTab = useMemo(
+    () =>
+      typeof tab === "string" ? (tab as keyof typeof CLUB_TABS) : undefined,
+    [tab]
+  );
 
   const changeTab = (to: keyof typeof CLUB_TABS) => {
     router.push(
-      {
-        pathname: router.pathname,
-        query: { ...router.query, tab: to },
-      },
+      { pathname: router.pathname, query: { ...router.query, tab: to } },
       undefined,
-      {
-        shallow: true,
-      }
+      { shallow: true }
     );
   };
 
@@ -45,18 +46,22 @@ export default function ClubPage() {
   useEffect(() => {
     if (!clubID) return;
     if (!currentTab || !CLUB_TABS[currentTab]) {
-      changeTab("HOME");
+      changeTab("home");
     }
   }, [clubID, currentTab]);
 
   if (!currentTab) return;
   return (
     <div>
-      <Row.ul>
-        {Object.values(CLUB_TABS).map((tab) => (
-          <Row.li key={tab}>
-            <Button data-tab={tab} filled="contained" onClick={handleClickTabButton}>
-              {tab}
+      <Row.ul gap={8}>
+        {Object.entries(CLUB_TABS).map(([tabKey, tabValue]) => (
+          <Row.li key={tabKey}>
+            <Button
+              data-tab={tabKey}
+              filled="contained"
+              onClick={handleClickTabButton}
+            >
+              {tabValue}
             </Button>
           </Row.li>
         ))}
@@ -64,12 +69,12 @@ export default function ClubPage() {
       <SwitchCase
         condition={currentTab}
         cases={{
-          HOME: <div>홈</div>,
-          NOTICE: <div>공지</div>,
-          ACTIVITIES: <div>활동</div>,
-          CALENDAR: <div>일정</div>,
-          REVIEW: <div>후기</div>,
-          APPLY: <div>지원</div>,
+          home: <Club.Home />,
+          notice: <Club.Notice />,
+          activity: <Club.Activity />,
+          schedule: <Club.Schedule />,
+          review: <Club.Review />,
+          apply: <Club.Apply />,
         }}
       />
     </div>
