@@ -7,7 +7,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "",
+  baseURL: process.env.NEXT_PUBLIC_API_DOMAIN,
   headers: {
     "x-auth-token": "token",
     "api-key": process.env.NEXT_PUBLIC_API_KEY,
