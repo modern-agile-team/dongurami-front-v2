@@ -4,8 +4,7 @@ const fs = require("fs");
 
 generateApi({
   name: "Apis.d.ts",
-  // url: "http://dvapirfice.rsup.at:8080/api-docs",
-  input: path.resolve(process.cwd(), "./api.json"),
+  url: "http://43.200.169.78:3000/api-docs-json",
   prettier: {
     printWidth: 120,
     tabWidth: 2,
@@ -32,7 +31,11 @@ generateApi({
   .then(({ files }) => {
     files.forEach(({ fileName, fileExtension, fileContent }) => {
       fs.writeFileSync(
-        path.resolve(process.cwd(), "./src/@types/apis", `${fileName}${fileExtension}`),
+        path.resolve(
+          process.cwd(),
+          "./src/@types/apis",
+          `${fileName}${fileExtension}`
+        ),
         `declare global {
   namespace Swagger {
     ${fileContent}	
