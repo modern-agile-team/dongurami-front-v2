@@ -1,14 +1,16 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/router";
+
 import styles from "@/styles/Home.module.css";
 import { Row } from "@/components";
-import { useRouter } from "next/router";
-import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter();
+  const [state, setState] = useState(0);
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.target as HTMLButtonElement;
@@ -38,6 +40,8 @@ export default function Home() {
     }
   };
 
+  if (state >= 5) throw new Error("에러");
+
   return (
     <>
       <Head>
@@ -49,12 +53,11 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <button
-            role="button"
-            onClick={(ev) => {
-              throw Error("에러!");
+            onClick={() => {
+              setState(state + 1);
             }}
           >
-            에러
+            에러 테스트 <br /> 5번 클릭하면 에러 발생
           </button>
           <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
             <Row.li>

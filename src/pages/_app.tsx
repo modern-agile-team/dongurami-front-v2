@@ -8,14 +8,11 @@ import type { AppProps } from "next/app";
 
 import "@/styles/globals.css";
 import { DonguramiProvider } from "@/components";
-import ErrorBoundary from "@/components/Provider/ErrorBoundary";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <DonguramiProvider>
-      <ErrorBoundary>
-        <Component {...pageProps} />
-      </ErrorBoundary>
+      <Component {...pageProps} />
     </DonguramiProvider>
   );
 }
