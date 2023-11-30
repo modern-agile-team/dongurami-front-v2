@@ -4,4 +4,6 @@
  * Copyright (c) 2023 Your Company
  */
 
-export * from "./board";
+export * as ErrorCode from "./errorCode";
+
+export * as authAPI from "./auth";

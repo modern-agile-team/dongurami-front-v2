@@ -14,10 +14,16 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/types/*": ["./src/@types/*"]
     },
     "jsxImportSource": "@emotion/react",
-    "types": ["@emotion/react/types/css-prop", "jest", "node", "@testing-library/jest-dom"]
+    "types": [
+      "@emotion/react/types/css-prop",
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

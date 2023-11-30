@@ -5,14 +5,37 @@
  */
 
 import React, { useState } from "react";
+import { AxiosError } from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 import { Column } from "@/components";
+import { ErrorCode, authAPI } from "@/apis";
+
 import * as S from "./emotion";
 
 export default function Form() {
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
+  });
+
+  const { mutate: signIn } = useMutation({
+    mutationFn: authAPI.signIn,
+    onError(error) {
+      const err = error as AxiosError<SwaggerError.GeneralApiError>;
+      if (!err.response) return;
+      const { code } = err.response.data;
+      switch (code) {
+        case ErrorCode.Auth.ACCOUNT_MISMATCH: {
+          alert("이메일 혹은 비밀번호를 다시 확인해주세요.");
+          break;
+        }
+        case ErrorCode.Common.SERVER_ERROR: {
+          alert("서버 에러입니다. 개발자에게 문의해주세요.");
+          break;
+        }
+      }
+    },
   });
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +46,11 @@ export default function Form() {
 
   const handleLoginSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    alert(`아이디 ${loginInfo.username}\n비밀번호 ${loginInfo.password}`);
+    signIn({
+      email: loginInfo.username,
+      password: loginInfo.password,
+      loginType: "email",
+    });
   };
 
   return (
