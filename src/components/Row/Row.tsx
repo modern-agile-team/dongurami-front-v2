@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { createStyled, domElementList, filterHTMLAttribute } from "@/lib";
+import { createStyled, domElementList, filterHTMLAttribute } from "@/utils";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { AllHTMLAttributes, forwardRef } from "react";
@@ -65,19 +65,26 @@ const RowCSS = (props?: RowProps) => css`
 `;
 
 const StyledRow = styled(
-  forwardRef((props: { tag?: keyof JSX.IntrinsicElements } & RowProps & AllHTMLAttributes<HTMLElement>, ref) => {
-    const { tag = "div", ...rest } = props;
+  forwardRef(
+    (
+      props: { tag?: keyof JSX.IntrinsicElements } & RowProps &
+        AllHTMLAttributes<HTMLElement>,
+      ref
+    ) => {
+      const { tag = "div", ...rest } = props;
 
-    const htmlAttrs = filterHTMLAttribute(rest);
+      const htmlAttrs = filterHTMLAttribute(rest);
 
-    return React.createElement(tag, { ...htmlAttrs, ref });
-  })
+      return React.createElement(tag, { ...htmlAttrs, ref });
+    }
+  )
 )`
   ${(props) => RowCSS(props)}
 `;
 
-const RowBase: RowBaseType = forwardRef(({ ...rest }: React.ComponentProps<typeof StyledRow>, ref) =>
-  createStyled(StyledRow)({ ...rest, ref })
+const RowBase: RowBaseType = forwardRef(
+  ({ ...rest }: React.ComponentProps<typeof StyledRow>, ref) =>
+    createStyled(StyledRow)({ ...rest, ref })
 );
 
 /**
@@ -89,7 +96,9 @@ const RowBase: RowBaseType = forwardRef(({ ...rest }: React.ComponentProps<typeo
 const Row = RowBase as CreateRow;
 
 domElementList.forEach((domElement) => {
-  Row[domElement] = forwardRef(({ ...rest }, ref) => createStyled(StyledRow, domElement)[domElement]({ ...rest, ref }));
+  Row[domElement] = forwardRef(({ ...rest }, ref) =>
+    createStyled(StyledRow, domElement)[domElement]({ ...rest, ref })
+  );
 });
 
 export default Row;

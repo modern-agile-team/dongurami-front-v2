@@ -15,7 +15,7 @@ import {
   keys as breakPointKeys,
   domElementList,
   filterHTMLAttribute,
-} from "@/lib";
+} from "@/utils";
 
 type GridProps = {
   column?: { [size in breakPointKeys]?: number } | number;
