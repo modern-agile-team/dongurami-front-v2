@@ -48,6 +48,14 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
+          <button
+            role="button"
+            onClick={(ev) => {
+              throw Error("에러!");
+            }}
+          >
+            에러
+          </button>
           <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
             <Row.li>
               <button id="sign-in" onClick={handleRoute}>
