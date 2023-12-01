@@ -7,7 +7,7 @@
 import styled from "@emotion/styled";
 import { Theme } from "@emotion/react";
 
-import { Row } from "../../Layouts/Row";
+import { Row } from "@/components";
 
 export const ButtonContainer = styled(Row.button)<{
   filled: "outlined" | "contained";
