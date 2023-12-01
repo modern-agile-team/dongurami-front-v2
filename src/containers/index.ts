@@ -5,4 +5,4 @@
  */
 
 export * as Login from "./Login";
-export * as Club from "./Clubs";
+export * as Club from "./Club";
