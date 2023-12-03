@@ -4,28 +4,42 @@
  * Copyright (c) 2023 Your Company
  */
 
-import React, { useState } from "react";
-import { AxiosError } from "axios";
-import { useMutation } from "@tanstack/react-query";
+import React, { useMemo, useState } from "react";
+import { useRouter } from "next/router";
 
-import { Column } from "@/components";
-import { ErrorCode, authAPI } from "@/apis";
+import { Column, WhatIF } from "@/components";
+import { ErrorCode } from "@/apis";
+import { validator } from "@/utils";
+import { useAuth } from "@/hooks";
 
 import * as S from "./emotion";
 
 export default function Form() {
+  const router = useRouter();
+
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
   });
+  const loginValidationResult = useMemo(() => {
+    return {
+      isUsernameInvalid: !validator.email(loginInfo.username),
+      isPasswordInvalid: !validator.password(loginInfo.password),
+    };
+  }, [loginInfo]);
 
-  const { mutate: signIn } = useMutation({
-    mutationFn: authAPI.signIn,
-    onError(error) {
-      const err = error as AxiosError<SwaggerError.GeneralApiError>;
+  const { login } = useAuth({
+    onLoginSuccess() {
+      router.back();
+    },
+    onLoginError(err) {
       if (!err.response) return;
       const { code } = err.response.data;
       switch (code) {
+        case ErrorCode.Common.INVALID_REQUEST_PARAM: {
+          alert("이메일 혹은 비밀번호의 형식이 틀렸습니다.");
+          break;
+        }
         case ErrorCode.Auth.ACCOUNT_MISMATCH: {
           alert("이메일 혹은 비밀번호를 다시 확인해주세요.");
           break;
@@ -46,7 +60,15 @@ export default function Form() {
 
   const handleLoginSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    signIn({
+
+    if (
+      loginValidationResult.isUsernameInvalid ||
+      loginValidationResult.isPasswordInvalid
+    ) {
+      return;
+    }
+
+    login({
       email: loginInfo.username,
       password: loginInfo.password,
       loginType: "email",
@@ -54,28 +76,46 @@ export default function Form() {
   };
 
   return (
-    <S.FormLayout gap={10} onSubmit={handleLoginSubmit} role="form">
-      <Column.label>
+    <S.FormLayout role="form" gap={10} onSubmit={handleLoginSubmit}>
+      <Column.label css={{ width: "100%" }}>
         <span>아이디</span>
         <input
           id="username"
-          onChange={handleChange}
-          value={loginInfo.username}
           type="text"
           placeholder="아이디를 입력하세요"
+          css={{ width: "100%" }}
+          onChange={handleChange}
+          value={loginInfo.username}
         />
+        <WhatIF condition={loginValidationResult.isUsernameInvalid}>
+          <span>이메일 형식이 잘못됐습니다.</span>
+        </WhatIF>
       </Column.label>
-      <Column.label>
+      <Column.label css={{ width: "100%" }}>
         <span>비밀번호</span>
         <input
           id="password"
-          onChange={handleChange}
-          value={loginInfo.password}
           type="password"
           placeholder="비밀번호를 입력하세요"
+          css={{ width: "100%" }}
+          onChange={handleChange}
+          value={loginInfo.password}
         />
+        <WhatIF condition={loginValidationResult.isPasswordInvalid}>
+          <span>
+            비밀번호는 영어 + 숫자 + 특수문자 조합 8자리 이상 15자리 이하
+            문자입니다.
+          </span>
+        </WhatIF>
       </Column.label>
-      <button>로그인</button>
+      <button
+        disabled={
+          loginValidationResult.isUsernameInvalid ||
+          loginValidationResult.isPasswordInvalid
+        }
+      >
+        로그인
+      </button>
     </S.FormLayout>
   );
 }
