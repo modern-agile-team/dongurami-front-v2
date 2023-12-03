@@ -288,17 +288,7 @@ declare global {
        * @request POST:/api/users
        */
       export namespace UsersCreate {
-        export type RequestParams = {
-          loginType: "email";
-          name: string;
-          email: string;
-          role: "admin" | "일반회원";
-          password: stinrg;
-          phoneNumber: string;
-          grade: number;
-          gender: string;
-          profilePath: string;
-        };
+        export type RequestParams = {};
         export type RequestQuery = {};
         export type RequestBody = CreateUserRequestBodyDto;
         export type RequestHeaders = {};
