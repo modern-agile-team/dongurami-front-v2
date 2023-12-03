@@ -8,6 +8,7 @@ import v from "validator";
 
 function validator() {
   const password = (value: string) => {
+    if (value.length > 15) return false;
     return v.isStrongPassword(value, {
       minLength: 8,
       minSymbols: 1,
