@@ -5,7 +5,7 @@
  */
 
 import { HTMLAttributes } from "react";
-import { RecoilRoot } from "recoil";
+import { Provider, createStore } from "jotai";
 import { Theme, ThemeProvider } from "@emotion/react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
@@ -25,13 +25,16 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const store = createStore();
+
 export default function DonguramiProvider(props: HTMLAttributes<HTMLElement>) {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
+        <Provider store={store}>
           <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
-        </RecoilRoot>
+        </Provider>
       </QueryClientProvider>
     </ErrorBoundary>
   );
