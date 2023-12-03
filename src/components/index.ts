@@ -4,10 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-export * from "./Button";
-export * from "./Column";
-export * from "./Grid";
-export * from "./Row";
-export * from "./SwitchCase";
-export * from "./WhatIF";
+export * from "./UI";
+export * from "./Layouts";
+export * from "./Utilities";
 export * from "./Provider";

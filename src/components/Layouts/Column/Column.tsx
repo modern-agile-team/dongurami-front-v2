@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { createStyled, domElementList, filterHTMLAttribute } from "@/lib";
+import { createStyled, domElementList, filterHTMLAttribute } from "@/utils";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { AllHTMLAttributes, forwardRef } from "react";
@@ -65,19 +65,26 @@ const ColumnCSS = (props?: ColumnProps) => css`
 `;
 
 const StyledColumn = styled(
-  forwardRef((props: { tag?: keyof JSX.IntrinsicElements } & ColumnProps & AllHTMLAttributes<HTMLElement>, ref) => {
-    const { tag = "div", ...rest } = props;
+  forwardRef(
+    (
+      props: { tag?: keyof JSX.IntrinsicElements } & ColumnProps &
+        AllHTMLAttributes<HTMLElement>,
+      ref
+    ) => {
+      const { tag = "div", ...rest } = props;
 
-    const htmlAttrs = filterHTMLAttribute(rest);
+      const htmlAttrs = filterHTMLAttribute(rest);
 
-    return React.createElement(tag, { ...htmlAttrs, ref });
-  })
+      return React.createElement(tag, { ...htmlAttrs, ref });
+    }
+  )
 )`
   ${(props) => ColumnCSS(props)}
 `;
 
-const ColumnBase: ColumnBaseType = forwardRef(({ ...rest }: React.ComponentProps<typeof StyledColumn>, ref) =>
-  createStyled(StyledColumn)({ ...rest, ref })
+const ColumnBase: ColumnBaseType = forwardRef(
+  ({ ...rest }: React.ComponentProps<typeof StyledColumn>, ref) =>
+    createStyled(StyledColumn)({ ...rest, ref })
 );
 
 /**

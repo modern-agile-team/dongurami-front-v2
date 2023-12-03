@@ -5,3 +5,4 @@
  */
 
 export * from "./Apis";
+export * from "./ApiError";

@@ -7,7 +7,7 @@
 import styled from "@emotion/styled";
 import { Theme } from "@emotion/react";
 
-import { Row } from "../Row";
+import { Row } from "../../Layouts";
 
 export const ButtonContainer = styled(Row.button)<{
   filled: "outlined" | "contained";
@@ -32,7 +32,8 @@ export const ButtonContainer = styled(Row.button)<{
   color: ${({ theme, filled }) => (filled === "contained" ? "#fff" : "#000")};
   background: ${({ theme, filled, backgroundColor }) =>
     filled === "outlined" ? "transparent" : theme.color[backgroundColor]};
-  border: ${({ theme, backgroundColor }) => `1px solid ${theme.color[backgroundColor]}`};
+  border: ${({ theme, backgroundColor }) =>
+    `1px solid ${theme.color[backgroundColor]}`};
   border-radius: ${({ shape }) => {
     switch (shape) {
       case "circle":

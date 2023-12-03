@@ -1,14 +1,46 @@
+import React, { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
+import { useRouter } from "next/router";
+
 import styles from "@/styles/Home.module.css";
-import { Button, Row, SwitchCase, WhatIF } from "@/components";
-import { useState } from "react";
+import { Row } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [condition, setCondition] = useState(0);
+  const router = useRouter();
+  const [state, setState] = useState(0);
+
+  const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    const target = ev.target as HTMLButtonElement;
+    const id = target.id;
+
+    switch (id) {
+      case "sign-in": {
+        router.push("login");
+        break;
+      }
+      case "sign-up": {
+        router.push("sign-up");
+        break;
+      }
+      case "infinity-board": {
+        router.push("board/infinity");
+        break;
+      }
+      case "pagination-board": {
+        router.push("board/pagination");
+        break;
+      }
+      case "club": {
+        router.push("club/1?tab=home");
+        break;
+      }
+    }
+  };
+
+  if (state >= 5) throw new Error("에러");
 
   return (
     <>
@@ -20,29 +52,38 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
-          <WhatIF condition={condition === 0}>
-            <div>0입니다.</div>
-          </WhatIF>
-          <Button filled="contained" onClick={() => setCondition(condition + 1)}>
-            condition +1
-          </Button>
-          <span>{condition}</span>
-          <SwitchCase
-            condition={condition}
-            cases={{
-              0: <div>현재 조건은 0</div>,
-              1: <div>현재 조건은 1</div>,
-              2: <div>현재 조건은 2</div>,
+          <button
+            onClick={() => {
+              setState(state + 1);
             }}
-            defaultCase={<div>예외 케이스</div>}
-          />
-          <Row.ul gap={4}>
-            <Row.li>1</Row.li>
-            <Row.li>2</Row.li>
-            <Row.li>3</Row.li>
-            <Row.li>4</Row.li>
+          >
+            에러 테스트 <br /> 5번 클릭하면 에러 발생
+          </button>
+          <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
             <Row.li>
-              <Button filled="contained">asdasd</Button>
+              <button id="sign-in" onClick={handleRoute}>
+                로그인
+              </button>
+            </Row.li>
+            <Row.li>
+              <button id="sign-up" onClick={handleRoute}>
+                회원가입
+              </button>
+            </Row.li>
+            <Row.li>
+              <button id="infinity-board" onClick={handleRoute}>
+                무한스크롤 게시판
+              </button>
+            </Row.li>
+            <Row.li>
+              <button id="pagination-board" onClick={handleRoute}>
+                페이지네이션 게시판
+              </button>
+            </Row.li>
+            <Row.li>
+              <button id="club" onClick={handleRoute}>
+                동아리
+              </button>
             </Row.li>
           </Row.ul>
         </div>

@@ -40,7 +40,8 @@
 
 <table>
   <tr>
-     <td align="center"><a href="https://github.com/soonki-98"><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F79e3b45d-cfff-4119-9c1a-db28e4061d40%2F.jpeg?table=block&id=0fd69531-587f-4039-9a71-efbf613c92a4&spaceId=065109dd-4d22-4e3f-9455-ff3805b7d264&width=2880&userId=601054f0-a611-49e0-84b9-04831ec920f4&cache=v2" width="100px;" height="100px"; alt=""/><br /><sub><b>민순기</b></sub></a><br /><a href="https://github.com/soonki-98" title="Packaging/porting to new platform">프런트 개발 (팀장)</a></td>
+    <td align="center"><a href="https://github.com/jsj1510"><img src="https://avatars.githubusercontent.com/u/75245755?v=4" width="100px;" alt=""/><br /><sub><b>전상준</b></sub></a><br /><a href="https://github.com/jsj1510" title="Packaging/porting to new platform">프런트 개발자</a></td>
+     <td align="center"><a href="https://github.com/soonki-98"><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F79e3b45d-cfff-4119-9c1a-db28e4061d40%2F.jpeg?table=block&id=0fd69531-587f-4039-9a71-efbf613c92a4&spaceId=065109dd-4d22-4e3f-9455-ff3805b7d264&width=2880&userId=601054f0-a611-49e0-84b9-04831ec920f4&cache=v2" width="100px;" height="100px"; alt=""/><br /><sub><b>민순기</b></sub></a><br /><a href="https://github.com/soonki-98" title="Packaging/porting to new platform">프런트 개발</a></td>
     <td align="center"><a href="https://github.com/pho9902"><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc4282d5b-28a8-43bf-946d-1f3bbf4f209e%2F.jpeg?table=block&id=03dd6ada-2448-4c71-af8e-c0a6f3d89566&spaceId=065109dd-4d22-4e3f-9455-ff3805b7d264&width=2160&userId=601054f0-a611-49e0-84b9-04831ec920f4&cache=v2" width="100px;" height="100px"; alt=""/><br /><sub><b>박현우</b></sub></a><br /><a href="https://github.com/pho9902" title="Packaging/porting to new platform">프런트 개발자</a></td>
   </tr>
 </table>
