@@ -4,6 +4,4 @@
  * Copyright (c) 2023 Your Company
  */
 
-export * from "./Layout";
-export * from "./Form";
-export * from "./Choice";
+export { default as Form } from "./Form";
