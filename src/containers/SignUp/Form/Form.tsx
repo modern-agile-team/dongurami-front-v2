@@ -14,6 +14,7 @@ export default function Form() {
   };
   return (
     <S.FormLayout gap={10} onSubmit={handleSignUpSubmit} role="form">
+      <Column.h2>회원가입</Column.h2>
       <Column.label>ㅇ</Column.label>
     </S.FormLayout>
   );
