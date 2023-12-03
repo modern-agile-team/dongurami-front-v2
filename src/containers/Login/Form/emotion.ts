@@ -11,4 +11,5 @@ export const FormLayout = styled(Column.form)`
   padding: 20px 10px;
   border: 1px solid #fff;
   border-radius: 6px;
+  width: 500px;
 `;
