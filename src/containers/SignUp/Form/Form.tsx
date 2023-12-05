@@ -20,6 +20,8 @@ export default function Form() {
     grade: 0,
     gender: "",
   });
+  const [maleChecked, setMaleChecked] = useState(false);
+  const [femaleChecked, setFemaleChecked] = useState(false);
 
   const handleSignUpSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -42,6 +44,16 @@ export default function Form() {
     const id = ev.target.id;
 
     setUserInfo({ ...userInfo, [id]: ev.target.value });
+  };
+
+  const checkGender = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    if (ev.target.id === "male") {
+      setMaleChecked(true);
+      setFemaleChecked(false);
+      return;
+    }
+    setMaleChecked(false);
+    setFemaleChecked(true);
   };
 
   return (
@@ -94,11 +106,24 @@ export default function Form() {
       <Column.label>
         <span>성별</span>
         <Row.div>
-          <input type="checkbox" id="male" name="male" />
+          <input
+            type="checkbox"
+            value="male"
+            id="male"
+            name="male"
+            onChange={checkGender}
+            checked={maleChecked}
+          />
           <label htmlFor="male">남성</label>
-          <input type="checkbox" id="female" name="female" />
+          <input
+            type="checkbox"
+            value="female"
+            id="female"
+            name="female"
+            onChange={checkGender}
+            checked={femaleChecked}
+          />
           <label htmlFor="female">여성</label>
-          {/* Todo  두개다 선택 못하게 막기*/}
         </Row.div>
       </Column.label>
       <button>회원가입</button>
