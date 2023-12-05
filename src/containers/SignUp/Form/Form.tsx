@@ -9,12 +9,22 @@ import * as S from "./emotion";
 import { useState } from "react";
 
 export default function Form() {
+  const [isAvailableId, setIsAvailableId] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    loginType: "email",
+    name: "",
+    email: "",
+    role: "admin",
+    password: "",
+    phoneNumber: "",
+    grade: 0,
+    gender: "",
+  });
+
   const handleSignUpSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    alert("");
+    console.log(userInfo);
   };
-
-  const [isAvailableId, setIsAvailableId] = useState(false);
 
   function emailCheck(ev: React.ChangeEvent<HTMLInputElement>) {
     if (true) {
@@ -23,12 +33,23 @@ export default function Form() {
       setIsAvailableId(true);
     }
   }
+
+  const handleChange = (
+    ev:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const id = ev.target.id;
+
+    setUserInfo({ ...userInfo, [id]: ev.target.value });
+  };
+
   return (
     <S.FormLayout gap={10} onSubmit={handleSignUpSubmit} role="form">
       <Column.h2>회원가입</Column.h2>
       <Column.label>
         <span>E-mail</span>
-        <input placeholder="E-mail" onChange={emailCheck} />
+        <input placeholder="E-mail" onChange={handleChange} id="email" />
         {isAvailableId ? (
           <Column.span>사용 가능한 이메일 형식 입니다.</Column.span>
         ) : (
@@ -38,20 +59,30 @@ export default function Form() {
       </Column.label>
       <Column.label>
         <span>이름(닉네임?)</span>
-        <input placeholder="name" />
+        <input
+          id="name"
+          placeholder="name"
+          onChange={handleChange}
+          type="text"
+        />
       </Column.label>
 
       <Column.label>
         <span>비밀번호</span>
-        <input placeholder="password" />
+        <input placeholder="password" onChange={handleChange} id="password" />
+        {/* Todo 마스킹 */}
       </Column.label>
       <Column.label>
         <span>전화번호</span>
-        <input placeholder="phone" />
+        <input
+          placeholder="phoneNumber"
+          id="phoneNumber"
+          onChange={handleChange}
+        />
       </Column.label>
       <Column.label>
         <span>학년</span>
-        <select name="학년">
+        <select name="학년" onChange={handleChange} id="grade">
           <option value="select">현재 학년을 선택하세요</option>
           <option value={0}>0 (전공심화)</option>
           <option value={1}>1학년</option>
@@ -65,10 +96,16 @@ export default function Form() {
         <Row.div>
           <input type="checkbox" id="male" name="male" />
           <label htmlFor="male">남성</label>
-          <input type="checkbox" id="male" name="male" />
-          <label htmlFor="male">여성</label>
+          <input type="checkbox" id="female" name="female" />
+          <label htmlFor="female">여성</label>
+          {/* Todo  두개다 선택 못하게 막기*/}
         </Row.div>
       </Column.label>
+      <button>회원가입</button>
     </S.FormLayout>
   );
 }
+
+//Todo
+// api 연동
+// 테스트코드
