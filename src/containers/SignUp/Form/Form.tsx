@@ -50,10 +50,12 @@ export default function Form() {
     if (ev.target.id === "male") {
       setMaleChecked(true);
       setFemaleChecked(false);
-      return;
+      setUserInfo({ ...userInfo, gender: "male" });
+    } else {
+      setMaleChecked(false);
+      setFemaleChecked(true);
+      setUserInfo({ ...userInfo, gender: "female" });
     }
-    setMaleChecked(false);
-    setFemaleChecked(true);
   };
 
   return (
