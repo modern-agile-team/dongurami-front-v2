@@ -39,15 +39,9 @@ export default function Form() {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
-    const id = ev.target.id as
-      | "email"
-      | "name"
-      | "password"
-      | "phoneNumber"
-      | "grade"
-      | "gender";
+    const { id, value }: { id: string; value: string | number } = ev.target;
 
-    setUserInfo({ ...userInfo, [id]: ev.target.value });
+    setUserInfo({ ...userInfo, [id]: value });
   };
 
   return (
