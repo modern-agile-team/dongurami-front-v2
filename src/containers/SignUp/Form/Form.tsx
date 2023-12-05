@@ -14,14 +14,12 @@ export default function Form() {
     loginType: "email",
     name: "",
     email: "",
-    role: "admin",
+    role: "student",
     password: "",
     phoneNumber: "",
     grade: 0,
     gender: "",
   });
-  const [maleChecked, setMaleChecked] = useState(false);
-  const [femaleChecked, setFemaleChecked] = useState(false);
 
   const handleSignUpSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -41,21 +39,15 @@ export default function Form() {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
-    const id = ev.target.id;
+    const id = ev.target.id as
+      | "email"
+      | "name"
+      | "password"
+      | "phoneNumber"
+      | "grade"
+      | "gender";
 
     setUserInfo({ ...userInfo, [id]: ev.target.value });
-  };
-
-  const checkGender = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    if (ev.target.id === "male") {
-      setMaleChecked(true);
-      setFemaleChecked(false);
-      setUserInfo({ ...userInfo, gender: "male" });
-    } else {
-      setMaleChecked(false);
-      setFemaleChecked(true);
-      setUserInfo({ ...userInfo, gender: "female" });
-    }
   };
 
   return (
@@ -111,19 +103,19 @@ export default function Form() {
           <input
             type="checkbox"
             value="male"
-            id="male"
+            id="gender"
             name="male"
-            onChange={checkGender}
-            checked={maleChecked}
+            onChange={handleChange}
+            checked={userInfo.gender === "male"}
           />
           <label htmlFor="male">남성</label>
           <input
             type="checkbox"
             value="female"
-            id="female"
+            id="gender"
             name="female"
-            onChange={checkGender}
-            checked={femaleChecked}
+            onChange={handleChange}
+            checked={userInfo.gender === "female"}
           />
           <label htmlFor="female">여성</label>
         </Row.div>
