@@ -69,18 +69,6 @@ export default function Form() {
           <label htmlFor="male">여성</label>
         </Row.div>
       </Column.label>
-      <Column.label>
-        <label htmlFor="inputFile">기기에서 이미지 선택</label>
-        <img src="www.baseimgpath.test" alt="profileImg" />
-        <span>기본 이미지로 변경</span>
-        <input
-          type="file"
-          id="inputFile"
-          style={{ display: "none" }}
-          name="profileImg"
-          accept="image/jpg, image/png, image/jpeg"
-        />
-      </Column.label>
     </S.FormLayout>
   );
 }

@@ -6,7 +6,7 @@
 
 export const signUp = async () => {};
 
-const obj = {
+const example = {
   loginType: "email",
   name: "string",
   email: "user@example.com",
