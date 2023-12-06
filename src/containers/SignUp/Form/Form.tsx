@@ -9,6 +9,7 @@ import * as S from "./emotion";
 import { useState } from "react";
 import { validator } from "@/utils";
 import { signUp } from "@/apis/users";
+import { useRouter } from "next/router";
 
 export default function Form() {
   const [isAvailableId, setIsAvailableId] = useState(false);
@@ -24,6 +25,7 @@ export default function Form() {
   });
 
   const [passwordType, setPasswordType] = useState("password");
+  const router = useRouter();
 
   const handleSignUpSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -54,6 +56,7 @@ export default function Form() {
       return;
     }
     signUp(userInfo);
+    router;
   };
 
   const handleChange = (
@@ -62,8 +65,11 @@ export default function Form() {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { id, value }: { id: string; value: string | number } = ev.target;
-
-    setUserInfo({ ...userInfo, [id]: value });
+    const data =
+      id !== "grade"
+        ? { ...userInfo, [id]: value }
+        : { ...userInfo, [id]: parseInt(value) };
+    setUserInfo(data);
   };
 
   return (
