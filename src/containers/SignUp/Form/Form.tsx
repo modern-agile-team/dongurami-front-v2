@@ -4,16 +4,17 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Row, Column, WhatIF } from "@/components";
-import * as S from "./emotion";
 import { useMemo, useState } from "react";
+
+import { Row, Column, WhatIF } from "@/components";
 import { validator } from "@/utils";
-import { signUp } from "@/apis/users";
-import { useRouter } from "next/router";
+import { usersAPI } from "@/apis";
+
+import * as S from "./emotion";
 
 export default function Form() {
   const [isAvailableId, setIsAvailableId] = useState(false);
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<any>({
     loginType: "email",
     name: "",
     email: "",
@@ -22,10 +23,10 @@ export default function Form() {
     phoneNumber: "",
     grade: 0,
     gender: "",
+    profilePath: "조만간사라질예정",
   });
 
   const [passwordType, setPasswordType] = useState("password");
-  const router = useRouter();
 
   const signUpValidationResult = useMemo(() => {
     return {
@@ -54,17 +55,13 @@ export default function Form() {
        }
      });
     추후 기획에서 필수값이 결정되면 작업 예정*/
-
-    if (
-      signUpValidationResult.isEmailInvalid ||
-      signUpValidationResult.isPasswordInvalid ||
-      signUpValidationResult.isPhoneNumberInvalid
-    ) {
+    const { isEmailInvalid, isPasswordInvalid, isPhoneNumberInvalid } =
+      signUpValidationResult;
+    if (isEmailInvalid || isPasswordInvalid || isPhoneNumberInvalid) {
       return;
     }
 
-    signUp(userInfo);
-    router.replace("/");
+    usersAPI.signUp(userInfo);
   };
 
   const handleChange = (
