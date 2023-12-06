@@ -4,9 +4,9 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Row, Column } from "@/components";
+import { Row, Column, WhatIF } from "@/components";
 import * as S from "./emotion";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { validator } from "@/utils";
 import { signUp } from "@/apis/users";
 import { useRouter } from "next/router";
@@ -26,6 +26,14 @@ export default function Form() {
 
   const [passwordType, setPasswordType] = useState("password");
   const router = useRouter();
+
+  const signUpValidationResult = useMemo(() => {
+    return {
+      isEmailInvalid: !validator.email(userInfo.email),
+      isPasswordInvalid: !validator.password(userInfo.password),
+      isPhoneNumberInvalid: !validator.phoneNumber(userInfo.phoneNumber),
+    };
+  }, [userInfo]);
 
   const handleSignUpSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -47,16 +55,16 @@ export default function Form() {
      });
     추후 기획에서 필수값이 결정되면 작업 예정*/
 
-    if (!validator.phoneNumber(userInfo.phoneNumber)) {
-      alert("전화번호 형식을 다시 확인해주세요");
+    if (
+      signUpValidationResult.isEmailInvalid ||
+      signUpValidationResult.isPasswordInvalid ||
+      signUpValidationResult.isPhoneNumberInvalid
+    ) {
       return;
     }
-    if (!validator.email(userInfo.email)) {
-      alert("이메일 형식을 확인해주세요");
-      return;
-    }
+
     signUp(userInfo);
-    router;
+    router.replace("/");
   };
 
   const handleChange = (
@@ -65,11 +73,14 @@ export default function Form() {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { id, value }: { id: string; value: string | number } = ev.target;
-    const data =
-      id !== "grade"
-        ? { ...userInfo, [id]: value }
-        : { ...userInfo, [id]: parseInt(value) };
-    setUserInfo(data);
+
+    if (id === "grade") setUserInfo({ ...userInfo, [id]: parseInt(value) });
+    else if (id === "phoneNumber" && value.length === 11)
+      setUserInfo({
+        ...userInfo,
+        [id]: value.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
+      });
+    else setUserInfo({ ...userInfo, [id]: value });
   };
 
   return (
@@ -78,6 +89,9 @@ export default function Form() {
       <Column.label>
         <span>E-mail</span>
         <input placeholder="E-mail" onChange={handleChange} id="email" />
+        <WhatIF condition={signUpValidationResult.isEmailInvalid}>
+          <span>이메일 형식이 잘못됐습니다.</span>
+        </WhatIF>
       </Column.label>
       <Column.label>
         <span>이름(닉네임?)</span>
@@ -97,6 +111,12 @@ export default function Form() {
           id="password"
           type={passwordType}
         />
+        <WhatIF condition={signUpValidationResult.isPasswordInvalid}>
+          <span>
+            비밀번호는 영어 + 숫자 + 특수문자 조합 8자리 이상 15자리 이하
+            문자입니다.
+          </span>
+        </WhatIF>
         <span
           onClick={() => {
             passwordType === "password"
@@ -114,6 +134,9 @@ export default function Form() {
           id="phoneNumber"
           onChange={handleChange}
         />
+        <WhatIF condition={signUpValidationResult.isPhoneNumberInvalid}>
+          <span>전화번호는 '-' 를 제외한 숫자만 입력해주세요.</span>
+        </WhatIF>
       </Column.label>
       <Column.label>
         <span>학년</span>
@@ -149,7 +172,15 @@ export default function Form() {
           <label htmlFor="female">여성</label>
         </Row.div>
       </Column.label>
-      <button>회원가입</button>
+      <button
+        disabled={
+          signUpValidationResult.isEmailInvalid ||
+          signUpValidationResult.isPasswordInvalid ||
+          signUpValidationResult.isPhoneNumberInvalid
+        }
+      >
+        회원가입
+      </button>
     </S.FormLayout>
   );
 }
