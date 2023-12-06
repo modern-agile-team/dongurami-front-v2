@@ -8,6 +8,7 @@ import { Row, Column } from "@/components";
 import * as S from "./emotion";
 import { useState } from "react";
 import { validator } from "@/utils";
+import { signUp } from "@/apis/users";
 
 export default function Form() {
   const [isAvailableId, setIsAvailableId] = useState(false);
@@ -44,10 +45,15 @@ export default function Form() {
      });
     추후 기획에서 필수값이 결정되면 작업 예정*/
 
-    if (!validator.phoneNumber(userInfo.phoneNumber))
+    if (!validator.phoneNumber(userInfo.phoneNumber)) {
       alert("전화번호 형식을 다시 확인해주세요");
-    else if (!validator.email(userInfo.email))
+      return;
+    }
+    if (!validator.email(userInfo.email)) {
       alert("이메일 형식을 확인해주세요");
+      return;
+    }
+    signUp(userInfo);
   };
 
   const handleChange = (

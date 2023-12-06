@@ -11,8 +11,8 @@ const apiPath = (path?: string) => `/users${path ? `/${path}` : ""}`;
 /**
  * 유저 생성(회원가입)
  */
-export const signUp = async (args: Swagger.Api.AuthSignIn.RequestBody) => {
-  const result = await instance.post<Swagger.Api.AuthSignIn.ResponseBody>(
+export const signUp = async (args: Swagger.Api.UsersCreate.RequestBody) => {
+  const result = await instance.post<Swagger.Api.UsersCreate.ResponseBody>(
     apiPath(),
     args
   );
