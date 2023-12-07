@@ -5,15 +5,17 @@
  */
 
 import { useMemo, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import { Row, Column, WhatIF } from "@/components";
 import { validator } from "@/utils";
 import { usersAPI } from "@/apis";
 
 import * as S from "./emotion";
+import { AxiosError } from "axios";
 
 export default function Form() {
-  const [isAvailableId, setIsAvailableId] = useState(false);
   const [userInfo, setUserInfo] = useState<any>({
     loginType: "email",
     name: "",
@@ -27,6 +29,7 @@ export default function Form() {
   });
 
   const [passwordType, setPasswordType] = useState("password");
+  const router = useRouter();
 
   const signUpValidationResult = useMemo(() => {
     return {
@@ -35,6 +38,18 @@ export default function Form() {
       isPhoneNumberInvalid: !validator.phoneNumber(userInfo.phoneNumber),
     };
   }, [userInfo]);
+
+  const { mutate } = useMutation({
+    mutationFn: usersAPI.signUp,
+    onSuccess(_) {
+      alert("회원가입이 완료되었습니다.");
+      router.push("/");
+    },
+    onError(error) {
+      const err = error as AxiosError<SwaggerError.GeneralApiError>;
+      alert(err.response?.data.message);
+    },
+  });
 
   const handleSignUpSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -61,7 +76,7 @@ export default function Form() {
       return;
     }
 
-    usersAPI.signUp(userInfo);
+    mutate(userInfo);
   };
 
   const handleChange = (
