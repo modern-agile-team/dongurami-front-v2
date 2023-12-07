@@ -7,13 +7,13 @@
 import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { AxiosError } from "axios";
 
 import { Row, Column, WhatIF } from "@/components";
 import { validator } from "@/utils";
 import { usersAPI } from "@/apis";
 
 import * as S from "./emotion";
-import { AxiosError } from "axios";
 
 export default function Form() {
   const [userInfo, setUserInfo] = useState<any>({
@@ -28,7 +28,9 @@ export default function Form() {
     profilePath: "조만간사라질예정",
   });
 
-  const [passwordType, setPasswordType] = useState("password");
+  const [passwordType, setPasswordType] = useState<"password" | "text">(
+    "password"
+  );
   const router = useRouter();
 
   const signUpValidationResult = useMemo(() => {
@@ -41,6 +43,7 @@ export default function Form() {
 
   const { mutate } = useMutation({
     mutationFn: usersAPI.signUp,
+    mutationKey: ["signUp", userInfo],
     onSuccess(_) {
       alert("회원가입이 완료되었습니다.");
       router.push("/");
