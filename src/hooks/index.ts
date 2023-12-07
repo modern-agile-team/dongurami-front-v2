@@ -5,3 +5,4 @@
  */
 
 export * from "./useIntersectionObserver";
+export * from "./useAuth";
