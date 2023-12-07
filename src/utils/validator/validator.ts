@@ -6,21 +6,23 @@
 
 import v from "validator";
 
-function validator() {
-  const password = (value: string) => {
+class Validator {
+  password(value: string) {
     if (value.length > 15) return false;
     return v.isStrongPassword(value, {
       minLength: 8,
       minSymbols: 1,
       minUppercase: 0,
     });
-  };
+  }
 
-  const email = (value: string) => {
+  email(value: string) {
     return v.isEmail(value);
-  };
+  }
 
-  return { password, email };
+  phoneNumber(value: string) {
+    return v.isMobilePhone(value);
+  }
 }
 
-export default validator();
+export default new Validator();
