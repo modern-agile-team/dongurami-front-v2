@@ -31,34 +31,3 @@ export const createMajor = async (
   );
   return result.data;
 };
-
-// class MajorAPI extends BaseAPIInstance {
-//   constructor() {
-//     super();
-//   }
-
-//   private _apiPath = (path?: string) => {
-//     return `/major${path ? `/${path}` : ""}`;
-//   };
-
-//   /**
-//    * 전공 목록 전체 조회
-//    */
-//   getMajorList = async () => {
-//     const result = await this.instance.get<Swagger.Api.GetAllMajors.ResponseBody>(
-//       this._apiPath()
-//     );
-//     return result.data;
-//   };
-
-//   /**
-//    * 전공 코드 및 이름 생성
-//    */
-//   createMajor = async (args: Swagger.Api.CreateNewMajor.RequestBody) => {
-//     const result = await this.instance.post<Swagger.Api.CreateNewMajor.ResponseBody>(
-//       this._apiPath(),
-//       args
-//     );
-//     return result.data;
-//   };
-// }
