@@ -23,10 +23,7 @@ declare global {
        * @format email
        */
       email: string;
-      /**
-       * password
-       * @pattern /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/
-       */
+      /** password (email 로그인시에만 패턴 검사를 진행합니다.) */
       password: string | null;
     }
 
@@ -99,7 +96,7 @@ declare global {
       /** role */
       role: CreateUserRequestBodyDtoRoleEnum;
       /**
-       * password
+       * password (email 로그인시에만 패턴 검사를 진행합니다.)
        * @pattern /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/
        */
       password: string | null;
@@ -124,7 +121,7 @@ declare global {
       profilePath: string | null;
     }
 
-    export interface FreeBoardDto {
+    export interface FreePostDto {
       /**
        * 고유 ID
        * @min 1
@@ -163,7 +160,7 @@ declare global {
       isAnonymous: boolean;
     }
 
-    export interface CreateFreeBoardDto {
+    export interface CreateFreePostDto {
       /**
        * 제목
        * @minLength 1
@@ -179,11 +176,11 @@ declare global {
       isAnonymous: boolean;
     }
 
-    export interface FreeBoardDetailResponseDto {
-      freeBoard: FreeBoardDto;
+    export interface FreePostDetailResponseDto {
+      freePost: FreePostDto;
     }
 
-    export interface FreeBoardsItemDto {
+    export interface FreePostsItemDto {
       /**
        * 고유 ID
        * @min 1
@@ -220,7 +217,7 @@ declare global {
       isAnonymous: boolean;
     }
 
-    export interface FreeBoardsPaginationResponseDto {
+    export interface FreePostsPaginationResponseDto {
       /**
        * 총 페이지 수
        * @format integer
@@ -256,10 +253,10 @@ declare global {
        * @min 1
        */
       lastPage: number;
-      freeBoards: FreeBoardsItemDto[];
+      freePosts: FreePostsItemDto[];
     }
 
-    export interface PutUpdateFreeBoardDto {
+    export interface PutUpdateFreePostDto {
       /**
        * 제목
        * @minLength 1
@@ -272,7 +269,7 @@ declare global {
       isAnonymous: boolean;
     }
 
-    export interface PatchUpdateFreeBoardDto {
+    export interface PatchUpdateFreePostDto {
       /**
        * 제목
        * @minLength 1
@@ -283,6 +280,14 @@ declare global {
       description?: string;
       /** 익명 여부 */
       isAnonymous?: boolean;
+    }
+
+    export interface FreePostDeleteResponseDto {
+      /**
+       * 삭제된 리소스 개수
+       * @format integer
+       */
+      count: number;
     }
 
     export interface MajorDto {
@@ -321,8 +326,8 @@ declare global {
       memo: string;
     }
 
-    export interface MajorCommonResponseDto {
-      major: MajorDto;
+    export interface MajorsCommonResponseDto {
+      majors: MajorDto[];
     }
 
     export interface CreateMajorRequestBodyDto {
@@ -350,6 +355,163 @@ declare global {
       major: MajorDto;
     }
 
+    export interface NoticeBoardDto {
+      /**
+       * 고유 ID
+       * @min 1
+       */
+      id: number;
+      /**
+       * 생성일자
+       * @format date-time
+       */
+      createdAt: string;
+      /**
+       * 수정일자
+       * @format date-time
+       */
+      updatedAt: string;
+      /**
+       * 공지 게시글 제목
+       * @minLength 1
+       * @maxLength 255
+       */
+      title: string;
+      /** 공지 게시글 본문 */
+      description: string;
+      /**
+       * 게시글 작성자 고유 ID
+       * @format integer
+       */
+      userId: number;
+      /**
+       * 공지 게시글 조회수
+       * @format integer
+       * @default 0
+       */
+      hit: number;
+      /**
+       * 댓글 허용 여부 (false: 비활성화, true: 허용)
+       * @default true
+       */
+      isAllowComment: boolean;
+    }
+
+    export interface CreateNoticeBoardDto {
+      /**
+       * 공지 게시글 제목
+       * @minLength 1
+       * @maxLength 255
+       */
+      title: string;
+      /** 공지 게시글 본문 */
+      description: string;
+      /**
+       * 댓글 허용 여부 (false: 비활성화, true: 허용)
+       * @default true
+       */
+      isAllowComment: boolean;
+    }
+
+    export interface NoticeBoardDetailResponseDto {
+      noticeBoard: NoticeBoardDto;
+    }
+
+    export interface NoticeBoardsItemDto {
+      /**
+       * 고유 ID
+       * @min 1
+       */
+      id: number;
+      /**
+       * 생성일자
+       * @format date-time
+       */
+      createdAt: string;
+      /**
+       * 수정일자
+       * @format date-time
+       */
+      updatedAt: string;
+      /**
+       * 공지 게시글 제목
+       * @minLength 1
+       * @maxLength 255
+       */
+      title: string;
+      /**
+       * 게시글 작성자 고유 ID
+       * @format integer
+       */
+      userId: number;
+      /**
+       * 공지 게시글 조회수
+       * @format integer
+       * @default 0
+       */
+      hit: number;
+      /**
+       * 댓글 허용 여부 (false: 비활성화, true: 허용)
+       * @default true
+       */
+      isAllowComment: boolean;
+    }
+
+    export interface NoticeBoardsPaginationResponseDto {
+      /**
+       * 총 페이지 수
+       * @format integer
+       * @min 1
+       */
+      totalCount: number;
+      /**
+       * 한 요청에 대한 data 수
+       * @format integer
+       * @min 1
+       */
+      pageSize: number;
+      /**
+       * 현재 페이지 번호
+       * @format integer
+       * @min 1
+       */
+      currentPage: number;
+      /**
+       * 다음 페이지 번호, 다음 페이지가 없다면 null 반환
+       * @format integer
+       * @min 2
+       */
+      nextPage: number | null;
+      /**
+       * 다음 페이지 존재 여부
+       * @min 1
+       */
+      hasNext: boolean;
+      /**
+       * 마지막 페이지 번호
+       * @format integer
+       * @min 1
+       */
+      lastPage: number;
+      noticeBoards: NoticeBoardsItemDto[];
+    }
+
+    export interface PutUpdateNoticeBoardDto {
+      /**
+       * 공지 게시글 제목
+       * @minLength 1
+       * @maxLength 255
+       */
+      title: string;
+      /** 공지 게시글 본문 */
+      description: string;
+      /**
+       * 댓글 허용 여부 (false: 비활성화, true: 허용)
+       * @default true
+       */
+      isAllowComment: boolean;
+    }
+
     /** login type 현재 email 만 */
     export type SignInRequestBodyDtoLoginTypeEnum = "email";
 
@@ -375,7 +537,7 @@ declare global {
      * error code
      * @example 1
      */
-    export type AuthSignInCodeEnum = "1" | "1000" | "1001";
+    export type AuthSignInCodeEnum = 1 | 1000 | 1001;
 
     /** error message */
     export type AuthSignInMessageEnum =
@@ -387,7 +549,7 @@ declare global {
      * error code
      * @example 0
      */
-    export type AuthSignInCodeEnum1 = "0";
+    export type AuthSignInCodeEnum1 = 0;
 
     /** error message */
     export type AuthSignInMessageEnum1 =
@@ -397,7 +559,7 @@ declare global {
      * error code
      * @example 3
      */
-    export type AuthGetProfileCodeEnum = "3";
+    export type AuthGetProfileCodeEnum = 3;
 
     /** error message */
     export type AuthGetProfileMessageEnum = "This token is invalid.";
@@ -406,7 +568,7 @@ declare global {
      * error code
      * @example 3
      */
-    export type AuthGetAccessTokenCodeEnum = "3";
+    export type AuthGetAccessTokenCodeEnum = 3;
 
     /** error message */
     export type AuthGetAccessTokenMessageEnum = "This token is invalid.";
@@ -415,7 +577,7 @@ declare global {
      * error code
      * @example 1
      */
-    export type UsersCreateCodeEnum = "1";
+    export type UsersCreateCodeEnum = 1;
 
     /** error message */
     export type UsersCreateMessageEnum =
@@ -425,7 +587,7 @@ declare global {
      * error code
      * @example 2000
      */
-    export type UsersCreateCodeEnum1 = "2000" | "2001";
+    export type UsersCreateCodeEnum1 = 2000 | 2001;
 
     /** error message */
     export type UsersCreateMessageEnum1 =
@@ -436,7 +598,7 @@ declare global {
      * error code
      * @example 0
      */
-    export type UsersCreateCodeEnum2 = "0";
+    export type UsersCreateCodeEnum2 = 0;
 
     /** error message */
     export type UsersCreateMessageEnum2 =
@@ -446,52 +608,52 @@ declare global {
      * error code
      * @example 1
      */
-    export type FreeBoardCreateCodeEnum = "1";
+    export type FreePostCreateCodeEnum = 1;
 
     /** error message */
-    export type FreeBoardCreateMessageEnum =
+    export type FreePostCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreeBoardCreateCodeEnum1 = "3";
+    export type FreePostCreateCodeEnum1 = 3;
 
     /** error message */
-    export type FreeBoardCreateMessageEnum1 = "This token is invalid.";
+    export type FreePostCreateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreeBoardCreateCodeEnum2 = "0";
+    export type FreePostCreateCodeEnum2 = 0;
 
     /** error message */
-    export type FreeBoardCreateMessageEnum2 =
+    export type FreePostCreateMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreeBoardFindAllAndCountCodeEnum = "1";
+    export type FreePostFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type FreeBoardFindAllAndCountMessageEnum =
+    export type FreePostFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreeBoardFindAllAndCountCodeEnum1 = "0";
+    export type FreePostFindAllAndCountCodeEnum1 = 0;
 
     /** error message */
-    export type FreeBoardFindAllAndCountMessageEnum1 =
+    export type FreePostFindAllAndCountMessageEnum1 =
       "Server error. Please contact server developer";
 
-    export interface FreeBoardFindAllAndCountParams {
+    export interface FreePostFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -537,7 +699,7 @@ declare global {
     export type IsAnonymousEnum = "true" | "false" | "0" | "1";
 
     /** 익명여부 필터링 */
-    export type FreeBoardFindAllAndCountParams1IsAnonymousEnum =
+    export type FreePostFindAllAndCountParams1IsAnonymousEnum =
       | "true"
       | "false"
       | "0"
@@ -547,79 +709,79 @@ declare global {
      * error code
      * @example 1
      */
-    export type FreeBoardFindOneOrNotFoundCodeEnum = "1";
+    export type FreePostFindOneOrNotFoundCodeEnum = 1;
 
     /** error message */
-    export type FreeBoardFindOneOrNotFoundMessageEnum =
+    export type FreePostFindOneOrNotFoundMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreeBoardFindOneOrNotFoundCodeEnum1 = "5";
+    export type FreePostFindOneOrNotFoundCodeEnum1 = 5;
 
     /** error message */
-    export type FreeBoardFindOneOrNotFoundMessageEnum1 =
+    export type FreePostFindOneOrNotFoundMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 1
      */
-    export type FreeBoardPutUpdateCodeEnum = "1";
+    export type FreePostPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type FreeBoardPutUpdateMessageEnum =
+    export type FreePostPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreeBoardPutUpdateCodeEnum1 = "3";
+    export type FreePostPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type FreeBoardPutUpdateMessageEnum1 = "This token is invalid.";
+    export type FreePostPutUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreeBoardPutUpdateCodeEnum2 = "4";
+    export type FreePostPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type FreeBoardPutUpdateMessageEnum2 =
+    export type FreePostPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreeBoardPutUpdateCodeEnum3 = "5";
+    export type FreePostPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type FreeBoardPutUpdateMessageEnum3 =
+    export type FreePostPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreeBoardPutUpdateCodeEnum4 = "0";
+    export type FreePostPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type FreeBoardPutUpdateMessageEnum4 =
+    export type FreePostPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreeBoardPatchUpdateCodeEnum = "1" | "6";
+    export type FreePostPatchUpdateCodeEnum = 1 | 6;
 
     /** error message */
-    export type FreeBoardPatchUpdateMessageEnum =
+    export type FreePostPatchUpdateMessageEnum =
       | "Invalid request parameter. Please check your request."
       | "At least one update field must exist.";
 
@@ -627,46 +789,95 @@ declare global {
      * error code
      * @example 3
      */
-    export type FreeBoardPatchUpdateCodeEnum1 = "3";
+    export type FreePostPatchUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type FreeBoardPatchUpdateMessageEnum1 = "This token is invalid.";
+    export type FreePostPatchUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreeBoardPatchUpdateCodeEnum2 = "4";
+    export type FreePostPatchUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type FreeBoardPatchUpdateMessageEnum2 =
+    export type FreePostPatchUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreeBoardPatchUpdateCodeEnum3 = "5";
+    export type FreePostPatchUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type FreeBoardPatchUpdateMessageEnum3 =
+    export type FreePostPatchUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreeBoardPatchUpdateCodeEnum4 = "0";
+    export type FreePostPatchUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type FreeBoardPatchUpdateMessageEnum4 =
+    export type FreePostPatchUpdateMessageEnum4 =
+      "Server error. Please contact server developer";
+
+    /**
+     * error code
+     * @example 1
+     */
+    export type FreePostRemoveCodeEnum = 1;
+
+    /** error message */
+    export type FreePostRemoveMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 3
+     */
+    export type FreePostRemoveCodeEnum1 = 3;
+
+    /** error message */
+    export type FreePostRemoveMessageEnum1 = "This token is invalid.";
+
+    /**
+     * error code
+     * @example 4
+     */
+    export type FreePostRemoveCodeEnum2 = 4;
+
+    /** error message */
+    export type FreePostRemoveMessageEnum2 =
+      "You don't have permission to access it.";
+
+    /**
+     * error code
+     * @example 5
+     */
+    export type FreePostRemoveCodeEnum3 = 5;
+
+    /** error message */
+    export type FreePostRemoveMessageEnum3 =
+      "The resource you're trying to access doesn't exist.";
+
+    /**
+     * error code
+     * @example 0
+     */
+    export type FreePostRemoveCodeEnum4 = 0;
+
+    /** error message */
+    export type FreePostRemoveMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 0
      */
-    export type GetAllMajorsCodeEnum = "0";
+    export type GetAllMajorsCodeEnum = 0;
 
     /** error message */
     export type GetAllMajorsMessageEnum =
@@ -676,7 +887,7 @@ declare global {
      * error code
      * @example 1
      */
-    export type CreateNewMajorCodeEnum = "1";
+    export type CreateNewMajorCodeEnum = 1;
 
     /** error message */
     export type CreateNewMajorMessageEnum =
@@ -686,7 +897,7 @@ declare global {
      * error code
      * @example 3000
      */
-    export type CreateNewMajorCodeEnum1 = "3000" | "3001";
+    export type CreateNewMajorCodeEnum1 = 3000 | 3001;
 
     /** error message */
     export type CreateNewMajorMessageEnum1 =
@@ -697,10 +908,180 @@ declare global {
      * error code
      * @example 0
      */
-    export type CreateNewMajorCodeEnum2 = "0";
+    export type CreateNewMajorCodeEnum2 = 0;
 
     /** error message */
     export type CreateNewMajorMessageEnum2 =
+      "Server error. Please contact server developer";
+
+    /**
+     * error code
+     * @example 1
+     */
+    export type NoticeBoardCreateCodeEnum = 1;
+
+    /** error message */
+    export type NoticeBoardCreateMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 3
+     */
+    export type NoticeBoardCreateCodeEnum1 = 3;
+
+    /** error message */
+    export type NoticeBoardCreateMessageEnum1 = "This token is invalid.";
+
+    /**
+     * error code
+     * @example 0
+     */
+    export type NoticeBoardCreateCodeEnum2 = 0;
+
+    /** error message */
+    export type NoticeBoardCreateMessageEnum2 =
+      "Server error. Please contact server developer";
+
+    /**
+     * error code
+     * @example 1
+     */
+    export type NoticeBoardFindAllAndCountCodeEnum = 1;
+
+    /** error message */
+    export type NoticeBoardFindAllAndCountMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    export interface NoticeBoardFindAllAndCountParams {
+      /**
+       * 페이지번호
+       * @format integer
+       * @min 1
+       * @default 1
+       */
+      page?: number;
+      /**
+       * 페이지당 아이템 수
+       * @format integer
+       * @min 1
+       * @max 100
+       * @default 20
+       */
+      pageSize?: number;
+      /**
+       * 공지게시글 고유 ID 필터링
+       * @format integer
+       */
+      id?: number;
+      /**
+       * 공지게시글 작성자 고유 ID 필터링
+       * @format integer
+       */
+      userId?: number;
+      /**
+       * title 필터링
+       * @minLength 1
+       * @maxLength 255
+       */
+      title?: string;
+      /** 댓글 허용 여부 */
+      isAllowComment?: IsAllowCommentEnum;
+      /**
+       * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAllowComment, createdAt, updatedAt]
+       * @format csv
+       * @default "id"
+       * @example "-id,updatedAt"
+       */
+      order?: string;
+    }
+
+    /** 댓글 허용 여부 */
+    export type IsAllowCommentEnum = "true" | "false";
+
+    /** 댓글 허용 여부 */
+    export type NoticeBoardFindAllAndCountParams1IsAllowCommentEnum =
+      | "true"
+      | "false";
+
+    /**
+     * error code
+     * @example 1
+     */
+    export type NoticeBoardFindOneOrNotFoundCodeEnum = 1;
+
+    /** error message */
+    export type NoticeBoardFindOneOrNotFoundMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 5
+     */
+    export type NoticeBoardFindOneOrNotFoundCodeEnum1 = 5;
+
+    /** error message */
+    export type NoticeBoardFindOneOrNotFoundMessageEnum1 =
+      "The resource you're trying to access doesn't exist.";
+
+    /**
+     * error code
+     * @example 0
+     */
+    export type NoticeBoardFindOneOrNotFoundCodeEnum2 = 0;
+
+    /** error message */
+    export type NoticeBoardFindOneOrNotFoundMessageEnum2 =
+      "Server error. Please contact server developer";
+
+    /**
+     * error code
+     * @example 1
+     */
+    export type NoticeBoardsControllerPutUpdateCodeEnum = 1;
+
+    /** error message */
+    export type NoticeBoardsControllerPutUpdateMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 3
+     */
+    export type NoticeBoardsControllerPutUpdateCodeEnum1 = 3;
+
+    /** error message */
+    export type NoticeBoardsControllerPutUpdateMessageEnum1 =
+      "This token is invalid.";
+
+    /**
+     * error code
+     * @example 4
+     */
+    export type NoticeBoardsControllerPutUpdateCodeEnum2 = 4;
+
+    /** error message */
+    export type NoticeBoardsControllerPutUpdateMessageEnum2 =
+      "You don't have permission to access it.";
+
+    /**
+     * error code
+     * @example 5
+     */
+    export type NoticeBoardsControllerPutUpdateCodeEnum3 = 5;
+
+    /** error message */
+    export type NoticeBoardsControllerPutUpdateMessageEnum3 =
+      "The resource you're trying to access doesn't exist.";
+
+    /**
+     * error code
+     * @example 0
+     */
+    export type NoticeBoardsControllerPutUpdateCodeEnum4 = 0;
+
+    /** error message */
+    export type NoticeBoardsControllerPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     export namespace Api {
@@ -783,27 +1164,27 @@ declare global {
       }
       /**
        * No description
-       * @tags free-boards
-       * @name FreeBoardCreate
+       * @tags free-posts
+       * @name FreePostCreate
        * @summary 자유 게시글 생성
-       * @request POST:/api/free-boards
+       * @request POST:/api/free-posts
        * @secure
        */
-      export namespace FreeBoardCreate {
+      export namespace FreePostCreate {
         export type RequestParams = {};
         export type RequestQuery = {};
-        export type RequestBody = CreateFreeBoardDto;
+        export type RequestBody = CreateFreePostDto;
         export type RequestHeaders = {};
-        export type ResponseBody = FreeBoardDetailResponseDto;
+        export type ResponseBody = FreePostDetailResponseDto;
       }
       /**
        * No description
-       * @tags free-boards
-       * @name FreeBoardFindAllAndCount
+       * @tags free-posts
+       * @name FreePostFindAllAndCount
        * @summary 자유 게시글 전체조회(pagination)
-       * @request GET:/api/free-boards
+       * @request GET:/api/free-posts
        */
-      export namespace FreeBoardFindAllAndCount {
+      export namespace FreePostFindAllAndCount {
         export type RequestParams = {};
         export type RequestQuery = {
           /**
@@ -837,7 +1218,7 @@ declare global {
            */
           title?: string;
           /** 익명여부 필터링 */
-          isAnonymous?: FreeBoardFindAllAndCountParams1IsAnonymousEnum;
+          isAnonymous?: FreePostFindAllAndCountParams1IsAnonymousEnum;
           /**
            * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAnonymous, createdAt, updatedAt]
            * @format csv
@@ -848,78 +1229,96 @@ declare global {
         };
         export type RequestBody = never;
         export type RequestHeaders = {};
-        export type ResponseBody = FreeBoardsPaginationResponseDto;
+        export type ResponseBody = FreePostsPaginationResponseDto;
       }
       /**
        * No description
-       * @tags free-boards
-       * @name FreeBoardFindOneOrNotFound
+       * @tags free-posts
+       * @name FreePostFindOneOrNotFound
        * @summary 자유게시글 상세조회
-       * @request GET:/api/free-boards/{freeBoardId}
+       * @request GET:/api/free-posts/{freePostId}
        */
-      export namespace FreeBoardFindOneOrNotFound {
+      export namespace FreePostFindOneOrNotFound {
         export type RequestParams = {
-          freeBoardId: number;
+          freePostId: number;
         };
         export type RequestQuery = {};
         export type RequestBody = never;
         export type RequestHeaders = {};
-        export type ResponseBody = FreeBoardDetailResponseDto;
+        export type ResponseBody = FreePostDetailResponseDto;
       }
       /**
        * No description
-       * @tags free-boards
-       * @name FreeBoardPutUpdate
+       * @tags free-posts
+       * @name FreePostPutUpdate
        * @summary 자유게시글 수정
-       * @request PUT:/api/free-boards/{freeBoardId}
+       * @request PUT:/api/free-posts/{freePostId}
        * @secure
        */
-      export namespace FreeBoardPutUpdate {
+      export namespace FreePostPutUpdate {
         export type RequestParams = {
-          freeBoardId: number;
+          freePostId: number;
         };
         export type RequestQuery = {};
-        export type RequestBody = PutUpdateFreeBoardDto;
+        export type RequestBody = PutUpdateFreePostDto;
         export type RequestHeaders = {};
-        export type ResponseBody = FreeBoardDetailResponseDto;
+        export type ResponseBody = FreePostDetailResponseDto;
       }
       /**
        * No description
-       * @tags free-boards
-       * @name FreeBoardPatchUpdate
+       * @tags free-posts
+       * @name FreePostPatchUpdate
        * @summary 자유게시글 부분 수정
-       * @request PATCH:/api/free-boards/{freeBoardId}
+       * @request PATCH:/api/free-posts/{freePostId}
        * @secure
        */
-      export namespace FreeBoardPatchUpdate {
+      export namespace FreePostPatchUpdate {
         export type RequestParams = {
-          freeBoardId: number;
+          freePostId: number;
         };
         export type RequestQuery = {};
-        export type RequestBody = PatchUpdateFreeBoardDto;
+        export type RequestBody = PatchUpdateFreePostDto;
         export type RequestHeaders = {};
-        export type ResponseBody = FreeBoardDetailResponseDto;
+        export type ResponseBody = FreePostDetailResponseDto;
       }
       /**
        * No description
-       * @tags major
+       * @tags free-posts
+       * @name FreePostRemove
+       * @summary 자유게시글 삭제 (현재 내부 사정으로 서버에러가 무조건적으로 발생합니다.
+       * @request DELETE:/api/free-posts/{freePostId}
+       * @deprecated
+       * @secure
+       */
+      export namespace FreePostRemove {
+        export type RequestParams = {
+          freePostId: number;
+        };
+        export type RequestQuery = {};
+        export type RequestBody = never;
+        export type RequestHeaders = {};
+        export type ResponseBody = FreePostDeleteResponseDto;
+      }
+      /**
+       * No description
+       * @tags majors
        * @name GetAllMajors
        * @summary 전공 목록 전체 조회
-       * @request GET:/api/major
+       * @request GET:/api/majors
        */
       export namespace GetAllMajors {
         export type RequestParams = {};
         export type RequestQuery = {};
         export type RequestBody = never;
         export type RequestHeaders = {};
-        export type ResponseBody = MajorCommonResponseDto;
+        export type ResponseBody = MajorsCommonResponseDto;
       }
       /**
        * No description
-       * @tags major
+       * @tags majors
        * @name CreateNewMajor
        * @summary 전공 코드 및 이름 생성
-       * @request POST:/api/major
+       * @request POST:/api/majors
        */
       export namespace CreateNewMajor {
         export type RequestParams = {};
@@ -927,6 +1326,108 @@ declare global {
         export type RequestBody = CreateMajorRequestBodyDto;
         export type RequestHeaders = {};
         export type ResponseBody = MajorDetailResponseDto;
+      }
+      /**
+       * No description
+       * @tags notice-boards
+       * @name NoticeBoardCreate
+       * @summary 공지 게시글 생성 API
+       * @request POST:/api/notice-boards
+       * @secure
+       */
+      export namespace NoticeBoardCreate {
+        export type RequestParams = {};
+        export type RequestQuery = {};
+        export type RequestBody = CreateNoticeBoardDto;
+        export type RequestHeaders = {};
+        export type ResponseBody = NoticeBoardDetailResponseDto;
+      }
+      /**
+       * No description
+       * @tags notice-boards
+       * @name NoticeBoardFindAllAndCount
+       * @summary 공지 게시글 전체조회(pagination)
+       * @request GET:/api/notice-boards
+       */
+      export namespace NoticeBoardFindAllAndCount {
+        export type RequestParams = {};
+        export type RequestQuery = {
+          /**
+           * 페이지번호
+           * @format integer
+           * @min 1
+           * @default 1
+           */
+          page?: number;
+          /**
+           * 페이지당 아이템 수
+           * @format integer
+           * @min 1
+           * @max 100
+           * @default 20
+           */
+          pageSize?: number;
+          /**
+           * 공지게시글 고유 ID 필터링
+           * @format integer
+           */
+          id?: number;
+          /**
+           * 공지게시글 작성자 고유 ID 필터링
+           * @format integer
+           */
+          userId?: number;
+          /**
+           * title 필터링
+           * @minLength 1
+           * @maxLength 255
+           */
+          title?: string;
+          /** 댓글 허용 여부 */
+          isAllowComment?: NoticeBoardFindAllAndCountParams1IsAllowCommentEnum;
+          /**
+           * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAllowComment, createdAt, updatedAt]
+           * @format csv
+           * @default "id"
+           * @example "-id,updatedAt"
+           */
+          order?: string;
+        };
+        export type RequestBody = never;
+        export type RequestHeaders = {};
+        export type ResponseBody = NoticeBoardsPaginationResponseDto;
+      }
+      /**
+       * No description
+       * @tags notice-boards
+       * @name NoticeBoardFindOneOrNotFound
+       * @summary 공지게시글 상세조회
+       * @request GET:/api/notice-boards/{noticeBoardId}
+       */
+      export namespace NoticeBoardFindOneOrNotFound {
+        export type RequestParams = {
+          noticeBoardId: number;
+        };
+        export type RequestQuery = {};
+        export type RequestBody = never;
+        export type RequestHeaders = {};
+        export type ResponseBody = NoticeBoardDetailResponseDto;
+      }
+      /**
+       * No description
+       * @tags notice-boards
+       * @name NoticeBoardsControllerPutUpdate
+       * @request PUT:/api/notice-boards/{noticeBoardId}
+       * @secure
+       */
+      export namespace NoticeBoardsControllerPutUpdate {
+        export type RequestParams = {
+          noticeBoardId: number;
+        };
+        export type RequestQuery = {};
+        export type RequestBody = PutUpdateNoticeBoardDto;
+        export type RequestHeaders = {};
+        export type ResponseBody = NoticeBoardDetailResponseDto;
       }
     }
   }

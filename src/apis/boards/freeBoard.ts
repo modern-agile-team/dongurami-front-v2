@@ -1,10 +1,10 @@
 /*
- * Created on Mon Dec 04 2023
+ * Created on Fri Dec 08 2023
  *
  * Copyright (c) 2023 Your Company
  */
 
-import instance from "./instance";
+import instance from "../instance";
 
 const freeBoardAPI = () => {
   const apiPath = (path?: string) => {
@@ -101,4 +101,6 @@ const freeBoardAPI = () => {
   return { createPost, getAll, getPost, updatePost, patchPost, removePost };
 };
 
-export const freeBoard = freeBoardAPI();
+const freeBoard = freeBoardAPI();
+
+export default freeBoard;
