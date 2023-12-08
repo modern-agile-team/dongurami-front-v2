@@ -21,6 +21,7 @@ export default function useAuth(args?: IUseAuth) {
   const [loginStatus, setLoginStatus] = useAtom(loginStatusAtom);
 
   const { mutate } = useMutation({
+    mutationKey: ["useAuth", loginStatus],
     mutationFn: authAPI.signIn,
     onSuccess(data) {
       setLoginStatus({
@@ -30,7 +31,9 @@ export default function useAuth(args?: IUseAuth) {
       args?.onLoginSuccess?.(data);
     },
     onError(error) {
-      const err = error as AxiosError<SwaggerError.GeneralApiError>;
+      const err = error as AxiosError<
+        SwaggerError.GeneralApiError<{ error: Swagger.ValidationError[] }>
+      >;
       args?.onLoginError?.(err);
     },
   });
