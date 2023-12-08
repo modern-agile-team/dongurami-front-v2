@@ -21,12 +21,12 @@ export default function Form() {
     username: "",
     password: "",
   });
-  const loginValidationResult = useMemo(() => {
-    return {
+  const loginValidationResult = useMemo(
+    () => ({
       isUsernameInvalid: !validator.email(loginInfo.username),
-      isPasswordInvalid: !validator.password(loginInfo.password),
-    };
-  }, [loginInfo]);
+    }),
+    [loginInfo]
+  );
 
   const { login } = useAuth({
     onLoginSuccess() {
@@ -38,6 +38,10 @@ export default function Form() {
       switch (code) {
         case ErrorCode.Common.INVALID_REQUEST_PARAM: {
           alert("이메일 혹은 비밀번호의 형식이 틀렸습니다.");
+          break;
+        }
+        case ErrorCode.Auth.ACCOUNT_NOT_FOUND: {
+          alert("존재하지 않는 계정입니다.");
           break;
         }
         case ErrorCode.Auth.ACCOUNT_MISMATCH: {
@@ -60,13 +64,8 @@ export default function Form() {
 
   const handleLoginSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-
-    if (
-      loginValidationResult.isUsernameInvalid ||
-      loginValidationResult.isPasswordInvalid
-    ) {
-      return;
-    }
+    const { isUsernameInvalid } = loginValidationResult;
+    if (isUsernameInvalid) return;
 
     login({
       email: loginInfo.username,
@@ -101,21 +100,8 @@ export default function Form() {
           onChange={handleChange}
           value={loginInfo.password}
         />
-        <WhatIF condition={loginValidationResult.isPasswordInvalid}>
-          <span>
-            비밀번호는 영어 + 숫자 + 특수문자 조합 8자리 이상 15자리 이하
-            문자입니다.
-          </span>
-        </WhatIF>
       </Column.label>
-      <button
-        disabled={
-          loginValidationResult.isUsernameInvalid ||
-          loginValidationResult.isPasswordInvalid
-        }
-      >
-        로그인
-      </button>
+      <button disabled={loginValidationResult.isUsernameInvalid}>로그인</button>
     </S.FormLayout>
   );
 }
