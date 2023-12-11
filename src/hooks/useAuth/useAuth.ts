@@ -7,9 +7,11 @@
 import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
+import { RESET } from "jotai/utils";
 
 import { authAPI } from "@/apis";
-import { loginStatusAtom } from "@/globalState";
+import { accessTokenAtom } from "@/globalState";
+import instance from "@/apis/instance";
 
 interface IUseAuth {
   onLoginSuccess?: (data: Swagger.Api.AuthSignIn.ResponseBody) => void;
@@ -18,16 +20,14 @@ interface IUseAuth {
 }
 
 export default function useAuth(args?: IUseAuth) {
-  const [loginStatus, setLoginStatus] = useAtom(loginStatusAtom);
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
 
   const { mutate } = useMutation({
-    mutationKey: ["useAuth", loginStatus],
+    mutationKey: ["useAuth", accessToken],
     mutationFn: authAPI.signIn,
     onSuccess(data) {
-      setLoginStatus({
-        isLoggedIn: true,
-        accessToken: data.accessToken,
-      });
+      setAccessToken(data.accessToken || RESET);
+      instance.defaults.headers["Authorization"] = `Bearer ${data.accessToken}`;
       args?.onLoginSuccess?.(data);
     },
     onError(error) {
@@ -39,20 +39,17 @@ export default function useAuth(args?: IUseAuth) {
   });
 
   const logout = () => {
-    setLoginStatus({
-      accessToken: undefined,
-      isLoggedIn: false,
-    });
+    setAccessToken(RESET);
     args?.onLogout?.();
   };
 
-  const login = (data: {
-    email: string;
-    password: string;
-    loginType: "email";
-  }) => {
+  const login = (data: Swagger.Api.AuthSignIn.RequestBody) => {
     mutate(data);
   };
 
-  return { loginStatus, login, logout };
+  return {
+    isLoggedIn: Boolean(accessToken),
+    login,
+    logout,
+  };
 }
