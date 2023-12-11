@@ -18,18 +18,3 @@ export const signUp = async (args: Swagger.Api.UsersCreate.RequestBody) => {
   );
   return result.data;
 };
-
-// class UserAPI extends BaseAPIInstance {
-//   constructor() {
-//     super();
-//   }
-//   private _apiPath = (path?: string) => `/users${path ? `/${path}` : ""}`;
-
-//   signUp = async (args: Swagger.Api.AuthSignIn.RequestBody) => {
-//     const result = await this.instance.post<Swagger.Api.AuthSignIn.ResponseBody>(
-//       this._apiPath(),
-//       args
-//     );
-//     return result.data;
-//   };
-// }
