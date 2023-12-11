@@ -4,13 +4,16 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Row } from "@/components";
+import { Row, WhatIF } from "@/components";
+import { useAuth } from "@/hooks";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter();
   const [state, setState] = useState(0);
+
+  const { isLoggedIn, logout } = useAuth();
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.target as HTMLButtonElement;
@@ -60,16 +63,27 @@ export default function Home() {
             에러 테스트 <br /> 5번 클릭하면 에러 발생
           </button>
           <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
-            <Row.li>
-              <button id="sign-in" onClick={handleRoute}>
-                로그인
-              </button>
-            </Row.li>
-            <Row.li>
-              <button id="sign-up" onClick={handleRoute}>
-                회원가입
-              </button>
-            </Row.li>
+            <WhatIF
+              condition={isLoggedIn}
+              falsy={
+                <>
+                  <Row.li>
+                    <button id="sign-in" onClick={handleRoute}>
+                      로그인
+                    </button>
+                  </Row.li>
+                  <Row.li>
+                    <button id="sign-up" onClick={handleRoute}>
+                      회원가입
+                    </button>
+                  </Row.li>
+                </>
+              }
+            >
+              <Row.li>
+                <button onClick={logout}>로그아웃</button>
+              </Row.li>
+            </WhatIF>
             <Row.li>
               <button id="infinity-board" onClick={handleRoute}>
                 무한스크롤 게시판
