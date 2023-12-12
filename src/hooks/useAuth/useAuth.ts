@@ -26,9 +26,12 @@ export default function useAuth(args?: IUseAuth) {
     mutationKey: ["useAuth", accessToken],
     mutationFn: authAPI.signIn,
     onSuccess(data) {
-      setAccessToken(data.accessToken || RESET);
-      instance.defaults.headers["Authorization"] = `Bearer ${data.accessToken}`;
-      args?.onLoginSuccess?.(data);
+      if (data.accessToken) {
+        setAccessToken(data.accessToken);
+        instance.defaults.headers["Authorization"] =
+          `Bearer ${data.accessToken}`;
+        args?.onLoginSuccess?.(data);
+      }
     },
     onError(error) {
       const err = error as AxiosError<
