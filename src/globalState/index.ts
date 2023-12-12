@@ -4,4 +4,4 @@
  * Copyright (c) 2023 Your Company
  */
 
-export { default as loginStatusAtom } from "./loginStatus";
+export { default as accessTokenAtom } from "./accessToken";
