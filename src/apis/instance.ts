@@ -11,6 +11,12 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((value) => {
+  if (typeof window === "undefined") return value;
+
+  if (!value.headers.Authorization && localStorage.getItem("an")) {
+    value.headers.Authorization = `Bearer ${localStorage.getItem("an")}`;
+  }
+
   return value;
 });
 
