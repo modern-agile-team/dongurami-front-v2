@@ -8,7 +8,7 @@ import instance from "../instance";
 
 const freeBoardAPI = () => {
   const apiPath = (path?: string) => {
-    return `/free-boards${path ? `/${path}` : ""}`;
+    return `/free-posts${path ? `/${path}` : ""}`;
   };
 
   /**
