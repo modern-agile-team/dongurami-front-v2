@@ -98,7 +98,25 @@ const freeBoardAPI = () => {
     return result.data;
   };
 
-  return { createPost, getAll, getPost, updatePost, patchPost, removePost };
+  const increaseHit = async (
+    args: Swagger.Api.FreePostIncrementHit.RequestParams
+  ) => {
+    const result =
+      await instance.put<Swagger.Api.FreePostIncrementHit.ResponseBody>(
+        apiPath(`${args.freePostId}/hit`)
+      );
+    return result.data;
+  };
+
+  return {
+    createPost,
+    getAll,
+    getPost,
+    updatePost,
+    patchPost,
+    removePost,
+    increaseHit,
+  };
 };
 
 const freeBoard = freeBoardAPI();
