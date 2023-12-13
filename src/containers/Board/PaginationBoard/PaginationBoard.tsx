@@ -12,16 +12,19 @@ interface PostData {
   postNum: number;
 }
 
-export default function PaginationBoard() {
+interface PaginationBoardProps {
+  type?: string;
+}
+
+export default function PaginationBoard({ type }: PaginationBoardProps) {
   const dummyPage: number[] = [1, 2, 3];
   const dummyData: PostData[] = [
-    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 4 },
-    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 5 },
-    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 6 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 1 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 2 },
+    { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 3 },
   ];
 
   const router = useRouter();
-  const type = router.query.type;
 
   function handleClickButton(ev: React.MouseEvent<HTMLButtonElement>) {
     const target = ev.currentTarget as HTMLButtonElement;
@@ -33,7 +36,7 @@ export default function PaginationBoard() {
   function handleClickPostDetail(el: PostData) {
     router.push({
       pathname: `detail/${el.postNum}`,
-      query: { page: type },
+      query: { type: type },
     });
   }
   return (

@@ -35,14 +35,12 @@ export default function Home() {
       case "free": {
         router.push({
           pathname: "/board/free",
-          query: { type: "free" },
         });
         break;
       }
       case "notice": {
         router.push({
           pathname: "/board/notice",
-          query: { type: "notice" },
         });
         break;
       }
