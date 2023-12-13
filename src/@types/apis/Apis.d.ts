@@ -355,7 +355,7 @@ declare global {
       major: MajorDto;
     }
 
-    export interface NoticeBoardDto {
+    export interface NoticePostDto {
       /**
        * 고유 ID
        * @min 1
@@ -397,7 +397,7 @@ declare global {
       isAllowComment: boolean;
     }
 
-    export interface CreateNoticeBoardDto {
+    export interface CreateNoticePostDto {
       /**
        * 공지 게시글 제목
        * @minLength 1
@@ -413,11 +413,15 @@ declare global {
       isAllowComment: boolean;
     }
 
-    export interface NoticeBoardDetailResponseDto {
-      noticeBoard: NoticeBoardDto;
+    export interface NoticePostDetailResponseDto {
+      noticePost: NoticePostDto;
     }
 
-    export interface NoticeBoardsItemDto {
+    export interface NoticePostDeleteResponseDto {
+      count: number;
+    }
+
+    export interface NoticePostsItemDto {
       /**
        * 고유 ID
        * @min 1
@@ -457,7 +461,7 @@ declare global {
       isAllowComment: boolean;
     }
 
-    export interface NoticeBoardsPaginationResponseDto {
+    export interface NoticePostsPaginationResponseDto {
       /**
        * 총 페이지 수
        * @format integer
@@ -493,10 +497,10 @@ declare global {
        * @min 1
        */
       lastPage: number;
-      noticeBoards: NoticeBoardsItemDto[];
+      noticeBoards: NoticePostsItemDto[];
     }
 
-    export interface PutUpdateNoticeBoardDto {
+    export interface PutUpdateNoticePostDto {
       /**
        * 공지 게시글 제목
        * @minLength 1
@@ -918,42 +922,42 @@ declare global {
      * error code
      * @example 1
      */
-    export type NoticeBoardCreateCodeEnum = 1;
+    export type NoticePostCreateCodeEnum = 1;
 
     /** error message */
-    export type NoticeBoardCreateMessageEnum =
+    export type NoticePostCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticeBoardCreateCodeEnum1 = 3;
+    export type NoticePostCreateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticeBoardCreateMessageEnum1 = "This token is invalid.";
+    export type NoticePostCreateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticeBoardCreateCodeEnum2 = 0;
+    export type NoticePostCreateCodeEnum2 = 0;
 
     /** error message */
-    export type NoticeBoardCreateMessageEnum2 =
+    export type NoticePostCreateMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticeBoardFindAllAndCountCodeEnum = 1;
+    export type NoticePostFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type NoticeBoardFindAllAndCountMessageEnum =
+    export type NoticePostFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
-    export interface NoticeBoardFindAllAndCountParams {
+    export interface NoticePostFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -1000,7 +1004,7 @@ declare global {
     export type IsAllowCommentEnum = "true" | "false";
 
     /** 댓글 허용 여부 */
-    export type NoticeBoardFindAllAndCountParams1IsAllowCommentEnum =
+    export type NoticePostFindAllAndCountParams1IsAllowCommentEnum =
       | "true"
       | "false";
 
@@ -1008,80 +1012,80 @@ declare global {
      * error code
      * @example 1
      */
-    export type NoticeBoardFindOneOrNotFoundCodeEnum = 1;
+    export type NoticePostFindOneOrNotFoundCodeEnum = 1;
 
     /** error message */
-    export type NoticeBoardFindOneOrNotFoundMessageEnum =
+    export type NoticePostFindOneOrNotFoundMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticeBoardFindOneOrNotFoundCodeEnum1 = 5;
+    export type NoticePostFindOneOrNotFoundCodeEnum1 = 5;
 
     /** error message */
-    export type NoticeBoardFindOneOrNotFoundMessageEnum1 =
+    export type NoticePostFindOneOrNotFoundMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticeBoardFindOneOrNotFoundCodeEnum2 = 0;
+    export type NoticePostFindOneOrNotFoundCodeEnum2 = 0;
 
     /** error message */
-    export type NoticeBoardFindOneOrNotFoundMessageEnum2 =
+    export type NoticePostFindOneOrNotFoundMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticeBoardsControllerPutUpdateCodeEnum = 1;
+    export type NoticePostsControllerPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type NoticeBoardsControllerPutUpdateMessageEnum =
+    export type NoticePostsControllerPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticeBoardsControllerPutUpdateCodeEnum1 = 3;
+    export type NoticePostsControllerPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticeBoardsControllerPutUpdateMessageEnum1 =
+    export type NoticePostsControllerPutUpdateMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticeBoardsControllerPutUpdateCodeEnum2 = 4;
+    export type NoticePostsControllerPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type NoticeBoardsControllerPutUpdateMessageEnum2 =
+    export type NoticePostsControllerPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticeBoardsControllerPutUpdateCodeEnum3 = 5;
+    export type NoticePostsControllerPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type NoticeBoardsControllerPutUpdateMessageEnum3 =
+    export type NoticePostsControllerPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticeBoardsControllerPutUpdateCodeEnum4 = 0;
+    export type NoticePostsControllerPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type NoticeBoardsControllerPutUpdateMessageEnum4 =
+    export type NoticePostsControllerPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     export namespace Api {
@@ -1329,27 +1333,27 @@ declare global {
       }
       /**
        * No description
-       * @tags notice-boards
-       * @name NoticeBoardCreate
+       * @tags notice-posts
+       * @name NoticePostCreate
        * @summary 공지 게시글 생성 API
-       * @request POST:/api/notice-boards
+       * @request POST:/api/notice-posts
        * @secure
        */
-      export namespace NoticeBoardCreate {
+      export namespace NoticePostCreate {
         export type RequestParams = {};
         export type RequestQuery = {};
-        export type RequestBody = CreateNoticeBoardDto;
+        export type RequestBody = CreateNoticePostDto;
         export type RequestHeaders = {};
-        export type ResponseBody = NoticeBoardDetailResponseDto;
+        export type ResponseBody = NoticePostDetailResponseDto;
       }
       /**
        * No description
-       * @tags notice-boards
-       * @name NoticeBoardFindAllAndCount
+       * @tags notice-posts
+       * @name NoticePostFindAllAndCount
        * @summary 공지 게시글 전체조회(pagination)
-       * @request GET:/api/notice-boards
+       * @request GET:/api/notice-posts
        */
-      export namespace NoticeBoardFindAllAndCount {
+      export namespace NoticePostFindAllAndCount {
         export type RequestParams = {};
         export type RequestQuery = {
           /**
@@ -1384,7 +1388,7 @@ declare global {
            */
           title?: string;
           /** 댓글 허용 여부 */
-          isAllowComment?: NoticeBoardFindAllAndCountParams1IsAllowCommentEnum;
+          isAllowComment?: NoticePostFindAllAndCountParams1IsAllowCommentEnum;
           /**
            * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAllowComment, createdAt, updatedAt]
            * @format csv
@@ -1395,39 +1399,58 @@ declare global {
         };
         export type RequestBody = never;
         export type RequestHeaders = {};
-        export type ResponseBody = NoticeBoardsPaginationResponseDto;
+        export type ResponseBody = NoticePostsPaginationResponseDto;
       }
       /**
        * No description
-       * @tags notice-boards
-       * @name NoticeBoardFindOneOrNotFound
+       * @tags notice-posts
+       * @name NoticePostFindOneOrNotFound
        * @summary 공지게시글 상세조회
-       * @request GET:/api/notice-boards/{noticeBoardId}
+       * @request GET:/api/notice-posts/{noticePostId}
        */
-      export namespace NoticeBoardFindOneOrNotFound {
+      export namespace NoticePostFindOneOrNotFound {
         export type RequestParams = {
-          noticeBoardId: number;
+          noticePostId: number;
         };
         export type RequestQuery = {};
         export type RequestBody = never;
         export type RequestHeaders = {};
-        export type ResponseBody = NoticeBoardDetailResponseDto;
+        export type ResponseBody = NoticePostDetailResponseDto;
       }
       /**
        * No description
-       * @tags notice-boards
-       * @name NoticeBoardsControllerPutUpdate
-       * @request PUT:/api/notice-boards/{noticeBoardId}
+       * @tags notice-posts
+       * @name NoticePostsControllerPutUpdate
+       * @request PUT:/api/notice-posts/{noticePostId}
        * @secure
        */
-      export namespace NoticeBoardsControllerPutUpdate {
+      export namespace NoticePostsControllerPutUpdate {
         export type RequestParams = {
-          noticeBoardId: number;
+          noticePostId: number;
         };
         export type RequestQuery = {};
-        export type RequestBody = PutUpdateNoticeBoardDto;
+        export type RequestBody = PutUpdateNoticePostDto;
         export type RequestHeaders = {};
-        export type ResponseBody = NoticeBoardDetailResponseDto;
+        export type ResponseBody = NoticePostDetailResponseDto;
+      }
+
+      /**
+       * No description
+       * @tags notice-posts
+       * @name NoticePostRemove
+       * @summary 자유게시글 삭제 (현재 내부 사정으로 서버에러가 무조건적으로 발생합니다.
+       * @request DELETE:/api/free-posts/{freePostId}
+       * @deprecated
+       * @secure
+       */
+      export namespace NoticePostRemove {
+        export type RequestParams = {
+          noticePostId: number;
+        };
+        export type RequestQuery = {};
+        export type RequestBody = never;
+        export type RequestHeaders = {};
+        export type ResponseBody = NoticePostDeleteResponseDto;
       }
     }
   }

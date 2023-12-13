@@ -8,7 +8,7 @@ import instance from "../instance";
 
 const freeBoardAPI = () => {
   const apiPath = (path?: string) => {
-    return `/free-boards${path ? `/${path}` : ""}`;
+    return `/free-posts${path ? `/${path}` : ""}`;
   };
 
   /**
@@ -101,6 +101,6 @@ const freeBoardAPI = () => {
   return { createPost, getAll, getPost, updatePost, patchPost, removePost };
 };
 
-const freeBoard = freeBoardAPI();
+const freePost = freeBoardAPI();
 
-export default freeBoard;
+export default freePost;
