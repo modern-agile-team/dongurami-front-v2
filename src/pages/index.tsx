@@ -32,10 +32,21 @@ export default function Home() {
         router.push("board/infinity");
         break;
       }
-      case "pagination-board": {
-        router.push("board/pagination");
+      case "free": {
+        router.push({
+          pathname: "/board/free",
+          query: { type: "free" },
+        });
         break;
       }
+      case "notice": {
+        router.push({
+          pathname: "/board/notice",
+          query: { type: "notice" },
+        });
+        break;
+      }
+
       case "club": {
         router.push("club/1?tab=home");
         break;
@@ -90,8 +101,13 @@ export default function Home() {
               </button>
             </Row.li>
             <Row.li>
-              <button id="pagination-board" onClick={handleRoute}>
-                페이지네이션 게시판
+              <button id="free" onClick={handleRoute}>
+                자유 게시판
+              </button>
+            </Row.li>
+            <Row.li>
+              <button id="notice" onClick={handleRoute}>
+                공지 게시판
               </button>
             </Row.li>
             <Row.li>

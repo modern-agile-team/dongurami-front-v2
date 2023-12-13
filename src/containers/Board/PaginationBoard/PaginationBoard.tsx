@@ -13,8 +13,6 @@ interface PostData {
 }
 
 export default function PaginationBoard() {
-  const [postList, setPostList] = useState([]);
-
   const dummyPage: number[] = [1, 2, 3];
   const dummyData: PostData[] = [
     { author: "pho", date: "23.11.15", title: "ㅎㅇ", view: 33, postNum: 4 },
@@ -23,6 +21,7 @@ export default function PaginationBoard() {
   ];
 
   const router = useRouter();
+  const type = router.query.type;
 
   function handleClickButton(ev: React.MouseEvent<HTMLButtonElement>) {
     const target = ev.currentTarget as HTMLButtonElement;
@@ -32,10 +31,16 @@ export default function PaginationBoard() {
   }
 
   function handleClickPostDetail(el: PostData) {
-    router.push(`detail/${el.postNum}`);
+    router.push({
+      pathname: `detail/${el.postNum}`,
+      query: { page: type },
+    });
   }
   return (
     <S.Wrap>
+      <S.Title>
+        <h2>{type === "free" ? "자유게시판" : "공지게시판"}</h2>
+      </S.Title>
       <S.BoardBody>
         <S.PostWrapper>
           <S.PostAuthor>작성자</S.PostAuthor>
