@@ -1,5 +1,5 @@
 import { PaginationBoard } from "@/containers/Board";
 
 export default function PaginationTestPage() {
-  return <PaginationBoard />;
+  return <PaginationBoard type={"notice"} />;
 }
