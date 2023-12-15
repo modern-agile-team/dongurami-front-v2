@@ -67,6 +67,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     pageSize: 20,
   });
 
+  if (noticeBoard.noticePosts.length === 0) {
+    return {
+      redirect: {
+        destination: "/board/notice/1", // 에러 페이지 또는 다른 경로로 리디렉션
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       noticeBoard,
