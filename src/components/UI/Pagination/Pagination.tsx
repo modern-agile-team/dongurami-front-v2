@@ -4,8 +4,9 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Button, Row, WhatIF } from "@/components";
 import React, { useMemo, useState } from "react";
+
+import { Button, Row, WhatIF } from "@/components";
 
 interface IPaginationProps {
   count: number;
