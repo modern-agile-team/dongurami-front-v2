@@ -24,7 +24,7 @@ export default function FreeBoard(props: {
             <th css={{ padding: "4px 8px" }}>번호</th>
             <th css={{ padding: "4px 8px" }}>제목</th>
             <th css={{ padding: "4px 8px" }}>등록일</th>
-            <th css={{ padding: "4px 8px" }}>좋아요</th>
+            <th css={{ padding: "4px 8px" }}>조회수</th>
           </tr>
         </thead>
         <tbody>
