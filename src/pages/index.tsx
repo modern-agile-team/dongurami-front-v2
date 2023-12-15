@@ -28,12 +28,12 @@ export default function Home() {
         router.push("sign-up");
         break;
       }
-      case "infinity-board": {
-        router.push("board/infinity");
+      case "free-board": {
+        router.push("board/free/1");
         break;
       }
-      case "pagination-board": {
-        router.push("board/pagination");
+      case "notice-board": {
+        router.push("board/notice/1");
         break;
       }
       case "club": {
@@ -85,13 +85,13 @@ export default function Home() {
               </Row.li>
             </WhatIF>
             <Row.li>
-              <button id="infinity-board" onClick={handleRoute}>
-                무한스크롤 게시판
+              <button id="notice-board" onClick={handleRoute}>
+                공지 게시판
               </button>
             </Row.li>
             <Row.li>
-              <button id="pagination-board" onClick={handleRoute}>
-                페이지네이션 게시판
+              <button id="free-board" onClick={handleRoute}>
+                자유 게시판
               </button>
             </Row.li>
             <Row.li>

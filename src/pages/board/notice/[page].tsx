@@ -10,14 +10,14 @@ import { useRouter } from "next/router";
 import { boardsAPI } from "@/apis";
 import { Column, Pagination } from "@/components";
 
-export default function FreeBoard(props: {
-  freeBoard: Swagger.Api.FreePostFindAllAndCount.ResponseBody;
+export default function NoticeBoard(props: {
+  noticeBoard: Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
 
   return (
     <Column horizonAlign="center" gap={10}>
-      <h1>자유 게시판</h1>
+      <h1>공지 게시판</h1>
       <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -28,7 +28,7 @@ export default function FreeBoard(props: {
           </tr>
         </thead>
         <tbody>
-          {props.freeBoard.freePosts.map((post) => {
+          {props.noticeBoard.noticePosts.map((post) => {
             return (
               <tr>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
@@ -49,8 +49,8 @@ export default function FreeBoard(props: {
         </tbody>
       </table>
       <Pagination
-        defaultPage={props.freeBoard?.currentPage}
-        count={props.freeBoard?.lastPage || 1}
+        defaultPage={props.noticeBoard?.currentPage}
+        count={props.noticeBoard?.lastPage || 1}
         onChange={(_, page) => {
           router.replace(`/board/free/${page}`);
         }}
@@ -62,14 +62,14 @@ export default function FreeBoard(props: {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
-  const freeBoard = await boardsAPI.freeBoard.getAll({
+  const noticeBoard = await boardsAPI.noticeBoard.getAll({
     page: Number(page),
     pageSize: 20,
   });
 
   return {
     props: {
-      freeBoard,
+      noticeBoard,
     },
   };
 };
