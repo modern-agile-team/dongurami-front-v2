@@ -9,10 +9,10 @@ import React, { useMemo, useState } from "react";
 
 interface IPaginationProps {
   count: number;
-  defaultPage: number;
-  siblingCount: number;
-  boundaryCount: number;
-  onChange: (ev: React.ChangeEvent<unknown>, page: number) => void;
+  defaultPage?: number;
+  siblingCount?: number;
+  boundaryCount?: number;
+  onChange?: (ev: React.ChangeEvent<unknown>, page: number) => void;
 }
 
 /**
@@ -64,7 +64,7 @@ export default function Pagination({
                 disabled={`${currentPage}` === `${page}`}
                 onClick={(ev) => {
                   setCurrentPage(Number(page));
-                  props.onChange(ev, Number(page));
+                  props.onChange?.(ev, Number(page));
                 }}
               >
                 {page}
