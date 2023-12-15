@@ -10,14 +10,14 @@ import { useRouter } from "next/router";
 import { boardsAPI } from "@/apis";
 import { Column, Pagination } from "@/components";
 
-export default function NoticeBoard(props: {
-  noticeBoard: Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
+export default function FreeBoard(props: {
+  freeBoard: Swagger.Api.FreePostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
 
   return (
     <Column horizonAlign="center" gap={10}>
-      <h1>공지 게시판</h1>
+      <h1>자유 게시판</h1>
       <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -28,7 +28,7 @@ export default function NoticeBoard(props: {
           </tr>
         </thead>
         <tbody>
-          {props.noticeBoard.noticePosts.map((post) => {
+          {props.freeBoard.freePosts.map((post) => {
             return (
               <tr>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
@@ -49,10 +49,15 @@ export default function NoticeBoard(props: {
         </tbody>
       </table>
       <Pagination
-        defaultPage={props.noticeBoard?.currentPage}
-        count={props.noticeBoard?.lastPage || 1}
+        defaultPage={props.freeBoard?.currentPage}
+        count={props.freeBoard?.lastPage || 1}
         onChange={(_, page) => {
-          router.replace(`/board/free/${page}`);
+          router.push({
+            pathname: "/board/free",
+            query: {
+              page,
+            },
+          });
         }}
       />
     </Column>
@@ -62,15 +67,15 @@ export default function NoticeBoard(props: {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
-  const noticeBoard = await boardsAPI.noticeBoard.getAll({
+  const freeBoard = await boardsAPI.freeBoard.getAll({
     page: Number(page),
     pageSize: 20,
   });
 
-  if (noticeBoard.noticePosts.length === 0) {
+  if (freeBoard.freePosts.length === 0) {
     return {
       redirect: {
-        destination: "/board/notice/1", // 에러 페이지 또는 다른 경로로 리디렉션
+        destination: `/board/free?page=${freeBoard.lastPage}`,
         permanent: false,
       },
     };
@@ -78,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      noticeBoard,
+      freeBoard,
     },
   };
 };

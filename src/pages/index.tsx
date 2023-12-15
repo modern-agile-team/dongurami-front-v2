@@ -29,11 +29,21 @@ export default function Home() {
         break;
       }
       case "free-board": {
-        router.push("board/free/1");
+        router.push({
+          pathname: "/board/free",
+          query: {
+            page: 1,
+          },
+        });
         break;
       }
       case "notice-board": {
-        router.push("board/notice/1");
+        router.push({
+          pathname: "/board/notice",
+          query: {
+            page: 1,
+          },
+        });
         break;
       }
       case "club": {
