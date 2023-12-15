@@ -30,7 +30,7 @@ export default function NoticeBoard(props: {
         <tbody>
           {props.noticeBoard.noticePosts.map((post) => {
             return (
-              <tr>
+              <tr key={post.id}>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
                   {post.id}
                 </th>

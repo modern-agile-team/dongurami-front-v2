@@ -30,7 +30,7 @@ export default function FreeBoard(props: {
         <tbody>
           {props.freeBoard.freePosts.map((post) => {
             return (
-              <tr>
+              <tr key={post.id}>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
                   {post.id}
                 </th>
