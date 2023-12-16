@@ -36,11 +36,11 @@ export default function DetailBoard() {
 
       case "notice":
         if (type === "get") {
-          response = await boardsAPI.noticePost.getPost({
+          response = await boardsAPI.noticeBoard.getPost({
             noticePostId: Number(postId),
           });
         } else if (type === "remove") {
-          response = await boardsAPI.noticePost.removePost({
+          response = await boardsAPI.noticeBoard.removePost({
             noticePostId: Number(postId),
           });
         }

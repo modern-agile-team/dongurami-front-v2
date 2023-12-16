@@ -5,4 +5,4 @@
  */
 
 export { default as freePost } from "./freePost";
-export { default as noticePost } from "./noticePost";
+export { default as noticeBoard } from "./noticeBoard";
