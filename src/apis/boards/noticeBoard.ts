@@ -8,17 +8,15 @@ import instance from "../instance";
 
 const noticeBoardAPI = () => {
   const apiPath = (path?: string) => {
-    return `/notice-boards${path ? `/${path}` : ""}`;
+    return `/notice-posts${path ? `/${path}` : ""}`;
   };
 
   /**
-   * 자유 게시글 생성
+   * 공지 게시글 생성
    */
-  const createPost = async (
-    args: Swagger.Api.NoticeBoardCreate.RequestBody
-  ) => {
+  const createPost = async (args: Swagger.Api.NoticePostCreate.RequestBody) => {
     const result =
-      await instance.post<Swagger.Api.NoticeBoardCreate.ResponseBody>(
+      await instance.post<Swagger.Api.NoticePostCreate.ResponseBody>(
         apiPath(),
         args
       );
@@ -26,13 +24,13 @@ const noticeBoardAPI = () => {
   };
 
   /**
-   * 자유 게시글 전체조회
+   * 공지 게시판 전체조회
    */
   const getAll = async (
-    args: Swagger.Api.NoticeBoardFindAllAndCount.RequestQuery
+    args: Swagger.Api.NoticePostFindAllAndCount.RequestQuery
   ) => {
     const result =
-      await instance.get<Swagger.Api.NoticeBoardFindAllAndCount.ResponseBody>(
+      await instance.get<Swagger.Api.NoticePostFindAllAndCount.ResponseBody>(
         apiPath(),
         { params: args }
       );
@@ -40,38 +38,73 @@ const noticeBoardAPI = () => {
   };
 
   const getPost = async (
-    args: Swagger.Api.NoticeBoardFindOneOrNotFound.RequestParams
+    args: Swagger.Api.NoticePostFindOneOrNotFound.RequestParams
   ) => {
     const result =
-      await instance.get<Swagger.Api.NoticeBoardFindOneOrNotFound.ResponseBody>(
-        apiPath(`${args.noticeBoardId}`)
+      await instance.get<Swagger.Api.NoticePostFindOneOrNotFound.ResponseBody>(
+        apiPath(`${args.noticePostId}`)
       );
     return result.data;
   };
 
   /**
-   * 자유게시글 수정
+   * 공지 게시글 수정
    */
   const updatePost = async (
-    args: Swagger.Api.NoticeBoardsControllerPutUpdate.RequestBody &
-      Swagger.Api.NoticeBoardsControllerPutUpdate.RequestParams
+    args: Swagger.Api.NoticePostsControllerPutUpdate.RequestBody &
+      Swagger.Api.NoticePostsControllerPutUpdate.RequestParams
   ) => {
     const data = { ...args } as Partial<
-      Swagger.Api.NoticeBoardsControllerPutUpdate.RequestBody &
-        Swagger.Api.NoticeBoardsControllerPutUpdate.RequestParams
+      Swagger.Api.NoticePostsControllerPutUpdate.RequestBody &
+        Swagger.Api.NoticePostsControllerPutUpdate.RequestParams
     >;
 
-    delete data.noticeBoardId;
+    delete data.noticePostId;
 
     const result =
-      await instance.put<Swagger.Api.NoticeBoardsControllerPutUpdate.ResponseBody>(
-        apiPath(`${args.noticeBoardId}`),
+      await instance.put<Swagger.Api.NoticePostsControllerPutUpdate.ResponseBody>(
+        apiPath(`${args.noticePostId}`),
         data
       );
     return result.data;
   };
 
-  return { createPost, getAll, getPost, updatePost };
+  /**
+   * 공지 게시글 부분 수정
+   */
+  const patchPost = async (
+    args: Swagger.Api.NoticePostsControllerPatchUpdate.RequestBody &
+      Swagger.Api.NoticePostsControllerPatchUpdate.RequestParams
+  ) => {
+    const data = { ...args } as Partial<
+      Swagger.Api.NoticePostsControllerPatchUpdate.RequestBody &
+        Swagger.Api.NoticePostsControllerPatchUpdate.RequestParams
+    >;
+
+    delete data.noticePostId;
+
+    const result =
+      await instance.patch<Swagger.Api.NoticePostsControllerPatchUpdate.ResponseBody>(
+        apiPath(`${args.noticePostId}`),
+        data
+      );
+    return result.data;
+  };
+
+  /**
+   * 공지 게시글 삭제
+   */
+  const removePost = async (
+    args: Swagger.Api.NoticePostsControllerRemove.RequestParams
+  ) => {
+    const result =
+      await instance.delete<Swagger.Api.NoticePostsControllerRemove.ResponseBody>(
+        apiPath(`${args.noticePostId}`)
+      );
+    return result.data;
+  };
+
+  return { createPost, getAll, getPost, updatePost, patchPost, removePost };
 };
 
 const noticeBoard = noticeBoardAPI();

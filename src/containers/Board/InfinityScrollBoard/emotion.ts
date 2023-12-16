@@ -1,5 +1,12 @@
-import { Grid } from "@/components";
+/*
+ * Created on Tue Dec 12 2023
+ *
+ * Copyright (c) 2023 Your Company
+ */
+
 import styled from "@emotion/styled";
+
+import { Column, Grid } from "@/components";
 
 export const Wrap = styled.div`
   border: 1px solid red;
@@ -17,7 +24,7 @@ export const BoardGrid = styled(Grid.ul)`
   width: 100%;
 `;
 
-export const GridItem = styled.li`
+export const GridItem = styled(Column.li)`
   border: 1px solid white;
   margin: 0 auto;
 `;
