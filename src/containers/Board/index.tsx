@@ -7,3 +7,4 @@
 export * from "./InfinityScrollBoard";
 export * from "./PaginationBoard";
 export * from "./DetailBoard";
+export * from "./WriteBoard";

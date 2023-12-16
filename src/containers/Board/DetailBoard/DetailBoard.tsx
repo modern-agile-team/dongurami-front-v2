@@ -60,7 +60,6 @@ export default function DetailBoard() {
       //   noticePostId: Number(postId),
       // });
 
-      console.log(response);
       return response;
     },
     mutationKey: ["post", post],
@@ -81,10 +80,20 @@ export default function DetailBoard() {
     router.back();
   };
 
+  const handleClickUpdate = async () => {
+    router.push({
+      pathname: `/board/write/`,
+      query: {
+        Id: postId,
+      },
+    });
+  };
+
   return (
     <S.Container>
       <S.Title>{post?.freePost.title}</S.Title>
       <S.WrapBar>
+        <S.Btn onClick={handleClickUpdate}>수정</S.Btn>
         <S.Btn onClick={handleClickDelete}>삭제</S.Btn>
       </S.WrapBar>
       <S.WrapDesc>
