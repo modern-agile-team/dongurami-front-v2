@@ -12,7 +12,7 @@ const noticeBoardAPI = () => {
   };
 
   /**
-   * 자유 게시글 생성
+   * 공지 게시글 생성
    */
   const createPost = async (args: Swagger.Api.NoticePostCreate.RequestBody) => {
     const result =
@@ -24,7 +24,7 @@ const noticeBoardAPI = () => {
   };
 
   /**
-   * 자유 게시글 전체조회
+   * 공지 게시판 전체조회
    */
   const getAll = async (
     args: Swagger.Api.NoticePostFindAllAndCount.RequestQuery
@@ -48,7 +48,7 @@ const noticeBoardAPI = () => {
   };
 
   /**
-   * 자유게시글 수정
+   * 공지 게시글 수정
    */
   const updatePost = async (
     args: Swagger.Api.NoticePostsControllerPutUpdate.RequestBody &
@@ -69,19 +69,44 @@ const noticeBoardAPI = () => {
     return result.data;
   };
 
+  /**
+   * 공지 게시글 부분 수정
+   */
+  const patchPost = async (
+    args: Swagger.Api.NoticePostsControllerPatchUpdate.RequestBody &
+      Swagger.Api.NoticePostsControllerPatchUpdate.RequestParams
+  ) => {
+    const data = { ...args } as Partial<
+      Swagger.Api.NoticePostsControllerPatchUpdate.RequestBody &
+        Swagger.Api.NoticePostsControllerPatchUpdate.RequestParams
+    >;
+
+    delete data.noticePostId;
+
+    const result =
+      await instance.patch<Swagger.Api.NoticePostsControllerPatchUpdate.ResponseBody>(
+        apiPath(`${args.noticePostId}`),
+        data
+      );
+    return result.data;
+  };
+
+  /**
+   * 공지 게시글 삭제
+   */
   const removePost = async (
-    args: Swagger.Api.NoticePostRemove.RequestParams
+    args: Swagger.Api.NoticePostsControllerRemove.RequestParams
   ) => {
     const result =
-      await instance.delete<Swagger.Api.NoticePostRemove.ResponseBody>(
+      await instance.delete<Swagger.Api.NoticePostsControllerRemove.ResponseBody>(
         apiPath(`${args.noticePostId}`)
       );
     return result.data;
   };
 
-  return { createPost, getAll, getPost, updatePost, removePost };
+  return { createPost, getAll, getPost, updatePost, patchPost, removePost };
 };
 
-const noticePost = noticeBoardAPI();
+const noticeBoard = noticeBoardAPI();
 
-export default noticePost;
+export default noticeBoard;

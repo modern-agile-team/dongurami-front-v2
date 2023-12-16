@@ -21,7 +21,9 @@ const theme: Theme = {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5000,
+      staleTime: 5 * 1000,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
     },
   },
 });

@@ -417,10 +417,6 @@ declare global {
       noticePost: NoticePostDto;
     }
 
-    export interface NoticePostDeleteResponseDto {
-      count: number;
-    }
-
     export interface NoticePostsItemDto {
       /**
        * 고유 ID
@@ -497,7 +493,7 @@ declare global {
        * @min 1
        */
       lastPage: number;
-      noticeBoards: NoticePostsItemDto[];
+      noticePosts: NoticePostsItemDto[];
     }
 
     export interface PutUpdateNoticePostDto {
@@ -514,6 +510,27 @@ declare global {
        * @default true
        */
       isAllowComment: boolean;
+    }
+
+    export interface PatchUpdateNoticePostDto {
+      /**
+       * 공지 게시글 제목
+       * @minLength 1
+       * @maxLength 255
+       */
+      title?: string;
+      /** 공지 게시글 본문 */
+      description?: string;
+      /** 댓글 허용 여부 (false: 비활성화, true: 허용) */
+      isAllowComment?: boolean;
+    }
+
+    export interface NoticePostDeleteResponseDto {
+      /**
+       * 삭제된 리소스 개수
+       * @format integer
+       */
+      count: number;
     }
 
     /** login type 현재 email 만 */
@@ -879,6 +896,26 @@ declare global {
 
     /**
      * error code
+     * @example 1
+     */
+    export type FreePostIncrementHitCodeEnum = 1;
+
+    /** error message */
+    export type FreePostIncrementHitMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 5
+     */
+    export type FreePostIncrementHitCodeEnum1 = 5;
+
+    /** error message */
+    export type FreePostIncrementHitMessageEnum1 =
+      "The resource you're trying to access doesn't exist.";
+
+    /**
+     * error code
      * @example 0
      */
     export type GetAllMajorsCodeEnum = 0;
@@ -1088,6 +1125,106 @@ declare global {
     export type NoticePostsControllerPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
+    /**
+     * error code
+     * @example 1
+     */
+    export type NoticePostsControllerPatchUpdateCodeEnum = 1;
+
+    /** error message */
+    export type NoticePostsControllerPatchUpdateMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 3
+     */
+    export type NoticePostsControllerPatchUpdateCodeEnum1 = 3;
+
+    /** error message */
+    export type NoticePostsControllerPatchUpdateMessageEnum1 =
+      "This token is invalid.";
+
+    /**
+     * error code
+     * @example 4
+     */
+    export type NoticePostsControllerPatchUpdateCodeEnum2 = 4;
+
+    /** error message */
+    export type NoticePostsControllerPatchUpdateMessageEnum2 =
+      "You don't have permission to access it.";
+
+    /**
+     * error code
+     * @example 5
+     */
+    export type NoticePostsControllerPatchUpdateCodeEnum3 = 5;
+
+    /** error message */
+    export type NoticePostsControllerPatchUpdateMessageEnum3 =
+      "The resource you're trying to access doesn't exist.";
+
+    /**
+     * error code
+     * @example 0
+     */
+    export type NoticePostsControllerPatchUpdateCodeEnum4 = 0;
+
+    /** error message */
+    export type NoticePostsControllerPatchUpdateMessageEnum4 =
+      "Server error. Please contact server developer";
+
+    /**
+     * error code
+     * @example 1
+     */
+    export type NoticePostsControllerRemoveCodeEnum = 1;
+
+    /** error message */
+    export type NoticePostsControllerRemoveMessageEnum =
+      "Invalid request parameter. Please check your request.";
+
+    /**
+     * error code
+     * @example 3
+     */
+    export type NoticePostsControllerRemoveCodeEnum1 = 3;
+
+    /** error message */
+    export type NoticePostsControllerRemoveMessageEnum1 =
+      "This token is invalid.";
+
+    /**
+     * error code
+     * @example 4
+     */
+    export type NoticePostsControllerRemoveCodeEnum2 = 4;
+
+    /** error message */
+    export type NoticePostsControllerRemoveMessageEnum2 =
+      "You don't have permission to access it.";
+
+    /**
+     * error code
+     * @example 5
+     */
+    export type NoticePostsControllerRemoveCodeEnum3 = 5;
+
+    /** error message */
+    export type NoticePostsControllerRemoveMessageEnum3 =
+      "The resource you're trying to access doesn't exist.";
+
+    /**
+     * error code
+     * @example 0
+     */
+    export type NoticePostsControllerRemoveCodeEnum4 = 0;
+
+    /** error message */
+    export type NoticePostsControllerRemoveMessageEnum4 =
+      "Server error. Please contact server developer";
+
     export namespace Api {
       /**
        * @description 서버에서 관리하는 에러코드를 조회합니다.
@@ -1289,9 +1426,8 @@ declare global {
        * No description
        * @tags free-posts
        * @name FreePostRemove
-       * @summary 자유게시글 삭제 (현재 내부 사정으로 서버에러가 무조건적으로 발생합니다.
+       * @summary 자유게시글 삭제
        * @request DELETE:/api/free-posts/{freePostId}
-       * @deprecated
        * @secure
        */
       export namespace FreePostRemove {
@@ -1302,6 +1438,22 @@ declare global {
         export type RequestBody = never;
         export type RequestHeaders = {};
         export type ResponseBody = FreePostDeleteResponseDto;
+      }
+      /**
+       * No description
+       * @tags free-posts
+       * @name FreePostIncrementHit
+       * @summary 조회수 증가(1)
+       * @request PUT:/api/free-posts/{freePostId}/hit
+       */
+      export namespace FreePostIncrementHit {
+        export type RequestParams = {
+          freePostId: number;
+        };
+        export type RequestQuery = {};
+        export type RequestBody = never;
+        export type RequestHeaders = {};
+        export type ResponseBody = void;
       }
       /**
        * No description
@@ -1433,17 +1585,30 @@ declare global {
         export type RequestHeaders = {};
         export type ResponseBody = NoticePostDetailResponseDto;
       }
-
       /**
        * No description
        * @tags notice-posts
-       * @name NoticePostRemove
-       * @summary 자유게시글 삭제 (현재 내부 사정으로 서버에러가 무조건적으로 발생합니다.
-       * @request DELETE:/api/free-posts/{freePostId}
-       * @deprecated
+       * @name NoticePostsControllerPatchUpdate
+       * @request PATCH:/api/notice-posts/{noticePostId}
        * @secure
        */
-      export namespace NoticePostRemove {
+      export namespace NoticePostsControllerPatchUpdate {
+        export type RequestParams = {
+          noticePostId: number;
+        };
+        export type RequestQuery = {};
+        export type RequestBody = PatchUpdateNoticePostDto;
+        export type RequestHeaders = {};
+        export type ResponseBody = NoticePostDetailResponseDto;
+      }
+      /**
+       * No description
+       * @tags notice-posts
+       * @name NoticePostsControllerRemove
+       * @request DELETE:/api/notice-posts/{noticePostId}
+       * @secure
+       */
+      export namespace NoticePostsControllerRemove {
         export type RequestParams = {
           noticePostId: number;
         };

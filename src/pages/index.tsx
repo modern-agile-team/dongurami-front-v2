@@ -28,19 +28,21 @@ export default function Home() {
         router.push("sign-up");
         break;
       }
-      case "infinity-board": {
-        router.push("board/infinity");
-        break;
-      }
-      case "free": {
+      case "free-board": {
         router.push({
           pathname: "/board/free",
+          query: {
+            page: 1,
+          },
         });
         break;
       }
-      case "notice": {
+      case "notice-board": {
         router.push({
           pathname: "/board/notice",
+          query: {
+            page: 1,
+          },
         });
         break;
       }
@@ -94,18 +96,13 @@ export default function Home() {
               </Row.li>
             </WhatIF>
             <Row.li>
-              <button id="infinity-board" onClick={handleRoute}>
-                무한스크롤 게시판
-              </button>
-            </Row.li>
-            <Row.li>
-              <button id="free" onClick={handleRoute}>
-                자유 게시판
-              </button>
-            </Row.li>
-            <Row.li>
-              <button id="notice" onClick={handleRoute}>
+              <button id="notice-board" onClick={handleRoute}>
                 공지 게시판
+              </button>
+            </Row.li>
+            <Row.li>
+              <button id="free-board" onClick={handleRoute}>
+                자유 게시판
               </button>
             </Row.li>
             <Row.li>
