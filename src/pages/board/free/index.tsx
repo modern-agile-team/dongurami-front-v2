@@ -10,10 +10,20 @@ import { useRouter } from "next/router";
 import { boardsAPI } from "@/apis";
 import { Column, Pagination } from "@/components";
 
+interface PostData {
+  id: number;
+}
+
 export default function FreeBoard(props: {
   freeBoard: Swagger.Api.FreePostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
+
+  function handleClickPostDetail(el: PostData) {
+    router.push({
+      pathname: `free/detail/${el.id}`,
+    });
+  }
 
   return (
     <Column horizonAlign="center" gap={10}>
@@ -30,7 +40,7 @@ export default function FreeBoard(props: {
         <tbody>
           {props.freeBoard.freePosts.map((post) => {
             return (
-              <tr key={post.id}>
+              <tr key={post.id} onClick={() => handleClickPostDetail(post)}>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
                   {post.id}
                 </th>
