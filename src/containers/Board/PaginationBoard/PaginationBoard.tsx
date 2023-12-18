@@ -5,9 +5,11 @@
  */
 
 import { useRouter } from "next/router";
+import React from "react";
+
 import * as S from "./emotion";
 
-export default function PagenationBoard() {
+export default function PaginationBoard() {
   interface PostData {
     author: string;
     date: string; //추후 api 스펙 관련 필요시 변경
