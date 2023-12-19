@@ -11,7 +11,7 @@ export default function WriteNoticeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await boardsAPI.noticeBoard.getPost({
+      const response = await boardsAPI.noticePost.getPost({
         noticePostId: Number(Id),
       });
 

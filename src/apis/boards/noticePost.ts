@@ -6,7 +6,7 @@
 
 import instance from "../instance";
 
-const noticeBoardAPI = () => {
+const noticePostAPI = () => {
   const apiPath = (path?: string) => {
     return `/notice-posts${path ? `/${path}` : ""}`;
   };
@@ -107,6 +107,6 @@ const noticeBoardAPI = () => {
   return { createPost, getAll, getPost, updatePost, patchPost, removePost };
 };
 
-const noticeBoard = noticeBoardAPI();
+const noticePost = noticePostAPI();
 
-export default noticeBoard;
+export default noticePost;

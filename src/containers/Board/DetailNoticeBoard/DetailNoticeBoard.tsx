@@ -11,7 +11,7 @@ export default function DetailNoticeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await boardsAPI.noticeBoard.getPost({
+      const response = await boardsAPI.noticePost.getPost({
         noticePostId: Number(postId),
       });
 
@@ -22,7 +22,7 @@ export default function DetailNoticeBoard() {
   });
 
   const handleClickDelete = async () => {
-    const response = await boardsAPI.noticeBoard.removePost({
+    const response = await boardsAPI.noticePost.removePost({
       noticePostId: Number(postId),
     });
 
