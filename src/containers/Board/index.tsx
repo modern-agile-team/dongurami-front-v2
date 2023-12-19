@@ -5,4 +5,6 @@
  */
 
 export * from "./InfinityScrollBoard";
-export * from "./PagenationBoard";
+export * from "./PaginationBoard";
+export * from "./DetailBoard";
+export * from "./WriteBoard";

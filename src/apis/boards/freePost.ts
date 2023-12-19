@@ -119,6 +119,6 @@ const freeBoardAPI = () => {
   };
 };
 
-const freeBoard = freeBoardAPI();
+const freePost = freeBoardAPI();
 
-export default freeBoard;
+export default freePost;

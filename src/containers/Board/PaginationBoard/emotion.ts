@@ -16,6 +16,13 @@ export const Wrap = styled.div`
   }
 `;
 
+export const Title = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
 export const BoardBody = styled.div`
   border: 1px solid blue;
   width: 70vw;

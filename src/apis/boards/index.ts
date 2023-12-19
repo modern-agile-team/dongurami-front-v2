@@ -4,5 +4,5 @@
  * Copyright (c) 2023 Your Company
  */
 
-export { default as freeBoard } from "./freeBoard";
+export { default as freePost } from "./freePost";
 export { default as noticeBoard } from "./noticeBoard";

@@ -46,6 +46,7 @@ export default function Home() {
         });
         break;
       }
+
       case "club": {
         router.push("club/1?tab=home");
         break;
