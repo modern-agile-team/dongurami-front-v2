@@ -5,7 +5,7 @@ import * as S from "./emotion";
 import { Quill } from "@/components";
 import { boardsAPI } from "@/apis";
 
-export default function WriteBoard() {
+export default function WriteFreeBoard() {
   const router = useRouter();
   const { Id } = router.query;
 
@@ -23,7 +23,7 @@ export default function WriteBoard() {
 
   return (
     <S.Container>
-      <Quill post={data} />
+      <Quill post={data?.freePost} />
     </S.Container>
   );
 }

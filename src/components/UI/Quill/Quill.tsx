@@ -28,7 +28,10 @@ const formats = [
 ];
 
 interface QuillProps {
-  post?: Swagger.FreePostDetailResponseDto | undefined;
+  post?: {
+    title: string;
+    description: string;
+  };
 }
 
 export default function Quill({ post }: QuillProps) {
@@ -37,8 +40,9 @@ export default function Quill({ post }: QuillProps) {
 
   useEffect(() => {
     if (post) {
-      setTitle(post.freePost.title);
-      setContent(post.freePost.description);
+      console.log(post);
+      setTitle(post.title);
+      // setContent(post.description);
     }
   }, [post]);
 

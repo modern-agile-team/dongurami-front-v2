@@ -4,8 +4,8 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { DetailBoard } from "@/containers/Board";
+import { DetailNoticeBoard } from "@/containers/Board";
 
 export default function PostDetailPage() {
-  return <DetailBoard />
+  return <DetailNoticeBoard />;
 }
