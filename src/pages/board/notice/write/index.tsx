@@ -1,5 +1,5 @@
-import { WriteFreeBoard } from "@/containers/Board";
+import { WriteNoticeBoard } from "@/containers/Board";
 
 export default function NoticeWritePage() {
-  return <WriteFreeBoard />;
+  return <WriteNoticeBoard />;
 }

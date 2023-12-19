@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 
+import { Button } from "@/components";
+
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -28,59 +30,56 @@ const formats = [
 ];
 
 interface QuillProps {
-  post?: {
+  value: {
     title: string;
     description: string;
+    isAnonymous?: boolean;
+    isAllowComment?: boolean;
   };
+
+  handleClickUpdate: () => void;
+
+  setValue: React.Dispatch<
+    React.SetStateAction<{
+      title: string;
+      description: string;
+      isAnonymous: boolean;
+      isAllowComment: boolean;
+    }>
+  >;
 }
 
-export default function Quill({ post }: QuillProps) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    if (post) {
-      console.log(post);
-      setTitle(post.title);
-      // setContent(post.description);
-    }
-  }, [post]);
-
-  function submitHandler(event: any) {
+export default function Quill({
+  value,
+  handleClickUpdate,
+  setValue,
+}: QuillProps) {
+  function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
-
-    // const requestObj = {
-    //   id: new Date().toISOString(),
-    //   title: title,
-    //   content: content,
-    //   isDraft: isDraft,
-    //   isPublished: isPublished,
-    // };
-
-    // fetch("/api/posts", {
-    //   method: "POST",
-    //   body: JSON.stringify(requestObj),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
+    setValue((prevValue) => ({
+      ...prevValue,
+      title: event.target.value,
+    }));
   }
 
-  function handleTitleChange(event: any) {
-    event.preventDefault();
-    setTitle(event.target.value);
+  function handleContentChange(content: string) {
+    setValue((prevValue) => ({
+      ...prevValue,
+      description: content,
+    }));
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleClickUpdate();
+      }}
+    >
       <label htmlFor="title">Title</label>
       <input
         type="text"
-        value={title}
+        value={value.title}
         name="title"
         placeholder="Enter a title"
         onChange={handleTitleChange}
@@ -89,11 +88,12 @@ export default function Quill({ post }: QuillProps) {
       <QuillNoSSRWrapper
         modules={modules}
         formats={formats}
-        onChange={setContent}
+        value={value.description}
+        onChange={handleContentChange}
         theme="snow"
       />
-      <button>Save</button>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <Button>{value ? "생성" : "수정"}</Button>
+      <div dangerouslySetInnerHTML={{ __html: value.description }} />
     </form>
   );
 }
