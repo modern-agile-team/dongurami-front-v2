@@ -1,13 +1,15 @@
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 
 import { Button } from "@/components";
 
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
+const QuillNoSSRWrapper =
+  typeof window !== "undefined"
+    ? dynamic(import("react-quill"), {
+        ssr: false,
+        loading: () => <p>Loading ...</p>,
+      })
+    : () => false;
 
 const modules = {
   toolbar: {
