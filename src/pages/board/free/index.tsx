@@ -35,7 +35,7 @@ export default function FreeBoard(props: {
   return (
     <Column horizonAlign="center" gap={10}>
       <Head>
-        <title>자유 게시판</title>
+        <title>동그라미 - 자유 게시판</title>
       </Head>
       <h1>자유 게시판</h1>
       <Button onClick={handleClickPostWrite}>글쓰기</Button>

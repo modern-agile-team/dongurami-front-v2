@@ -12,7 +12,7 @@ export default function PostDetailPage() {
   return (
     <>
       <Head>
-        <title>자유 게시글</title>
+        <title>동그라미 - 자유 게시글</title>
       </Head>
       <DetailFreeBoard />
     </>

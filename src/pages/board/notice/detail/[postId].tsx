@@ -12,7 +12,7 @@ export default function PostDetailPage() {
   return (
     <>
       <Head>
-        <title>공지 게시글</title>
+        <title>동그라미 - 공지 게시글</title>
       </Head>
       <DetailNoticeBoard />
     </>

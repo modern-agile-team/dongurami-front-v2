@@ -12,7 +12,7 @@ export default function LoginPage() {
   return (
     <Login.Layout>
       <Head>
-        <title>로그인</title>
+        <title>동그라미 - 로그인</title>
       </Head>
       <Login.Form />
     </Login.Layout>

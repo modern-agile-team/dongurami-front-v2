@@ -12,7 +12,7 @@ export default function SignUpPage() {
   return (
     <SignUp.Layout>
       <Head>
-        <title>회원가입</title>
+        <title>동그라미 - 회원가입</title>
       </Head>
       <SignUp.Form />
     </SignUp.Layout>
