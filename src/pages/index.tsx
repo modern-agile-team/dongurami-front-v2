@@ -60,9 +60,6 @@ export default function Home() {
     <>
       <Head>
         <title>동그라미</title>
-        <meta name="description" content="우리들의 동아리" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
