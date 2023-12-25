@@ -6,6 +6,7 @@
 
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { boardsAPI } from "@/apis";
 import { Button, Column, Pagination } from "@/components";
@@ -33,6 +34,9 @@ export default function NoticeBoard(props: {
 
   return (
     <Column horizonAlign="center" gap={10}>
+      <Head>
+        <title>공지 게시판</title>
+      </Head>
       <h1>공지 게시판</h1>
       <Button onClick={handleClickPostWrite}>글쓰기</Button>
 

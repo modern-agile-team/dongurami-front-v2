@@ -6,6 +6,7 @@
 
 import React, { useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { Button, Row, SwitchCase } from "@/components";
 import { Club } from "@/containers";
@@ -53,6 +54,9 @@ export default function ClubPage() {
   if (!currentTab) return;
   return (
     <div>
+      <Head>
+        <title>{clubID} 동아리</title>
+      </Head>
       <Row.ul gap={8}>
         {Object.entries(CLUB_TABS).map(([tabKey, tabValue]) => (
           <Row.li key={tabKey}>

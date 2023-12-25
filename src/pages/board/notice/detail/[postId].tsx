@@ -4,8 +4,17 @@
  * Copyright (c) 2023 Your Company
  */
 
+import Head from "next/head";
+
 import { DetailNoticeBoard } from "@/containers/Board";
 
 export default function PostDetailPage() {
-  return <DetailNoticeBoard />;
+  return (
+    <>
+      <Head>
+        <title>공지 게시글</title>
+      </Head>
+      <DetailNoticeBoard />
+    </>
+  );
 }

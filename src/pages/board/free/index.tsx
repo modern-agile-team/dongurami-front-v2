@@ -6,6 +6,7 @@
 
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { boardsAPI } from "@/apis";
 import { Button, Column, Pagination } from "@/components";
@@ -33,6 +34,9 @@ export default function FreeBoard(props: {
 
   return (
     <Column horizonAlign="center" gap={10}>
+      <Head>
+        <title>자유 게시판</title>
+      </Head>
       <h1>자유 게시판</h1>
       <Button onClick={handleClickPostWrite}>글쓰기</Button>
       <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
