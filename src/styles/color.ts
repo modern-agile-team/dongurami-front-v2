@@ -4,10 +4,12 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Theme } from "@emotion/react";
+import { ThemeColor } from "@emotion/react";
 
-const colorTheme: Theme["color"] = {
+export const lightThemeColor: ThemeColor = {
   primary: "#6ec2f7",
 };
 
-export default colorTheme;
+export const darkThemeColor: ThemeColor = {
+  primary: "#6ec2f7",
+};

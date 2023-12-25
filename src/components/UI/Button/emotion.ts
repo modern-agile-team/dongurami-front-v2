@@ -5,7 +5,7 @@
  */
 
 import styled from "@emotion/styled";
-import { Theme } from "@emotion/react";
+import { ThemeColor } from "@emotion/react";
 
 import { Row } from "../../Layouts";
 
@@ -13,7 +13,7 @@ export const ButtonContainer = styled(Row.button)<{
   filled: "outlined" | "contained";
   shape: "square" | "round" | "circle";
   sizes: "xs" | "s" | "m" | "l" | "xl";
-  backgroundColor: keyof Theme["color"];
+  backgroundColor: keyof ThemeColor;
 }>`
   padding: ${({ sizes }) => {
     switch (sizes) {
@@ -29,11 +29,11 @@ export const ButtonContainer = styled(Row.button)<{
         return "8px 14px";
     }
   }};
-  color: ${({ theme, filled }) => (filled === "contained" ? "#fff" : "#000")};
+  color: ${({ filled }) => (filled === "contained" ? "#fff" : "#000")};
   background: ${({ theme, filled, backgroundColor }) =>
-    filled === "outlined" ? "transparent" : theme.color[backgroundColor]};
+    filled === "outlined" ? "transparent" : theme.color.light[backgroundColor]};
   border: ${({ theme, backgroundColor }) =>
-    `1px solid ${theme.color[backgroundColor]}`};
+    `1px solid ${theme.color.light[backgroundColor]}`};
   border-radius: ${({ shape }) => {
     switch (shape) {
       case "circle":

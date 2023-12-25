@@ -6,7 +6,7 @@
 
 import { Theme } from "@emotion/react";
 
-const fontTheme: Theme["font"] = {
+const typoTheme: Theme["typography"] = {
   Body1: {
     fontSize: "16px",
     fontWeight: "bold",
@@ -14,4 +14,4 @@ const fontTheme: Theme["font"] = {
   },
 };
 
-export default fontTheme;
+export default typoTheme;

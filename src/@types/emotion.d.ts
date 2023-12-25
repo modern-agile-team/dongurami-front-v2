@@ -7,11 +7,15 @@
 import "@emotion/react";
 
 declare module "@emotion/react" {
+  type ThemeColor = {
+    primary: string;
+  };
   export interface Theme {
     color: {
-      primary: string;
+      light: ThemeColor;
+      dark: ThemeColor;
     };
-    font: {
+    typography: {
       Body1: {
         fontSize: string;
         fontWeight: string;

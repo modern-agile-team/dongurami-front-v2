@@ -9,15 +9,19 @@ import { Provider, createStore } from "jotai";
 import { Theme, ThemeProvider } from "@emotion/react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
-import colorTheme from "@/styles/color";
-import fontTheme from "@/styles/font";
+import typoTheme from "@/styles/font";
+import { darkThemeColor, lightThemeColor } from "@/styles/color";
 
 import ErrorBoundary from "./ErrorBoundary";
 
 const theme: Theme = {
-  color: colorTheme,
-  font: fontTheme,
+  color: {
+    light: lightThemeColor,
+    dark: darkThemeColor,
+  },
+  typography: typoTheme,
 };
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

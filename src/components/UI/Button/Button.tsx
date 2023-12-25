@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { Theme } from "@emotion/react";
+import { Theme, ThemeColor } from "@emotion/react";
 
 import * as S from "./emotion";
 
@@ -13,7 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   shape: "square" | "round" | "circle";
   size: "xs" | "s" | "m" | "l" | "xl";
   filled: "outlined" | "contained";
-  backgroundColor: keyof Theme["color"];
+  backgroundColor: keyof ThemeColor;
   startEnhancer: React.ReactNode;
   endEnhancer: React.ReactNode;
 }
