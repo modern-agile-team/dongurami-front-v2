@@ -45,7 +45,7 @@ export default function FreeBoard(props: {
           </tr>
         </thead>
         <tbody>
-          {props.freeBoard.freePosts.map((post) => {
+          {props.freeBoard.contents.map((post) => {
             return (
               <tr key={post.id} onClick={() => handleClickPostDetail(post)}>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     pageSize: 20,
   });
 
-  if (freeBoard.freePosts.length === 0) {
+  if (freeBoard.contents.length === 0) {
     return {
       redirect: {
         destination: `/board/free?page=${freeBoard.lastPage}`,

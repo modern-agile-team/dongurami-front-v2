@@ -90,6 +90,9 @@ const freeBoardAPI = () => {
     return result.data;
   };
 
+  /**
+   * 게시글 삭제
+   */
   const removePost = async (args: Swagger.Api.FreePostRemove.RequestParams) => {
     const result =
       await instance.delete<Swagger.Api.FreePostRemove.ResponseBody>(
@@ -98,6 +101,9 @@ const freeBoardAPI = () => {
     return result.data;
   };
 
+  /**
+   * 조회수 1 증가
+   */
   const increaseHit = async (
     args: Swagger.Api.FreePostIncrementHit.RequestParams
   ) => {

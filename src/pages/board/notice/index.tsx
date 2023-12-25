@@ -46,7 +46,7 @@ export default function NoticeBoard(props: {
           </tr>
         </thead>
         <tbody>
-          {props.noticePost.noticePosts.map((post) => {
+          {props.noticePost.contents.map((post) => {
             return (
               <tr key={post.id} onClick={() => handleClickPostDetail(post)}>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
@@ -90,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     pageSize: 20,
   });
 
-  if (noticePost.noticePosts.length === 0) {
+  if (noticePost.contents.length === 0) {
     return {
       redirect: {
         destination: `/board/notice?page=${noticePost.lastPage}`,
