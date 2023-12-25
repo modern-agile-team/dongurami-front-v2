@@ -12,16 +12,14 @@ export const Title = styled.h2`
   padding: 12px 20px;
 `;
 
-export const WrapBar = styled.div`
+export const WrapBar = styled(Row)`
   padding: 12px 20px;
-  flex-direction: row;
-  /* align-items: center; */
-  display: flex;
   justify-content: flex-end;
 `;
 
-export const Btn = styled.button`
+export const Btn = styled(Button)`
   padding: 6px;
+  margin-right: 12px;
 `;
 
 export const WrapDesc = styled.div`

@@ -8,14 +8,14 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
 import { boardsAPI } from "@/apis";
-import { Column, Pagination } from "@/components";
+import { Button, Column, Pagination } from "@/components";
 
 interface PostData {
   id: number;
 }
 
 export default function NoticeBoard(props: {
-  noticeBoard: Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
+  noticePost: Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
 
@@ -25,9 +25,17 @@ export default function NoticeBoard(props: {
     });
   }
 
+  function handleClickPostWrite() {
+    router.push({
+      pathname: `notice/write/`,
+    });
+  }
+
   return (
     <Column horizonAlign="center" gap={10}>
       <h1>공지 게시판</h1>
+      <Button onClick={handleClickPostWrite}>글쓰기</Button>
+
       <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -38,7 +46,7 @@ export default function NoticeBoard(props: {
           </tr>
         </thead>
         <tbody>
-          {props.noticeBoard.noticePosts.map((post) => {
+          {props.noticePost.noticePosts.map((post) => {
             return (
               <tr key={post.id} onClick={() => handleClickPostDetail(post)}>
                 <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
@@ -59,8 +67,8 @@ export default function NoticeBoard(props: {
         </tbody>
       </table>
       <Pagination
-        defaultPage={props.noticeBoard?.currentPage}
-        count={props.noticeBoard?.lastPage || 1}
+        defaultPage={props.noticePost?.currentPage}
+        count={props.noticePost?.lastPage || 1}
         onChange={(_, page) => {
           router.push({
             pathname: "/board/notice",
@@ -77,15 +85,15 @@ export default function NoticeBoard(props: {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
-  const noticeBoard = await boardsAPI.noticeBoard.getAll({
+  const noticePost = await boardsAPI.noticePost.getAll({
     page: Number(page),
     pageSize: 20,
   });
 
-  if (noticeBoard.noticePosts.length === 0) {
+  if (noticePost.noticePosts.length === 0) {
     return {
       redirect: {
-        destination: `/board/notice?page=${noticeBoard.lastPage}`,
+        destination: `/board/notice?page=${noticePost.lastPage}`,
         permanent: false,
       },
     };
@@ -93,7 +101,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      noticeBoard,
+      noticePost,
     },
   };
 };

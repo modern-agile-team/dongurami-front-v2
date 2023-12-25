@@ -8,7 +8,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
 import { boardsAPI } from "@/apis";
-import { Column, Pagination } from "@/components";
+import { Button, Column, Pagination } from "@/components";
 
 interface PostData {
   id: number;
@@ -25,9 +25,16 @@ export default function FreeBoard(props: {
     });
   }
 
+  function handleClickPostWrite() {
+    router.push({
+      pathname: `free/write/`,
+    });
+  }
+
   return (
     <Column horizonAlign="center" gap={10}>
       <h1>자유 게시판</h1>
+      <Button onClick={handleClickPostWrite}>글쓰기</Button>
       <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
         <thead>
           <tr>

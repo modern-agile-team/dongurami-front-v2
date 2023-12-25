@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import * as S from "./emotion";
 import { boardsAPI } from "@/apis";
 
-export default function DetailBoard() {
+export default function DetailFreeBoard() {
   const router = useRouter();
   const { postId } = router.query;
 
@@ -31,7 +31,7 @@ export default function DetailBoard() {
 
   const handleClickUpdate = async () => {
     router.push({
-      pathname: `/board/write/`,
+      pathname: `/board/free/write/`,
       query: {
         Id: postId,
       },
