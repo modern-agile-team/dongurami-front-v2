@@ -27,15 +27,10 @@ const handler = NextAuth({
           }),
         });
         const user = await res.json();
-        console.log(user);
 
         if (user) {
-          console.log(req);
-          console.log("----");
-          console.log("user ==>", user);
           return user;
         } else {
-          console.log(req);
           return null;
         }
       },
@@ -52,13 +47,13 @@ const handler = NextAuth({
 
     async session({ session, token }) {
       session.user = token as any;
+
       return session;
     },
   },
 
-  // pages: {
-  //   signIn: "/signin",
-  // },
+  pages: {
+    signIn: "/login",
+  },
 });
 export default handler;
-// export { handler as GET, handler as POST };

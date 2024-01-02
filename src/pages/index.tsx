@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import styles from "@/styles/Home.module.css";
 import { Row, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
+import { signIn } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,10 +25,7 @@ export default function Home() {
         router.push("login");
         break;
       }
-      case "sign-up": {
-        router.push("sign-up");
-        break;
-      }
+
       case "free-board": {
         router.push({
           pathname: "/board/free",
@@ -76,13 +74,8 @@ export default function Home() {
               falsy={
                 <>
                   <Row.li>
-                    <button id="sign-in" onClick={handleRoute}>
+                    <button id="sign-in" onClick={() => signIn()}>
                       로그인
-                    </button>
-                  </Row.li>
-                  <Row.li>
-                    <button id="sign-up" onClick={handleRoute}>
-                      회원가입
                     </button>
                   </Row.li>
                 </>
