@@ -8,15 +8,19 @@ import { DonguramiProvider } from "@/components";
 import TestRouterProvider from "./TestRouterProvider";
 import { HTMLAttributes } from "react";
 import { NextRouter } from "next/router";
+import { Session } from "next-auth";
 
 interface ITestProvider extends HTMLAttributes<HTMLElement> {
   router: NextRouter;
+  session: Session;
 }
 
 export default function TestProvider(props: ITestProvider) {
   return (
     <TestRouterProvider router={props.router}>
-      <DonguramiProvider>{props.children}</DonguramiProvider>
+      <DonguramiProvider session={props.session}>
+        {props.children}
+      </DonguramiProvider>
     </TestRouterProvider>
   );
 }
