@@ -10,9 +10,12 @@ import Head from "next/head";
 import "@/styles/globals.css";
 import { DonguramiProvider } from "@/components";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
-    <DonguramiProvider>
+    <DonguramiProvider session={session}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
