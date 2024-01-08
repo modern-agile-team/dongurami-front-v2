@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Row, WhatIF } from "@/components";
+import { Button, Row, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 
@@ -61,44 +61,49 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
-          <button
+          <Button
             onClick={() => {
               setState(state + 1);
             }}
           >
             에러 테스트 <br /> 5번 클릭하면 에러 발생
-          </button>
+          </Button>
           <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
             <WhatIF
               condition={isLoggedIn}
               falsy={
                 <>
                   <Row.li>
-                    <button id="sign-in" onClick={() => signIn()}>
+                    <Button id="sign-in" onClick={handleRoute}>
                       로그인
-                    </button>
+                    </Button>
+                  </Row.li>
+                  <Row.li>
+                    <Button id="sign-up" onClick={handleRoute}>
+                      회원가입
+                    </Button>
                   </Row.li>
                 </>
               }
             >
               <Row.li>
-                <button onClick={logout}>로그아웃</button>
+                <Button onClick={logout}>로그아웃</Button>
               </Row.li>
             </WhatIF>
             <Row.li>
-              <button id="notice-board" onClick={handleRoute}>
+              <Button id="notice-board" onClick={handleRoute}>
                 공지 게시판
-              </button>
+              </Button>
             </Row.li>
             <Row.li>
-              <button id="free-board" onClick={handleRoute}>
+              <Button id="free-board" onClick={handleRoute}>
                 자유 게시판
-              </button>
+              </Button>
             </Row.li>
             <Row.li>
-              <button id="club" onClick={handleRoute}>
+              <Button id="club" onClick={handleRoute}>
                 동아리
-              </button>
+              </Button>
             </Row.li>
           </Row.ul>
         </div>

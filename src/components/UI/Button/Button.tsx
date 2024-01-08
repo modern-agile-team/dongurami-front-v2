@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { Theme, ThemeColor } from "@emotion/react";
+import { ThemeColor } from "@emotion/react";
 
 import * as S from "./emotion";
 
@@ -13,6 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   shape: "square" | "round" | "circle";
   size: "xs" | "s" | "m" | "l" | "xl";
   filled: "outlined" | "contained";
+  color: keyof ThemeColor;
   backgroundColor: keyof ThemeColor;
   startEnhancer: React.ReactNode;
   endEnhancer: React.ReactNode;
@@ -21,24 +22,23 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   shape = "round",
   size = "m",
-  filled = "outlined",
-  backgroundColor = "primary",
+  filled = "contained",
+  color = "neutral_10",
+  backgroundColor = "primary_100",
   ...rest
 }: Partial<ButtonProps>) {
   return (
-    <S.ButtonContainer
-      verticalAlign="center"
-      gap={4}
-      role="button"
-      sizes={size}
+    <S.ButtonStyle
       shape={shape}
+      size={size}
       filled={filled}
+      color={color}
       backgroundColor={backgroundColor}
       {...rest}
     >
       {rest.startEnhancer && <div>{rest.startEnhancer}</div>}
       {rest.children}
       {rest.endEnhancer && <div>{rest.endEnhancer}</div>}
-    </S.ButtonContainer>
+    </S.ButtonStyle>
   );
 }
