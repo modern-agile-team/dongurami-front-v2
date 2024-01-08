@@ -8,20 +8,20 @@ import { boardsAPI } from "@/apis";
 
 export default function WriteNoticeBoard() {
   const router = useRouter();
-  const { Id } = router.query;
+  const { id } = router.query;
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryFn: async () => {
       const response = await boardsAPI.noticePost.getPost({
-        noticePostId: Number(Id),
+        noticePostId: Number(id),
       });
 
       return response;
     },
-    queryKey: ["post", Id],
+    queryKey: ["post", id],
 
-    enabled: Id !== undefined,
+    enabled: id !== undefined,
   });
 
   const [value, setValue] = useState<{
@@ -45,9 +45,9 @@ export default function WriteNoticeBoard() {
     };
 
     let response;
-    if (Id) {
+    if (id) {
       response = await boardsAPI.noticePost.updatePost({
-        noticePostId: Number(Id),
+        noticePostId: Number(id),
         ...params,
       });
       router.back();
