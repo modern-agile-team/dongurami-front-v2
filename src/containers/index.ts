@@ -6,5 +6,4 @@
 
 export * as Login from "./Login";
 export * as Club from "./Club";
-export * as SignUp from "./SignUp";
 export * as Board from "./Board";

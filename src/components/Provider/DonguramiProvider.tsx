@@ -13,7 +13,8 @@ import typoTheme from "@/styles/font";
 import { darkThemeColor, lightThemeColor } from "@/styles/color";
 
 import ErrorBoundary from "./ErrorBoundary";
-
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 const theme: Theme = {
   color: {
     light: lightThemeColor,
@@ -34,12 +35,16 @@ const queryClient = new QueryClient({
 
 const store = createStore();
 
-export default function DonguramiProvider(props: HTMLAttributes<HTMLElement>) {
+export default function DonguramiProvider(
+  props: HTMLAttributes<HTMLElement> & { session: Session }
+) {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+          <SessionProvider session={props.session}>
+            <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+          </SessionProvider>
         </Provider>
       </QueryClientProvider>
     </ErrorBoundary>
