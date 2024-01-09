@@ -41,8 +41,8 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
+    async jwt({ token, user, account }) {
+      return { ...token, ...user, ...account};
     },
 
     async session({ session, token }) {
