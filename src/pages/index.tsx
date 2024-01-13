@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Button, Row, WhatIF } from "@/components";
+import { Button, Row, WhatIF, Svg } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 
@@ -15,6 +15,7 @@ export default function Home() {
   const [state, setState] = useState(0);
 
   const { isLoggedIn, logout } = useAuth();
+  const { BookMark, Calendar, ChatDots } = Svg();
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.target as HTMLButtonElement;
@@ -59,6 +60,11 @@ export default function Home() {
       <Head>
         <title>동그라미</title>
       </Head>
+
+      <BookMark width={"80"} height={"80"} />
+      <Calendar width={"80"} height={"80"} />
+      <ChatDots width={"80"} height={"80"} />
+
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <Button
@@ -68,6 +74,7 @@ export default function Home() {
           >
             에러 테스트 <br /> 5번 클릭하면 에러 발생
           </Button>
+
           <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
             <WhatIF
               condition={isLoggedIn}
