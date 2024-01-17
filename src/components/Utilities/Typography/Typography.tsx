@@ -45,12 +45,12 @@ const textColor = (typoColor: TypoColor) => css`
 
 export const TypographyCSS = (
   typoSize: TypoSize = "Body1",
-  typoColor: TypoColor = "neutral_70"
+  typoColor: TypoColor = "neutral_100"
 ) => css`
   ${fontSize(typoSize)};
   ${fontWeight(typoSize)};
   ${lineHeight(typoSize)};
-  ${typoColor && textColor(typoColor)};
+  ${textColor(typoColor)};
 `;
 
 const StyledTypography = styled(
