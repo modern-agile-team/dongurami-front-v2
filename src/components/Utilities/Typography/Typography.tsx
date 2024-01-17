@@ -5,15 +5,18 @@
  */
 
 import React, { AllHTMLAttributes, forwardRef } from "react";
-import { Theme, css } from "@emotion/react";
+import { Theme, ThemeColor, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { createStyled, domElementList, filterHTMLAttribute } from "@/utils";
 import { lightThemeColor, typographyTheme } from "@/styles/theme";
 
+type TypoSize = keyof Theme["typography"];
+type TypoColor = keyof ThemeColor;
+
 type TypographyProps = {
-  typoSize?: keyof Theme["typography"];
-  typoColor?: keyof Theme["color"]["dark"];
+  typoSize?: TypoSize;
+  typoColor?: TypoColor;
 };
 type TypographyBaseType = React.ForwardRefExoticComponent<
   React.ComponentProps<typeof StyledTypography> & React.RefAttributes<unknown>
@@ -24,25 +27,25 @@ type TypographyTagsType = {
 
 interface CreateTypography extends TypographyBaseType, TypographyTagsType {}
 
-const fontSize = (typoSize: keyof Theme["typography"]) => css`
+const fontSize = (typoSize: TypoSize) => css`
   font-size: ${typographyTheme[typoSize].fontSize};
 `;
 
-const lineHeight = (typoSize: keyof Theme["typography"]) => css`
+const lineHeight = (typoSize: TypoSize) => css`
   line-height: ${typographyTheme[typoSize].lineHeight};
 `;
 
-const fontWeight = (typoSize: keyof Theme["typography"]) => css`
+const fontWeight = (typoSize: TypoSize) => css`
   font-weight: ${typographyTheme[typoSize].fontWeight};
 `;
 
-const textColor = (typoColor: keyof Theme["color"]["dark"]) => css`
+const textColor = (typoColor: TypoColor) => css`
   color: ${lightThemeColor[typoColor]};
 `;
 
 export const TypographyCSS = (
-  typoSize: keyof Theme["typography"] = "Body1",
-  typoColor: keyof Theme["color"]["dark"] = "neutral_70"
+  typoSize: TypoSize = "Body1",
+  typoColor: TypoColor = "neutral_70"
 ) => css`
   ${fontSize(typoSize)};
   ${fontWeight(typoSize)};
@@ -66,10 +69,7 @@ const StyledTypography = styled(
   )
 )`
   ${(props) =>
-    TypographyCSS(
-      props.typoSize as keyof Theme["typography"],
-      props.typoColor as keyof Theme["color"]["dark"]
-    )}
+    TypographyCSS(props.typoSize as TypoSize, props.typoColor as TypoColor)}
 `;
 
 const TypographyBase: TypographyBaseType = forwardRef(
