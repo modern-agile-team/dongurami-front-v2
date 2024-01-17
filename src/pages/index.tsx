@@ -4,10 +4,9 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Button, Column, Row, WhatIF } from "@/components";
+import { Button, Column, Row, Typography, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
-import { Typography } from "@/components/Utilities/Typography";
 
 const inter = Inter({ subsets: ["latin"] });
 
