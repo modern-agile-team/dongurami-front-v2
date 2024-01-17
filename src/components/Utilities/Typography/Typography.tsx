@@ -66,14 +66,15 @@ const StyledTypography = styled(
   forwardRef(
     (
       props: { tag?: keyof JSX.IntrinsicElements } & TypographyProps &
-        AllHTMLAttributes<HTMLElement>
+        AllHTMLAttributes<HTMLElement>,
+      ref
     ) => {
       const { tag = "span", ...rest } = props;
 
       delete rest.typoSize;
       delete rest.typoColor;
 
-      return React.createElement(tag, rest);
+      return React.createElement(tag, { ...rest, ref });
     }
   )
 )`
@@ -85,8 +86,8 @@ const StyledTypography = styled(
 `;
 
 const TypographyBase: TypographyBaseType = forwardRef(
-  ({ ...rest }: React.ComponentProps<typeof StyledTypography>) =>
-    createStyled(StyledTypography)({ ...rest })
+  ({ ...rest }: React.ComponentProps<typeof StyledTypography>, ref) =>
+    createStyled(StyledTypography)({ ...rest, ref })
 );
 
 const Typography = TypographyBase as CreateTypography;
