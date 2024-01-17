@@ -35,6 +35,16 @@ export default function Form() {
           >
             구글
           </button>
+          <button
+            onClick={() =>
+              signIn("naver", {
+                redirect: true,
+                callbackUrl: "/",
+              })
+            }
+          >
+            네이버
+          </button>
         </div>
       ) : (
         <button onClick={() => signOut()}>로그아웃</button>
