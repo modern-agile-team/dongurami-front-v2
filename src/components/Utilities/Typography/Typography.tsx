@@ -20,7 +20,7 @@ import React, { AllHTMLAttributes, forwardRef } from "react";
 import { Theme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { createStyled, domElementList } from "@/utils";
+import { createStyled, domElementList, filterHTMLAttribute } from "@/utils";
 import { lightThemeColor, typographyTheme } from "@/styles/theme";
 
 type TypographyProps = {
@@ -71,10 +71,9 @@ const StyledTypography = styled(
     ) => {
       const { tag = "span", ...rest } = props;
 
-      delete rest.typoSize;
-      delete rest.typoColor;
+      const htmlAttrs = filterHTMLAttribute(rest);
 
-      return React.createElement(tag, { ...rest, ref });
+      return React.createElement(tag, { ...htmlAttrs, ref });
     }
   )
 )`
