@@ -1,5 +1,9 @@
 import NextAuth from "next-auth";
+
 import KakaoProvider from "next-auth/providers/kakao";
+import GoogleProvider from "next-auth/providers/google";
+import NaverProvider from "next-auth/providers/naver";
+
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
@@ -39,10 +43,18 @@ const handler = NextAuth({
       clientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!,
       clientSecret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET!,
     }),
+    GoogleProvider({
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET!,
+    }),
+    NaverProvider({
+      clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID!,
+      clientSecret: process.env.NEXT_PUBLIC_NAVER_CLIENT_SECRET!,
+    }),
   ],
   callbacks: {
     async jwt({ token, user, account }) {
-      return { ...token, ...user, ...account};
+      return { ...token, ...user, ...account };
     },
 
     async session({ session, token }) {
@@ -51,7 +63,7 @@ const handler = NextAuth({
       return session;
     },
   },
-
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
   },
