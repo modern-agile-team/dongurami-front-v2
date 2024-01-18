@@ -4,9 +4,10 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Button, Row, WhatIF, Svg } from "@/components";
+import { Button, Row, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
+import * as Svg from "@/components/Svg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,6 @@ export default function Home() {
   const [state, setState] = useState(0);
 
   const { isLoggedIn, logout } = useAuth();
-  const { BookMark, Calendar, ChatDots } = Svg();
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.target as HTMLButtonElement;
@@ -60,11 +60,7 @@ export default function Home() {
       <Head>
         <title>동그라미</title>
       </Head>
-
-      <BookMark width={"80"} height={"80"} />
-      <Calendar width={"80"} height={"80"} />
-      <ChatDots width={"80"} height={"80"} />
-
+      <Svg.Calendar size="80" />
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <Button
