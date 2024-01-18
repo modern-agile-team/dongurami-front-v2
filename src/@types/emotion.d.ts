@@ -52,17 +52,30 @@ declare module "@emotion/react" {
     neutral_90: string;
     neutral_100: string;
   };
+
+  type ThemeTypography = {
+    fontSize: string;
+    fontWeight: number;
+    lineHeight: string;
+  };
   export interface Theme {
     color: {
       light: ThemeColor;
       dark: ThemeColor;
     };
     typography: {
-      Body1: {
-        fontSize: string;
-        fontWeight: string;
-        lineHeight: string;
-      };
+      Head1: ThemeTypography;
+      Head2: ThemeTypography;
+      Head3: ThemeTypography;
+      Head4: ThemeTypography;
+      Head5: ThemeTypography;
+      Head6: ThemeTypography;
+      SubTitle1: ThemeTypography;
+      SubTitle2: ThemeTypography;
+      Body1: ThemeTypography;
+      Body2: ThemeTypography;
+      Button: ThemeTypography;
+      Caption: ThemeTypography;
     };
   }
 }
