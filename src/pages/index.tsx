@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Button, Row, WhatIF } from "@/components";
+import { Button, Column, Row, Typography, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 import * as Svg from "@/components/Svg";
@@ -63,52 +63,58 @@ export default function Home() {
       <Svg.Calendar size="80" />
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
-          <Button
-            onClick={() => {
-              setState(state + 1);
-            }}
-          >
-            에러 테스트 <br /> 5번 클릭하면 에러 발생
-          </Button>
-
-          <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
-            <WhatIF
-              condition={isLoggedIn}
-              falsy={
-                <>
+          <Column>
+            <Typography.h1 typoSize="Head1" typoColor="primary_100">
+              동그라미
+            </Typography.h1>
+            <Row>
+              <Button
+                onClick={() => {
+                  setState(state + 1);
+                }}
+              >
+                에러 테스트 <br /> 5번 클릭하면 에러 발생
+              </Button>
+              <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
+                <WhatIF
+                  condition={isLoggedIn}
+                  falsy={
+                    <>
+                      <Row.li>
+                        <Button id="sign-in" onClick={handleRoute}>
+                          로그인
+                        </Button>
+                      </Row.li>
+                      <Row.li>
+                        <Button id="sign-up" onClick={handleRoute}>
+                          회원가입
+                        </Button>
+                      </Row.li>
+                    </>
+                  }
+                >
                   <Row.li>
-                    <Button id="sign-in" onClick={handleRoute}>
-                      로그인
-                    </Button>
+                    <Button onClick={logout}>로그아웃</Button>
                   </Row.li>
-                  <Row.li>
-                    <Button id="sign-up" onClick={handleRoute}>
-                      회원가입
-                    </Button>
-                  </Row.li>
-                </>
-              }
-            >
-              <Row.li>
-                <Button onClick={logout}>로그아웃</Button>
-              </Row.li>
-            </WhatIF>
-            <Row.li>
-              <Button id="notice-board" onClick={handleRoute}>
-                공지 게시판
-              </Button>
-            </Row.li>
-            <Row.li>
-              <Button id="free-board" onClick={handleRoute}>
-                자유 게시판
-              </Button>
-            </Row.li>
-            <Row.li>
-              <Button id="club" onClick={handleRoute}>
-                동아리
-              </Button>
-            </Row.li>
-          </Row.ul>
+                </WhatIF>
+                <Row.li>
+                  <Button id="notice-board" onClick={handleRoute}>
+                    공지 게시판
+                  </Button>
+                </Row.li>
+                <Row.li>
+                  <Button id="free-board" onClick={handleRoute}>
+                    자유 게시판
+                  </Button>
+                </Row.li>
+                <Row.li>
+                  <Button id="club" onClick={handleRoute}>
+                    동아리
+                  </Button>
+                </Row.li>
+              </Row.ul>
+            </Row>
+          </Column>
         </div>
       </main>
     </>
