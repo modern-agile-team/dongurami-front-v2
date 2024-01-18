@@ -8,18 +8,18 @@ import { boardsAPI } from "@/apis";
 
 export default function WriteFreeBoard() {
   const router = useRouter();
-  const { Id } = router.query;
+  const { id } = router.query;
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryFn: async () => {
       const response = await boardsAPI.freePost.getPost({
-        freePostId: Number(Id),
+        freePostId: Number(id),
       });
       return response;
     },
-    queryKey: ["post", Id],
-    enabled: Id !== undefined,
+    queryKey: ["post", id],
+    enabled: id !== undefined,
   });
 
   const [value, setValue] = useState<{
@@ -43,9 +43,9 @@ export default function WriteFreeBoard() {
     };
 
     let response;
-    if (Id) {
+    if (id) {
       response = await boardsAPI.freePost.patchPost({
-        freePostId: Number(Id),
+        freePostId: Number(id),
         ...params,
       });
       router.back();

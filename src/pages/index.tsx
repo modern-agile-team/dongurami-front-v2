@@ -7,6 +7,7 @@ import styles from "@/styles/Home.module.css";
 import { Button, Column, Row, Typography, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
+import * as Svg from "@/components/Svg";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,6 +60,7 @@ export default function Home() {
       <Head>
         <title>동그라미</title>
       </Head>
+      <Svg.Calendar size="40" />
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <Column>
