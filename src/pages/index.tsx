@@ -60,7 +60,7 @@ export default function Home() {
       <Head>
         <title>동그라미</title>
       </Head>
-      <Svg.Calendar size="80" />
+      <Svg.Calendar size="40" />
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <Column>
