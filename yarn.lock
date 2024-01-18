@@ -7407,6 +7407,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
+    jest-transformer-svg: "npm:^2.0.2"
     jotai: "npm:^2.6.0"
     lodash: "npm:^4.17.21"
     next: "npm:14.0.2"
@@ -9980,6 +9981,16 @@ __metadata:
     pretty-format: "npm:^29.7.0"
     semver: "npm:^7.5.3"
   checksum: 6e9003c94ec58172b4a62864a91c0146513207bedf4e0a06e1e2ac70a4484088a2683e3a0538d8ea913bcfd53dc54a9b98a98cdfa562e7fe1d1339aeae1da570
+  languageName: node
+  linkType: hard
+
+"jest-transformer-svg@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "jest-transformer-svg@npm:2.0.2"
+  peerDependencies:
+    jest: ">= 28.1.0"
+    react: ^17.0.0 || ^18.0.0
+  checksum: f71a46b2fb35dc25df714005b2d36f82287ab518647eddbce9c9baa923478da2a25f3fd358703db01c52630f2733a375219d3d0896965856b3940788a2f2f68e
   languageName: node
   linkType: hard
 
