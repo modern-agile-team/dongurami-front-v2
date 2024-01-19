@@ -86,7 +86,12 @@ export default function Home() {
               </Button>
               <Modal
                 isOpen={isOpen}
+                focusTrap
+                onOpen={() => {
+                  alert("열림");
+                }}
                 onClose={() => {
+                  alert("닫힘");
                   setIsOpen(false);
                 }}
               >
@@ -94,6 +99,13 @@ export default function Home() {
                   css={{ width: "100px", height: "100px", background: "#487" }}
                 >
                   테스트
+                  <Button
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    닫기
+                  </Button>
                 </div>
               </Modal>
               <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
