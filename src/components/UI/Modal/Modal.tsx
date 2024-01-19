@@ -6,21 +6,33 @@
 
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { CSSInterpolation } from "@emotion/css";
+import FocusTrapReact from "focus-trap-react";
 
 import * as S from "./emotion";
 
 export default function Modal({
   children,
   isOpen = false,
+  focusTrap = false,
   shouldCloseToClickOutside = true,
+  horizonAlign = "center",
+  verticalAlign = "center",
   ...rest
 }: {
   children: React.ReactNode;
   isOpen?: boolean;
   shouldCloseToClickOutside?: boolean;
+  horizonAlign?: "center" | "left" | "right";
+  verticalAlign?: "center" | "top" | "bottom";
+  customStyle?: CSSInterpolation;
+  focusTrap?: boolean;
   onClose?: () => void;
+  onOpen?: () => void;
 }) {
   const [show, setShow] = useState(isOpen);
+
+  const FocusTrap = focusTrap ? FocusTrapReact : React.Fragment;
 
   const handleClose = (ev: React.MouseEvent) => {
     const target = ev.target as HTMLElement;
@@ -37,18 +49,27 @@ export default function Modal({
     setShow(isOpen);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (show) {
+      rest.onOpen?.();
+    }
+  }, [show]);
+
   if (!show || typeof window === "undefined") return;
   return (
     <>
       {createPortal(
-        <S.ModalWrapper
-          className="modal-dimmed"
-          horizonAlign="center"
-          verticalAlign="center"
-          onClick={handleClose}
-        >
-          {children}
-        </S.ModalWrapper>,
+        <FocusTrap>
+          <S.ModalWrapper
+            className="modal-dimmed"
+            horizonAlign={horizonAlign}
+            verticalAlign={verticalAlign}
+            css={rest.customStyle}
+            onClick={handleClose}
+          >
+            {children}
+          </S.ModalWrapper>
+        </FocusTrap>,
         document.body
       )}
     </>
