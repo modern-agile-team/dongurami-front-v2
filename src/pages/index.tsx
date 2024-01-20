@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
-import { Button, Column, Row, Typography, WhatIF } from "@/components";
+import { Button, Column, Modal, Row, Typography, WhatIF } from "@/components";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 import * as Svg from "@/components/Svg";
@@ -53,6 +53,8 @@ export default function Home() {
     }
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   if (state >= 5) throw new Error("에러");
 
   return (
@@ -75,6 +77,37 @@ export default function Home() {
               >
                 에러 테스트 <br /> 5번 클릭하면 에러 발생
               </Button>
+              <Button
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              >
+                모달 테스트
+              </Button>
+              <Modal
+                isOpen={isOpen}
+                focusTrap
+                onOpen={() => {
+                  alert("열림");
+                }}
+                onClose={() => {
+                  alert("닫힘");
+                  setIsOpen(false);
+                }}
+              >
+                <div
+                  css={{ width: "100px", height: "100px", background: "#487" }}
+                >
+                  테스트
+                  <Button
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    닫기
+                  </Button>
+                </div>
+              </Modal>
               <Row.ul css={{ width: "100%" }} gap={10} horizonAlign="center">
                 <WhatIF
                   condition={isLoggedIn}

@@ -19,6 +19,7 @@
     "@tanstack/react-query": "^5.8.3",
     "acorn-walk": "^8.3.1",
     "axios": "^1.6.2",
+    "focus-trap-react": "^10.2.3",
     "jest-transformer-svg": "^2.0.2",
     "jotai": "^2.6.0",
     "lodash": "^4.17.21",
