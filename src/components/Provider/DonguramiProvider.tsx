@@ -17,8 +17,8 @@ import {
   darkThemeColor,
 } from "@/styles/theme";
 import { themeModeAtom } from "@/globalState";
-import ErrorBoundary from "./ErrorBoundary";
 import { useClientEffect } from "@/hooks";
+import ErrorBoundary from "./ErrorBoundary";
 
 const queryClient = new QueryClient({
   defaultOptions: {
