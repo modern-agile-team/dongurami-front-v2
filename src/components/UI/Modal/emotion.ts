@@ -14,7 +14,7 @@ export const ModalWrapper = styled(Row.dialog)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: ${({ theme }) => theme.color.light.neutral_100}d4;
+  background-color: ${({ theme }) => theme.color.neutral_10}d4;
   z-index: 999;
   border: none;
 `;

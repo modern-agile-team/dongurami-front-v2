@@ -5,27 +5,20 @@
  */
 
 import { HTMLAttributes } from "react";
-import { Provider, createStore } from "jotai";
-import { Theme, ThemeProvider } from "@emotion/react";
+import { Provider, createStore, useAtomValue } from "jotai";
+import { ThemeProvider } from "@emotion/react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 
 import {
   typographyTheme,
   lightThemeColor,
   darkThemeColor,
 } from "@/styles/theme";
-
+import { themeModeAtom } from "@/globalState";
 import ErrorBoundary from "./ErrorBoundary";
-import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
-
-const theme: Theme = {
-  color: {
-    light: lightThemeColor,
-    dark: darkThemeColor,
-  },
-  typography: typographyTheme,
-};
+import { useClientEffect } from "@/hooks";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,10 +40,39 @@ export default function DonguramiProvider(
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <SessionProvider session={props.session}>
-            <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+            <DonguramiThemeProvider {...props} />
           </SessionProvider>
         </Provider>
       </QueryClientProvider>
     </ErrorBoundary>
   );
 }
+
+const DonguramiThemeProvider = (props: HTMLAttributes<HTMLElement>) => {
+  const mode = useAtomValue(themeModeAtom);
+
+  useClientEffect(() => {
+    switch (mode) {
+      case "dark": {
+        document.body.style.backgroundColor = "#000";
+        break;
+      }
+      case "light": {
+        document.body.style.backgroundColor = "#f7f7f7";
+        break;
+      }
+    }
+  }, [mode]);
+
+  return (
+    <ThemeProvider
+      theme={{
+        color: mode === "light" ? lightThemeColor : darkThemeColor,
+        typography: typographyTheme,
+        mode,
+      }}
+    >
+      {props.children}
+    </ThemeProvider>
+  );
+};

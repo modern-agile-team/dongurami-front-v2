@@ -16,11 +16,11 @@ type Args = {
 };
 
 export const ButtonStyle = styled.button<Args>`
-  color: ${({ color, theme }) => theme.color.light[color]};
+  color: ${({ color, theme }) => theme.color[color]};
   border: 1px solid
-    ${({ theme, backgroundColor }) => theme.color.light[backgroundColor]};
+    ${({ theme, backgroundColor }) => theme.color[backgroundColor]};
   background-color: ${({ backgroundColor, filled, theme }) =>
-    filled === "contained" ? theme.color.light[backgroundColor] : "none"};
+    filled === "contained" ? theme.color[backgroundColor] : "none"};
   border-radius: ${({ shape }) => {
     switch (shape) {
       case "circle":
@@ -49,6 +49,6 @@ export const ButtonStyle = styled.button<Args>`
   transition: 0.2s;
   &:hover {
     background-color: ${({ theme, backgroundColor }) =>
-      `${theme.color.light[backgroundColor]}80`};
+      `${theme.color[backgroundColor]}80`};
   }
 `;

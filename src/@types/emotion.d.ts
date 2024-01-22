@@ -59,10 +59,7 @@ declare module "@emotion/react" {
     lineHeight: string;
   };
   export interface Theme {
-    color: {
-      light: ThemeColor;
-      dark: ThemeColor;
-    };
+    color: ThemeColor;
     typography: {
       Head1: ThemeTypography;
       Head2: ThemeTypography;
@@ -77,6 +74,7 @@ declare module "@emotion/react" {
       Button: ThemeTypography;
       Caption: ThemeTypography;
     };
+    mode: "dark" | "light";
   }
 }
 

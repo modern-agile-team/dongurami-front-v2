@@ -9,7 +9,7 @@ import { Theme, ThemeColor, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { createStyled, domElementList, filterHTMLAttribute } from "@/utils";
-import { lightThemeColor, typographyTheme } from "@/styles/theme";
+import { typographyTheme } from "@/styles/theme";
 
 type TypoSize = keyof Theme["typography"];
 type TypoColor = keyof ThemeColor;
@@ -39,18 +39,19 @@ const fontWeight = (typoSize: TypoSize) => css`
   font-weight: ${typographyTheme[typoSize].fontWeight};
 `;
 
-const textColor = (typoColor: TypoColor) => css`
-  color: ${lightThemeColor[typoColor]};
+const textColor = (typoColor: TypoColor, theme: Theme) => css`
+  color: ${theme.color[typoColor]};
 `;
 
 export const TypographyCSS = (
   typoSize: TypoSize = "Body1",
-  typoColor: TypoColor = "neutral_100"
+  typoColor: TypoColor = "neutral_100",
+  theme: Theme
 ) => css`
   ${fontSize(typoSize)};
   ${fontWeight(typoSize)};
   ${lineHeight(typoSize)};
-  ${textColor(typoColor)};
+  ${textColor(typoColor, theme)};
 `;
 
 const StyledTypography = styled(
@@ -68,8 +69,12 @@ const StyledTypography = styled(
     }
   )
 )`
-  ${(props) =>
-    TypographyCSS(props.typoSize as TypoSize, props.typoColor as TypoColor)}
+  ${({ theme, ...props }) =>
+    TypographyCSS(
+      props.typoSize as TypoSize,
+      props.typoColor as TypoColor,
+      theme
+    )}
 `;
 
 const TypographyBase: TypographyBaseType = forwardRef(
