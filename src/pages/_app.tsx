@@ -6,9 +6,16 @@
 
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useAtom } from "jotai";
 
 import "@/styles/globals.css";
-import { DonguramiProvider } from "@/components";
+import {
+  Button,
+  DonguramiProvider,
+  SwitchCase,
+  Typography,
+} from "@/components";
+import { themeModeAtom } from "@/globalState";
 
 export default function App({
   Component,
@@ -19,7 +26,31 @@ export default function App({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <ThemeChangeButton />
       <Component {...pageProps} />
     </DonguramiProvider>
   );
 }
+
+const ThemeChangeButton = () => {
+  const [mode, setThemeMode] = useAtom(themeModeAtom);
+  return (
+    <Button
+      css={{ position: "fixed", bottom: "30px", right: "50px" }}
+      onClick={() => {
+        setThemeMode((prevMode) => {
+          if (prevMode === "dark") return "light";
+          return "dark";
+        });
+      }}
+    >
+      <SwitchCase
+        condition={mode}
+        cases={{
+          dark: <Typography typoColor="neutral_10">다크 모드</Typography>,
+          light: <Typography typoColor="neutral_10">라이트 모드</Typography>,
+        }}
+      />
+    </Button>
+  );
+};
