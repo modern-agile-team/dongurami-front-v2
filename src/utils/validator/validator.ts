@@ -23,6 +23,10 @@ class Validator {
   phoneNumber(value: string) {
     return v.isMobilePhone(value);
   }
+
+  get isClient() {
+    return typeof window !== "undefined";
+  }
 }
 
 export default new Validator();

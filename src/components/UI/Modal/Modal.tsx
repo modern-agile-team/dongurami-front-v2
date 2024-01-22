@@ -9,6 +9,8 @@ import { createPortal } from "react-dom";
 import { CSSInterpolation } from "@emotion/css";
 import FocusTrapReact from "focus-trap-react";
 
+import { validator } from "@/utils";
+
 import * as S from "./emotion";
 
 export default function Modal({
@@ -55,7 +57,7 @@ export default function Modal({
     }
   }, [show]);
 
-  if (!show || typeof window === "undefined") return;
+  if (!show || !validator.isClient) return;
   return (
     <>
       {createPortal(

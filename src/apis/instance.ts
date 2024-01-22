@@ -6,12 +6,14 @@
 
 import axios from "axios";
 
+import { validator } from "@/utils";
+
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_DOMAIN,
 });
 
 instance.interceptors.request.use((value) => {
-  if (typeof window === "undefined") return value;
+  if (!validator.isClient) return value;
 
   if (!value.headers.Authorization && localStorage.getItem("an")) {
     value.headers.Authorization = `Bearer ${localStorage.getItem("an")}`;

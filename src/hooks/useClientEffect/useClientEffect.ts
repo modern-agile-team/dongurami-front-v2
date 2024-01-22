@@ -6,12 +6,14 @@
 
 import { DependencyList, useEffect } from "react";
 
+import { validator } from "@/utils";
+
 export default function useClientEffect(
   callback: () => void,
   deps: DependencyList = []
 ) {
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!validator.isClient) return;
     callback();
   }, deps);
 }
