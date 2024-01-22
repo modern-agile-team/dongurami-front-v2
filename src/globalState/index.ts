@@ -5,3 +5,4 @@
  */
 
 export { default as accessTokenAtom } from "./accessToken";
+export { default as themeModeAtom } from "./themeMode";

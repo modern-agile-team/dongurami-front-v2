@@ -2,14 +2,14 @@ import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 
 import { Button } from "@/components";
+import { validator } from "@/utils";
 
-const QuillNoSSRWrapper =
-  typeof window !== "undefined"
-    ? dynamic(import("react-quill"), {
-        ssr: false,
-        loading: () => <p>Loading ...</p>,
-      })
-    : () => false;
+const QuillNoSSRWrapper = validator.isClient
+  ? dynamic(import("react-quill"), {
+      ssr: false,
+      loading: () => <p>Loading ...</p>,
+    })
+  : () => false;
 
 const modules = {
   toolbar: {
