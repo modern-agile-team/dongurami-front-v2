@@ -9,9 +9,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { RESET } from "jotai/utils";
 
-import { authAPI } from "@/apis";
+import { authAPI, instance } from "@/apis";
 import { accessTokenAtom } from "@/globalState";
-import instance from "@/apis/instance";
 
 interface IUseAuth {
   onLoginSuccess?: (data: Swagger.Api.AuthSignIn.ResponseBody) => void;
@@ -24,8 +23,8 @@ export default function useAuth(args?: IUseAuth) {
 
   const { mutate } = useMutation({
     mutationKey: ["useAuth", accessToken],
-    mutationFn: authAPI.signIn,
-    onSuccess(data) {
+    mutationFn: authAPI.authSignIn,
+    onSuccess({ data }) {
       if (data.accessToken) {
         setAccessToken(data.accessToken);
         instance.defaults.headers["Authorization"] =

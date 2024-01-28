@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 
 import * as S from "./emotion";
-import { boardsAPI } from "@/apis";
+import { freePostsAPI } from "@/apis";
 
 export default function DetailFreeBoard() {
   const router = useRouter();
@@ -11,22 +10,20 @@ export default function DetailFreeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await boardsAPI.freePost.getPost({
-        freePostId: Number(postId),
-      });
+      const response = await freePostsAPI.freePostFindOneOrNotFound(
+        Number(postId)
+      );
 
-      return response;
+      return response.data;
     },
     queryKey: ["post", postId],
     enabled: postId !== undefined,
   });
 
-  const handleClickDelete = async () => {
-    const response = await boardsAPI.freePost.removePost({
-      freePostId: Number(postId),
+  const handleClickDelete = () => {
+    freePostsAPI.freePostRemove(Number(postId)).then(() => {
+      router.back();
     });
-
-    router.back();
   };
 
   const handleClickUpdate = async () => {
