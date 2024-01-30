@@ -8,8 +8,8 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { boardsAPI } from "@/apis";
 import { Button, Column, Pagination } from "@/components";
+import { noticePostsAPI } from "@/apis";
 
 interface PostData {
   id: number;
@@ -89,10 +89,12 @@ export default function NoticeBoard(props: {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
-  const noticePost = await boardsAPI.noticePost.getAll({
-    page: Number(page),
-    pageSize: 20,
-  });
+  const noticePost = (
+    await noticePostsAPI.noticePostFindAllAndCount({
+      page: Number(page),
+      pageSize: 20,
+    })
+  ).data;
 
   if (noticePost.contents.length === 0) {
     return {

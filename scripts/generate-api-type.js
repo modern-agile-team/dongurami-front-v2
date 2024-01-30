@@ -5,7 +5,6 @@ const fs = require("fs");
 generateApi({
   name: "Apis.d.ts",
   url: "http://43.200.169.78:3000/api-docs-json",
-  output: path.resolve(process.cwd(), "./src/apis"),
   prettier: {
     printWidth: 120,
     tabWidth: 2,
@@ -20,17 +19,31 @@ generateApi({
     jsxBracketSameLine: false,
     trailingComma: "es5",
   },
-  generateClient: true,
+  generateClient: false,
   extractRequestParams: true,
   extractRequestBody: true,
   extractEnums: true,
   generateUnionEnums: true,
-  generateRouteTypes: false,
+  generateRouteTypes: true,
   enumNamesAsValues: true,
   addReadonly: true,
-  httpClientType: "axios",
-  modular: true,
-  moduleNameFirstTag: true,
-  moduleNameIndex: true,
-  singleHttpClient: true,
-});
+})
+  .then(({ files }) => {
+    files.forEach(({ fileName, fileExtension, fileContent }) => {
+      fs.writeFileSync(
+        path.resolve(
+          process.cwd(),
+          "./src/@types/apis",
+          `${fileName}${fileExtension}`
+        ),
+        `declare global {
+  namespace Swagger {
+    ${fileContent}	
+    }
+  }
+  export {};
+`
+      );
+    });
+  })
+  .catch((e) => console.error(e));

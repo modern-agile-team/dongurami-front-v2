@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import * as S from "./emotion";
 import { Quill } from "@/components";
-import { boardsAPI } from "@/apis";
+import { noticePostsAPI } from "@/apis";
 
 export default function WriteNoticeBoard() {
   const router = useRouter();
@@ -13,11 +13,11 @@ export default function WriteNoticeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await boardsAPI.noticePost.getPost({
-        noticePostId: Number(id),
-      });
+      const response = await noticePostsAPI.noticePostFindOneOrNotFound(
+        Number(id)
+      );
 
-      return response;
+      return response.data;
     },
     queryKey: ["post", id],
 
@@ -44,19 +44,13 @@ export default function WriteNoticeBoard() {
       isAllowComment: value.isAllowComment,
     };
 
-    let response;
     if (id) {
-      response = await boardsAPI.noticePost.updatePost({
-        noticePostId: Number(id),
-        ...params,
-      });
+      await noticePostsAPI.noticePostPutUpdate(Number(id), params);
       router.back();
     } else {
-      response = await boardsAPI.noticePost.createPost({
-        ...params,
-      });
+      const { data } = await noticePostsAPI.noticePostCreate(params);
       router.replace({
-        pathname: `/board/notice/detail/${response.noticePost.id}`,
+        pathname: `/board/notice/detail/${data.noticePost.id}`,
       });
     }
 
