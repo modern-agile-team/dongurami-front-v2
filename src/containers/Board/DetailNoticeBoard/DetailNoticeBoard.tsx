@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 
 import * as S from "./emotion";
-import { boardsAPI } from "@/apis";
+import { noticePostsAPI } from "@/apis";
 
 export default function DetailNoticeBoard() {
   const router = useRouter();
@@ -11,22 +10,20 @@ export default function DetailNoticeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await boardsAPI.noticePost.getPost({
-        noticePostId: Number(postId),
-      });
+      const response = await noticePostsAPI.noticePostFindOneOrNotFound(
+        Number(postId)
+      );
 
-      return response;
+      return response.data;
     },
     queryKey: ["post", postId],
     enabled: postId !== undefined,
   });
 
-  const handleClickDelete = async () => {
-    const response = await boardsAPI.noticePost.removePost({
-      noticePostId: Number(postId),
+  const handleClickDelete = () => {
+    noticePostsAPI.noticePostRemove(Number(postId)).then(() => {
+      router.back();
     });
-
-    router.back();
   };
 
   const handleClickUpdate = async () => {

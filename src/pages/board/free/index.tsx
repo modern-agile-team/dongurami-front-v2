@@ -8,8 +8,8 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { boardsAPI } from "@/apis";
 import { Button, Column, Pagination } from "@/components";
+import { freePostsAPI } from "@/apis";
 
 interface PostData {
   id: number;
@@ -88,10 +88,12 @@ export default function FreeBoard(props: {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
-  const freeBoard = await boardsAPI.freePost.getAll({
-    page: Number(page),
-    pageSize: 20,
-  });
+  const freeBoard = (
+    await freePostsAPI.freePostFindAllAndCount({
+      page: Number(page),
+      pageSize: 20,
+    })
+  ).data;
 
   if (freeBoard.contents.length === 0) {
     return {

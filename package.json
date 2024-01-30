@@ -10,7 +10,7 @@
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "generate:apis": "node ./scripts/generate-api.js"
+    "generate:apis": "node ./scripts/generate-api.js && node ./scripts/generate-api-type.js"
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",

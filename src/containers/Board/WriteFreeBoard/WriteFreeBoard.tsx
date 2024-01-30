@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import * as S from "./emotion";
 import { Quill } from "@/components";
-import { boardsAPI } from "@/apis";
+import { freePostsAPI } from "@/apis";
 
 export default function WriteFreeBoard() {
   const router = useRouter();
@@ -13,10 +13,8 @@ export default function WriteFreeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await boardsAPI.freePost.getPost({
-        freePostId: Number(id),
-      });
-      return response;
+      const response = await freePostsAPI.freePostFindOneOrNotFound(Number(id));
+      return response.data;
     },
     queryKey: ["post", id],
     enabled: id !== undefined,
@@ -42,19 +40,15 @@ export default function WriteFreeBoard() {
       isAnonymous: value.isAnonymous,
     };
 
-    let response;
     if (id) {
-      response = await boardsAPI.freePost.patchPost({
-        freePostId: Number(id),
-        ...params,
-      });
+      await freePostsAPI.freePostPatchUpdate(Number(id), params);
       router.back();
     } else {
-      response = await boardsAPI.freePost.createPost({
+      const { data } = await freePostsAPI.freePostCreate({
         ...params,
       });
       router.replace({
-        pathname: `/board/free/detail/${response.freePost.id}`,
+        pathname: `/board/free/detail/${data.freePost.id}`,
       });
     }
     queryClient.removeQueries();
