@@ -8,6 +8,12 @@ export const Container = styled(Row.div)`
   justify-content: space-between;
   width: 100%;
 `;
+
+export const Logo = styled.button`
+  border: 0px;
+  background-color: #fff;
+`;
+
 export const Navigation = styled(Row.div)`
   margin-left: 80px;
 `;

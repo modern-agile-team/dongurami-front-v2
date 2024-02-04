@@ -7,6 +7,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 import * as S from "./emotion";
 import { Button, Row, Typography } from "@/components";
@@ -21,8 +22,6 @@ export default function Header({}: {}) {
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.target as HTMLButtonElement;
     const id = target.id;
-
-    console.log(id);
     switch (id) {
       case "sign-in": {
         router.push("login");
@@ -52,13 +51,26 @@ export default function Header({}: {}) {
         router.push("club/1?tab=home");
         break;
       }
+
+      case "root": {
+        router.push("/");
+        break;
+      }
     }
   };
 
   return (
     <S.Container>
       <Row.ul>
-        <Image width="155" height="37" src={Logo} alt="메인헤더로고" />
+        <S.Logo onClick={handleRoute}>
+          <Image
+            id="root"
+            width="155"
+            height="37"
+            src={Logo}
+            alt="메인헤더로고"
+          />
+        </S.Logo>
 
         <S.Navigation>
           <S.NavigationButton onClick={handleRoute}>
@@ -94,8 +106,12 @@ export default function Header({}: {}) {
           falsy={
             <>
               <Row.li>
-                <S.LoginButton id="sign-in" onClick={handleRoute}>
-                  <Typography typoSize="SubTitle2" typoColor="neutral_60">
+                <S.LoginButton onClick={handleRoute}>
+                  <Typography
+                    id="sign-in"
+                    typoSize="SubTitle2"
+                    typoColor="neutral_60"
+                  >
                     로그인
                   </Typography>
                 </S.LoginButton>
@@ -104,8 +120,12 @@ export default function Header({}: {}) {
                 ㅣ
               </Typography>
               <Row.li>
-                <S.LoginButton id="sign-up" onClick={handleRoute}>
-                  <Typography typoSize="SubTitle2" typoColor="neutral_60">
+                <S.LoginButton onClick={handleRoute}>
+                  <Typography
+                    id="sign-up"
+                    typoSize="SubTitle2"
+                    typoColor="neutral_60"
+                  >
                     회원가입
                   </Typography>
                 </S.LoginButton>
