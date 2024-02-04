@@ -11,9 +11,6 @@ import { Row, WhatIF } from "@/components";
 import * as S from "./emotion";
 import { lightThemeColor } from "@/styles/theme";
 
-import Left from "@/assets/board/left.png";
-import Right from "@/assets/board/right.png";
-
 interface IPaginationProps {
   count: number;
   defaultPage?: number;
@@ -67,7 +64,13 @@ export default function Pagination({
           props.onChange?.(ev, Number(1));
         }}
       >
-        <Image id="left" width={54} height={54} src={Left} alt="왼쪽화살표" />
+        <Image
+          id="left"
+          width={54}
+          height={54}
+          src={"@/assets/board/left.png"}
+          alt="왼쪽화살표"
+        />
       </S.ArrowButton>
       {totalList.map((page) => {
         return (
@@ -110,7 +113,7 @@ export default function Pagination({
           id="right"
           width={54}
           height={54}
-          src={Right}
+          src={"@/assets/board/right.png"}
           alt="오른쪽화살표"
         />
       </S.ArrowButton>
