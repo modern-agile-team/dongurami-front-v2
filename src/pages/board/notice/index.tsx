@@ -8,8 +8,11 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { Button, Column, Pagination } from "@/components";
+import { Button, Column, Pagination, Typography } from "@/components";
 import { noticePostsAPI } from "@/apis";
+import { Header } from "@/components/UI/Header";
+import { Table } from "@/components/UI/Table";
+import { SearchWriter } from "@/containers/Board/SearchWriter";
 
 interface PostData {
   id: number;
@@ -26,50 +29,26 @@ export default function NoticeBoard(props: {
     });
   }
 
-  function handleClickPostWrite() {
-    router.push({
-      pathname: `notice/write/`,
-    });
-  }
-
   return (
     <Column horizonAlign="center" gap={10}>
-      <Head>
-        <title>동그라미 - 공지 게시판</title>
-      </Head>
-      <h1>공지 게시판</h1>
-      <Button onClick={handleClickPostWrite}>글쓰기</Button>
+      <Column
+        horizonAlign="left"
+        style={{
+          width: "calc(100% - 512px)",
+          marginBottom: 20,
+        }}
+      >
+        <Typography typoSize="Head4" typoColor="primary_100">
+          공지게시판
+        </Typography>
+      </Column>
+      <Table
+        data={props.noticePost}
+        type="free"
+        handleClickPostDetail={handleClickPostDetail}
+      />
 
-      <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th css={{ padding: "4px 8px" }}>번호</th>
-            <th css={{ padding: "4px 8px" }}>제목</th>
-            <th css={{ padding: "4px 8px" }}>등록일</th>
-            <th css={{ padding: "4px 8px" }}>조회수</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.noticePost.contents.map((post) => {
-            return (
-              <tr key={post.id} onClick={() => handleClickPostDetail(post)}>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {post.id}
-                </th>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {post.title}
-                </th>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </th>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {post.hit}
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <SearchWriter />
       <Pagination
         defaultPage={props.noticePost?.currentPage}
         count={props.noticePost?.lastPage || 1}
