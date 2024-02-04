@@ -20,8 +20,6 @@ export default function Home() {
   return (
     <>
       <Column>
-        <Header />
-
         <Row>
           <Button
             onClick={() => {
