@@ -6,10 +6,13 @@
 
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import { useState, useEffect } from "react";
 
-import { Button, Column, Pagination } from "@/components";
+import { Button, Column, Pagination, Typography } from "@/components";
 import { freePostsAPI } from "@/apis";
+import { Header } from "@/components/UI/Header";
+import { Table } from "@/components/UI/Table";
+import { SearchWriter } from "@/containers/Board/SearchWriter";
 
 interface PostData {
   id: number;
@@ -19,6 +22,11 @@ export default function FreeBoard(props: {
   freeBoard: Swagger.Api.FreePostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   function handleClickPostDetail(el: PostData) {
     router.push({
@@ -26,62 +34,45 @@ export default function FreeBoard(props: {
     });
   }
 
-  function handleClickPostWrite() {
-    router.push({
-      pathname: `free/write/`,
-    });
-  }
+  console.log(props.freeBoard?.lastPage);
 
   return (
-    <Column horizonAlign="center" gap={10}>
-      <Head>
-        <title>동그라미 - 자유 게시판</title>
-      </Head>
-      <h1>자유 게시판</h1>
-      <Button onClick={handleClickPostWrite}>글쓰기</Button>
-      <table css={{ border: "1px solid", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th css={{ padding: "4px 8px" }}>번호</th>
-            <th css={{ padding: "4px 8px" }}>제목</th>
-            <th css={{ padding: "4px 8px" }}>등록일</th>
-            <th css={{ padding: "4px 8px" }}>조회수</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.freeBoard.contents.map((post) => {
-            return (
-              <tr key={post.id} onClick={() => handleClickPostDetail(post)}>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {post.id}
-                </th>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {post.title}
-                </th>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </th>
-                <th css={{ padding: "4px 8px", borderTop: "1px solid" }}>
-                  {post.hit}
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <Pagination
-        defaultPage={props.freeBoard?.currentPage}
-        count={props.freeBoard?.lastPage || 1}
-        onChange={(_, page) => {
-          router.push({
-            pathname: "/board/free",
-            query: {
-              page,
-            },
-          });
-        }}
-      />
-    </Column>
+    mounted && (
+      <Column horizonAlign="center" gap={10}>
+        <Column
+          horizonAlign="left"
+          style={{
+            width: "calc(100% - 512px)",
+            minWidth: 1408,
+            marginBottom: 20,
+          }}
+        >
+          <Typography typoSize="Head4" typoColor="primary_100">
+            수다게시판
+          </Typography>
+        </Column>
+        <Table
+          data={props.freeBoard}
+          type="free"
+          handleClickPostDetail={handleClickPostDetail}
+        />
+
+        <SearchWriter />
+
+        <Pagination
+          defaultPage={props.freeBoard?.currentPage}
+          count={props.freeBoard?.lastPage || 1}
+          onChange={(_, page) => {
+            router.push({
+              pathname: "/board/free",
+              query: {
+                page,
+              },
+            });
+          }}
+        />
+      </Column>
+    )
   );
 }
 

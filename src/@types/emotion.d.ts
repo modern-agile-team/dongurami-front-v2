@@ -51,6 +51,8 @@ declare module "@emotion/react" {
     neutral_80: string;
     neutral_90: string;
     neutral_100: string;
+
+    white: string;
   };
 
   type ThemeTypography = {

@@ -16,6 +16,7 @@ import {
   Typography,
 } from "@/components";
 import { themeModeAtom } from "@/globalState";
+import { Header } from "@/components/UI/Header";
 
 export default function App({
   Component,
@@ -27,6 +28,7 @@ export default function App({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <ThemeChangeButton />
+      <Header />
       <Component {...pageProps} />
     </DonguramiProvider>
   );

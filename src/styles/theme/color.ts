@@ -50,6 +50,8 @@ export const lightThemeColor: ThemeColor = {
   neutral_80: "#4b4b4b",
   neutral_90: "#353535",
   neutral_100: "#1e1e1e",
+
+  white: "#fffff",
 };
 
 export const darkThemeColor: ThemeColor = {
@@ -96,4 +98,6 @@ export const darkThemeColor: ThemeColor = {
   neutral_30: "#4b4b4b",
   neutral_20: "#353535",
   neutral_10: "#1e1e1e",
+
+  white: "#fffff",
 };
