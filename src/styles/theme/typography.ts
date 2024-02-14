@@ -18,7 +18,7 @@ const typography: Theme["typography"] = {
     fontWeight: 700,
   },
   Head3: {
-    fontSize: "3px",
+    fontSize: "3rem",
     lineHeight: "normal",
     fontWeight: 700,
   },
