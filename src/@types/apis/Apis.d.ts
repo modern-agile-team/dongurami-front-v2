@@ -1197,52 +1197,52 @@ declare global {
      * error code
      * @example 1
      */
-    export type NoticepostCreateCodeEnum = 1;
+    export type NoticePostCreateCodeEnum = 1;
 
     /** error message */
-    export type NoticepostCreateMessageEnum =
+    export type NoticePostCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticepostCreateCodeEnum1 = 3;
+    export type NoticePostCreateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticepostCreateMessageEnum1 = "This token is invalid.";
+    export type NoticePostCreateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostCreateCodeEnum2 = 0;
+    export type NoticePostCreateCodeEnum2 = 0;
 
     /** error message */
-    export type NoticepostCreateMessageEnum2 =
+    export type NoticePostCreateMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticepostFindAllAndCountCodeEnum = 1;
+    export type NoticePostFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type NoticepostFindAllAndCountMessageEnum =
+    export type NoticePostFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostFindAllAndCountCodeEnum1 = 0;
+    export type NoticePostFindAllAndCountCodeEnum1 = 0;
 
     /** error message */
-    export type NoticepostFindAllAndCountMessageEnum1 =
+    export type NoticePostFindAllAndCountMessageEnum1 =
       "Server error. Please contact server developer";
 
-    export interface NoticepostFindAllAndCountParams {
+    export interface NoticePostFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -1289,7 +1289,7 @@ declare global {
     export type IsAllowCommentEnum = "true" | "false";
 
     /** 댓글 허용 여부 */
-    export type NoticepostFindAllAndCountParams1IsAllowCommentEnum =
+    export type NoticePostFindAllAndCountParams1IsAllowCommentEnum =
       | "true"
       | "false";
 
@@ -1297,207 +1297,207 @@ declare global {
      * error code
      * @example 1
      */
-    export type NoticepostFindOneOrNotFoundCodeEnum = 1;
+    export type NoticePostFindOneOrNotFoundCodeEnum = 1;
 
     /** error message */
-    export type NoticepostFindOneOrNotFoundMessageEnum =
+    export type NoticePostFindOneOrNotFoundMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticepostFindOneOrNotFoundCodeEnum1 = 5;
+    export type NoticePostFindOneOrNotFoundCodeEnum1 = 5;
 
     /** error message */
-    export type NoticepostFindOneOrNotFoundMessageEnum1 =
+    export type NoticePostFindOneOrNotFoundMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostFindOneOrNotFoundCodeEnum2 = 0;
+    export type NoticePostFindOneOrNotFoundCodeEnum2 = 0;
 
     /** error message */
-    export type NoticepostFindOneOrNotFoundMessageEnum2 =
+    export type NoticePostFindOneOrNotFoundMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticepostPutUpdateCodeEnum = 1;
+    export type NoticePostPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type NoticepostPutUpdateMessageEnum =
+    export type NoticePostPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticepostPutUpdateCodeEnum1 = 3;
+    export type NoticePostPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticepostPutUpdateMessageEnum1 = "This token is invalid.";
+    export type NoticePostPutUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticepostPutUpdateCodeEnum2 = 4;
+    export type NoticePostPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type NoticepostPutUpdateMessageEnum2 =
+    export type NoticePostPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticepostPutUpdateCodeEnum3 = 5;
+    export type NoticePostPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type NoticepostPutUpdateMessageEnum3 =
+    export type NoticePostPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostPutUpdateCodeEnum4 = 0;
+    export type NoticePostPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type NoticepostPutUpdateMessageEnum4 =
+    export type NoticePostPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticepostPatchUpdateCodeEnum = 1;
+    export type NoticePostPatchUpdateCodeEnum = 1;
 
     /** error message */
-    export type NoticepostPatchUpdateMessageEnum =
+    export type NoticePostPatchUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticepostPatchUpdateCodeEnum1 = 3;
+    export type NoticePostPatchUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticepostPatchUpdateMessageEnum1 = "This token is invalid.";
+    export type NoticePostPatchUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticepostPatchUpdateCodeEnum2 = 4;
+    export type NoticePostPatchUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type NoticepostPatchUpdateMessageEnum2 =
+    export type NoticePostPatchUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticepostPatchUpdateCodeEnum3 = 5;
+    export type NoticePostPatchUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type NoticepostPatchUpdateMessageEnum3 =
+    export type NoticePostPatchUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostPatchUpdateCodeEnum4 = 0;
+    export type NoticePostPatchUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type NoticepostPatchUpdateMessageEnum4 =
+    export type NoticePostPatchUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticepostRemoveCodeEnum = 1;
+    export type NoticePostRemoveCodeEnum = 1;
 
     /** error message */
-    export type NoticepostRemoveMessageEnum =
+    export type NoticePostRemoveMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticepostRemoveCodeEnum1 = 3;
+    export type NoticePostRemoveCodeEnum1 = 3;
 
     /** error message */
-    export type NoticepostRemoveMessageEnum1 = "This token is invalid.";
+    export type NoticePostRemoveMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticepostRemoveCodeEnum2 = 4;
+    export type NoticePostRemoveCodeEnum2 = 4;
 
     /** error message */
-    export type NoticepostRemoveMessageEnum2 =
+    export type NoticePostRemoveMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticepostRemoveCodeEnum3 = 5;
+    export type NoticePostRemoveCodeEnum3 = 5;
 
     /** error message */
-    export type NoticepostRemoveMessageEnum3 =
+    export type NoticePostRemoveMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostRemoveCodeEnum4 = 0;
+    export type NoticePostRemoveCodeEnum4 = 0;
 
     /** error message */
-    export type NoticepostRemoveMessageEnum4 =
+    export type NoticePostRemoveMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticepostIncreaseHitCodeEnum = 1;
+    export type NoticePostIncreaseHitCodeEnum = 1;
 
     /** error message */
-    export type NoticepostIncreaseHitMessageEnum =
+    export type NoticePostIncreaseHitMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticepostIncreaseHitCodeEnum1 = 5;
+    export type NoticePostIncreaseHitCodeEnum1 = 5;
 
     /** error message */
-    export type NoticepostIncreaseHitMessageEnum1 =
+    export type NoticePostIncreaseHitMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticepostIncreaseHitCodeEnum2 = 0;
+    export type NoticePostIncreaseHitCodeEnum2 = 0;
 
     /** error message */
-    export type NoticepostIncreaseHitMessageEnum2 =
+    export type NoticePostIncreaseHitMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
@@ -2701,12 +2701,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostCreate
+       * @name NoticePostCreate
        * @summary 공지 게시글 생성 API
        * @request POST:/api/notice-posts
        * @secure
        */
-      export namespace NoticepostCreate {
+      export namespace NoticePostCreate {
         export type RequestParams = {};
         export type RequestQuery = {};
         export type RequestBody = CreateNoticePostDto;
@@ -2716,11 +2716,11 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostFindAllAndCount
+       * @name NoticePostFindAllAndCount
        * @summary 공지 게시글 전체조회(pagination)
        * @request GET:/api/notice-posts
        */
-      export namespace NoticepostFindAllAndCount {
+      export namespace NoticePostFindAllAndCount {
         export type RequestParams = {};
         export type RequestQuery = {
           /**
@@ -2755,7 +2755,7 @@ declare global {
            */
           title?: string;
           /** 댓글 허용 여부 */
-          isAllowComment?: NoticepostFindAllAndCountParams1IsAllowCommentEnum;
+          isAllowComment?: NoticePostFindAllAndCountParams1IsAllowCommentEnum;
           /**
            * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAllowComment, createdAt, updatedAt]
            * @format csv
@@ -2771,11 +2771,11 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostFindOneOrNotFound
+       * @name NoticePostFindOneOrNotFound
        * @summary 공지게시글 상세조회
        * @request GET:/api/notice-posts/{postId}
        */
-      export namespace NoticepostFindOneOrNotFound {
+      export namespace NoticePostFindOneOrNotFound {
         export type RequestParams = {
           postId: number;
         };
@@ -2787,12 +2787,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostPutUpdate
+       * @name NoticePostPutUpdate
        * @summary 공지게시글 수정
        * @request PUT:/api/notice-posts/{postId}
        * @secure
        */
-      export namespace NoticepostPutUpdate {
+      export namespace NoticePostPutUpdate {
         export type RequestParams = {
           postId: number;
         };
@@ -2804,12 +2804,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostPatchUpdate
+       * @name NoticePostPatchUpdate
        * @summary 공지게시글 patch 수정
        * @request PATCH:/api/notice-posts/{postId}
        * @secure
        */
-      export namespace NoticepostPatchUpdate {
+      export namespace NoticePostPatchUpdate {
         export type RequestParams = {
           postId: number;
         };
@@ -2821,12 +2821,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostRemove
+       * @name NoticePostRemove
        * @summary 공지 게시글 삭제
        * @request DELETE:/api/notice-posts/{postId}
        * @secure
        */
-      export namespace NoticepostRemove {
+      export namespace NoticePostRemove {
         export type RequestParams = {
           postId: number;
         };
@@ -2838,11 +2838,11 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticepostIncreaseHit
+       * @name NoticePostIncreaseHit
        * @summary 조회수 1 증가
        * @request PUT:/api/notice-posts/{postId}/hit
        */
-      export namespace NoticepostIncreaseHit {
+      export namespace NoticePostIncreaseHit {
         export type RequestParams = {
           postId: number;
         };
