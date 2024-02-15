@@ -5,8 +5,10 @@
  */
 
 import React from "react";
-import { ThemeColor } from "@emotion/react";
+import { Theme, ThemeColor, useTheme } from "@emotion/react";
 
+import { Typography } from "@/components";
+import { filterHTMLAttribute } from "@/utils";
 import * as S from "./emotion";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,14 +21,44 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   endEnhancer: React.ReactNode;
 }
 
-export default function Button({
+const Text = (
+  props: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    typoSize?: keyof Theme["typography"];
+    typoColor?: keyof ThemeColor;
+    hoverTypoColor?: keyof ThemeColor;
+  }
+) => {
+  const theme = useTheme();
+  return (
+    <button
+      css={{
+        cursor: "pointer",
+        border: "none",
+        background: "none",
+      }}
+      {...filterHTMLAttribute(props)}
+    >
+      <Typography
+        typoSize={props.typoSize ?? "Body1"}
+        typoColor={props.typoColor ?? "accent_10"}
+        css={{
+          ":hover": { color: theme.color[props.hoverTypoColor ?? "accent_10"] },
+        }}
+      >
+        {props.children}
+      </Typography>
+    </button>
+  );
+};
+
+const Button = ({
   shape = "round",
   size = "m",
   filled = "contained",
   color = "neutral_10",
   backgroundColor = "primary_100",
   ...rest
-}: Partial<ButtonProps>) {
+}: Partial<ButtonProps>) => {
   return (
     <S.ButtonStyle
       shape={shape}
@@ -41,4 +73,9 @@ export default function Button({
       {rest.endEnhancer && <div>{rest.endEnhancer}</div>}
     </S.ButtonStyle>
   );
-}
+};
+
+Button.Text = Text;
+Text.displayName = "TextButton";
+
+export default Button;

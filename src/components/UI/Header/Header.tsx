@@ -60,8 +60,8 @@ export default function Header({}: {}) {
   };
 
   return (
-    <S.Container>
-      <Row.ul>
+    <S.Container horizonAlign="distribute" verticalAlign="center">
+      <Row gap={66}>
         <S.Logo onClick={handleRoute}>
           <Image
             id="root"
@@ -72,33 +72,45 @@ export default function Header({}: {}) {
           />
         </S.Logo>
 
-        <S.Navigation>
-          <S.NavigationButton onClick={handleRoute}>
-            <Typography id="club" typoSize="Head5" typoColor="neutral_60">
-              동아리 둘러보기
-            </Typography>
-          </S.NavigationButton>
-          <S.NavigationButton onClick={handleRoute}>
-            <Typography typoSize="Head5" typoColor="neutral_60">
-              동아리 지원하기
-            </Typography>
-          </S.NavigationButton>
-          <S.NavigationButton onClick={handleRoute}>
-            <Typography id="free-board" typoSize="Head5" typoColor="neutral_60">
-              수다 게시판
-            </Typography>
-          </S.NavigationButton>
-          <S.NavigationButton onClick={handleRoute}>
-            <Typography
-              id="notice-board"
-              typoSize="Head5"
-              typoColor="neutral_60"
-            >
-              공지 게시판
-            </Typography>
-          </S.NavigationButton>
-        </S.Navigation>
-      </Row.ul>
+        <Row.ul gap={76}>
+          <Button.Text
+            id="club"
+            onClick={handleRoute}
+            typoSize="Head5"
+            typoColor="neutral_60"
+            hoverTypoColor="neutral_90"
+          >
+            동아리 둘러보기
+          </Button.Text>
+          <Button.Text
+            id="supply"
+            onClick={handleRoute}
+            typoSize="Head5"
+            typoColor="neutral_60"
+            hoverTypoColor="neutral_90"
+          >
+            동아리 지원하기
+          </Button.Text>
+          <Button.Text
+            id="free-board"
+            onClick={handleRoute}
+            typoSize="Head5"
+            typoColor="neutral_60"
+            hoverTypoColor="neutral_90"
+          >
+            수다 게시판
+          </Button.Text>
+          <Button.Text
+            onClick={handleRoute}
+            id="notice-board"
+            typoSize="Head5"
+            typoColor="neutral_60"
+            hoverTypoColor="neutral_90"
+          >
+            공지 게시판
+          </Button.Text>
+        </Row.ul>
+      </Row>
 
       <Row.ul horizonAlign="right">
         <WhatIF
@@ -106,35 +118,42 @@ export default function Header({}: {}) {
           falsy={
             <>
               <Row.li>
-                <S.LoginButton onClick={handleRoute}>
-                  <Typography
-                    id="sign-in"
-                    typoSize="SubTitle2"
-                    typoColor="neutral_60"
-                  >
-                    로그인
-                  </Typography>
-                </S.LoginButton>
+                <Button.Text
+                  id="sign-in"
+                  typoSize="SubTitle2"
+                  typoColor="neutral_60"
+                  onClick={handleRoute}
+                  hoverTypoColor="neutral_90"
+                >
+                  로그인
+                </Button.Text>
               </Row.li>
               <Typography typoSize="SubTitle2" typoColor="neutral_60">
                 ㅣ
               </Typography>
               <Row.li>
-                <S.LoginButton onClick={handleRoute}>
-                  <Typography
-                    id="sign-up"
-                    typoSize="SubTitle2"
-                    typoColor="neutral_60"
-                  >
-                    회원가입
-                  </Typography>
-                </S.LoginButton>
+                <Button.Text
+                  id="sign-up"
+                  typoSize="SubTitle2"
+                  typoColor="neutral_60"
+                  onClick={handleRoute}
+                  hoverTypoColor="neutral_90"
+                >
+                  회원가입
+                </Button.Text>
               </Row.li>
             </>
           }
         >
           <Row.li>
-            <Button onClick={logout}>로그아웃</Button>
+            <Button.Text
+              onClick={logout}
+              typoSize="Head5"
+              typoColor="neutral_60"
+              hoverTypoColor="neutral_90"
+            >
+              로그아웃
+            </Button.Text>
           </Row.li>
         </WhatIF>
       </Row.ul>
