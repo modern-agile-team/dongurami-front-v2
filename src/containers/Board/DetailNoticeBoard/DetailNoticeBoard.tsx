@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 import * as S from "./emotion";
 import { noticePostsAPI } from "@/apis";
@@ -8,7 +9,7 @@ export default function DetailNoticeBoard() {
   const router = useRouter();
   const { postId } = router.query;
 
-  const { data } = useQuery({
+  const { data, isFetched } = useQuery({
     queryFn: async () => {
       const response = await noticePostsAPI.noticePostFindOneOrNotFound(
         Number(postId)
@@ -19,6 +20,16 @@ export default function DetailNoticeBoard() {
     queryKey: ["post", postId],
     enabled: postId !== undefined,
   });
+
+  useEffect(() => {
+    if (isFetched) {
+      incrementPostViews();
+    }
+  }, [isFetched]);
+
+  const incrementPostViews = async () => {
+    await noticePostsAPI.noticePostIncreaseHit(Number(postId));
+  };
 
   const handleClickDelete = () => {
     noticePostsAPI.noticePostRemove(Number(postId)).then(() => {

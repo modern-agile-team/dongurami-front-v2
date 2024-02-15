@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 import * as S from "./emotion";
 import { freePostsAPI } from "@/apis";
@@ -8,7 +9,7 @@ export default function DetailFreeBoard() {
   const router = useRouter();
   const { postId } = router.query;
 
-  const { data } = useQuery({
+  const { data, isFetched } = useQuery({
     queryFn: async () => {
       const response = await freePostsAPI.freePostFindOneOrNotFound(
         Number(postId)
@@ -16,9 +17,20 @@ export default function DetailFreeBoard() {
 
       return response.data;
     },
+
     queryKey: ["post", postId],
     enabled: postId !== undefined,
   });
+
+  useEffect(() => {
+    if (isFetched) {
+      incrementPostViews();
+    }
+  }, [isFetched]);
+
+  const incrementPostViews = async () => {
+    await freePostsAPI.freePostIncrementHit(Number(postId));
+  };
 
   const handleClickDelete = () => {
     freePostsAPI.freePostRemove(Number(postId)).then(() => {
