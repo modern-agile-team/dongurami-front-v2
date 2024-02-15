@@ -71,10 +71,10 @@ declare module "@emotion/react" {
       Head6: ThemeTypography;
       SubTitle1: ThemeTypography;
       SubTitle2: ThemeTypography;
+      SubTitle3: ThemeTypography;
+      SubTitle4: ThemeTypography;
       Body1: ThemeTypography;
       Body2: ThemeTypography;
-      Button: ThemeTypography;
-      Caption: ThemeTypography;
     };
     mode: "dark" | "light";
   }
