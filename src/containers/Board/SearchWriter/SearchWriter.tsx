@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import * as S from "./emotion";
 import { Typography } from "@/components";
+import * as Svg from "@/components/Svg";
 
 export default function SearchWriter() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function SearchWriter() {
 
         <S.Input
           type="text"
-          placeholder="Enter your search query"
+          placeholder="검색어를 입력하세요"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={handleKeyPress}
@@ -44,7 +45,12 @@ export default function SearchWriter() {
       </S.WrapSearch>
 
       <S.WrapButton onClick={handleClickPostWrite}>
-        <Typography typoColor="white" typoSize="Head5">
+        <Svg.Pen35 />
+        <Typography
+          typoColor="white"
+          typoSize="Head5"
+          style={{ marginLeft: 11 }}
+        >
           글쓰기
         </Typography>
       </S.WrapButton>
