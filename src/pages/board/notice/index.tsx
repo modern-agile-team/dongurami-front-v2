@@ -6,11 +6,9 @@
 
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
 import { Button, Column, Pagination, Typography } from "@/components";
 import { noticePostsAPI } from "@/apis";
-import { Header } from "@/components/UI/Header";
 import { Table } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 
@@ -35,6 +33,7 @@ export default function NoticeBoard(props: {
         horizonAlign="left"
         style={{
           width: "calc(100% - 512px)",
+          minWidth: 1408,
           marginBottom: 20,
         }}
       >
@@ -48,7 +47,7 @@ export default function NoticeBoard(props: {
         handleClickPostDetail={handleClickPostDetail}
       />
 
-      <SearchWriter />
+      <SearchWriter type="notice" />
       <Pagination
         defaultPage={props.noticePost?.currentPage}
         count={props.noticePost?.lastPage || 1}

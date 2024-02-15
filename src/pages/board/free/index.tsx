@@ -57,7 +57,7 @@ export default function FreeBoard(props: {
           handleClickPostDetail={handleClickPostDetail}
         />
 
-        <SearchWriter />
+        <SearchWriter type="free" />
 
         <Pagination
           defaultPage={props.freeBoard?.currentPage}

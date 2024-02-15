@@ -4,9 +4,15 @@ import { useState } from "react";
 import * as S from "./emotion";
 import { Typography } from "@/components";
 import * as Svg from "@/components/Svg";
+import { useAuth } from "@/hooks";
 
-export default function SearchWriter() {
+interface BoardType {
+  type: string;
+}
+
+export default function SearchWriter({ type }: BoardType) {
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
 
   const [query, setQuery] = useState<string>("");
 
@@ -44,16 +50,19 @@ export default function SearchWriter() {
         />
       </S.WrapSearch>
 
-      <S.WrapButton onClick={handleClickPostWrite}>
-        <Svg.Pen35 />
-        <Typography
-          typoColor="white"
-          typoSize="Head5"
-          style={{ marginLeft: 11 }}
-        >
-          글쓰기
-        </Typography>
-      </S.WrapButton>
+      {/* 관리자 구분 값 필요 */}
+      {isLoggedIn && type === "free" ? (
+        <S.WrapButton onClick={handleClickPostWrite}>
+          <Svg.Pen35 />
+          <Typography
+            typoColor="white"
+            typoSize="Head5"
+            style={{ marginLeft: 11 }}
+          >
+            글쓰기
+          </Typography>
+        </S.WrapButton>
+      ) : null}
     </S.Container>
   );
 }

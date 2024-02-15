@@ -16,7 +16,7 @@ interface PostData {
 interface TableData {
   data:
     | Swagger.Api.FreePostFindAllAndCount.ResponseBody
-    | Swagger.Api.NoticepostFindAllAndCount.ResponseBody;
+    | Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
   type: string;
   handleClickPostDetail: (el: PostData) => void;
 }
