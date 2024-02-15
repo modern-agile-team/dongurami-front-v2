@@ -16,7 +16,7 @@ interface PostData {
 interface TableData {
   data:
     | Swagger.Api.FreePostFindAllAndCount.ResponseBody
-    | Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
+    | Swagger.Api.NoticepostFindAllAndCount.ResponseBody;
   type: string;
   handleClickPostDetail: (el: PostData) => void;
 }
@@ -57,7 +57,7 @@ export default function Table({
   };
 
   return (
-    <S.TableConatiner>
+    <S.TableContainer>
       <S.Table>
         <S.Thead>
           <S.Tr>
@@ -91,13 +91,7 @@ export default function Table({
         <S.Tbody>
           {data.contents.map((post) => {
             return (
-              <S.Tr
-                key={post.id}
-                style={{
-                  height: 80,
-                }}
-                onClick={() => handleClickPostDetail(post)}
-              >
+              <S.Tr key={post.id} onClick={() => handleClickPostDetail(post)}>
                 <S.Th>
                   <Typography typoColor="neutral_90" typoSize="Head6">
                     {post.id}
@@ -125,6 +119,6 @@ export default function Table({
           })}
         </S.Tbody>
       </S.Table>
-    </S.TableConatiner>
+    </S.TableContainer>
   );
 }

@@ -7,9 +7,10 @@
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
 
-import { Row, WhatIF } from "@/components";
 import * as S from "./emotion";
+import { Row, WhatIF } from "@/components";
 import { lightThemeColor } from "@/styles/theme";
+import * as Svg from "@/components/Svg";
 
 interface IPaginationProps {
   count: number;
@@ -60,17 +61,12 @@ export default function Pagination({
     >
       <S.ArrowButton
         onClick={(ev) => {
-          setCurrentPage(Number(1));
-          props.onChange?.(ev, Number(1));
+          const prevPage = Math.max(currentPage - 10, 1);
+          setCurrentPage(Number(prevPage));
+          props.onChange?.(ev, Number(prevPage));
         }}
       >
-        <Image
-          id="left"
-          width={54}
-          height={54}
-          src={"@/assets/board/left.png"}
-          alt="왼쪽화살표"
-        />
+        <Svg.ArrowLeft45 />
       </S.ArrowButton>
       {totalList.map((page) => {
         return (
@@ -89,6 +85,7 @@ export default function Pagination({
                     `${page}` === `${currentPage}`
                       ? "white"
                       : `${lightThemeColor.neutral_90}`,
+                  fontSize: 34,
                 }}
                 disabled={`${currentPage}` === `${page}`}
                 onClick={(ev) => {
@@ -105,17 +102,12 @@ export default function Pagination({
 
       <S.ArrowButton
         onClick={(ev) => {
-          setCurrentPage(Number(props.count));
-          props.onChange?.(ev, Number(props.count));
+          const nextPage = Math.min(currentPage + 10, props.count);
+          setCurrentPage(Number(nextPage));
+          props.onChange?.(ev, Number(nextPage));
         }}
       >
-        <Image
-          id="right"
-          width={54}
-          height={54}
-          src={"@/assets/board/right.png"}
-          alt="오른쪽화살표"
-        />
+        <Svg.ArrowRight45 />
       </S.ArrowButton>
     </Row.li>
   );
