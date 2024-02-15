@@ -6,7 +6,7 @@
 
 import { Auth } from "./Auth";
 import { AuthSocial } from "./AuthSocial";
-import { FreePosts } from "./FreePosts";
+import { freePost } from "./FreePost";
 import { Majors } from "./Majors";
 import { NoticePosts } from "./NoticePosts";
 import { Root } from "./Root";
@@ -37,7 +37,7 @@ instance.interceptors.request.use((value) => {
 
 export const authAPI = new Auth(httpClient);
 export const authSocialAPI = new AuthSocial(httpClient);
-export const freePostsAPI = new FreePosts(httpClient);
+export const freePostsAPI = new freePost(httpClient);
 export const majorsAPI = new Majors(httpClient);
 export const noticePostsAPI = new NoticePosts(httpClient);
 export const rootAPI = new Root(httpClient);
