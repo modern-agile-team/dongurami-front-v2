@@ -6,6 +6,7 @@ export default function HomePage() {
     <>
       <Column>
         <Home.Banner />
+        <Home.ClubPreview />
       </Column>
     </>
   );
