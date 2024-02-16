@@ -20,8 +20,9 @@ export default function Header({}: {}) {
   const router = useRouter();
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    const target = ev.target as HTMLButtonElement;
+    const target = ev.currentTarget as HTMLButtonElement;
     const id = target.id;
+
     switch (id) {
       case "sign-in": {
         router.push("login");
