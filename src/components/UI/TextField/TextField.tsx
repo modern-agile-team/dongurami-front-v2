@@ -8,6 +8,7 @@ import { InputHTMLAttributes } from "react";
 import { Theme } from "@emotion/react";
 
 import * as S from "./emotion";
+import { filterHTMLAttribute } from "@/utils";
 
 interface ITextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   backgroundColor?: keyof Theme["color"];
@@ -28,7 +29,7 @@ const TextField = (props: ITextFieldProps) => {
       typoSize={props.typoSize ?? "SubTitle3"}
     >
       {props.startEnhancer && props.startEnhancer}
-      <input {...props} />
+      <input {...filterHTMLAttribute(props)} />
       {props.endEnhancer && props.endEnhancer}
     </S.CommonStyledTextField>
   );
