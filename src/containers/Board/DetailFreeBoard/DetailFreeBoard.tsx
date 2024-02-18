@@ -10,7 +10,7 @@ export default function DetailFreeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await freePostsAPI.freePostFindOneOrNotFound(
+      const response = await freePostsAPI.freepostFindOneOrNotFound(
         Number(postId)
       );
 
@@ -21,7 +21,7 @@ export default function DetailFreeBoard() {
   });
 
   const handleClickDelete = () => {
-    freePostsAPI.freePostRemove(Number(postId)).then(() => {
+    freePostsAPI.freepostRemove(Number(postId)).then(() => {
       router.back();
     });
   };

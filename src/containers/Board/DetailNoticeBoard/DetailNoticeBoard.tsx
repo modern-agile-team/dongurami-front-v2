@@ -10,7 +10,7 @@ export default function DetailNoticeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await noticePostsAPI.noticePostFindOneOrNotFound(
+      const response = await noticePostsAPI.noticepostFindOneOrNotFound(
         Number(postId)
       );
 
@@ -21,7 +21,7 @@ export default function DetailNoticeBoard() {
   });
 
   const handleClickDelete = () => {
-    noticePostsAPI.noticePostRemove(Number(postId)).then(() => {
+    noticePostsAPI.noticepostRemove(Number(postId)).then(() => {
       router.back();
     });
   };

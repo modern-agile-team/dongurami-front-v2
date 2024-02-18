@@ -19,7 +19,7 @@ interface PostData {
 }
 
 export default function FreeBoard(props: {
-  freeBoard: Swagger.Api.FreePostFindAllAndCount.ResponseBody;
+  freeBoard: Swagger.Api.FreepostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
   const [mounted, setMounted] = useState<boolean>(false);
@@ -80,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
   const freeBoard = (
-    await freePostsAPI.freePostFindAllAndCount({
+    await freePostsAPI.freepostFindAllAndCount({
       page: Number(page),
       pageSize: 20,
     })

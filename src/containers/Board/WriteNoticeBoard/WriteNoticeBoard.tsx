@@ -13,7 +13,7 @@ export default function WriteNoticeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await noticePostsAPI.noticePostFindOneOrNotFound(
+      const response = await noticePostsAPI.noticepostFindOneOrNotFound(
         Number(id)
       );
 
@@ -45,10 +45,10 @@ export default function WriteNoticeBoard() {
     };
 
     if (id) {
-      await noticePostsAPI.noticePostPutUpdate(Number(id), params);
+      await noticePostsAPI.noticepostPutUpdate(Number(id), params);
       router.back();
     } else {
-      const { data } = await noticePostsAPI.noticePostCreate(params);
+      const { data } = await noticePostsAPI.noticepostCreate(params);
       router.replace({
         pathname: `/board/notice/detail/${data.noticePost.id}`,
       });
