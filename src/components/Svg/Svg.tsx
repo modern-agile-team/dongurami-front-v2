@@ -1,5 +1,7 @@
 import { SVGProps } from "react";
 
+import { filterSVGAttribute } from "@/utils";
+
 /*
  * Created on Sun Feb 18 2024
  *
@@ -15,5 +17,5 @@ export type SvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export default function Svg(props: SvgProps) {
-  return <svg {...props}></svg>;
+  return <svg {...filterSVGAttribute(props)}></svg>;
 }
