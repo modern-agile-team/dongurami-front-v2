@@ -7408,6 +7408,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
+    jest-transform-stub: "npm:^2.0.0"
     jest-transformer-svg: "npm:^2.0.2"
     jotai: "npm:^2.6.0"
     lodash: "npm:^4.17.21"
@@ -10005,6 +10006,13 @@ __metadata:
     pretty-format: "npm:^29.7.0"
     semver: "npm:^7.5.3"
   checksum: 6e9003c94ec58172b4a62864a91c0146513207bedf4e0a06e1e2ac70a4484088a2683e3a0538d8ea913bcfd53dc54a9b98a98cdfa562e7fe1d1339aeae1da570
+  languageName: node
+  linkType: hard
+
+"jest-transform-stub@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "jest-transform-stub@npm:2.0.0"
+  checksum: 75c8c193882ab6d81d07fcd34b88decdaeccc39de5fcf1b8ea2af36870223d188f89ea8b150811ceec853329e2b1a22b66e8850d84bd4482f11a5325cabe16c2
   languageName: node
   linkType: hard
 
