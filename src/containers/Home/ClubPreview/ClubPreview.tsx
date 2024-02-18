@@ -7,7 +7,7 @@
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
 
-import { Button, Column, TextField, Row, Svg, Typography } from "@/components";
+import { Button, Column, TextField, Row, Icon } from "@/components";
 import { Converter } from "@/utils";
 
 const categories = {
@@ -36,7 +36,7 @@ export default function ClubPreview() {
         css={{ width: "30rem" }}
         typoColor="neutral_100"
         placeholder="동아리를 검색해보세요"
-        endEnhancer={<Svg.ChatDots size={24} />}
+        endEnhancer={<Icon name="Search30" fill="primary_100" size={24} />}
       />
       <Column gap={62}>
         <Row.ul css={{ width: "100%" }} horizonAlign="distribute" gap={44}>
