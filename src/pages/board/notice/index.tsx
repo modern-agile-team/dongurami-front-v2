@@ -66,27 +66,32 @@ export default function NoticeBoard(props: {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const page = ctx.query.page as string;
+  try {
+    const page = ctx.query.page as string;
 
-  const noticePost = (
-    await noticePostsAPI.noticepostFindAllAndCount({
-      page: Number(page),
-      pageSize: 20,
-    })
-  ).data;
+    const noticePost = (
+      await noticePostsAPI.noticepostFindAllAndCount({
+        page: Number(page),
+        pageSize: 20,
+      })
+    ).data;
 
-  if (noticePost.contents.length === 0) {
+    if (noticePost.contents.length === 0) {
+      return {
+        redirect: {
+          destination: `/board/notice?page=${noticePost.lastPage}`,
+          permanent: false,
+        },
+      };
+    }
+
     return {
-      redirect: {
-        destination: `/board/notice?page=${noticePost.lastPage}`,
-        permanent: false,
+      props: {
+        noticePost,
       },
     };
+  } catch (err) {
+    console.error(err);
+    throw new Error("공지 게시판을 조회할 수 없습니다.");
   }
-
-  return {
-    props: {
-      noticePost,
-    },
-  };
 };

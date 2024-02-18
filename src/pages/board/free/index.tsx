@@ -77,27 +77,32 @@ export default function FreeBoard(props: {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const page = ctx.query.page as string;
+  try {
+    const page = ctx.query.page as string;
 
-  const freeBoard = (
-    await freePostsAPI.freepostFindAllAndCount({
-      page: Number(page),
-      pageSize: 20,
-    })
-  ).data;
+    const freeBoard = (
+      await freePostsAPI.freepostFindAllAndCount({
+        page: Number(page),
+        pageSize: 20,
+      })
+    ).data;
 
-  if (freeBoard.contents.length === 0) {
+    if (freeBoard.contents.length === 0) {
+      return {
+        redirect: {
+          destination: `/board/free?page=${freeBoard.lastPage}`,
+          permanent: false,
+        },
+      };
+    }
+
     return {
-      redirect: {
-        destination: `/board/free?page=${freeBoard.lastPage}`,
-        permanent: false,
+      props: {
+        freeBoard,
       },
     };
+  } catch (err) {
+    console.error(err);
+    throw new Error("수다 게시판을 조회할 수 없습니다.");
   }
-
-  return {
-    props: {
-      freeBoard,
-    },
-  };
 };
