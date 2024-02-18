@@ -6,3 +6,5 @@
 
 export * as Login from "./Login";
 export * as Club from "./Club";
+export * as Board from "./Board";
+export * as Home from "./Home";

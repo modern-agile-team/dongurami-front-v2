@@ -7,7 +7,7 @@
 import React from "react";
 
 interface WhatIF {
-  condition: boolean;
+  condition: boolean | undefined | null;
   children: React.ReactNode;
   falsy?: React.ReactNode;
 }

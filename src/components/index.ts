@@ -8,3 +8,4 @@ export * from "./UI";
 export * from "./Layouts";
 export * from "./Utilities";
 export * from "./Provider";
+export * from "./Svg";

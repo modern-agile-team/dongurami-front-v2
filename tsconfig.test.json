@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,7 +17,12 @@
       "@/*": ["./src/*"]
     },
     "jsxImportSource": "@emotion/react",
-    "types": ["@emotion/react/types/css-prop", "jest", "node", "@testing-library/jest-dom"]
+    "types": [
+      "@emotion/react/types/css-prop",
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

@@ -4,10 +4,12 @@
  * Copyright (c) 2023 Your Company
  */
 
-import * as S from "./emotion";
 import axios from "axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
+
 import { useIntersectionObserver } from "@/hooks";
+
+import * as S from "./emotion";
 
 async function fetchPosts(pageParam: any) {
   const result = await axios.get(

@@ -4,36 +4,23 @@
  * Copyright (c) 2023 Your Company
  */
 
+import { ThemeColor } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Theme } from "@emotion/react";
 
-import { Row } from "../../Layouts";
-
-export const ButtonContainer = styled(Row.button)<{
-  filled: "outlined" | "contained";
+type Args = {
   shape: "square" | "round" | "circle";
-  sizes: "xs" | "s" | "m" | "l" | "xl";
-  backgroundColor: keyof Theme["color"];
-}>`
-  padding: ${({ sizes }) => {
-    switch (sizes) {
-      case "xs":
-        return "2px 4px";
-      case "s":
-        return "2px 6px";
-      case "m":
-        return "4px 8px";
-      case "l":
-        return "6px 12px";
-      case "xl":
-        return "8px 14px";
-    }
-  }};
-  color: ${({ theme, filled }) => (filled === "contained" ? "#fff" : "#000")};
-  background: ${({ theme, filled, backgroundColor }) =>
-    filled === "outlined" ? "transparent" : theme.color[backgroundColor]};
-  border: ${({ theme, backgroundColor }) =>
-    `1px solid ${theme.color[backgroundColor]}`};
+  size: "xs" | "s" | "m" | "l" | "xl";
+  filled: "outlined" | "contained";
+  color: keyof ThemeColor;
+  backgroundColor: keyof ThemeColor;
+};
+
+export const ButtonStyle = styled.button<Args>`
+  color: ${({ color, theme }) => theme.color[color]};
+  border: 1px solid
+    ${({ theme, backgroundColor }) => theme.color[backgroundColor]};
+  background-color: ${({ backgroundColor, filled, theme }) =>
+    filled === "contained" ? theme.color[backgroundColor] : "none"};
   border-radius: ${({ shape }) => {
     switch (shape) {
       case "circle":
@@ -41,11 +28,27 @@ export const ButtonContainer = styled(Row.button)<{
       case "round":
         return "16px";
       case "square":
-        return "6px";
+        return "8px";
     }
   }};
+  padding: ${({ size }) => {
+    switch (size) {
+      case "xl":
+        return "8px 14px";
+      case "l":
+        return "6px 12px";
+      case "m":
+        return "4px 8px";
+      case "s":
+        return "2px 6px";
+      case "xs":
+        return "2px 4px";
+    }
+  }};
+  cursor: pointer;
+  transition: 0.2s;
   &:hover {
-    opacity: 0.9;
-    cursor: pointer;
+    background-color: ${({ theme, backgroundColor }) =>
+      `${theme.color[backgroundColor]}80`};
   }
 `;

@@ -6,3 +6,4 @@
 
 export * from "./SwitchCase";
 export * from "./WhatIF";
+export * from "./Typography";
