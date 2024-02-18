@@ -34,6 +34,7 @@ export default function ClubPreview() {
     >
       <TextField
         css={{ width: "30rem" }}
+        typoColor="neutral_100"
         placeholder="동아리를 검색해보세요"
         endEnhancer={<Svg.ChatDots size={24} />}
       />
