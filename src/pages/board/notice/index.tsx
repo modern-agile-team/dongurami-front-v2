@@ -19,7 +19,7 @@ interface PostData {
 }
 
 export default function NoticeBoard(props: {
-  noticePost: Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
+  noticePost: Swagger.Api.NoticepostFindAllAndCount.ResponseBody;
 }) {
   const router = useRouter();
 
@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const page = ctx.query.page as string;
 
   const noticePost = (
-    await noticePostsAPI.noticePostFindAllAndCount({
+    await noticePostsAPI.noticepostFindAllAndCount({
       page: Number(page),
       pageSize: 20,
     })

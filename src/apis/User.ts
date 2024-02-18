@@ -10,34 +10,36 @@
  */
 
 import {
-  CreateUserRequestBodyDto,
-  FindOneUserOrNotFoundCodeEnum,
-  FindOneUserOrNotFoundCodeEnum1,
-  FindOneUserOrNotFoundMessageEnum,
-  FindOneUserOrNotFoundMessageEnum1,
-  PutUpdateUserCodeEnum,
-  PutUpdateUserCodeEnum1,
-  PutUpdateUserCodeEnum2,
-  PutUpdateUserCodeEnum3,
-  PutUpdateUserCodeEnum4,
+  CreateUserDto,
   PutUpdateUserDto,
-  PutUpdateUserMessageEnum,
-  PutUpdateUserMessageEnum1,
-  PutUpdateUserMessageEnum2,
-  PutUpdateUserMessageEnum3,
-  PutUpdateUserMessageEnum4,
+  UserCreateCodeEnum,
+  UserCreateCodeEnum1,
+  UserCreateCodeEnum2,
+  UserCreateMessageEnum,
+  UserCreateMessageEnum1,
+  UserCreateMessageEnum2,
   UserDetailResponseDto,
-  UsersCreateCodeEnum,
-  UsersCreateCodeEnum1,
-  UsersCreateCodeEnum2,
-  UsersCreateMessageEnum,
-  UsersCreateMessageEnum1,
-  UsersCreateMessageEnum2,
+  UserFindOneUserOrNotFoundCodeEnum,
+  UserFindOneUserOrNotFoundCodeEnum1,
+  UserFindOneUserOrNotFoundCodeEnum2,
+  UserFindOneUserOrNotFoundMessageEnum,
+  UserFindOneUserOrNotFoundMessageEnum1,
+  UserFindOneUserOrNotFoundMessageEnum2,
+  UserPutUpdateCodeEnum,
+  UserPutUpdateCodeEnum1,
+  UserPutUpdateCodeEnum2,
+  UserPutUpdateCodeEnum3,
+  UserPutUpdateCodeEnum4,
+  UserPutUpdateMessageEnum,
+  UserPutUpdateMessageEnum1,
+  UserPutUpdateMessageEnum2,
+  UserPutUpdateMessageEnum3,
+  UserPutUpdateMessageEnum4,
   ValidationError,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Users<SecurityDataType = unknown> {
+export class User<SecurityDataType = unknown> {
   http: HttpClient<SecurityDataType>;
 
   constructor(http: HttpClient<SecurityDataType>) {
@@ -47,12 +49,12 @@ export class Users<SecurityDataType = unknown> {
   /**
    * No description
    *
-   * @tags users
-   * @name UsersCreate
+   * @tags user
+   * @name UserCreate
    * @summary 유저 생성(회원가입)
    * @request POST:/api/users
    */
-  usersCreate = (data: CreateUserRequestBodyDto, params: RequestParams = {}) =>
+  userCreate = (data: CreateUserDto, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
       | {
@@ -72,9 +74,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: UsersCreateCodeEnum;
+          code?: UserCreateCodeEnum;
           /** error message */
-          message?: UsersCreateMessageEnum;
+          message?: UserCreateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -95,9 +97,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 2000
            */
-          code?: UsersCreateCodeEnum1;
+          code?: UserCreateCodeEnum1;
           /** error message */
-          message?: UsersCreateMessageEnum1;
+          message?: UserCreateMessageEnum1;
         }
       | {
           /**
@@ -116,9 +118,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: UsersCreateCodeEnum2;
+          code?: UserCreateCodeEnum2;
           /** error message */
-          message?: UsersCreateMessageEnum2;
+          message?: UserCreateMessageEnum2;
         }
     >({
       path: `/api/users`,
@@ -131,12 +133,12 @@ export class Users<SecurityDataType = unknown> {
   /**
    * No description
    *
-   * @tags users
-   * @name FindOneUserOrNotFound
+   * @tags user
+   * @name UserFindOneUserOrNotFound
    * @summary 유저 정보 단일 조회
    * @request GET:/api/users/{userId}
    */
-  findOneUserOrNotFound = (userId: number, params: RequestParams = {}) =>
+  userFindOneUserOrNotFound = (userId: number, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
       | {
@@ -156,9 +158,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FindOneUserOrNotFoundCodeEnum;
+          code?: UserFindOneUserOrNotFoundCodeEnum;
           /** error message */
-          message?: FindOneUserOrNotFoundMessageEnum;
+          message?: UserFindOneUserOrNotFoundMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -179,9 +181,30 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FindOneUserOrNotFoundCodeEnum1;
+          code?: UserFindOneUserOrNotFoundCodeEnum1;
           /** error message */
-          message?: FindOneUserOrNotFoundMessageEnum1;
+          message?: UserFindOneUserOrNotFoundMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: UserFindOneUserOrNotFoundCodeEnum2;
+          /** error message */
+          message?: UserFindOneUserOrNotFoundMessageEnum2;
         }
     >({
       path: `/api/users/${userId}`,
@@ -192,17 +215,13 @@ export class Users<SecurityDataType = unknown> {
   /**
    * No description
    *
-   * @tags users
-   * @name PutUpdateUser
+   * @tags user
+   * @name UserPutUpdate
    * @summary 유저 정보 업데이트
    * @request PUT:/api/users/{userId}
    * @secure
    */
-  putUpdateUser = (
-    userId: number,
-    data: PutUpdateUserDto,
-    params: RequestParams = {}
-  ) =>
+  userPutUpdate = (userId: number, data: PutUpdateUserDto, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
       | {
@@ -222,9 +241,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: PutUpdateUserCodeEnum;
+          code?: UserPutUpdateCodeEnum;
           /** error message */
-          message?: PutUpdateUserMessageEnum;
+          message?: UserPutUpdateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -245,9 +264,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: PutUpdateUserCodeEnum1;
+          code?: UserPutUpdateCodeEnum1;
           /** error message */
-          message?: PutUpdateUserMessageEnum1;
+          message?: UserPutUpdateMessageEnum1;
         }
       | {
           /**
@@ -266,9 +285,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 4
            */
-          code?: PutUpdateUserCodeEnum2;
+          code?: UserPutUpdateCodeEnum2;
           /** error message */
-          message?: PutUpdateUserMessageEnum2;
+          message?: UserPutUpdateMessageEnum2;
         }
       | {
           /**
@@ -287,9 +306,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: PutUpdateUserCodeEnum3;
+          code?: UserPutUpdateCodeEnum3;
           /** error message */
-          message?: PutUpdateUserMessageEnum3;
+          message?: UserPutUpdateMessageEnum3;
         }
       | {
           /**
@@ -308,9 +327,9 @@ export class Users<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: PutUpdateUserCodeEnum4;
+          code?: UserPutUpdateCodeEnum4;
           /** error message */
-          message?: PutUpdateUserMessageEnum4;
+          message?: UserPutUpdateMessageEnum4;
         }
     >({
       path: `/api/users/${userId}`,

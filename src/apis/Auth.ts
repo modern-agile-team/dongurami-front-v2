@@ -11,9 +11,13 @@
 
 import {
   AuthGetAccessTokenCodeEnum,
+  AuthGetAccessTokenCodeEnum1,
   AuthGetAccessTokenMessageEnum,
+  AuthGetAccessTokenMessageEnum1,
   AuthGetProfileCodeEnum,
+  AuthGetProfileCodeEnum1,
   AuthGetProfileMessageEnum,
+  AuthGetProfileMessageEnum1,
   AuthSignInCodeEnum,
   AuthSignInCodeEnum1,
   AuthSignInMessageEnum,
@@ -109,27 +113,48 @@ export class Auth<SecurityDataType = unknown> {
   authGetProfile = (params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
-      {
-        /**
-         * 에러 발생 시각
-         * @format date-time
-         */
-        timestamp?: string;
-        /**
-         * http status code
-         * @format integer
-         * @min 400
-         * @example 401
-         */
-        statusCode?: number;
-        /**
-         * error code
-         * @example 3
-         */
-        code?: AuthGetProfileCodeEnum;
-        /** error message */
-        message?: AuthGetProfileMessageEnum;
-      }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: AuthGetProfileCodeEnum;
+          /** error message */
+          message?: AuthGetProfileMessageEnum;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: AuthGetProfileCodeEnum1;
+          /** error message */
+          message?: AuthGetProfileMessageEnum1;
+        }
     >({
       path: `/api/auth/profile`,
       method: "GET",
@@ -149,27 +174,48 @@ export class Auth<SecurityDataType = unknown> {
   authGetAccessToken = (userId: number, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
-      {
-        /**
-         * 에러 발생 시각
-         * @format date-time
-         */
-        timestamp?: string;
-        /**
-         * http status code
-         * @format integer
-         * @min 400
-         * @example 401
-         */
-        statusCode?: number;
-        /**
-         * error code
-         * @example 3
-         */
-        code?: AuthGetAccessTokenCodeEnum;
-        /** error message */
-        message?: AuthGetAccessTokenMessageEnum;
-      }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: AuthGetAccessTokenCodeEnum;
+          /** error message */
+          message?: AuthGetAccessTokenMessageEnum;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: AuthGetAccessTokenCodeEnum1;
+          /** error message */
+          message?: AuthGetAccessTokenMessageEnum1;
+        }
     >({
       path: `/api/auth/access-token/${userId}`,
       method: "GET",

@@ -11,15 +11,15 @@
 
 import {
   CreateMajorRequestBodyDto,
-  CreateNewMajorCodeEnum,
-  CreateNewMajorCodeEnum1,
-  CreateNewMajorCodeEnum2,
-  CreateNewMajorMessageEnum,
-  CreateNewMajorMessageEnum1,
-  CreateNewMajorMessageEnum2,
-  GetAllMajorsCodeEnum,
-  GetAllMajorsMessageEnum,
+  MajorCreateNewMajorCodeEnum,
+  MajorCreateNewMajorCodeEnum1,
+  MajorCreateNewMajorCodeEnum2,
+  MajorCreateNewMajorMessageEnum,
+  MajorCreateNewMajorMessageEnum1,
+  MajorCreateNewMajorMessageEnum2,
   MajorDetailResponseDto,
+  MajorFindAllMajorsCodeEnum,
+  MajorFindAllMajorsMessageEnum,
   MajorsCommonResponseDto,
   ValidationError,
 } from "./data-contracts";
@@ -36,11 +36,11 @@ export class Majors<SecurityDataType = unknown> {
    * No description
    *
    * @tags majors
-   * @name GetAllMajors
+   * @name MajorFindAllMajors
    * @summary 전공 목록 전체 조회
-   * @request GET:/api/majors
+   * @request GET:/api/major
    */
-  getAllMajors = (params: RequestParams = {}) =>
+  majorFindAllMajors = (params: RequestParams = {}) =>
     this.http.request<
       MajorsCommonResponseDto,
       {
@@ -60,12 +60,12 @@ export class Majors<SecurityDataType = unknown> {
          * error code
          * @example 0
          */
-        code?: GetAllMajorsCodeEnum;
+        code?: MajorFindAllMajorsCodeEnum;
         /** error message */
-        message?: GetAllMajorsMessageEnum;
+        message?: MajorFindAllMajorsMessageEnum;
       }
     >({
-      path: `/api/majors`,
+      path: `/api/major`,
       method: "GET",
       format: "json",
       ...params,
@@ -74,11 +74,11 @@ export class Majors<SecurityDataType = unknown> {
    * No description
    *
    * @tags majors
-   * @name CreateNewMajor
+   * @name MajorCreateNewMajor
    * @summary 전공 코드 및 이름 생성
-   * @request POST:/api/majors
+   * @request POST:/api/major
    */
-  createNewMajor = (data: CreateMajorRequestBodyDto, params: RequestParams = {}) =>
+  majorCreateNewMajor = (data: CreateMajorRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       MajorDetailResponseDto,
       | {
@@ -98,9 +98,9 @@ export class Majors<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: CreateNewMajorCodeEnum;
+          code?: MajorCreateNewMajorCodeEnum;
           /** error message */
-          message?: CreateNewMajorMessageEnum;
+          message?: MajorCreateNewMajorMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -121,9 +121,9 @@ export class Majors<SecurityDataType = unknown> {
            * error code
            * @example 3000
            */
-          code?: CreateNewMajorCodeEnum1;
+          code?: MajorCreateNewMajorCodeEnum1;
           /** error message */
-          message?: CreateNewMajorMessageEnum1;
+          message?: MajorCreateNewMajorMessageEnum1;
         }
       | {
           /**
@@ -142,12 +142,12 @@ export class Majors<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: CreateNewMajorCodeEnum2;
+          code?: MajorCreateNewMajorCodeEnum2;
           /** error message */
-          message?: CreateNewMajorMessageEnum2;
+          message?: MajorCreateNewMajorMessageEnum2;
         }
     >({
-      path: `/api/majors`,
+      path: `/api/major`,
       method: "POST",
       body: data,
       type: ContentType.Json,

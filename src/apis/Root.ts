@@ -9,6 +9,7 @@
  * ---------------------------------------------------------------
  */
 
+import { ErrorCodeResponseDto } from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
 export class Root<SecurityDataType = unknown> {
@@ -22,14 +23,15 @@ export class Root<SecurityDataType = unknown> {
    * @description 서버에서 관리하는 에러코드를 조회합니다.
    *
    * @tags root
-   * @name GetFindAllErrorCode
+   * @name RootFindAllErrorCode
    * @summary 개발용으로 생성된 에러코드 전체조회
    * @request GET:/api/error-code
    */
-  getFindAllErrorCode = (params: RequestParams = {}) =>
-    this.http.request<void, any>({
+  rootFindAllErrorCode = (params: RequestParams = {}) =>
+    this.http.request<ErrorCodeResponseDto, any>({
       path: `/api/error-code`,
       method: "GET",
+      format: "json",
       ...params,
     });
 }
