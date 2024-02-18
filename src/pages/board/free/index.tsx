@@ -4,13 +4,12 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { Button, Column, Pagination, Typography } from "@/components";
+import { Column, Loader, Pagination, Typography, WhatIF } from "@/components";
 import { freePostsAPI } from "@/apis";
-import { Header } from "@/components/UI/Header";
 import { Table } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 
@@ -18,15 +17,21 @@ interface PostData {
   id: number;
 }
 
-export default function FreeBoard(props: {
-  freeBoard: Swagger.Api.FreepostFindAllAndCount.ResponseBody;
-}) {
+export default function FreeBoard(props: { boardName: string }) {
   const router = useRouter();
-  const [mounted, setMounted] = useState<boolean>(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["board", "free", router.query.page],
+    queryFn: async () => {
+      const page = router.query.page as string;
+      return (
+        await freePostsAPI.freepostFindAllAndCount({
+          page: Number(page),
+          pageSize: 20,
+        })
+      ).data;
+    },
+  });
 
   function handleClickPostDetail(el: PostData) {
     router.push({
@@ -34,34 +39,35 @@ export default function FreeBoard(props: {
     });
   }
 
-  console.log(props.freeBoard?.lastPage);
-
+  if (isError) throw new Error("게시판을 불러올 수 없습니다.");
   return (
-    mounted && (
-      <Column horizonAlign="center" gap={10}>
-        <Column
-          horizonAlign="left"
-          style={{
-            width: "calc(100% - 512px)",
-            minWidth: 1408,
-            marginBottom: 20,
-          }}
-        >
-          <Typography typoSize="Head4" typoColor="primary_100">
-            수다게시판
-          </Typography>
-        </Column>
-        <Table
-          data={props.freeBoard}
-          type="free"
-          handleClickPostDetail={handleClickPostDetail}
-        />
+    <Column horizonAlign="center" gap={10}>
+      <Column
+        horizonAlign="left"
+        style={{
+          width: "calc(100% - 512px)",
+          minWidth: 1408,
+          marginBottom: 20,
+        }}
+      >
+        <Typography typoSize="Head4" typoColor="primary_100">
+          {props.boardName}
+        </Typography>
+      </Column>
+      <WhatIF condition={!isLoading} falsy={<Loader />}>
+        {data && (
+          <Table
+            data={data}
+            type="free"
+            handleClickPostDetail={handleClickPostDetail}
+          />
+        )}
 
         <SearchWriter />
 
         <Pagination
-          defaultPage={props.freeBoard?.currentPage}
-          count={props.freeBoard?.lastPage || 1}
+          defaultPage={data?.currentPage}
+          count={data?.lastPage || 1}
           onChange={(_, page) => {
             router.push({
               pathname: "/board/free",
@@ -71,38 +77,15 @@ export default function FreeBoard(props: {
             });
           }}
         />
-      </Column>
-    )
+      </WhatIF>
+    </Column>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  try {
-    const page = ctx.query.page as string;
-
-    const freeBoard = (
-      await freePostsAPI.freepostFindAllAndCount({
-        page: Number(page),
-        pageSize: 20,
-      })
-    ).data;
-
-    if (freeBoard.contents.length === 0) {
-      return {
-        redirect: {
-          destination: `/board/free?page=${freeBoard.lastPage}`,
-          permanent: false,
-        },
-      };
-    }
-
-    return {
-      props: {
-        freeBoard,
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    throw new Error("수다 게시판을 조회할 수 없습니다.");
-  }
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  return {
+    props: {
+      boardName: "수다 게시판",
+    },
+  };
 };

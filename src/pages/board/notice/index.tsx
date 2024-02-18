@@ -4,13 +4,12 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import { useQuery } from "@tanstack/react-query";
 
-import { Button, Column, Pagination, Typography } from "@/components";
+import { Column, Loader, Pagination, Typography, WhatIF } from "@/components";
 import { noticePostsAPI } from "@/apis";
-import { Header } from "@/components/UI/Header";
 import { Table } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 
@@ -18,10 +17,21 @@ interface PostData {
   id: number;
 }
 
-export default function NoticeBoard(props: {
-  noticePost: Swagger.Api.NoticepostFindAllAndCount.ResponseBody;
-}) {
+export default function NoticeBoard(props: { boardName: string }) {
   const router = useRouter();
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["board", "notice", router.query.page],
+    queryFn: async () => {
+      const page = router.query.page as string;
+      return (
+        await noticePostsAPI.noticepostFindAllAndCount({
+          page: Number(page),
+          pageSize: 20,
+        })
+      ).data;
+    },
+  });
 
   function handleClickPostDetail(el: PostData) {
     router.push({
@@ -29,6 +39,7 @@ export default function NoticeBoard(props: {
     });
   }
 
+  if (isError) throw new Error("게시판을 불러올 수 없습니다.");
   return (
     <Column horizonAlign="center" gap={10}>
       <Column
@@ -39,59 +50,41 @@ export default function NoticeBoard(props: {
         }}
       >
         <Typography typoSize="Head4" typoColor="primary_100">
-          공지게시판
+          {props.boardName}
         </Typography>
       </Column>
-      <Table
-        data={props.noticePost}
-        type="free"
-        handleClickPostDetail={handleClickPostDetail}
-      />
+      <WhatIF condition={!isLoading} falsy={<Loader />}>
+        {data && (
+          <Table
+            data={data}
+            type="free"
+            handleClickPostDetail={handleClickPostDetail}
+          />
+        )}
 
-      <SearchWriter />
-      <Pagination
-        defaultPage={props.noticePost?.currentPage}
-        count={props.noticePost?.lastPage || 1}
-        onChange={(_, page) => {
-          router.push({
-            pathname: "/board/notice",
-            query: {
-              page,
-            },
-          });
-        }}
-      />
+        <SearchWriter />
+
+        <Pagination
+          defaultPage={data?.currentPage}
+          count={data?.lastPage || 1}
+          onChange={(_, page) => {
+            router.push({
+              pathname: "/board/notice",
+              query: {
+                page,
+              },
+            });
+          }}
+        />
+      </WhatIF>
     </Column>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  try {
-    const page = ctx.query.page as string;
-
-    const noticePost = (
-      await noticePostsAPI.noticepostFindAllAndCount({
-        page: Number(page),
-        pageSize: 20,
-      })
-    ).data;
-
-    if (noticePost.contents.length === 0) {
-      return {
-        redirect: {
-          destination: `/board/notice?page=${noticePost.lastPage}`,
-          permanent: false,
-        },
-      };
-    }
-
-    return {
-      props: {
-        noticePost,
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    throw new Error("공지 게시판을 조회할 수 없습니다.");
-  }
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  return {
+    props: {
+      boardName: "공지 게시판",
+    },
+  };
 };
