@@ -63,15 +63,9 @@ export default function Header({}: {}) {
   return (
     <S.Container horizonAlign="distribute" verticalAlign="center">
       <Row gap={66}>
-        <S.Logo onClick={handleRoute}>
-          <Image
-            id="root"
-            width="155"
-            height="37"
-            src={Logo}
-            alt="메인헤더로고"
-          />
-        </S.Logo>
+        <Button.Text id="root" onClick={handleRoute}>
+          <Image width="155" height="37" src={Logo} alt="메인헤더로고" />
+        </Button.Text>
 
         <Row.ul gap={76}>
           <Button.Text

@@ -12,11 +12,12 @@ import "@/styles/globals.css";
 import {
   Button,
   DonguramiProvider,
+  Footer,
+  Header,
   SwitchCase,
   Typography,
 } from "@/components";
 import { themeModeAtom } from "@/globalState";
-import { Header } from "@/components/UI/Header";
 
 export default function App({
   Component,
@@ -30,6 +31,7 @@ export default function App({
       <ThemeChangeButton />
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </DonguramiProvider>
   );
 }
