@@ -49,7 +49,7 @@ export default function Header({}: {}) {
       }
 
       case "club": {
-        router.push("club/1?tab=home");
+        router.push("/club/1?tab=home");
         break;
       }
 
@@ -72,7 +72,11 @@ export default function Header({}: {}) {
             id="club"
             onClick={handleRoute}
             typoSize="Head5"
-            typoColor="neutral_60"
+            typoColor={
+              router.pathname === "/club/[clubID]"
+                ? "neutral_100"
+                : "neutral_60"
+            }
             hoverTypoColor="neutral_90"
           >
             동아리 둘러보기
@@ -91,7 +95,7 @@ export default function Header({}: {}) {
             onClick={handleRoute}
             typoSize="Head5"
             typoColor={
-              router.pathname === "/board/free" ? "neutral_90" : "neutral_60"
+              router.pathname === "/board/free" ? "neutral_100" : "neutral_60"
             }
             hoverTypoColor="neutral_90"
           >
@@ -102,7 +106,7 @@ export default function Header({}: {}) {
             id="notice-board"
             typoSize="Head5"
             typoColor={
-              router.pathname === "/board/notice" ? "neutral_90" : "neutral_60"
+              router.pathname === "/board/notice" ? "neutral_100" : "neutral_60"
             }
             hoverTypoColor="neutral_90"
           >

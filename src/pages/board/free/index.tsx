@@ -7,6 +7,7 @@
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import Head from "next/head";
 
 import { Column, Loader, Pagination, Typography, WhatIF } from "@/components";
 import { freePostsAPI } from "@/apis";
@@ -41,44 +42,49 @@ export default function FreeBoard(props: { boardName: string }) {
 
   if (isError) throw new Error("게시판을 불러올 수 없습니다.");
   return (
-    <Column horizonAlign="center" gap={10}>
-      <Column
-        horizonAlign="left"
-        style={{
-          width: "calc(100% - 512px)",
-          minWidth: 1408,
-          marginBottom: 20,
-        }}
-      >
-        <Typography typoSize="Head4" typoColor="primary_100">
-          {props.boardName}
-        </Typography>
-      </Column>
-      <WhatIF condition={!isLoading} falsy={<Loader />}>
-        {data && (
-          <Table
-            data={data}
-            type="free"
-            handleClickPostDetail={handleClickPostDetail}
-          />
-        )}
-
-        <SearchWriter />
-
-        <Pagination
-          defaultPage={data?.currentPage}
-          count={data?.lastPage || 1}
-          onChange={(_, page) => {
-            router.push({
-              pathname: "/board/free",
-              query: {
-                page,
-              },
-            });
+    <>
+      <Head>
+        <title>동그라미 - 수다 게시판</title>
+      </Head>
+      <Column horizonAlign="center" gap={10}>
+        <Column
+          horizonAlign="left"
+          style={{
+            width: "calc(100% - 512px)",
+            minWidth: 1408,
+            marginBottom: 20,
           }}
-        />
-      </WhatIF>
-    </Column>
+        >
+          <Typography typoSize="Head4" typoColor="primary_100">
+            {props.boardName}
+          </Typography>
+        </Column>
+        <WhatIF condition={!isLoading} falsy={<Loader />}>
+          {data && (
+            <Table
+              data={data}
+              type="free"
+              handleClickPostDetail={handleClickPostDetail}
+            />
+          )}
+
+          <SearchWriter />
+
+          <Pagination
+            defaultPage={data?.currentPage}
+            count={data?.lastPage || 1}
+            onChange={(_, page) => {
+              router.push({
+                pathname: "/board/free",
+                query: {
+                  page,
+                },
+              });
+            }}
+          />
+        </WhatIF>
+      </Column>
+    </>
   );
 }
 
