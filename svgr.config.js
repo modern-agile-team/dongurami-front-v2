@@ -4,7 +4,6 @@ const removeFillPlugin = require("./plugins/svg-remove-fill-pluigin");
 
 const propTypesTemplate = ({ componentName, jsx }, { tpl }) => {
   return tpl`
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     import React, { forwardRef, Ref } from 'react';
     import { IconProps } from "../Icon";
     import Svg from "../Svg";
