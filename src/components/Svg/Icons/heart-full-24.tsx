@@ -1,7 +1,7 @@
 import React, { forwardRef, Ref } from "react";
 import { IconProps } from "../Icon";
 import Svg from "../Svg";
-const SvgHeartfull24 = forwardRef(
+const SvgHeartFull24 = forwardRef(
   (
     { size, title, desc, titleId, descId, ...props }: IconProps,
     ref: Ref<SVGSVGElement>
@@ -32,11 +32,11 @@ const SvgHeartfull24 = forwardRef(
     );
   }
 );
-SvgHeartfull24.defaultProps = {
+SvgHeartFull24.defaultProps = {
   size: 24,
   focusable: false,
   "aria-hidden": true,
   role: "img",
   fill: "currentcolor",
 };
-export default SvgHeartfull24;
+export default SvgHeartFull24;
