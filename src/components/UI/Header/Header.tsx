@@ -90,7 +90,9 @@ export default function Header({}: {}) {
             id="free-board"
             onClick={handleRoute}
             typoSize="Head5"
-            typoColor="neutral_60"
+            typoColor={
+              router.pathname === "/board/free" ? "neutral_90" : "neutral_60"
+            }
             hoverTypoColor="neutral_90"
           >
             수다 게시판
@@ -99,7 +101,9 @@ export default function Header({}: {}) {
             onClick={handleRoute}
             id="notice-board"
             typoSize="Head5"
-            typoColor="neutral_60"
+            typoColor={
+              router.pathname === "/board/notice" ? "neutral_90" : "neutral_60"
+            }
             hoverTypoColor="neutral_90"
           >
             공지 게시판
