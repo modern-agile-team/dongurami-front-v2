@@ -55,7 +55,7 @@ export default function ClubPage() {
   return (
     <div>
       <Head>
-        <title>동그라미 - {clubID} 동아리</title>
+        <title>동그라미 - 모던 애자일</title>
       </Head>
       <Row.ul gap={8}>
         {Object.entries(CLUB_TABS).map(([tabKey, tabValue]) => (
