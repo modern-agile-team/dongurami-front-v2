@@ -16,6 +16,7 @@ export const SidebarWrapper = styled(Column.ul)<{ isOpen: boolean }>`
   width: ${({ isOpen }) =>
     isOpen ? Converter.pxToRem(289) : Converter.pxToRem(100)};
   transition: 0.5s width;
+  border-right: 1px solid ${({ theme }) => theme.color.neutral_10};
 `;
 
 export const SidebarToggleArrow = styled(Row.button)<{ isOpen: boolean }>`
