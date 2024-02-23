@@ -4,33 +4,28 @@
  * Copyright (c) 2023 Your Company
  */
 
-import React, { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { Button, Row, SwitchCase } from "@/components";
+import { Row, SwitchCase } from "@/components";
 import { Club } from "@/containers";
 
-const CLUB_TABS = {
+const CLUB_TABS: Record<string, string> = {
   home: "홈",
-  notice: "공지",
-  activity: "활동",
-  schedule: "일정",
-  review: "후기",
-  apply: "지원서 작성",
+  community: "커뮤니티",
+  gallery: "갤러리",
+  calendar: "캘린더",
+  review: "리뷰",
+  apply: "지원하기",
+  manage: "관리",
 };
 
 export default function ClubPage() {
   const router = useRouter();
-  const { clubID, tab } = router.query;
+  const { clubID, tab } = router.query as { clubID: string; tab?: string };
 
-  const currentTab = useMemo(
-    () =>
-      typeof tab === "string" ? (tab as keyof typeof CLUB_TABS) : undefined,
-    [tab]
-  );
-
-  const changeTab = (to: keyof typeof CLUB_TABS) => {
+  const changeTab = (to: string) => {
     router.push(
       { pathname: router.pathname, query: { ...router.query, tab: to } },
       undefined,
@@ -38,49 +33,31 @@ export default function ClubPage() {
     );
   };
 
-  const handleClickTabButton = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    const target = ev.currentTarget as HTMLButtonElement;
-    const tab = target.dataset["tab"] as keyof typeof CLUB_TABS;
-    changeTab(tab);
-  };
-
   useEffect(() => {
     if (!clubID) return;
-    if (!currentTab || !CLUB_TABS[currentTab]) {
+    if (!tab || !CLUB_TABS[tab]) {
       changeTab("home");
     }
-  }, [clubID, currentTab]);
+  }, [clubID, tab]);
 
-  if (!currentTab) return;
+  if (!tab) return;
   return (
-    <div>
+    <Row css={{ height: "100%" }}>
       <Head>
         <title>동그라미 - 모던 애자일</title>
       </Head>
-      <Row.ul gap={8}>
-        {Object.entries(CLUB_TABS).map(([tabKey, tabValue]) => (
-          <Row.li key={tabKey}>
-            <Button
-              data-tab={tabKey}
-              filled="contained"
-              onClick={handleClickTabButton}
-            >
-              {tabValue}
-            </Button>
-          </Row.li>
-        ))}
-      </Row.ul>
+      <Club.Sidebar tabList={CLUB_TABS} />
       <SwitchCase
-        condition={currentTab}
+        condition={tab}
         cases={{
           home: <Club.Home />,
-          notice: <Club.Notice />,
-          activity: <Club.Activity />,
-          schedule: <Club.Schedule />,
+          community: <Club.Notice />,
+          gallery: <Club.Activity />,
+          calendar: <Club.Schedule />,
           review: <Club.Review />,
           apply: <Club.Apply />,
         }}
       />
-    </div>
+    </Row>
   );
 }
