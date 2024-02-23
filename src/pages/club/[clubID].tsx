@@ -47,17 +47,24 @@ export default function ClubPage() {
         <title>동그라미 - 모던 애자일</title>
       </Head>
       <Club.Sidebar tabList={CLUB_TABS} />
-      <SwitchCase
-        condition={tab}
-        cases={{
-          home: <Club.Home />,
-          community: <Club.Notice />,
-          gallery: <Club.Activity />,
-          calendar: <Club.Schedule />,
-          review: <Club.Review />,
-          apply: <Club.Apply />,
+      <div
+        css={{
+          width: "100%",
+          height: "100%",
         }}
-      />
+      >
+        <SwitchCase
+          condition={tab}
+          cases={{
+            home: <Club.Home />,
+            community: <Club.Notice />,
+            gallery: <Club.Activity />,
+            calendar: <Club.Schedule />,
+            review: <Club.Review />,
+            apply: <Club.Apply />,
+          }}
+        />
+      </div>
     </Row>
   );
 }
