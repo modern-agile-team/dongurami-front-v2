@@ -5,9 +5,11 @@
  */
 
 import styled from "@emotion/styled";
+import { Theme } from "@emotion/react";
 
 import { Column, Row } from "@/components";
 import { Converter } from "@/utils";
+import { TypographyCSS } from "@/components/Utilities/Typography/Typography";
 
 export const Wrapper = styled(Row)`
   width: 100%;
@@ -41,4 +43,12 @@ export const DetailWrapper = styled(Column)`
       }
     }
   }
+`;
+
+export const ClubName = styled.span<{ typoSize: keyof Theme["typography"] }>`
+  width: 100%;
+  ${({ theme, typoSize }) =>
+    theme.mode === "light"
+      ? TypographyCSS(typoSize, "accent_50", theme)
+      : TypographyCSS(typoSize, "primary_10", theme)}
 `;

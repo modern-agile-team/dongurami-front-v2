@@ -4,10 +4,14 @@
  * Copyright (c) 2024 Your Company
  */
 
+import { useTheme } from "@emotion/react";
+
 import { Column, Row, Typography } from "@/components";
 import * as S from "./emotion";
 
 export default function Information() {
+  const theme = useTheme();
+
   return (
     <S.Wrapper gap={67} verticalAlign="center">
       <S.LogoWrapper>
@@ -18,16 +22,13 @@ export default function Information() {
         />
       </S.LogoWrapper>
       <S.DetailWrapper gap={16}>
-        <Typography
+        <S.ClubName
           typoSize="Head2"
-          typoColor="accent_50"
-          css={{ width: "100%", borderBottom: "5px solid #fff" }}
+          css={{ borderBottom: `5px solid ${theme.color.neutral_10}` }}
         >
           프리버드
-        </Typography>
-        <Typography typoSize="Head5" typoColor="accent_50">
-          밴드
-        </Typography>
+        </S.ClubName>
+        <S.ClubName typoSize="Head5">밴드</S.ClubName>
         <Column className="leader-info" gap={10}>
           <Typography typoSize="Head6" typoColor="neutral_20">
             동아리 회장님
