@@ -5,6 +5,7 @@
  */
 
 import { useTheme } from "@emotion/react";
+import Image from "next/image";
 
 import { Column, Row, Typography } from "@/components";
 import * as S from "./emotion";
@@ -15,7 +16,9 @@ export default function Information() {
   return (
     <S.Wrapper gap={67} verticalAlign="center">
       <S.LogoWrapper>
-        <img
+        <Image
+          fill
+          alt="동아리 로고"
           src={
             "https://file.miricanvas.com/template_thumb/2020/01/06/6090-1578287704703/535c5d06-c174-499a-b200-c98b9532843f/thumb.jpg"
           }
