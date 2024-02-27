@@ -15,7 +15,7 @@ export default function Footer() {
     <div
       css={{
         width: "100%",
-        marginTop: Converter.pxToRem(221),
+        borderTop: `1px solid ${theme.color.neutral_10}`,
         height: Converter.pxToRem(136),
         backgroundColor: theme.color.secondary_10,
       }}
