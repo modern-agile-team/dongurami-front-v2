@@ -18,14 +18,11 @@ export const Wrapper = styled(Row)`
 `;
 
 export const LogoWrapper = styled.div`
+  position: relative;
   width: ${Converter.pxToRem(454)};
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  img {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 export const DetailWrapper = styled(Column)`
