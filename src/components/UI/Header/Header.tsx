@@ -20,8 +20,9 @@ export default function Header({}: {}) {
   const router = useRouter();
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    const target = ev.target as HTMLButtonElement;
+    const target = ev.currentTarget as HTMLButtonElement;
     const id = target.id;
+
     switch (id) {
       case "sign-in": {
         router.push("login");
@@ -48,7 +49,7 @@ export default function Header({}: {}) {
       }
 
       case "club": {
-        router.push("club/1?tab=home");
+        router.push("/club/1?tab=home");
         break;
       }
 
@@ -62,22 +63,20 @@ export default function Header({}: {}) {
   return (
     <S.Container horizonAlign="distribute" verticalAlign="center">
       <Row gap={66}>
-        <S.Logo onClick={handleRoute}>
-          <Image
-            id="root"
-            width="155"
-            height="37"
-            src={Logo}
-            alt="메인헤더로고"
-          />
-        </S.Logo>
+        <Button.Text id="root" onClick={handleRoute}>
+          <Image width="155" height="37" src={Logo} alt="메인헤더로고" />
+        </Button.Text>
 
         <Row.ul gap={76}>
           <Button.Text
             id="club"
             onClick={handleRoute}
             typoSize="Head5"
-            typoColor="neutral_60"
+            typoColor={
+              router.pathname === "/club/[clubID]"
+                ? "neutral_100"
+                : "neutral_60"
+            }
             hoverTypoColor="neutral_90"
           >
             동아리 둘러보기
@@ -95,7 +94,9 @@ export default function Header({}: {}) {
             id="free-board"
             onClick={handleRoute}
             typoSize="Head5"
-            typoColor="neutral_60"
+            typoColor={
+              router.pathname === "/board/free" ? "neutral_100" : "neutral_60"
+            }
             hoverTypoColor="neutral_90"
           >
             수다 게시판
@@ -104,7 +105,9 @@ export default function Header({}: {}) {
             onClick={handleRoute}
             id="notice-board"
             typoSize="Head5"
-            typoColor="neutral_60"
+            typoColor={
+              router.pathname === "/board/notice" ? "neutral_100" : "neutral_60"
+            }
             hoverTypoColor="neutral_90"
           >
             공지 게시판

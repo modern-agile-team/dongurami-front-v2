@@ -6,6 +6,10 @@ export default function HomePage() {
     <>
       <Column>
         <Home.Banner />
+        <Column css={{ margin: "0 auto" }}>
+          <Home.ClubPreview />
+          <Home.RecruitingClubs />
+        </Column>
       </Column>
     </>
   );

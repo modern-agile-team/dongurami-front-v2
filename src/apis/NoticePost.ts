@@ -14,59 +14,59 @@ import {
   NoticePostDeleteResponseDto,
   NoticePostDetailResponseDto,
   NoticePostsPaginationResponseDto,
-  NoticePostCreateCodeEnum,
-  NoticePostCreateCodeEnum1,
-  NoticePostCreateCodeEnum2,
-  NoticePostCreateMessageEnum,
-  NoticePostCreateMessageEnum1,
-  NoticePostCreateMessageEnum2,
-  NoticePostFindAllAndCountCodeEnum,
-  NoticePostFindAllAndCountCodeEnum1,
-  NoticePostFindAllAndCountMessageEnum,
-  NoticePostFindAllAndCountMessageEnum1,
-  NoticePostFindAllAndCountParams,
-  NoticePostFindOneOrNotFoundCodeEnum,
-  NoticePostFindOneOrNotFoundCodeEnum1,
-  NoticePostFindOneOrNotFoundCodeEnum2,
-  NoticePostFindOneOrNotFoundMessageEnum,
-  NoticePostFindOneOrNotFoundMessageEnum1,
-  NoticePostFindOneOrNotFoundMessageEnum2,
-  NoticePostIncreaseHitCodeEnum,
-  NoticePostIncreaseHitCodeEnum1,
-  NoticePostIncreaseHitCodeEnum2,
-  NoticePostIncreaseHitMessageEnum,
-  NoticePostIncreaseHitMessageEnum1,
-  NoticePostIncreaseHitMessageEnum2,
-  NoticePostPatchUpdateCodeEnum,
-  NoticePostPatchUpdateCodeEnum1,
-  NoticePostPatchUpdateCodeEnum2,
-  NoticePostPatchUpdateCodeEnum3,
-  NoticePostPatchUpdateCodeEnum4,
-  NoticePostPatchUpdateMessageEnum,
-  NoticePostPatchUpdateMessageEnum1,
-  NoticePostPatchUpdateMessageEnum2,
-  NoticePostPatchUpdateMessageEnum3,
-  NoticePostPatchUpdateMessageEnum4,
-  NoticePostPutUpdateCodeEnum,
-  NoticePostPutUpdateCodeEnum1,
-  NoticePostPutUpdateCodeEnum2,
-  NoticePostPutUpdateCodeEnum3,
-  NoticePostPutUpdateCodeEnum4,
-  NoticePostPutUpdateMessageEnum,
-  NoticePostPutUpdateMessageEnum1,
-  NoticePostPutUpdateMessageEnum2,
-  NoticePostPutUpdateMessageEnum3,
-  NoticePostPutUpdateMessageEnum4,
-  NoticePostRemoveCodeEnum,
-  NoticePostRemoveCodeEnum1,
-  NoticePostRemoveCodeEnum2,
-  NoticePostRemoveCodeEnum3,
-  NoticePostRemoveCodeEnum4,
-  NoticePostRemoveMessageEnum,
-  NoticePostRemoveMessageEnum1,
-  NoticePostRemoveMessageEnum2,
-  NoticePostRemoveMessageEnum3,
-  NoticePostRemoveMessageEnum4,
+  NoticepostCreateCodeEnum,
+  NoticepostCreateCodeEnum1,
+  NoticepostCreateCodeEnum2,
+  NoticepostCreateMessageEnum,
+  NoticepostCreateMessageEnum1,
+  NoticepostCreateMessageEnum2,
+  NoticepostFindAllAndCountCodeEnum,
+  NoticepostFindAllAndCountCodeEnum1,
+  NoticepostFindAllAndCountMessageEnum,
+  NoticepostFindAllAndCountMessageEnum1,
+  NoticepostFindAllAndCountParams,
+  NoticepostFindOneOrNotFoundCodeEnum,
+  NoticepostFindOneOrNotFoundCodeEnum1,
+  NoticepostFindOneOrNotFoundCodeEnum2,
+  NoticepostFindOneOrNotFoundMessageEnum,
+  NoticepostFindOneOrNotFoundMessageEnum1,
+  NoticepostFindOneOrNotFoundMessageEnum2,
+  NoticepostIncreaseHitCodeEnum,
+  NoticepostIncreaseHitCodeEnum1,
+  NoticepostIncreaseHitCodeEnum2,
+  NoticepostIncreaseHitMessageEnum,
+  NoticepostIncreaseHitMessageEnum1,
+  NoticepostIncreaseHitMessageEnum2,
+  NoticepostPatchUpdateCodeEnum,
+  NoticepostPatchUpdateCodeEnum1,
+  NoticepostPatchUpdateCodeEnum2,
+  NoticepostPatchUpdateCodeEnum3,
+  NoticepostPatchUpdateCodeEnum4,
+  NoticepostPatchUpdateMessageEnum,
+  NoticepostPatchUpdateMessageEnum1,
+  NoticepostPatchUpdateMessageEnum2,
+  NoticepostPatchUpdateMessageEnum3,
+  NoticepostPatchUpdateMessageEnum4,
+  NoticepostPutUpdateCodeEnum,
+  NoticepostPutUpdateCodeEnum1,
+  NoticepostPutUpdateCodeEnum2,
+  NoticepostPutUpdateCodeEnum3,
+  NoticepostPutUpdateCodeEnum4,
+  NoticepostPutUpdateMessageEnum,
+  NoticepostPutUpdateMessageEnum1,
+  NoticepostPutUpdateMessageEnum2,
+  NoticepostPutUpdateMessageEnum3,
+  NoticepostPutUpdateMessageEnum4,
+  NoticepostRemoveCodeEnum,
+  NoticepostRemoveCodeEnum1,
+  NoticepostRemoveCodeEnum2,
+  NoticepostRemoveCodeEnum3,
+  NoticepostRemoveCodeEnum4,
+  NoticepostRemoveMessageEnum,
+  NoticepostRemoveMessageEnum1,
+  NoticepostRemoveMessageEnum2,
+  NoticepostRemoveMessageEnum3,
+  NoticepostRemoveMessageEnum4,
   PatchUpdateNoticePostDto,
   PutUpdateNoticePostDto,
   ValidationError,
@@ -84,7 +84,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostCreate
+   * @name NoticepostCreate
    * @summary 공지 게시글 생성 API
    * @request POST:/api/notice-posts
    * @secure
@@ -109,9 +109,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostCreateCodeEnum;
+          code?: NoticepostCreateCodeEnum;
           /** error message */
-          message?: NoticePostCreateMessageEnum;
+          message?: NoticepostCreateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -132,9 +132,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: NoticePostCreateCodeEnum1;
+          code?: NoticepostCreateCodeEnum1;
           /** error message */
-          message?: NoticePostCreateMessageEnum1;
+          message?: NoticepostCreateMessageEnum1;
         }
       | {
           /**
@@ -153,9 +153,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostCreateCodeEnum2;
+          code?: NoticepostCreateCodeEnum2;
           /** error message */
-          message?: NoticePostCreateMessageEnum2;
+          message?: NoticepostCreateMessageEnum2;
         }
     >({
       path: `/api/notice-posts`,
@@ -170,12 +170,12 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostFindAllAndCount
+   * @name NoticepostFindAllAndCount
    * @summary 공지 게시글 전체조회(pagination)
    * @request GET:/api/notice-posts
    */
   noticepostFindAllAndCount = (
-    query: NoticePostFindAllAndCountParams,
+    query: NoticepostFindAllAndCountParams,
     params: RequestParams = {}
   ) =>
     this.http.request<
@@ -197,9 +197,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostFindAllAndCountCodeEnum;
+          code?: NoticepostFindAllAndCountCodeEnum;
           /** error message */
-          message?: NoticePostFindAllAndCountMessageEnum;
+          message?: NoticepostFindAllAndCountMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -220,9 +220,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostFindAllAndCountCodeEnum1;
+          code?: NoticepostFindAllAndCountCodeEnum1;
           /** error message */
-          message?: NoticePostFindAllAndCountMessageEnum1;
+          message?: NoticepostFindAllAndCountMessageEnum1;
         }
     >({
       path: `/api/notice-posts`,
@@ -235,7 +235,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostFindOneOrNotFound
+   * @name NoticepostFindOneOrNotFound
    * @summary 공지게시글 상세조회
    * @request GET:/api/notice-posts/{postId}
    */
@@ -259,9 +259,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostFindOneOrNotFoundCodeEnum;
+          code?: NoticepostFindOneOrNotFoundCodeEnum;
           /** error message */
-          message?: NoticePostFindOneOrNotFoundMessageEnum;
+          message?: NoticepostFindOneOrNotFoundMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -282,9 +282,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: NoticePostFindOneOrNotFoundCodeEnum1;
+          code?: NoticepostFindOneOrNotFoundCodeEnum1;
           /** error message */
-          message?: NoticePostFindOneOrNotFoundMessageEnum1;
+          message?: NoticepostFindOneOrNotFoundMessageEnum1;
         }
       | {
           /**
@@ -303,9 +303,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostFindOneOrNotFoundCodeEnum2;
+          code?: NoticepostFindOneOrNotFoundCodeEnum2;
           /** error message */
-          message?: NoticePostFindOneOrNotFoundMessageEnum2;
+          message?: NoticepostFindOneOrNotFoundMessageEnum2;
         }
     >({
       path: `/api/notice-posts/${postId}`,
@@ -317,7 +317,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostPutUpdate
+   * @name NoticepostPutUpdate
    * @summary 공지게시글 수정
    * @request PUT:/api/notice-posts/{postId}
    * @secure
@@ -346,9 +346,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostPutUpdateCodeEnum;
+          code?: NoticepostPutUpdateCodeEnum;
           /** error message */
-          message?: NoticePostPutUpdateMessageEnum;
+          message?: NoticepostPutUpdateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -369,9 +369,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: NoticePostPutUpdateCodeEnum1;
+          code?: NoticepostPutUpdateCodeEnum1;
           /** error message */
-          message?: NoticePostPutUpdateMessageEnum1;
+          message?: NoticepostPutUpdateMessageEnum1;
         }
       | {
           /**
@@ -390,9 +390,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 4
            */
-          code?: NoticePostPutUpdateCodeEnum2;
+          code?: NoticepostPutUpdateCodeEnum2;
           /** error message */
-          message?: NoticePostPutUpdateMessageEnum2;
+          message?: NoticepostPutUpdateMessageEnum2;
         }
       | {
           /**
@@ -411,9 +411,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: NoticePostPutUpdateCodeEnum3;
+          code?: NoticepostPutUpdateCodeEnum3;
           /** error message */
-          message?: NoticePostPutUpdateMessageEnum3;
+          message?: NoticepostPutUpdateMessageEnum3;
         }
       | {
           /**
@@ -432,9 +432,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostPutUpdateCodeEnum4;
+          code?: NoticepostPutUpdateCodeEnum4;
           /** error message */
-          message?: NoticePostPutUpdateMessageEnum4;
+          message?: NoticepostPutUpdateMessageEnum4;
         }
     >({
       path: `/api/notice-posts/${postId}`,
@@ -449,7 +449,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostPatchUpdate
+   * @name NoticepostPatchUpdate
    * @summary 공지게시글 patch 수정
    * @request PATCH:/api/notice-posts/{postId}
    * @secure
@@ -478,9 +478,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostPatchUpdateCodeEnum;
+          code?: NoticepostPatchUpdateCodeEnum;
           /** error message */
-          message?: NoticePostPatchUpdateMessageEnum;
+          message?: NoticepostPatchUpdateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -501,9 +501,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: NoticePostPatchUpdateCodeEnum1;
+          code?: NoticepostPatchUpdateCodeEnum1;
           /** error message */
-          message?: NoticePostPatchUpdateMessageEnum1;
+          message?: NoticepostPatchUpdateMessageEnum1;
         }
       | {
           /**
@@ -522,9 +522,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 4
            */
-          code?: NoticePostPatchUpdateCodeEnum2;
+          code?: NoticepostPatchUpdateCodeEnum2;
           /** error message */
-          message?: NoticePostPatchUpdateMessageEnum2;
+          message?: NoticepostPatchUpdateMessageEnum2;
         }
       | {
           /**
@@ -543,9 +543,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: NoticePostPatchUpdateCodeEnum3;
+          code?: NoticepostPatchUpdateCodeEnum3;
           /** error message */
-          message?: NoticePostPatchUpdateMessageEnum3;
+          message?: NoticepostPatchUpdateMessageEnum3;
         }
       | {
           /**
@@ -564,9 +564,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostPatchUpdateCodeEnum4;
+          code?: NoticepostPatchUpdateCodeEnum4;
           /** error message */
-          message?: NoticePostPatchUpdateMessageEnum4;
+          message?: NoticepostPatchUpdateMessageEnum4;
         }
     >({
       path: `/api/notice-posts/${postId}`,
@@ -581,7 +581,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostRemove
+   * @name NoticepostRemove
    * @summary 공지 게시글 삭제
    * @request DELETE:/api/notice-posts/{postId}
    * @secure
@@ -606,9 +606,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostRemoveCodeEnum;
+          code?: NoticepostRemoveCodeEnum;
           /** error message */
-          message?: NoticePostRemoveMessageEnum;
+          message?: NoticepostRemoveMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -629,9 +629,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: NoticePostRemoveCodeEnum1;
+          code?: NoticepostRemoveCodeEnum1;
           /** error message */
-          message?: NoticePostRemoveMessageEnum1;
+          message?: NoticepostRemoveMessageEnum1;
         }
       | {
           /**
@@ -650,9 +650,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 4
            */
-          code?: NoticePostRemoveCodeEnum2;
+          code?: NoticepostRemoveCodeEnum2;
           /** error message */
-          message?: NoticePostRemoveMessageEnum2;
+          message?: NoticepostRemoveMessageEnum2;
         }
       | {
           /**
@@ -671,9 +671,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: NoticePostRemoveCodeEnum3;
+          code?: NoticepostRemoveCodeEnum3;
           /** error message */
-          message?: NoticePostRemoveMessageEnum3;
+          message?: NoticepostRemoveMessageEnum3;
         }
       | {
           /**
@@ -692,9 +692,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostRemoveCodeEnum4;
+          code?: NoticepostRemoveCodeEnum4;
           /** error message */
-          message?: NoticePostRemoveMessageEnum4;
+          message?: NoticepostRemoveMessageEnum4;
         }
     >({
       path: `/api/notice-posts/${postId}`,
@@ -707,7 +707,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * No description
    *
    * @tags notice-post
-   * @name NoticePostIncreaseHit
+   * @name NoticepostIncreaseHit
    * @summary 조회수 1 증가
    * @request PUT:/api/notice-posts/{postId}/hit
    */
@@ -731,9 +731,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: NoticePostIncreaseHitCodeEnum;
+          code?: NoticepostIncreaseHitCodeEnum;
           /** error message */
-          message?: NoticePostIncreaseHitMessageEnum;
+          message?: NoticepostIncreaseHitMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: ValidationError[];
         }
@@ -754,9 +754,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: NoticePostIncreaseHitCodeEnum1;
+          code?: NoticepostIncreaseHitCodeEnum1;
           /** error message */
-          message?: NoticePostIncreaseHitMessageEnum1;
+          message?: NoticepostIncreaseHitMessageEnum1;
         }
       | {
           /**
@@ -775,9 +775,9 @@ export class NoticePost<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostIncreaseHitCodeEnum2;
+          code?: NoticepostIncreaseHitCodeEnum2;
           /** error message */
-          message?: NoticePostIncreaseHitMessageEnum2;
+          message?: NoticepostIncreaseHitMessageEnum2;
         }
     >({
       path: `/api/notice-posts/${postId}/hit`,

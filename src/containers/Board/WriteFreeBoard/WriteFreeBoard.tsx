@@ -13,7 +13,7 @@ export default function WriteFreeBoard() {
 
   const { data } = useQuery({
     queryFn: async () => {
-      const response = await freePostsAPI.freePostFindOneOrNotFound(Number(id));
+      const response = await freePostsAPI.freepostFindOneOrNotFound(Number(id));
       return response.data;
     },
     queryKey: ["post", id],
@@ -41,10 +41,10 @@ export default function WriteFreeBoard() {
     };
 
     if (id) {
-      await freePostsAPI.freePostPatchUpdate(Number(id), params);
+      await freePostsAPI.freepostPatchUpdate(Number(id), params);
       router.back();
     } else {
-      const { data } = await freePostsAPI.freePostCreate({
+      const { data } = await freePostsAPI.freepostCreate({
         ...params,
       });
       router.replace({

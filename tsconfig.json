@@ -15,6 +15,7 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
+      "@/assets/*": ["./src/assets/*"],
       "@/types/*": ["./src/@types/*"]
     },
     "jsxImportSource": "@emotion/react",

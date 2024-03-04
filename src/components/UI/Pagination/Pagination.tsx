@@ -5,10 +5,9 @@
  */
 
 import React, { useMemo, useState } from "react";
-import Image from "next/image";
 
+import { Icon, Row, WhatIF } from "@/components";
 import * as S from "./emotion";
-import { Row, WhatIF } from "@/components";
 import { lightThemeColor } from "@/styles/theme";
 import * as Svg from "@/components/Svg";
 
@@ -66,7 +65,7 @@ export default function Pagination({
           props.onChange?.(ev, Number(prevPage));
         }}
       >
-        <Svg.ArrowLeft45 />
+        <Icon id="left" size={54} name="LeftArrow24" />
       </S.ArrowButton>
       {totalList.map((page) => {
         return (
@@ -107,7 +106,7 @@ export default function Pagination({
           props.onChange?.(ev, Number(nextPage));
         }}
       >
-        <Svg.ArrowRight45 />
+        <Icon id="right" size={54} name="RightArrow24" />
       </S.ArrowButton>
     </Row.li>
   );

@@ -8,3 +8,7 @@ export * from "./Button";
 export * from "./Pagination";
 export * from "./Quill";
 export * from "./Modal";
+export * from "./TextField";
+export * from "./Footer";
+export * from "./Header";
+export * from "./Loader";

@@ -4,6 +4,14 @@
  * Copyright (c) 2023 Your Company
  */
 
+import { Column } from "@/components";
+
+import * as C from "./components";
+
 export default function Home() {
-  return <div>동아리 홈</div>;
+  return (
+    <Column css={{ width: "100%", height: "100%" }}>
+      <C.Information />
+    </Column>
+  );
 }

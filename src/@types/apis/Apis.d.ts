@@ -877,12 +877,12 @@ declare global {
        * @minLength 2
        * @maxLength 20
        */
-      name: string;
+      name: string | null;
       /**
        * email
        * @format email
        */
-      email: string;
+      email: string | null;
       /** role */
       role: SignUpRequestBodyDtoRoleEnum;
       /**
@@ -1197,52 +1197,52 @@ declare global {
      * error code
      * @example 1
      */
-    export type NoticePostCreateCodeEnum = 1;
+    export type NoticepostCreateCodeEnum = 1;
 
     /** error message */
-    export type NoticePostCreateMessageEnum =
+    export type NoticepostCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticePostCreateCodeEnum1 = 3;
+    export type NoticepostCreateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticePostCreateMessageEnum1 = "This token is invalid.";
+    export type NoticepostCreateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostCreateCodeEnum2 = 0;
+    export type NoticepostCreateCodeEnum2 = 0;
 
     /** error message */
-    export type NoticePostCreateMessageEnum2 =
+    export type NoticepostCreateMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticePostFindAllAndCountCodeEnum = 1;
+    export type NoticepostFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type NoticePostFindAllAndCountMessageEnum =
+    export type NoticepostFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostFindAllAndCountCodeEnum1 = 0;
+    export type NoticepostFindAllAndCountCodeEnum1 = 0;
 
     /** error message */
-    export type NoticePostFindAllAndCountMessageEnum1 =
+    export type NoticepostFindAllAndCountMessageEnum1 =
       "Server error. Please contact server developer";
 
-    export interface NoticePostFindAllAndCountParams {
+    export interface NoticepostFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -1289,7 +1289,7 @@ declare global {
     export type IsAllowCommentEnum = "true" | "false";
 
     /** 댓글 허용 여부 */
-    export type NoticePostFindAllAndCountParams1IsAllowCommentEnum =
+    export type NoticepostFindAllAndCountParams1IsAllowCommentEnum =
       | "true"
       | "false";
 
@@ -1297,259 +1297,259 @@ declare global {
      * error code
      * @example 1
      */
-    export type NoticePostFindOneOrNotFoundCodeEnum = 1;
+    export type NoticepostFindOneOrNotFoundCodeEnum = 1;
 
     /** error message */
-    export type NoticePostFindOneOrNotFoundMessageEnum =
+    export type NoticepostFindOneOrNotFoundMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticePostFindOneOrNotFoundCodeEnum1 = 5;
+    export type NoticepostFindOneOrNotFoundCodeEnum1 = 5;
 
     /** error message */
-    export type NoticePostFindOneOrNotFoundMessageEnum1 =
+    export type NoticepostFindOneOrNotFoundMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostFindOneOrNotFoundCodeEnum2 = 0;
+    export type NoticepostFindOneOrNotFoundCodeEnum2 = 0;
 
     /** error message */
-    export type NoticePostFindOneOrNotFoundMessageEnum2 =
+    export type NoticepostFindOneOrNotFoundMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticePostPutUpdateCodeEnum = 1;
+    export type NoticepostPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type NoticePostPutUpdateMessageEnum =
+    export type NoticepostPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticePostPutUpdateCodeEnum1 = 3;
+    export type NoticepostPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticePostPutUpdateMessageEnum1 = "This token is invalid.";
+    export type NoticepostPutUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticePostPutUpdateCodeEnum2 = 4;
+    export type NoticepostPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type NoticePostPutUpdateMessageEnum2 =
+    export type NoticepostPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticePostPutUpdateCodeEnum3 = 5;
+    export type NoticepostPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type NoticePostPutUpdateMessageEnum3 =
+    export type NoticepostPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostPutUpdateCodeEnum4 = 0;
+    export type NoticepostPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type NoticePostPutUpdateMessageEnum4 =
+    export type NoticepostPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticePostPatchUpdateCodeEnum = 1;
+    export type NoticepostPatchUpdateCodeEnum = 1;
 
     /** error message */
-    export type NoticePostPatchUpdateMessageEnum =
+    export type NoticepostPatchUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticePostPatchUpdateCodeEnum1 = 3;
+    export type NoticepostPatchUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type NoticePostPatchUpdateMessageEnum1 = "This token is invalid.";
+    export type NoticepostPatchUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticePostPatchUpdateCodeEnum2 = 4;
+    export type NoticepostPatchUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type NoticePostPatchUpdateMessageEnum2 =
+    export type NoticepostPatchUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticePostPatchUpdateCodeEnum3 = 5;
+    export type NoticepostPatchUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type NoticePostPatchUpdateMessageEnum3 =
+    export type NoticepostPatchUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostPatchUpdateCodeEnum4 = 0;
+    export type NoticepostPatchUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type NoticePostPatchUpdateMessageEnum4 =
+    export type NoticepostPatchUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticePostRemoveCodeEnum = 1;
+    export type NoticepostRemoveCodeEnum = 1;
 
     /** error message */
-    export type NoticePostRemoveMessageEnum =
+    export type NoticepostRemoveMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type NoticePostRemoveCodeEnum1 = 3;
+    export type NoticepostRemoveCodeEnum1 = 3;
 
     /** error message */
-    export type NoticePostRemoveMessageEnum1 = "This token is invalid.";
+    export type NoticepostRemoveMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type NoticePostRemoveCodeEnum2 = 4;
+    export type NoticepostRemoveCodeEnum2 = 4;
 
     /** error message */
-    export type NoticePostRemoveMessageEnum2 =
+    export type NoticepostRemoveMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticePostRemoveCodeEnum3 = 5;
+    export type NoticepostRemoveCodeEnum3 = 5;
 
     /** error message */
-    export type NoticePostRemoveMessageEnum3 =
+    export type NoticepostRemoveMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostRemoveCodeEnum4 = 0;
+    export type NoticepostRemoveCodeEnum4 = 0;
 
     /** error message */
-    export type NoticePostRemoveMessageEnum4 =
+    export type NoticepostRemoveMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type NoticePostIncreaseHitCodeEnum = 1;
+    export type NoticepostIncreaseHitCodeEnum = 1;
 
     /** error message */
-    export type NoticePostIncreaseHitMessageEnum =
+    export type NoticepostIncreaseHitMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type NoticePostIncreaseHitCodeEnum1 = 5;
+    export type NoticepostIncreaseHitCodeEnum1 = 5;
 
     /** error message */
-    export type NoticePostIncreaseHitMessageEnum1 =
+    export type NoticepostIncreaseHitMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type NoticePostIncreaseHitCodeEnum2 = 0;
+    export type NoticepostIncreaseHitCodeEnum2 = 0;
 
     /** error message */
-    export type NoticePostIncreaseHitMessageEnum2 =
+    export type NoticepostIncreaseHitMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostCreateCodeEnum = 1;
+    export type FreepostCreateCodeEnum = 1;
 
     /** error message */
-    export type FreePostCreateMessageEnum =
+    export type FreepostCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostCreateCodeEnum1 = 3;
+    export type FreepostCreateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostCreateMessageEnum1 = "This token is invalid.";
+    export type FreepostCreateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostCreateCodeEnum2 = 0;
+    export type FreepostCreateCodeEnum2 = 0;
 
     /** error message */
-    export type FreePostCreateMessageEnum2 =
+    export type FreepostCreateMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostFindAllAndCountCodeEnum = 1;
+    export type FreepostFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type FreePostFindAllAndCountMessageEnum =
+    export type FreepostFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostFindAllAndCountCodeEnum1 = 0;
+    export type FreepostFindAllAndCountCodeEnum1 = 0;
 
     /** error message */
-    export type FreePostFindAllAndCountMessageEnum1 =
+    export type FreepostFindAllAndCountMessageEnum1 =
       "Server error. Please contact server developer";
 
-    export interface FreePostFindAllAndCountParams {
+    export interface FreepostFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -1595,7 +1595,7 @@ declare global {
     export type IsAnonymousEnum = "true" | "false" | "0" | "1";
 
     /** 익명여부 필터링 */
-    export type FreePostFindAllAndCountParams1IsAnonymousEnum =
+    export type FreepostFindAllAndCountParams1IsAnonymousEnum =
       | "true"
       | "false"
       | "0"
@@ -1605,89 +1605,89 @@ declare global {
      * error code
      * @example 1
      */
-    export type FreePostFindOneOrNotFoundCodeEnum = 1;
+    export type FreepostFindOneOrNotFoundCodeEnum = 1;
 
     /** error message */
-    export type FreePostFindOneOrNotFoundMessageEnum =
+    export type FreepostFindOneOrNotFoundMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostFindOneOrNotFoundCodeEnum1 = 5;
+    export type FreepostFindOneOrNotFoundCodeEnum1 = 5;
 
     /** error message */
-    export type FreePostFindOneOrNotFoundMessageEnum1 =
+    export type FreepostFindOneOrNotFoundMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostFindOneOrNotFoundCodeEnum2 = 0;
+    export type FreepostFindOneOrNotFoundCodeEnum2 = 0;
 
     /** error message */
-    export type FreePostFindOneOrNotFoundMessageEnum2 =
+    export type FreepostFindOneOrNotFoundMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostPutUpdateCodeEnum = 1;
+    export type FreepostPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type FreePostPutUpdateMessageEnum =
+    export type FreepostPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostPutUpdateCodeEnum1 = 3;
+    export type FreepostPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostPutUpdateMessageEnum1 = "This token is invalid.";
+    export type FreepostPutUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostPutUpdateCodeEnum2 = 4;
+    export type FreepostPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type FreePostPutUpdateMessageEnum2 =
+    export type FreepostPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostPutUpdateCodeEnum3 = 5;
+    export type FreepostPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type FreePostPutUpdateMessageEnum3 =
+    export type FreepostPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostPutUpdateCodeEnum4 = 0;
+    export type FreepostPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostPutUpdateMessageEnum4 =
+    export type FreepostPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostPatchUpdateCodeEnum = 1 | 6;
+    export type FreepostPatchUpdateCodeEnum = 1 | 6;
 
     /** error message */
-    export type FreePostPatchUpdateMessageEnum =
+    export type FreepostPatchUpdateMessageEnum =
       | "Invalid request parameter. Please check your request."
       | "At least one update field must exist.";
 
@@ -1695,287 +1695,287 @@ declare global {
      * error code
      * @example 3
      */
-    export type FreePostPatchUpdateCodeEnum1 = 3;
+    export type FreepostPatchUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostPatchUpdateMessageEnum1 = "This token is invalid.";
+    export type FreepostPatchUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostPatchUpdateCodeEnum2 = 4;
+    export type FreepostPatchUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type FreePostPatchUpdateMessageEnum2 =
+    export type FreepostPatchUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostPatchUpdateCodeEnum3 = 5;
+    export type FreepostPatchUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type FreePostPatchUpdateMessageEnum3 =
+    export type FreepostPatchUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostPatchUpdateCodeEnum4 = 0;
+    export type FreepostPatchUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostPatchUpdateMessageEnum4 =
+    export type FreepostPatchUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostRemoveCodeEnum = 1;
+    export type FreepostRemoveCodeEnum = 1;
 
     /** error message */
-    export type FreePostRemoveMessageEnum =
+    export type FreepostRemoveMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostRemoveCodeEnum1 = 3;
+    export type FreepostRemoveCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostRemoveMessageEnum1 = "This token is invalid.";
+    export type FreepostRemoveMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostRemoveCodeEnum2 = 4;
+    export type FreepostRemoveCodeEnum2 = 4;
 
     /** error message */
-    export type FreePostRemoveMessageEnum2 =
+    export type FreepostRemoveMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostRemoveCodeEnum3 = 5;
+    export type FreepostRemoveCodeEnum3 = 5;
 
     /** error message */
-    export type FreePostRemoveMessageEnum3 =
+    export type FreepostRemoveMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostRemoveCodeEnum4 = 0;
+    export type FreepostRemoveCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostRemoveMessageEnum4 =
+    export type FreepostRemoveMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostIncrementHitCodeEnum = 1;
+    export type FreepostIncrementHitCodeEnum = 1;
 
     /** error message */
-    export type FreePostIncrementHitMessageEnum =
+    export type FreepostIncrementHitMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostIncrementHitCodeEnum1 = 5;
+    export type FreepostIncrementHitCodeEnum1 = 5;
 
     /** error message */
-    export type FreePostIncrementHitMessageEnum1 =
+    export type FreepostIncrementHitMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostIncrementHitCodeEnum2 = 0;
+    export type FreepostIncrementHitCodeEnum2 = 0;
 
     /** error message */
-    export type FreePostIncrementHitMessageEnum2 =
+    export type FreepostIncrementHitMessageEnum2 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostCreateReactionCodeEnum = 1;
+    export type FreepostCreateReactionCodeEnum = 1;
 
     /** error message */
-    export type FreePostCreateReactionMessageEnum =
+    export type FreepostCreateReactionMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostCreateReactionCodeEnum1 = 3;
+    export type FreepostCreateReactionCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostCreateReactionMessageEnum1 = "This token is invalid.";
+    export type FreepostCreateReactionMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostCreateReactionCodeEnum2 = 5;
+    export type FreepostCreateReactionCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostCreateReactionMessageEnum2 =
+    export type FreepostCreateReactionMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 4000
      */
-    export type FreePostCreateReactionCodeEnum3 = 4000;
+    export type FreepostCreateReactionCodeEnum3 = 4000;
 
     /** error message */
-    export type FreePostCreateReactionMessageEnum3 = "You've already liked it.";
+    export type FreepostCreateReactionMessageEnum3 = "You've already liked it.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostCreateReactionCodeEnum4 = 0;
+    export type FreepostCreateReactionCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostCreateReactionMessageEnum4 =
+    export type FreepostCreateReactionMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostRemoveReactionCodeEnum = 1;
+    export type FreepostRemoveReactionCodeEnum = 1;
 
     /** error message */
-    export type FreePostRemoveReactionMessageEnum =
+    export type FreepostRemoveReactionMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostRemoveReactionCodeEnum1 = 3;
+    export type FreepostRemoveReactionCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostRemoveReactionMessageEnum1 = "This token is invalid.";
+    export type FreepostRemoveReactionMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostRemoveReactionCodeEnum2 = 5;
+    export type FreepostRemoveReactionCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostRemoveReactionMessageEnum2 =
+    export type FreepostRemoveReactionMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 4001
      */
-    export type FreePostRemoveReactionCodeEnum3 = 4001;
+    export type FreepostRemoveReactionCodeEnum3 = 4001;
 
     /** error message */
-    export type FreePostRemoveReactionMessageEnum3 =
+    export type FreepostRemoveReactionMessageEnum3 =
       "You haven't liked it yet.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostRemoveReactionCodeEnum4 = 0;
+    export type FreepostRemoveReactionCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostRemoveReactionMessageEnum4 =
+    export type FreepostRemoveReactionMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostcommentCreateCodeEnum = 1;
+    export type FreepostcommentCreateCodeEnum = 1;
 
     /** error message */
-    export type FreePostcommentCreateMessageEnum =
+    export type FreepostcommentCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostcommentCreateCodeEnum1 = 3;
+    export type FreepostcommentCreateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostcommentCreateMessageEnum1 = "This token is invalid.";
+    export type FreepostcommentCreateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostcommentCreateCodeEnum2 = 5;
+    export type FreepostcommentCreateCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostcommentCreateMessageEnum2 =
+    export type FreepostcommentCreateMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostcommentCreateCodeEnum3 = 0;
+    export type FreepostcommentCreateCodeEnum3 = 0;
 
     /** error message */
-    export type FreePostcommentCreateMessageEnum3 =
+    export type FreepostcommentCreateMessageEnum3 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostcommentFindAllAndCountCodeEnum = 1;
+    export type FreepostcommentFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type FreePostcommentFindAllAndCountMessageEnum =
+    export type FreepostcommentFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostcommentFindAllAndCountCodeEnum1 = 5;
+    export type FreepostcommentFindAllAndCountCodeEnum1 = 5;
 
     /** error message */
-    export type FreePostcommentFindAllAndCountMessageEnum1 =
+    export type FreepostcommentFindAllAndCountMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostcommentFindAllAndCountCodeEnum2 = 0;
+    export type FreepostcommentFindAllAndCountCodeEnum2 = 0;
 
     /** error message */
-    export type FreePostcommentFindAllAndCountMessageEnum2 =
+    export type FreepostcommentFindAllAndCountMessageEnum2 =
       "Server error. Please contact server developer";
 
-    export interface FreePostcommentFindAllAndCountParams {
+    export interface FreepostcommentFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -2005,80 +2005,75 @@ declare global {
      * error code
      * @example 1
      */
-    export type FreePostcommentPutUpdateCodeEnum = 1;
+    export type FreepostcommentPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type FreePostcommentPutUpdateMessageEnum =
+    export type FreepostcommentPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostcommentPutUpdateCodeEnum1 = 3;
+    export type FreepostcommentPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostcommentPutUpdateMessageEnum1 = "This token is invalid.";
+    export type FreepostcommentPutUpdateMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostcommentPutUpdateCodeEnum2 = 4;
+    export type FreepostcommentPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type FreePostcommentPutUpdateMessageEnum2 =
+    export type FreepostcommentPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostcommentPutUpdateCodeEnum3 = 5;
+    export type FreepostcommentPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type FreePostcommentPutUpdateMessageEnum3 =
+    export type FreepostcommentPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostcommentPutUpdateCodeEnum4 = 0;
+    export type FreepostcommentPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostcommentPutUpdateMessageEnum4 =
+    export type FreepostcommentPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostcommentRemoveCodeEnum = 1;
+    export type FreepostcommentRemoveCodeEnum = 1;
 
     /** error message */
-    export type FreePostcommentRemoveMessageEnum =
+    export type FreepostcommentRemoveMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostcommentRemoveCodeEnum1 = 3;
+    export type FreepostcommentRemoveCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostcommentRemoveMessageEnum1 = "This token is invalid.";
+    export type FreepostcommentRemoveMessageEnum1 = "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostcommentRemoveCodeEnum2 = 4;
-
-    /** error message */
-    export type FreePostcommentRemoveMessageEnum2 =
-      "You don't have permission to access it.";
-
+    export type FreepostcommentRemoveCodeEnum2 = 4;
     /**
      * error code
      * @example 5
@@ -2088,57 +2083,57 @@ declare global {
     /** error message */
     export type FreePostcommentRemoveMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
+    export type FreepostcommentRemoveCodeEnum3 = 5;
+
+    /** error message */
+    export type FreepostcommentRemoveMessageEnum3 =
+      "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostcommentRemoveCodeEnum4 = 0;
+    export type FreepostcommentRemoveCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostcommentRemoveMessageEnum4 =
+    export type FreepostcommentRemoveMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostcommentCreateReactionCodeEnum = 1;
+    export type FreepostcommentCreateReactionCodeEnum = 1;
 
     /** error message */
-    export type FreePostcommentCreateReactionMessageEnum =
+    export type FreepostcommentCreateReactionMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostcommentCreateReactionCodeEnum1 = 3;
+    export type FreepostcommentCreateReactionCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostcommentCreateReactionMessageEnum1 =
+    export type FreepostcommentCreateReactionMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostcommentCreateReactionCodeEnum2 = 5;
+    export type FreepostcommentCreateReactionCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostcommentCreateReactionMessageEnum2 =
+    export type FreepostcommentCreateReactionMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 4000
      */
-    export type FreePostcommentCreateReactionCodeEnum3 = 4000;
-
-    /** error message */
-    export type FreePostcommentCreateReactionMessageEnum3 =
-      "You've already liked it.";
-
+    export type FreepostcommentCreateReactionCodeEnum3 = 4000;
     /**
      * error code
      * @example 0
@@ -2148,128 +2143,133 @@ declare global {
     /** error message */
     export type FreePostcommentCreateReactionMessageEnum4 =
       "Server error. Please contact server developer";
+    export type FreepostcommentCreateReactionCodeEnum4 = 0;
+
+    /** error message */
+    export type FreepostcommentCreateReactionMessageEnum4 =
+      "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostcommentRemoveReactionCodeEnum = 1;
+    export type FreepostcommentRemoveReactionCodeEnum = 1;
 
     /** error message */
-    export type FreePostcommentRemoveReactionMessageEnum =
+    export type FreepostcommentRemoveReactionMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostcommentRemoveReactionCodeEnum1 = 3;
+    export type FreepostcommentRemoveReactionCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostcommentRemoveReactionMessageEnum1 =
+    export type FreepostcommentRemoveReactionMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostcommentRemoveReactionCodeEnum2 = 5;
+    export type FreepostcommentRemoveReactionCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostcommentRemoveReactionMessageEnum2 =
+    export type FreepostcommentRemoveReactionMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 4001
      */
-    export type FreePostcommentRemoveReactionCodeEnum3 = 4001;
+    export type FreepostcommentRemoveReactionCodeEnum3 = 4001;
 
     /** error message */
-    export type FreePostcommentRemoveReactionMessageEnum3 =
+    export type FreepostcommentRemoveReactionMessageEnum3 =
       "You haven't liked it yet.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostcommentRemoveReactionCodeEnum4 = 0;
+    export type FreepostcommentRemoveReactionCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostcommentRemoveReactionMessageEnum4 =
+    export type FreepostcommentRemoveReactionMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostreplycommentCreateCodeEnum = 1;
+    export type FreepostreplycommentCreateCodeEnum = 1;
 
     /** error message */
-    export type FreePostreplycommentCreateMessageEnum =
+    export type FreepostreplycommentCreateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostreplycommentCreateCodeEnum1 = 3;
+    export type FreepostreplycommentCreateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostreplycommentCreateMessageEnum1 =
+    export type FreepostreplycommentCreateMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostreplycommentCreateCodeEnum2 = 5;
+    export type FreepostreplycommentCreateCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostreplycommentCreateMessageEnum2 =
+    export type FreepostreplycommentCreateMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostreplycommentCreateCodeEnum3 = 0;
+    export type FreepostreplycommentCreateCodeEnum3 = 0;
 
     /** error message */
-    export type FreePostreplycommentCreateMessageEnum3 =
+    export type FreepostreplycommentCreateMessageEnum3 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostreplycommentFindAllAndCountCodeEnum = 1;
+    export type FreepostreplycommentFindAllAndCountCodeEnum = 1;
 
     /** error message */
-    export type FreePostreplycommentFindAllAndCountMessageEnum =
+    export type FreepostreplycommentFindAllAndCountMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostreplycommentFindAllAndCountCodeEnum1 = 5;
+    export type FreepostreplycommentFindAllAndCountCodeEnum1 = 5;
 
     /** error message */
-    export type FreePostreplycommentFindAllAndCountMessageEnum1 =
+    export type FreepostreplycommentFindAllAndCountMessageEnum1 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostreplycommentFindAllAndCountCodeEnum2 = 0;
+    export type FreepostreplycommentFindAllAndCountCodeEnum2 = 0;
 
     /** error message */
-    export type FreePostreplycommentFindAllAndCountMessageEnum2 =
+    export type FreepostreplycommentFindAllAndCountMessageEnum2 =
       "Server error. Please contact server developer";
 
-    export interface FreePostreplycommentFindAllAndCountParams {
+    export interface FreepostreplycommentFindAllAndCountParams {
       /**
        * 페이지번호
        * @format integer
@@ -2300,200 +2300,200 @@ declare global {
      * error code
      * @example 1
      */
-    export type FreePostreplycommentPutUpdateCodeEnum = 1;
+    export type FreepostreplycommentPutUpdateCodeEnum = 1;
 
     /** error message */
-    export type FreePostreplycommentPutUpdateMessageEnum =
+    export type FreepostreplycommentPutUpdateMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostreplycommentPutUpdateCodeEnum1 = 3;
+    export type FreepostreplycommentPutUpdateCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostreplycommentPutUpdateMessageEnum1 =
+    export type FreepostreplycommentPutUpdateMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostreplycommentPutUpdateCodeEnum2 = 4;
+    export type FreepostreplycommentPutUpdateCodeEnum2 = 4;
 
     /** error message */
-    export type FreePostreplycommentPutUpdateMessageEnum2 =
+    export type FreepostreplycommentPutUpdateMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostreplycommentPutUpdateCodeEnum3 = 5;
+    export type FreepostreplycommentPutUpdateCodeEnum3 = 5;
 
     /** error message */
-    export type FreePostreplycommentPutUpdateMessageEnum3 =
+    export type FreepostreplycommentPutUpdateMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostreplycommentPutUpdateCodeEnum4 = 0;
+    export type FreepostreplycommentPutUpdateCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostreplycommentPutUpdateMessageEnum4 =
+    export type FreepostreplycommentPutUpdateMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostreplycommentRemoveCodeEnum = 1;
+    export type FreepostreplycommentRemoveCodeEnum = 1;
 
     /** error message */
-    export type FreePostreplycommentRemoveMessageEnum =
+    export type FreepostreplycommentRemoveMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostreplycommentRemoveCodeEnum1 = 3;
+    export type FreepostreplycommentRemoveCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostreplycommentRemoveMessageEnum1 =
+    export type FreepostreplycommentRemoveMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 4
      */
-    export type FreePostreplycommentRemoveCodeEnum2 = 4;
+    export type FreepostreplycommentRemoveCodeEnum2 = 4;
 
     /** error message */
-    export type FreePostreplycommentRemoveMessageEnum2 =
+    export type FreepostreplycommentRemoveMessageEnum2 =
       "You don't have permission to access it.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostreplycommentRemoveCodeEnum3 = 5;
+    export type FreepostreplycommentRemoveCodeEnum3 = 5;
 
     /** error message */
-    export type FreePostreplycommentRemoveMessageEnum3 =
+    export type FreepostreplycommentRemoveMessageEnum3 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostreplycommentRemoveCodeEnum4 = 0;
+    export type FreepostreplycommentRemoveCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostreplycommentRemoveMessageEnum4 =
+    export type FreepostreplycommentRemoveMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostreplycommentCreateReactionCodeEnum = 1;
+    export type FreepostreplycommentCreateReactionCodeEnum = 1;
 
     /** error message */
-    export type FreePostreplycommentCreateReactionMessageEnum =
+    export type FreepostreplycommentCreateReactionMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostreplycommentCreateReactionCodeEnum1 = 3;
+    export type FreepostreplycommentCreateReactionCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostreplycommentCreateReactionMessageEnum1 =
+    export type FreepostreplycommentCreateReactionMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostreplycommentCreateReactionCodeEnum2 = 5;
+    export type FreepostreplycommentCreateReactionCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostreplycommentCreateReactionMessageEnum2 =
+    export type FreepostreplycommentCreateReactionMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 4000
      */
-    export type FreePostreplycommentCreateReactionCodeEnum3 = 4000;
+    export type FreepostreplycommentCreateReactionCodeEnum3 = 4000;
 
     /** error message */
-    export type FreePostreplycommentCreateReactionMessageEnum3 =
+    export type FreepostreplycommentCreateReactionMessageEnum3 =
       "You've already liked it.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostreplycommentCreateReactionCodeEnum4 = 0;
+    export type FreepostreplycommentCreateReactionCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostreplycommentCreateReactionMessageEnum4 =
+    export type FreepostreplycommentCreateReactionMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
      * error code
      * @example 1
      */
-    export type FreePostreplycommentRemoveReactionCodeEnum = 1;
+    export type FreepostreplycommentRemoveReactionCodeEnum = 1;
 
     /** error message */
-    export type FreePostreplycommentRemoveReactionMessageEnum =
+    export type FreepostreplycommentRemoveReactionMessageEnum =
       "Invalid request parameter. Please check your request.";
 
     /**
      * error code
      * @example 3
      */
-    export type FreePostreplycommentRemoveReactionCodeEnum1 = 3;
+    export type FreepostreplycommentRemoveReactionCodeEnum1 = 3;
 
     /** error message */
-    export type FreePostreplycommentRemoveReactionMessageEnum1 =
+    export type FreepostreplycommentRemoveReactionMessageEnum1 =
       "This token is invalid.";
 
     /**
      * error code
      * @example 5
      */
-    export type FreePostreplycommentRemoveReactionCodeEnum2 = 5;
+    export type FreepostreplycommentRemoveReactionCodeEnum2 = 5;
 
     /** error message */
-    export type FreePostreplycommentRemoveReactionMessageEnum2 =
+    export type FreepostreplycommentRemoveReactionMessageEnum2 =
       "The resource you're trying to access doesn't exist.";
 
     /**
      * error code
      * @example 4001
      */
-    export type FreePostreplycommentRemoveReactionCodeEnum3 = 4001;
+    export type FreepostreplycommentRemoveReactionCodeEnum3 = 4001;
 
     /** error message */
-    export type FreePostreplycommentRemoveReactionMessageEnum3 =
+    export type FreepostreplycommentRemoveReactionMessageEnum3 =
       "You haven't liked it yet.";
 
     /**
      * error code
      * @example 0
      */
-    export type FreePostreplycommentRemoveReactionCodeEnum4 = 0;
+    export type FreepostreplycommentRemoveReactionCodeEnum4 = 0;
 
     /** error message */
-    export type FreePostreplycommentRemoveReactionMessageEnum4 =
+    export type FreepostreplycommentRemoveReactionMessageEnum4 =
       "Server error. Please contact server developer";
 
     /**
@@ -2701,12 +2701,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostCreate
+       * @name NoticepostCreate
        * @summary 공지 게시글 생성 API
        * @request POST:/api/notice-posts
        * @secure
        */
-      export namespace NoticePostCreate {
+      export namespace NoticepostCreate {
         export type RequestParams = {};
         export type RequestQuery = {};
         export type RequestBody = CreateNoticePostDto;
@@ -2716,11 +2716,11 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostFindAllAndCount
+       * @name NoticepostFindAllAndCount
        * @summary 공지 게시글 전체조회(pagination)
        * @request GET:/api/notice-posts
        */
-      export namespace NoticePostFindAllAndCount {
+      export namespace NoticepostFindAllAndCount {
         export type RequestParams = {};
         export type RequestQuery = {
           /**
@@ -2755,7 +2755,7 @@ declare global {
            */
           title?: string;
           /** 댓글 허용 여부 */
-          isAllowComment?: NoticePostFindAllAndCountParams1IsAllowCommentEnum;
+          isAllowComment?: NoticepostFindAllAndCountParams1IsAllowCommentEnum;
           /**
            * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAllowComment, createdAt, updatedAt]
            * @format csv
@@ -2771,11 +2771,11 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostFindOneOrNotFound
+       * @name NoticepostFindOneOrNotFound
        * @summary 공지게시글 상세조회
        * @request GET:/api/notice-posts/{postId}
        */
-      export namespace NoticePostFindOneOrNotFound {
+      export namespace NoticepostFindOneOrNotFound {
         export type RequestParams = {
           postId: number;
         };
@@ -2787,12 +2787,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostPutUpdate
+       * @name NoticepostPutUpdate
        * @summary 공지게시글 수정
        * @request PUT:/api/notice-posts/{postId}
        * @secure
        */
-      export namespace NoticePostPutUpdate {
+      export namespace NoticepostPutUpdate {
         export type RequestParams = {
           postId: number;
         };
@@ -2804,12 +2804,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostPatchUpdate
+       * @name NoticepostPatchUpdate
        * @summary 공지게시글 patch 수정
        * @request PATCH:/api/notice-posts/{postId}
        * @secure
        */
-      export namespace NoticePostPatchUpdate {
+      export namespace NoticepostPatchUpdate {
         export type RequestParams = {
           postId: number;
         };
@@ -2821,12 +2821,12 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostRemove
+       * @name NoticepostRemove
        * @summary 공지 게시글 삭제
        * @request DELETE:/api/notice-posts/{postId}
        * @secure
        */
-      export namespace NoticePostRemove {
+      export namespace NoticepostRemove {
         export type RequestParams = {
           postId: number;
         };
@@ -2838,11 +2838,11 @@ declare global {
       /**
        * No description
        * @tags notice-post
-       * @name NoticePostIncreaseHit
+       * @name NoticepostIncreaseHit
        * @summary 조회수 1 증가
        * @request PUT:/api/notice-posts/{postId}/hit
        */
-      export namespace NoticePostIncreaseHit {
+      export namespace NoticepostIncreaseHit {
         export type RequestParams = {
           postId: number;
         };
@@ -2854,12 +2854,12 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostCreate
+       * @name FreepostCreate
        * @summary 자유 게시글 생성
        * @request POST:/api/free-posts
        * @secure
        */
-      export namespace FreePostCreate {
+      export namespace FreepostCreate {
         export type RequestParams = {};
         export type RequestQuery = {};
         export type RequestBody = CreateFreePostDto;
@@ -2869,11 +2869,11 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostFindAllAndCount
+       * @name FreepostFindAllAndCount
        * @summary 자유 게시글 전체조회(pagination)
        * @request GET:/api/free-posts
        */
-      export namespace FreePostFindAllAndCount {
+      export namespace FreepostFindAllAndCount {
         export type RequestParams = {};
         export type RequestQuery = {
           /**
@@ -2907,7 +2907,7 @@ declare global {
            */
           title?: string;
           /** 익명여부 필터링 */
-          isAnonymous?: FreePostFindAllAndCountParams1IsAnonymousEnum;
+          isAnonymous?: FreepostFindAllAndCountParams1IsAnonymousEnum;
           /**
            * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, userId, title, hit, isAnonymous, createdAt, updatedAt]
            * @format csv
@@ -2923,11 +2923,11 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostFindOneOrNotFound
+       * @name FreepostFindOneOrNotFound
        * @summary 자유게시글 상세조회
        * @request GET:/api/free-posts/{postId}
        */
-      export namespace FreePostFindOneOrNotFound {
+      export namespace FreepostFindOneOrNotFound {
         export type RequestParams = {
           postId: number;
         };
@@ -2939,12 +2939,12 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostPutUpdate
+       * @name FreepostPutUpdate
        * @summary 자유게시글 수정
        * @request PUT:/api/free-posts/{postId}
        * @secure
        */
-      export namespace FreePostPutUpdate {
+      export namespace FreepostPutUpdate {
         export type RequestParams = {
           postId: number;
         };
@@ -2956,12 +2956,12 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostPatchUpdate
+       * @name FreepostPatchUpdate
        * @summary 자유게시글 부분 수정
        * @request PATCH:/api/free-posts/{postId}
        * @secure
        */
-      export namespace FreePostPatchUpdate {
+      export namespace FreepostPatchUpdate {
         export type RequestParams = {
           postId: number;
         };
@@ -2973,12 +2973,12 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostRemove
+       * @name FreepostRemove
        * @summary 자유게시글 삭제
        * @request DELETE:/api/free-posts/{postId}
        * @secure
        */
-      export namespace FreePostRemove {
+      export namespace FreepostRemove {
         export type RequestParams = {
           postId: number;
         };
@@ -2990,11 +2990,11 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostIncrementHit
+       * @name FreepostIncrementHit
        * @summary 조회수 증가(1)
        * @request PUT:/api/free-posts/{postId}/hit
        */
-      export namespace FreePostIncrementHit {
+      export namespace FreepostIncrementHit {
         export type RequestParams = {
           postId: number;
         };
@@ -3006,12 +3006,12 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostCreateReaction
+       * @name FreepostCreateReaction
        * @summary 자유 게시글 reaction 생성
        * @request POST:/api/free-posts/{postId}/reaction
        * @secure
        */
-      export namespace FreePostCreateReaction {
+      export namespace FreepostCreateReaction {
         export type RequestParams = {
           postId: number;
         };
@@ -3023,12 +3023,12 @@ declare global {
       /**
        * No description
        * @tags free-post
-       * @name FreePostRemoveReaction
+       * @name FreepostRemoveReaction
        * @summary 자유 게시글 reaction 삭제
        * @request DELETE:/api/free-posts/{postId}/reaction
        * @secure
        */
-      export namespace FreePostRemoveReaction {
+      export namespace FreepostRemoveReaction {
         export type RequestParams = {
           postId: number;
         };
@@ -3040,12 +3040,12 @@ declare global {
       /**
        * No description
        * @tags free-post-comment
-       * @name FreePostcommentCreate
+       * @name FreepostcommentCreate
        * @summary 자유 게시글 댓글 생성
        * @request POST:/api/free-posts/{postId}/comments
        * @secure
        */
-      export namespace FreePostcommentCreate {
+      export namespace FreepostcommentCreate {
         export type RequestParams = {
           postId: number;
         };
@@ -3057,11 +3057,11 @@ declare global {
       /**
        * No description
        * @tags free-post-comment
-       * @name FreePostcommentFindAllAndCount
+       * @name FreepostcommentFindAllAndCount
        * @summary 자유 게시글 댓글 전체조회(pagination)
        * @request GET:/api/free-posts/{postId}/comments
        */
-      export namespace FreePostcommentFindAllAndCount {
+      export namespace FreepostcommentFindAllAndCount {
         export type RequestParams = {
           postId: number;
         };
@@ -3096,12 +3096,12 @@ declare global {
       /**
        * No description
        * @tags free-post-comment
-       * @name FreePostcommentPutUpdate
+       * @name FreepostcommentPutUpdate
        * @summary 자유게시글 댓글 수정
        * @request PUT:/api/free-posts/{postId}/comments/{commentId}
        * @secure
        */
-      export namespace FreePostcommentPutUpdate {
+      export namespace FreepostcommentPutUpdate {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3114,12 +3114,12 @@ declare global {
       /**
        * No description
        * @tags free-post-comment
-       * @name FreePostcommentRemove
+       * @name FreepostcommentRemove
        * @summary 자유게시글 댓글 삭제
        * @request DELETE:/api/free-posts/{postId}/comments/{commentId}
        * @secure
        */
-      export namespace FreePostcommentRemove {
+      export namespace FreepostcommentRemove {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3132,12 +3132,12 @@ declare global {
       /**
        * No description
        * @tags free-post-comment
-       * @name FreePostcommentCreateReaction
+       * @name FreepostcommentCreateReaction
        * @summary 자유 게시글 댓글 reaction 생성
        * @request POST:/api/free-posts/{postId}/comments/{commentId}/reaction
        * @secure
        */
-      export namespace FreePostcommentCreateReaction {
+      export namespace FreepostcommentCreateReaction {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3150,12 +3150,12 @@ declare global {
       /**
        * No description
        * @tags free-post-comment
-       * @name FreePostcommentRemoveReaction
+       * @name FreepostcommentRemoveReaction
        * @summary 자유 게시글 댓글 reaction 삭제
        * @request DELETE:/api/free-posts/{postId}/comments/{commentId}/reaction
        * @secure
        */
-      export namespace FreePostcommentRemoveReaction {
+      export namespace FreepostcommentRemoveReaction {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3168,12 +3168,12 @@ declare global {
       /**
        * No description
        * @tags free-post-reply-comment
-       * @name FreePostreplycommentCreate
+       * @name FreepostreplycommentCreate
        * @summary 자유 게시글 대댓글 생성
        * @request POST:/api/free-posts/{postId}/comments/{commentId}/reply
        * @secure
        */
-      export namespace FreePostreplycommentCreate {
+      export namespace FreepostreplycommentCreate {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3186,11 +3186,11 @@ declare global {
       /**
        * No description
        * @tags free-post-reply-comment
-       * @name FreePostreplycommentFindAllAndCount
+       * @name FreepostreplycommentFindAllAndCount
        * @summary 자유 게시글 대댓글 전체조회(pagination)
        * @request GET:/api/free-posts/{postId}/comments/{commentId}/reply
        */
-      export namespace FreePostreplycommentFindAllAndCount {
+      export namespace FreepostreplycommentFindAllAndCount {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3226,12 +3226,12 @@ declare global {
       /**
        * No description
        * @tags free-post-reply-comment
-       * @name FreePostreplycommentPutUpdate
+       * @name FreepostreplycommentPutUpdate
        * @summary 자유게시글 대댓글 수정
        * @request PUT:/api/free-posts/{postId}/comments/{commentId}/reply/{replyId}
        * @secure
        */
-      export namespace FreePostreplycommentPutUpdate {
+      export namespace FreepostreplycommentPutUpdate {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3245,12 +3245,12 @@ declare global {
       /**
        * No description
        * @tags free-post-reply-comment
-       * @name FreePostreplycommentRemove
+       * @name FreepostreplycommentRemove
        * @summary 자유게시글 대댓글 삭제
        * @request DELETE:/api/free-posts/{postId}/comments/{commentId}/reply/{replyId}
        * @secure
        */
-      export namespace FreePostreplycommentRemove {
+      export namespace FreepostreplycommentRemove {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3264,12 +3264,12 @@ declare global {
       /**
        * No description
        * @tags free-post-reply-comment
-       * @name FreePostreplycommentCreateReaction
+       * @name FreepostreplycommentCreateReaction
        * @summary 자유 게시글 대댓글 reaction 생성
        * @request POST:/api/free-posts/{postId}/comments/{commentId}/reply/{replyId}/reaction
        * @secure
        */
-      export namespace FreePostreplycommentCreateReaction {
+      export namespace FreepostreplycommentCreateReaction {
         export type RequestParams = {
           postId: number;
           commentId: number;
@@ -3283,12 +3283,12 @@ declare global {
       /**
        * No description
        * @tags free-post-reply-comment
-       * @name FreePostreplycommentRemoveReaction
+       * @name FreepostreplycommentRemoveReaction
        * @summary 자유 게시글 대댓글 reaction 삭제
        * @request DELETE:/api/free-posts/{postId}/comments/{commentId}/reply/{replyId}/reaction
        * @secure
        */
-      export namespace FreePostreplycommentRemoveReaction {
+      export namespace FreepostreplycommentRemoveReaction {
         export type RequestParams = {
           postId: number;
           commentId: number;

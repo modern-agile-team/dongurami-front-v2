@@ -4,10 +4,12 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
+import { useQuery } from "@tanstack/react-query";
+import Head from "next/head";
 
-import { Button, Column, Pagination, Typography } from "@/components";
+import { Column, Loader, Pagination, Typography, WhatIF } from "@/components";
 import { noticePostsAPI } from "@/apis";
 import { Table } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
@@ -16,10 +18,21 @@ interface PostData {
   id: number;
 }
 
-export default function NoticeBoard(props: {
-  noticePost: Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
-}) {
+export default function NoticeBoard(props: { boardName: string }) {
   const router = useRouter();
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["board", "notice", router.query.page],
+    queryFn: async () => {
+      const page = router.query.page as string;
+      return (
+        await noticePostsAPI.noticepostFindAllAndCount({
+          page: Number(page),
+          pageSize: 20,
+        })
+      ).data;
+    },
+  });
 
   function handleClickPostDetail(el: PostData) {
     router.push({
@@ -27,65 +40,57 @@ export default function NoticeBoard(props: {
     });
   }
 
+  if (isError) throw new Error("게시판을 불러올 수 없습니다.");
   return (
-    <Column horizonAlign="center" gap={10}>
-      <Column
-        horizonAlign="left"
-        style={{
-          width: "calc(100% - 512px)",
-          minWidth: 1408,
-          marginBottom: 20,
-        }}
-      >
-        <Typography typoSize="Head4" typoColor="primary_100">
-          공지게시판
-        </Typography>
-      </Column>
-      <Table
-        data={props.noticePost}
-        type="free"
-        handleClickPostDetail={handleClickPostDetail}
-      />
+    <>
+      <Head>
+        <title>동그라미 - 공지 게시판</title>
+      </Head>
+      <Column horizonAlign="center" gap={10}>
+        <Column
+          horizonAlign="left"
+          style={{
+            width: "calc(100% - 512px)",
+            marginBottom: 20,
+          }}
+        >
+          <Typography typoSize="Head4" typoColor="primary_100">
+            {props.boardName}
+          </Typography>
+        </Column>
+        <WhatIF condition={!isLoading} falsy={<Loader />}>
+          {data && (
+            <Table
+              data={data}
+              type="free"
+              handleClickPostDetail={handleClickPostDetail}
+            />
+          )}
 
-      <SearchWriter type="notice" />
-      <Pagination
-        defaultPage={props.noticePost?.currentPage}
-        count={props.noticePost?.lastPage || 1}
-        onChange={(_, page) => {
-          router.push({
-            pathname: "/board/notice",
-            query: {
-              page,
-            },
-          });
-        }}
-      />
-    </Column>
+          <SearchWriter type="notice" />
+
+          <Pagination
+            defaultPage={data?.currentPage}
+            count={data?.lastPage || 1}
+            onChange={(_, page) => {
+              router.push({
+                pathname: "/board/notice",
+                query: {
+                  page,
+                },
+              });
+            }}
+          />
+        </WhatIF>
+      </Column>
+    </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const page = ctx.query.page as string;
-
-  const noticePost = (
-    await noticePostsAPI.noticePostFindAllAndCount({
-      page: Number(page),
-      pageSize: 20,
-    })
-  ).data;
-
-  if (noticePost.contents.length === 0) {
-    return {
-      redirect: {
-        destination: `/board/notice?page=${noticePost.lastPage}`,
-        permanent: false,
-      },
-    };
-  }
-
+export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
-      noticePost,
+      boardName: "공지 게시판",
     },
   };
 };

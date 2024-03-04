@@ -30,9 +30,11 @@ describe("동아리 페이지 테스트", () => {
         <ClubPage />
       </TestProvider>
     );
-    const noticeButton = await screen.findByRole("button", { name: "공지" });
-    await userEvent.click(noticeButton);
-    expect(mockRouter.query.tab).toBe("notice");
+    const calendarButton = await screen.findByRole("button", {
+      name: "캘린더",
+    });
+    await userEvent.click(calendarButton);
+    expect(mockRouter.query.tab).toBe("calendar");
   });
 
   it("3. URL을 통해 잘못된 탭으로 접근시 home 탭으로 이동한다.", async () => {
