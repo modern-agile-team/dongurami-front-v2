@@ -28,7 +28,7 @@ export default function DetailNoticeBoard() {
   }, [isFetched]);
 
   const incrementPostViews = async () => {
-    await noticePostsAPI.noticePostIncreaseHit(Number(postId));
+    await noticePostsAPI.noticepostIncreaseHit(Number(postId));
   };
 
   const handleClickDelete = () => {

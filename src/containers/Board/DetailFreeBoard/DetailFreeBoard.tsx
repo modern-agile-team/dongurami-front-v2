@@ -29,7 +29,7 @@ export default function DetailFreeBoard() {
   }, [isFetched]);
 
   const incrementPostViews = async () => {
-    await freePostsAPI.freePostIncrementHit(Number(postId));
+    await freePostsAPI.freepostIncrementHit(Number(postId));
   };
 
   const handleClickDelete = () => {

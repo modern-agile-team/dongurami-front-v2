@@ -26,7 +26,7 @@ export default function FreeBoard(props: { boardName: string }) {
     queryFn: async () => {
       const page = router.query.page as string;
       return (
-        await freePostsAPI.freePostFindAllAndCount({
+        await freePostsAPI.freepostFindAllAndCount({
           page: Number(page),
           pageSize: 20,
         })
