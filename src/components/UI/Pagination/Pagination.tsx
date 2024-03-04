@@ -9,7 +9,6 @@ import React, { useMemo, useState } from "react";
 import { Icon, Row, WhatIF } from "@/components";
 import * as S from "./emotion";
 import { lightThemeColor } from "@/styles/theme";
-import * as Svg from "@/components/Svg";
 
 interface IPaginationProps {
   count: number;

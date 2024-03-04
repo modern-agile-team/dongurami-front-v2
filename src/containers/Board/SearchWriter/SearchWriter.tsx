@@ -2,8 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import * as S from "./emotion";
-import { Typography } from "@/components";
-import * as Svg from "@/components/Svg";
+import { Typography, Icon } from "@/components";
 import { useAuth } from "@/hooks";
 
 interface BoardType {
@@ -51,9 +50,9 @@ export default function SearchWriter({ type }: BoardType) {
       </S.WrapSearch>
 
       {/* 관리자 구분 값 필요 */}
-      {isLoggedIn && type === "free" ? (
+      {!isLoggedIn && type === "free" ? (
         <S.WrapButton onClick={handleClickPostWrite}>
-          <Svg.Pen35 />
+          <Icon name="Pan35" size={40} fill="neutral_10" />
           <Typography
             typoColor="white"
             typoSize="Head5"
