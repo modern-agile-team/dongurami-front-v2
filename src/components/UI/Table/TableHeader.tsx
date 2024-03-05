@@ -8,6 +8,7 @@ import React from "react";
 
 import * as S from "./emotion";
 import { Typography } from "@/components";
+import { Converter } from "@/utils";
 
 interface PostData {
   id: number;
@@ -17,7 +18,7 @@ export default function TableHeader() {
   return (
     <S.Table>
       <S.Thead>
-        <S.Th style={{ padding: `40px 0px` }}>
+        <S.Th style={{ padding: `${Converter.pxToRem(40)} 0px` }}>
           <Typography typoColor="neutral_90" typoSize="Head5">
             순서
           </Typography>

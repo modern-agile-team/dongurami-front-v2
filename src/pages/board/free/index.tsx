@@ -9,11 +9,21 @@ import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 
-import { Column, Loader, Pagination, Typography, WhatIF } from "@/components";
+import {
+  Button,
+  Column,
+  Icon,
+  Loader,
+  Pagination,
+  Typography,
+  WhatIF,
+} from "@/components";
 import { freePostsAPI, noticePostsAPI } from "@/apis";
 import { Table, TableHeader } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 import { Converter } from "@/utils";
+import { lightThemeColor } from "@/styles/theme";
+import { useState } from "react";
 
 interface PostData {
   id: number;
@@ -21,6 +31,7 @@ interface PostData {
 
 export default function FreeBoard(props: { boardName: string }) {
   const router = useRouter();
+  const [isNoticeVisible, setIsNoticeVisible] = useState<boolean>(true);
 
   const {
     data: freeData,
@@ -62,6 +73,10 @@ export default function FreeBoard(props: { boardName: string }) {
     });
   }
 
+  function toggleNoticeVisibility() {
+    setIsNoticeVisible(!isNoticeVisible);
+  }
+
   if (isErrorFree || isErrorNotice)
     throw new Error("게시판을 불러올 수 없습니다.");
   return (
@@ -83,10 +98,58 @@ export default function FreeBoard(props: { boardName: string }) {
           </Typography>
         </Column>
 
+        <Column
+          horizonAlign="center"
+          style={{
+            width: `calc(100% - ${Converter.pxToRem(512)})`,
+            minWidth: Converter.pxToRem(1408),
+            margin: `${Converter.pxToRem(20)} 0`,
+            justifyContent: "flex-end",
+            flexDirection: "row",
+          }}
+        >
+          {isNoticeVisible ? (
+            <Button
+              shape="square"
+              style={{
+                border: `1px solid ${lightThemeColor.neutral_60}`,
+                width: Converter.pxToRem(25),
+                height: Converter.pxToRem(25),
+                marginRight: Converter.pxToRem(15),
+                backgroundColor: "#fff",
+                borderRadius: "3px",
+              }}
+              onClick={toggleNoticeVisibility}
+            />
+          ) : (
+            <Button
+              shape="square"
+              style={{
+                border: `1px solid ${lightThemeColor.neutral_60}`,
+                width: Converter.pxToRem(25),
+                height: Converter.pxToRem(25),
+                marginRight: Converter.pxToRem(15),
+                backgroundColor: "#fff",
+                borderRadius: "3px",
+                // alignItems: "center",
+                // justifyContent: "center",
+                // display: "flex",
+              }}
+              onClick={toggleNoticeVisibility}
+            >
+              <Icon name="Check35" size={35} />
+            </Button>
+          )}
+
+          <Typography typoSize="Head6" typoColor="neutral_90">
+            공지 숨기기
+          </Typography>
+        </Column>
+
         <TableHeader />
 
         <WhatIF condition={!isLoadingFree} falsy={<Loader />}>
-          {freeData?.currentPage === 1 ? (
+          {isNoticeVisible ? (
             <>
               {noticeData && (
                 <Table
