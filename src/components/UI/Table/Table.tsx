@@ -7,7 +7,8 @@
 import React from "react";
 
 import * as S from "./emotion";
-import { Typography } from "@/components";
+import { Button, Typography } from "@/components";
+import { lightThemeColor } from "@/styles/theme";
 
 interface PostData {
   id: number;
@@ -26,6 +27,9 @@ export default function Table({
   type,
   handleClickPostDetail,
 }: TableData) {
+  const slicedData =
+    type === "free" ? data.contents : data.contents.slice(0, 5);
+
   const getAuthorType = (
     post: Swagger.FreePostsItemDto | Swagger.NoticePostsItemDto
   ) => {
@@ -49,7 +53,7 @@ export default function Table({
       return (
         <S.Th>
           <Typography typoColor="neutral_90" typoSize="Head6">
-            운영자 ?
+            운영자
           </Typography>
         </S.Th>
       );
@@ -57,68 +61,55 @@ export default function Table({
   };
 
   return (
-    <S.TableContainer>
-      <S.Table>
-        <S.Thead>
-          <S.Tr>
-            <S.Th style={{ padding: `40px 0px` }}>
-              <Typography typoColor="neutral_90" typoSize="Head5">
-                순서
-              </Typography>
-            </S.Th>
-            <S.ThTitle>
-              <Typography typoColor="neutral_90" typoSize="Head5">
-                제목
-              </Typography>
-            </S.ThTitle>
-            <S.Th>
-              <Typography typoColor="neutral_90" typoSize="Head5">
-                작성자
-              </Typography>
-            </S.Th>
-            <S.Th>
-              <Typography typoColor="neutral_90" typoSize="Head5">
-                작성일
-              </Typography>
-            </S.Th>
-            <S.Th>
-              <Typography typoColor="neutral_90" typoSize="Head5">
-                조회
-              </Typography>
-            </S.Th>
-          </S.Tr>
-        </S.Thead>
-        <S.Tbody>
-          {data.contents.map((post) => {
-            return (
-              <S.Tr key={post.id} onClick={() => handleClickPostDetail(post)}>
-                <S.Th>
+    <S.Table>
+      <S.Tbody>
+        {slicedData.map((post) => {
+          return (
+            <S.Tr
+              key={post.id}
+              onClick={() => handleClickPostDetail(post)}
+              type={type}
+            >
+              <S.Th>
+                {type === "free" ? (
                   <Typography typoColor="neutral_90" typoSize="Head6">
                     {post.id}
                   </Typography>
-                </S.Th>
-                <S.ThTitle>
-                  <Typography typoColor="neutral_90" typoSize="Head6">
-                    {post.title}
-                  </Typography>
-                </S.ThTitle>
+                ) : (
+                  <Button
+                    shape="square"
+                    backgroundColor="primary_20"
+                    style={{
+                      border: `1px solid ${lightThemeColor.primary_50}`,
+                    }}
+                  >
+                    <Typography typoColor="primary_80" typoSize="Head7">
+                      공지
+                    </Typography>
+                  </Button>
+                )}
+              </S.Th>
+              <S.ThTitle>
+                <Typography typoColor="neutral_90" typoSize="Head6">
+                  {post.title}
+                </Typography>
+              </S.ThTitle>
 
-                {getAuthorType(post)}
-                <S.Th>
-                  <Typography typoColor="neutral_90" typoSize="Head6">
-                    {new Date(post.createdAt).toLocaleDateString()}
-                  </Typography>
-                </S.Th>
-                <S.Th>
-                  <Typography typoColor="neutral_90" typoSize="Head6">
-                    {post.hit}
-                  </Typography>
-                </S.Th>
-              </S.Tr>
-            );
-          })}
-        </S.Tbody>
-      </S.Table>
-    </S.TableContainer>
+              {getAuthorType(post)}
+              <S.Th>
+                <Typography typoColor="neutral_90" typoSize="Head6">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </Typography>
+              </S.Th>
+              <S.Th>
+                <Typography typoColor="neutral_90" typoSize="Head6">
+                  {post.hit}
+                </Typography>
+              </S.Th>
+            </S.Tr>
+          );
+        })}
+      </S.Tbody>
+    </S.Table>
   );
 }
