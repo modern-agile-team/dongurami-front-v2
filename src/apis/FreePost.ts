@@ -196,7 +196,10 @@ export class FreePost<SecurityDataType = unknown> {
    * @summary 자유 게시글 전체조회(pagination)
    * @request GET:/api/free-posts
    */
-  freepostFindAllAndCount = (query: FreepostFindAllAndCountParams, params: RequestParams = {}) =>
+  freepostFindAllAndCount = (
+    query: FreepostFindAllAndCountParams,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       FreePostsPaginationResponseDto,
       | {
@@ -341,7 +344,11 @@ export class FreePost<SecurityDataType = unknown> {
    * @request PUT:/api/free-posts/{postId}
    * @secure
    */
-  freepostPutUpdate = (postId: number, data: PutUpdateFreePostDto, params: RequestParams = {}) =>
+  freepostPutUpdate = (
+    postId: number,
+    data: PutUpdateFreePostDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       FreePostDetailResponseDto,
       | {
@@ -469,7 +476,11 @@ export class FreePost<SecurityDataType = unknown> {
    * @request PATCH:/api/free-posts/{postId}
    * @secure
    */
-  freepostPatchUpdate = (postId: number, data: PatchUpdateFreePostDto, params: RequestParams = {}) =>
+  freepostPatchUpdate = (
+    postId: number,
+    data: PatchUpdateFreePostDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       FreePostDetailResponseDto,
       | {
@@ -804,7 +815,11 @@ export class FreePost<SecurityDataType = unknown> {
    * @request POST:/api/free-posts/{postId}/reaction
    * @secure
    */
-  freepostCreateReaction = (postId: number, data: CreateReactionDto, params: RequestParams = {}) =>
+  freepostCreateReaction = (
+    postId: number,
+    data: CreateReactionDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       void,
       | {
@@ -931,7 +946,11 @@ export class FreePost<SecurityDataType = unknown> {
    * @request DELETE:/api/free-posts/{postId}/reaction
    * @secure
    */
-  freepostRemoveReaction = (postId: number, data: RemoveReactionDto, params: RequestParams = {}) =>
+  freepostRemoveReaction = (
+    postId: number,
+    data: RemoveReactionDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       void,
       | {

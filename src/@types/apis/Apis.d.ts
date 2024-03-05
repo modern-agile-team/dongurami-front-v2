@@ -2074,15 +2074,15 @@ declare global {
      * @example 4
      */
     export type FreepostcommentRemoveCodeEnum2 = 4;
-
-    /** error message */
-    export type FreepostcommentRemoveMessageEnum2 =
-      "You don't have permission to access it.";
-
     /**
      * error code
      * @example 5
      */
+    export type FreePostcommentRemoveCodeEnum3 = 5;
+
+    /** error message */
+    export type FreePostcommentRemoveMessageEnum3 =
+      "The resource you're trying to access doesn't exist.";
     export type FreepostcommentRemoveCodeEnum3 = 5;
 
     /** error message */
@@ -2134,15 +2134,15 @@ declare global {
      * @example 4000
      */
     export type FreepostcommentCreateReactionCodeEnum3 = 4000;
-
-    /** error message */
-    export type FreepostcommentCreateReactionMessageEnum3 =
-      "You've already liked it.";
-
     /**
      * error code
      * @example 0
      */
+    export type FreePostcommentCreateReactionCodeEnum4 = 0;
+
+    /** error message */
+    export type FreePostcommentCreateReactionMessageEnum4 =
+      "Server error. Please contact server developer";
     export type FreepostcommentCreateReactionCodeEnum4 = 0;
 
     /** error message */

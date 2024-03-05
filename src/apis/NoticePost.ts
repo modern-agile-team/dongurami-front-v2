@@ -174,7 +174,10 @@ export class NoticePost<SecurityDataType = unknown> {
    * @summary 공지 게시글 전체조회(pagination)
    * @request GET:/api/notice-posts
    */
-  noticepostFindAllAndCount = (query: NoticepostFindAllAndCountParams, params: RequestParams = {}) =>
+  noticepostFindAllAndCount = (
+    query: NoticepostFindAllAndCountParams,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       NoticePostsPaginationResponseDto,
       | {
@@ -319,7 +322,11 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request PUT:/api/notice-posts/{postId}
    * @secure
    */
-  noticepostPutUpdate = (postId: number, data: PutUpdateNoticePostDto, params: RequestParams = {}) =>
+  noticepostPutUpdate = (
+    postId: number,
+    data: PutUpdateNoticePostDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       NoticePostDetailResponseDto,
       | {
@@ -447,7 +454,11 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request PATCH:/api/notice-posts/{postId}
    * @secure
    */
-  noticepostPatchUpdate = (postId: number, data: PatchUpdateNoticePostDto, params: RequestParams = {}) =>
+  noticepostPatchUpdate = (
+    postId: number,
+    data: PatchUpdateNoticePostDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       NoticePostDetailResponseDto,
       | {

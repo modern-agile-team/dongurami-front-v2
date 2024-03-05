@@ -2,9 +2,8 @@ import styled from "@emotion/styled";
 
 import { lightThemeColor } from "@/styles/theme";
 
-export const TableConatiner = styled.table`
+export const TableContainer = styled.table`
   width: calc(100% - 512px);
-  height: 1710px;
   min-width: 1408px;
 `;
 export const Table = styled.table`
@@ -20,7 +19,6 @@ export const Thead = styled.thead`
 `;
 
 export const Tbody = styled.tbody`
-  height: 1600px;
   vertical-align: top;
 `;
 
@@ -31,13 +29,12 @@ export const Tr = styled.tr`
 export const ThTitle = styled.th`
   border: none;
   padding: 20px 0px;
-  align-items: center;
   width: 50%;
 `;
 
 export const Th = styled.th`
   border: none;
   padding: 20px 0px;
-  align-items: center;
   width: 12.5%;
+  text-align: center;
 `;

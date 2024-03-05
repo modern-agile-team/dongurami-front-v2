@@ -424,7 +424,12 @@ export class FreePostReplyComment<SecurityDataType = unknown> {
    * @request DELETE:/api/free-posts/{postId}/comments/{commentId}/reply/{replyId}
    * @secure
    */
-  freepostreplycommentRemove = (postId: number, commentId: number, replyId: number, params: RequestParams = {}) =>
+  freepostreplycommentRemove = (
+    postId: number,
+    commentId: number,
+    replyId: number,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       FreePostDeleteResponseDto,
       | {

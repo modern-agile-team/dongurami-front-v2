@@ -59,8 +59,9 @@ export default function Pagination({
     >
       <S.ArrowButton
         onClick={(ev) => {
-          setCurrentPage(Number(1));
-          props.onChange?.(ev, Number(1));
+          const prevPage = Math.max(currentPage - 10, 1);
+          setCurrentPage(Number(prevPage));
+          props.onChange?.(ev, Number(prevPage));
         }}
       >
         <Icon id="left" size={54} name="LeftArrow24" />
@@ -82,6 +83,7 @@ export default function Pagination({
                     `${page}` === `${currentPage}`
                       ? "white"
                       : `${lightThemeColor.neutral_90}`,
+                  fontSize: 34,
                 }}
                 disabled={`${currentPage}` === `${page}`}
                 onClick={(ev) => {
@@ -98,8 +100,9 @@ export default function Pagination({
 
       <S.ArrowButton
         onClick={(ev) => {
-          setCurrentPage(Number(props.count));
-          props.onChange?.(ev, Number(props.count));
+          const nextPage = Math.min(currentPage + 10, props.count);
+          setCurrentPage(Number(nextPage));
+          props.onChange?.(ev, Number(nextPage));
         }}
       >
         <Icon id="right" size={54} name="RightArrow24" />

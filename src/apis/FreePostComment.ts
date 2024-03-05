@@ -92,7 +92,11 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @request POST:/api/free-posts/{postId}/comments
    * @secure
    */
-  freepostcommentCreate = (postId: number, data: CreateFreePostCommentDto, params: RequestParams = {}) =>
+  freepostcommentCreate = (
+    postId: number,
+    data: CreateFreePostCommentDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       FreePostCommentDetailResponseDto,
       | {
@@ -418,7 +422,11 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @request DELETE:/api/free-posts/{postId}/comments/{commentId}
    * @secure
    */
-  freepostcommentRemove = (postId: number, commentId: number, params: RequestParams = {}) =>
+  freepostcommentRemove = (
+    postId: number,
+    commentId: number,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       FreePostDeleteResponseDto,
       | {

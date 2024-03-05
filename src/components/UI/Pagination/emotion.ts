@@ -19,8 +19,8 @@ export const PaginationButton = styled.button`
 
 export const ArrowButton = styled.button`
   border-radius: 10px;
-  width: 58px;
-  height: 58px;
+  padding: 6px;
+  border: 0px;
   align-items: center;
   justify-content: center;
 `;

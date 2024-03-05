@@ -915,7 +915,14 @@ export interface SignUpRequestBodyDto {
   profilePath: string | null;
 }
 
-export type ErrorCodeResponseDtoCodeEnum = "0" | "1" | "2" | "3" | "4" | "5" | "6";
+export type ErrorCodeResponseDtoCodeEnum =
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6";
 
 export type ErrorCodeResponseDtoMessageEnum =
   | "Server error. Please contact server developer"
@@ -928,7 +935,9 @@ export type ErrorCodeResponseDtoMessageEnum =
 
 export type ErrorCodeResponseDtoCodeEnum1 = "1000" | "1001";
 
-export type ErrorCodeResponseDtoMessageEnum1 = "The account was not found." | "Your account information doesn't match.";
+export type ErrorCodeResponseDtoMessageEnum1 =
+  | "The account was not found."
+  | "Your account information doesn't match.";
 
 export type ErrorCodeResponseDtoCodeEnum2 = "2000" | "2001" | "2002";
 
@@ -939,11 +948,15 @@ export type ErrorCodeResponseDtoMessageEnum2 =
 
 export type ErrorCodeResponseDtoCodeEnum3 = "3000" | "3001";
 
-export type ErrorCodeResponseDtoMessageEnum3 = "Major name that already exists" | "Major code that already exists.";
+export type ErrorCodeResponseDtoMessageEnum3 =
+  | "Major name that already exists"
+  | "Major code that already exists.";
 
 export type ErrorCodeResponseDtoCodeEnum4 = "4000" | "4001";
 
-export type ErrorCodeResponseDtoMessageEnum4 = "You've already liked it." | "You haven't liked it yet.";
+export type ErrorCodeResponseDtoMessageEnum4 =
+  | "You've already liked it."
+  | "You haven't liked it yet.";
 
 /** 유저 로그인 타입 */
 export type UserDtoLoginTypeEnum = "KAKAO" | "GOOGLE" | "NAVER";
@@ -997,7 +1010,8 @@ export type AuthSignInMessageEnum =
 export type AuthSignInCodeEnum1 = 0;
 
 /** error message */
-export type AuthSignInMessageEnum1 = "Server error. Please contact server developer";
+export type AuthSignInMessageEnum1 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1015,7 +1029,8 @@ export type AuthGetProfileMessageEnum = "This token is invalid.";
 export type AuthGetProfileCodeEnum1 = 0;
 
 /** error message */
-export type AuthGetProfileMessageEnum1 = "Server error. Please contact server developer";
+export type AuthGetProfileMessageEnum1 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1033,7 +1048,8 @@ export type AuthGetAccessTokenMessageEnum = "This token is invalid.";
 export type AuthGetAccessTokenCodeEnum1 = 0;
 
 /** error message */
-export type AuthGetAccessTokenMessageEnum1 = "Server error. Please contact server developer";
+export type AuthGetAccessTokenMessageEnum1 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1042,7 +1058,8 @@ export type AuthGetAccessTokenMessageEnum1 = "Server error. Please contact serve
 export type UserCreateCodeEnum = 1;
 
 /** error message */
-export type UserCreateMessageEnum = "Invalid request parameter. Please check your request.";
+export type UserCreateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1051,7 +1068,9 @@ export type UserCreateMessageEnum = "Invalid request parameter. Please check you
 export type UserCreateCodeEnum1 = 2000 | 2001;
 
 /** error message */
-export type UserCreateMessageEnum1 = "An email that already exists." | "A cell phone number that already exists.";
+export type UserCreateMessageEnum1 =
+  | "An email that already exists."
+  | "A cell phone number that already exists.";
 
 /**
  * error code
@@ -1060,7 +1079,8 @@ export type UserCreateMessageEnum1 = "An email that already exists." | "A cell p
 export type UserCreateCodeEnum2 = 0;
 
 /** error message */
-export type UserCreateMessageEnum2 = "Server error. Please contact server developer";
+export type UserCreateMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1069,7 +1089,8 @@ export type UserCreateMessageEnum2 = "Server error. Please contact server develo
 export type UserFindOneUserOrNotFoundCodeEnum = 1;
 
 /** error message */
-export type UserFindOneUserOrNotFoundMessageEnum = "Invalid request parameter. Please check your request.";
+export type UserFindOneUserOrNotFoundMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1078,7 +1099,8 @@ export type UserFindOneUserOrNotFoundMessageEnum = "Invalid request parameter. P
 export type UserFindOneUserOrNotFoundCodeEnum1 = 5;
 
 /** error message */
-export type UserFindOneUserOrNotFoundMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type UserFindOneUserOrNotFoundMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1087,7 +1109,8 @@ export type UserFindOneUserOrNotFoundMessageEnum1 = "The resource you're trying 
 export type UserFindOneUserOrNotFoundCodeEnum2 = 0;
 
 /** error message */
-export type UserFindOneUserOrNotFoundMessageEnum2 = "Server error. Please contact server developer";
+export type UserFindOneUserOrNotFoundMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1096,7 +1119,8 @@ export type UserFindOneUserOrNotFoundMessageEnum2 = "Server error. Please contac
 export type UserPutUpdateCodeEnum = 1;
 
 /** error message */
-export type UserPutUpdateMessageEnum = "Invalid request parameter. Please check your request.";
+export type UserPutUpdateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1114,7 +1138,8 @@ export type UserPutUpdateMessageEnum1 = "This token is invalid.";
 export type UserPutUpdateCodeEnum2 = 4;
 
 /** error message */
-export type UserPutUpdateMessageEnum2 = "You don't have permission to access it.";
+export type UserPutUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1123,7 +1148,8 @@ export type UserPutUpdateMessageEnum2 = "You don't have permission to access it.
 export type UserPutUpdateCodeEnum3 = 5;
 
 /** error message */
-export type UserPutUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type UserPutUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1132,7 +1158,8 @@ export type UserPutUpdateMessageEnum3 = "The resource you're trying to access do
 export type UserPutUpdateCodeEnum4 = 0;
 
 /** error message */
-export type UserPutUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type UserPutUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1141,7 +1168,8 @@ export type UserPutUpdateMessageEnum4 = "Server error. Please contact server dev
 export type MajorFindAllMajorsCodeEnum = 0;
 
 /** error message */
-export type MajorFindAllMajorsMessageEnum = "Server error. Please contact server developer";
+export type MajorFindAllMajorsMessageEnum =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1150,7 +1178,8 @@ export type MajorFindAllMajorsMessageEnum = "Server error. Please contact server
 export type MajorCreateNewMajorCodeEnum = 1;
 
 /** error message */
-export type MajorCreateNewMajorMessageEnum = "Invalid request parameter. Please check your request.";
+export type MajorCreateNewMajorMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1159,7 +1188,9 @@ export type MajorCreateNewMajorMessageEnum = "Invalid request parameter. Please 
 export type MajorCreateNewMajorCodeEnum1 = 3000 | 3001;
 
 /** error message */
-export type MajorCreateNewMajorMessageEnum1 = "Major name that already exists" | "Major code that already exists.";
+export type MajorCreateNewMajorMessageEnum1 =
+  | "Major name that already exists"
+  | "Major code that already exists.";
 
 /**
  * error code
@@ -1168,7 +1199,8 @@ export type MajorCreateNewMajorMessageEnum1 = "Major name that already exists" |
 export type MajorCreateNewMajorCodeEnum2 = 0;
 
 /** error message */
-export type MajorCreateNewMajorMessageEnum2 = "Server error. Please contact server developer";
+export type MajorCreateNewMajorMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1177,7 +1209,8 @@ export type MajorCreateNewMajorMessageEnum2 = "Server error. Please contact serv
 export type NoticepostCreateCodeEnum = 1;
 
 /** error message */
-export type NoticepostCreateMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostCreateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1195,7 +1228,8 @@ export type NoticepostCreateMessageEnum1 = "This token is invalid.";
 export type NoticepostCreateCodeEnum2 = 0;
 
 /** error message */
-export type NoticepostCreateMessageEnum2 = "Server error. Please contact server developer";
+export type NoticepostCreateMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1204,7 +1238,8 @@ export type NoticepostCreateMessageEnum2 = "Server error. Please contact server 
 export type NoticepostFindAllAndCountCodeEnum = 1;
 
 /** error message */
-export type NoticepostFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostFindAllAndCountMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1213,7 +1248,8 @@ export type NoticepostFindAllAndCountMessageEnum = "Invalid request parameter. P
 export type NoticepostFindAllAndCountCodeEnum1 = 0;
 
 /** error message */
-export type NoticepostFindAllAndCountMessageEnum1 = "Server error. Please contact server developer";
+export type NoticepostFindAllAndCountMessageEnum1 =
+  "Server error. Please contact server developer";
 
 export interface NoticepostFindAllAndCountParams {
   /**
@@ -1262,7 +1298,9 @@ export interface NoticepostFindAllAndCountParams {
 export type IsAllowCommentEnum = "true" | "false";
 
 /** 댓글 허용 여부 */
-export type NoticepostFindAllAndCountParams1IsAllowCommentEnum = "true" | "false";
+export type NoticepostFindAllAndCountParams1IsAllowCommentEnum =
+  | "true"
+  | "false";
 
 /**
  * error code
@@ -1271,7 +1309,8 @@ export type NoticepostFindAllAndCountParams1IsAllowCommentEnum = "true" | "false
 export type NoticepostFindOneOrNotFoundCodeEnum = 1;
 
 /** error message */
-export type NoticepostFindOneOrNotFoundMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostFindOneOrNotFoundMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1280,7 +1319,8 @@ export type NoticepostFindOneOrNotFoundMessageEnum = "Invalid request parameter.
 export type NoticepostFindOneOrNotFoundCodeEnum1 = 5;
 
 /** error message */
-export type NoticepostFindOneOrNotFoundMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type NoticepostFindOneOrNotFoundMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1289,7 +1329,8 @@ export type NoticepostFindOneOrNotFoundMessageEnum1 = "The resource you're tryin
 export type NoticepostFindOneOrNotFoundCodeEnum2 = 0;
 
 /** error message */
-export type NoticepostFindOneOrNotFoundMessageEnum2 = "Server error. Please contact server developer";
+export type NoticepostFindOneOrNotFoundMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1298,7 +1339,8 @@ export type NoticepostFindOneOrNotFoundMessageEnum2 = "Server error. Please cont
 export type NoticepostPutUpdateCodeEnum = 1;
 
 /** error message */
-export type NoticepostPutUpdateMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostPutUpdateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1316,7 +1358,8 @@ export type NoticepostPutUpdateMessageEnum1 = "This token is invalid.";
 export type NoticepostPutUpdateCodeEnum2 = 4;
 
 /** error message */
-export type NoticepostPutUpdateMessageEnum2 = "You don't have permission to access it.";
+export type NoticepostPutUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1325,7 +1368,8 @@ export type NoticepostPutUpdateMessageEnum2 = "You don't have permission to acce
 export type NoticepostPutUpdateCodeEnum3 = 5;
 
 /** error message */
-export type NoticepostPutUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type NoticepostPutUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1334,7 +1378,8 @@ export type NoticepostPutUpdateMessageEnum3 = "The resource you're trying to acc
 export type NoticepostPutUpdateCodeEnum4 = 0;
 
 /** error message */
-export type NoticepostPutUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type NoticepostPutUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1343,7 +1388,8 @@ export type NoticepostPutUpdateMessageEnum4 = "Server error. Please contact serv
 export type NoticepostPatchUpdateCodeEnum = 1;
 
 /** error message */
-export type NoticepostPatchUpdateMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostPatchUpdateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1361,7 +1407,8 @@ export type NoticepostPatchUpdateMessageEnum1 = "This token is invalid.";
 export type NoticepostPatchUpdateCodeEnum2 = 4;
 
 /** error message */
-export type NoticepostPatchUpdateMessageEnum2 = "You don't have permission to access it.";
+export type NoticepostPatchUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1370,7 +1417,8 @@ export type NoticepostPatchUpdateMessageEnum2 = "You don't have permission to ac
 export type NoticepostPatchUpdateCodeEnum3 = 5;
 
 /** error message */
-export type NoticepostPatchUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type NoticepostPatchUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1379,7 +1427,8 @@ export type NoticepostPatchUpdateMessageEnum3 = "The resource you're trying to a
 export type NoticepostPatchUpdateCodeEnum4 = 0;
 
 /** error message */
-export type NoticepostPatchUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type NoticepostPatchUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1388,7 +1437,8 @@ export type NoticepostPatchUpdateMessageEnum4 = "Server error. Please contact se
 export type NoticepostRemoveCodeEnum = 1;
 
 /** error message */
-export type NoticepostRemoveMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostRemoveMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1406,7 +1456,8 @@ export type NoticepostRemoveMessageEnum1 = "This token is invalid.";
 export type NoticepostRemoveCodeEnum2 = 4;
 
 /** error message */
-export type NoticepostRemoveMessageEnum2 = "You don't have permission to access it.";
+export type NoticepostRemoveMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1415,7 +1466,8 @@ export type NoticepostRemoveMessageEnum2 = "You don't have permission to access 
 export type NoticepostRemoveCodeEnum3 = 5;
 
 /** error message */
-export type NoticepostRemoveMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type NoticepostRemoveMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1424,7 +1476,8 @@ export type NoticepostRemoveMessageEnum3 = "The resource you're trying to access
 export type NoticepostRemoveCodeEnum4 = 0;
 
 /** error message */
-export type NoticepostRemoveMessageEnum4 = "Server error. Please contact server developer";
+export type NoticepostRemoveMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1433,7 +1486,8 @@ export type NoticepostRemoveMessageEnum4 = "Server error. Please contact server 
 export type NoticepostIncreaseHitCodeEnum = 1;
 
 /** error message */
-export type NoticepostIncreaseHitMessageEnum = "Invalid request parameter. Please check your request.";
+export type NoticepostIncreaseHitMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1442,7 +1496,8 @@ export type NoticepostIncreaseHitMessageEnum = "Invalid request parameter. Pleas
 export type NoticepostIncreaseHitCodeEnum1 = 5;
 
 /** error message */
-export type NoticepostIncreaseHitMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type NoticepostIncreaseHitMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1451,7 +1506,8 @@ export type NoticepostIncreaseHitMessageEnum1 = "The resource you're trying to a
 export type NoticepostIncreaseHitCodeEnum2 = 0;
 
 /** error message */
-export type NoticepostIncreaseHitMessageEnum2 = "Server error. Please contact server developer";
+export type NoticepostIncreaseHitMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1460,7 +1516,8 @@ export type NoticepostIncreaseHitMessageEnum2 = "Server error. Please contact se
 export type FreepostCreateCodeEnum = 1;
 
 /** error message */
-export type FreepostCreateMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostCreateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1478,7 +1535,8 @@ export type FreepostCreateMessageEnum1 = "This token is invalid.";
 export type FreepostCreateCodeEnum2 = 0;
 
 /** error message */
-export type FreepostCreateMessageEnum2 = "Server error. Please contact server developer";
+export type FreepostCreateMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1487,7 +1545,8 @@ export type FreepostCreateMessageEnum2 = "Server error. Please contact server de
 export type FreepostFindAllAndCountCodeEnum = 1;
 
 /** error message */
-export type FreepostFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostFindAllAndCountMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1496,7 +1555,8 @@ export type FreepostFindAllAndCountMessageEnum = "Invalid request parameter. Ple
 export type FreepostFindAllAndCountCodeEnum1 = 0;
 
 /** error message */
-export type FreepostFindAllAndCountMessageEnum1 = "Server error. Please contact server developer";
+export type FreepostFindAllAndCountMessageEnum1 =
+  "Server error. Please contact server developer";
 
 export interface FreepostFindAllAndCountParams {
   /**
@@ -1544,7 +1604,11 @@ export interface FreepostFindAllAndCountParams {
 export type IsAnonymousEnum = "true" | "false" | "0" | "1";
 
 /** 익명여부 필터링 */
-export type FreepostFindAllAndCountParams1IsAnonymousEnum = "true" | "false" | "0" | "1";
+export type FreepostFindAllAndCountParams1IsAnonymousEnum =
+  | "true"
+  | "false"
+  | "0"
+  | "1";
 
 /**
  * error code
@@ -1553,7 +1617,8 @@ export type FreepostFindAllAndCountParams1IsAnonymousEnum = "true" | "false" | "
 export type FreepostFindOneOrNotFoundCodeEnum = 1;
 
 /** error message */
-export type FreepostFindOneOrNotFoundMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostFindOneOrNotFoundMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1562,7 +1627,8 @@ export type FreepostFindOneOrNotFoundMessageEnum = "Invalid request parameter. P
 export type FreepostFindOneOrNotFoundCodeEnum1 = 5;
 
 /** error message */
-export type FreepostFindOneOrNotFoundMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type FreepostFindOneOrNotFoundMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1571,7 +1637,8 @@ export type FreepostFindOneOrNotFoundMessageEnum1 = "The resource you're trying 
 export type FreepostFindOneOrNotFoundCodeEnum2 = 0;
 
 /** error message */
-export type FreepostFindOneOrNotFoundMessageEnum2 = "Server error. Please contact server developer";
+export type FreepostFindOneOrNotFoundMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1580,7 +1647,8 @@ export type FreepostFindOneOrNotFoundMessageEnum2 = "Server error. Please contac
 export type FreepostPutUpdateCodeEnum = 1;
 
 /** error message */
-export type FreepostPutUpdateMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostPutUpdateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1598,7 +1666,8 @@ export type FreepostPutUpdateMessageEnum1 = "This token is invalid.";
 export type FreepostPutUpdateCodeEnum2 = 4;
 
 /** error message */
-export type FreepostPutUpdateMessageEnum2 = "You don't have permission to access it.";
+export type FreepostPutUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1607,7 +1676,8 @@ export type FreepostPutUpdateMessageEnum2 = "You don't have permission to access
 export type FreepostPutUpdateCodeEnum3 = 5;
 
 /** error message */
-export type FreepostPutUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostPutUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1616,7 +1686,8 @@ export type FreepostPutUpdateMessageEnum3 = "The resource you're trying to acces
 export type FreepostPutUpdateCodeEnum4 = 0;
 
 /** error message */
-export type FreepostPutUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostPutUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1645,7 +1716,8 @@ export type FreepostPatchUpdateMessageEnum1 = "This token is invalid.";
 export type FreepostPatchUpdateCodeEnum2 = 4;
 
 /** error message */
-export type FreepostPatchUpdateMessageEnum2 = "You don't have permission to access it.";
+export type FreepostPatchUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1654,7 +1726,8 @@ export type FreepostPatchUpdateMessageEnum2 = "You don't have permission to acce
 export type FreepostPatchUpdateCodeEnum3 = 5;
 
 /** error message */
-export type FreepostPatchUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostPatchUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1663,7 +1736,8 @@ export type FreepostPatchUpdateMessageEnum3 = "The resource you're trying to acc
 export type FreepostPatchUpdateCodeEnum4 = 0;
 
 /** error message */
-export type FreepostPatchUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostPatchUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1672,7 +1746,8 @@ export type FreepostPatchUpdateMessageEnum4 = "Server error. Please contact serv
 export type FreepostRemoveCodeEnum = 1;
 
 /** error message */
-export type FreepostRemoveMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostRemoveMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1690,7 +1765,8 @@ export type FreepostRemoveMessageEnum1 = "This token is invalid.";
 export type FreepostRemoveCodeEnum2 = 4;
 
 /** error message */
-export type FreepostRemoveMessageEnum2 = "You don't have permission to access it.";
+export type FreepostRemoveMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1699,7 +1775,8 @@ export type FreepostRemoveMessageEnum2 = "You don't have permission to access it
 export type FreepostRemoveCodeEnum3 = 5;
 
 /** error message */
-export type FreepostRemoveMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostRemoveMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1708,7 +1785,8 @@ export type FreepostRemoveMessageEnum3 = "The resource you're trying to access d
 export type FreepostRemoveCodeEnum4 = 0;
 
 /** error message */
-export type FreepostRemoveMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostRemoveMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1717,7 +1795,8 @@ export type FreepostRemoveMessageEnum4 = "Server error. Please contact server de
 export type FreepostIncrementHitCodeEnum = 1;
 
 /** error message */
-export type FreepostIncrementHitMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostIncrementHitMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1726,7 +1805,8 @@ export type FreepostIncrementHitMessageEnum = "Invalid request parameter. Please
 export type FreepostIncrementHitCodeEnum1 = 5;
 
 /** error message */
-export type FreepostIncrementHitMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type FreepostIncrementHitMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1735,7 +1815,8 @@ export type FreepostIncrementHitMessageEnum1 = "The resource you're trying to ac
 export type FreepostIncrementHitCodeEnum2 = 0;
 
 /** error message */
-export type FreepostIncrementHitMessageEnum2 = "Server error. Please contact server developer";
+export type FreepostIncrementHitMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1744,7 +1825,8 @@ export type FreepostIncrementHitMessageEnum2 = "Server error. Please contact ser
 export type FreepostCreateReactionCodeEnum = 1;
 
 /** error message */
-export type FreepostCreateReactionMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostCreateReactionMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1762,7 +1844,8 @@ export type FreepostCreateReactionMessageEnum1 = "This token is invalid.";
 export type FreepostCreateReactionCodeEnum2 = 5;
 
 /** error message */
-export type FreepostCreateReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostCreateReactionMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1780,7 +1863,8 @@ export type FreepostCreateReactionMessageEnum3 = "You've already liked it.";
 export type FreepostCreateReactionCodeEnum4 = 0;
 
 /** error message */
-export type FreepostCreateReactionMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostCreateReactionMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1789,7 +1873,8 @@ export type FreepostCreateReactionMessageEnum4 = "Server error. Please contact s
 export type FreepostRemoveReactionCodeEnum = 1;
 
 /** error message */
-export type FreepostRemoveReactionMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostRemoveReactionMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1807,7 +1892,8 @@ export type FreepostRemoveReactionMessageEnum1 = "This token is invalid.";
 export type FreepostRemoveReactionCodeEnum2 = 5;
 
 /** error message */
-export type FreepostRemoveReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostRemoveReactionMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1825,7 +1911,8 @@ export type FreepostRemoveReactionMessageEnum3 = "You haven't liked it yet.";
 export type FreepostRemoveReactionCodeEnum4 = 0;
 
 /** error message */
-export type FreepostRemoveReactionMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostRemoveReactionMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1834,7 +1921,8 @@ export type FreepostRemoveReactionMessageEnum4 = "Server error. Please contact s
 export type FreepostcommentCreateCodeEnum = 1;
 
 /** error message */
-export type FreepostcommentCreateMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostcommentCreateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1852,7 +1940,8 @@ export type FreepostcommentCreateMessageEnum1 = "This token is invalid.";
 export type FreepostcommentCreateCodeEnum2 = 5;
 
 /** error message */
-export type FreepostcommentCreateMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostcommentCreateMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1861,7 +1950,8 @@ export type FreepostcommentCreateMessageEnum2 = "The resource you're trying to a
 export type FreepostcommentCreateCodeEnum3 = 0;
 
 /** error message */
-export type FreepostcommentCreateMessageEnum3 = "Server error. Please contact server developer";
+export type FreepostcommentCreateMessageEnum3 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1870,7 +1960,8 @@ export type FreepostcommentCreateMessageEnum3 = "Server error. Please contact se
 export type FreepostcommentFindAllAndCountCodeEnum = 1;
 
 /** error message */
-export type FreepostcommentFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostcommentFindAllAndCountMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1879,7 +1970,8 @@ export type FreepostcommentFindAllAndCountMessageEnum = "Invalid request paramet
 export type FreepostcommentFindAllAndCountCodeEnum1 = 5;
 
 /** error message */
-export type FreepostcommentFindAllAndCountMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type FreepostcommentFindAllAndCountMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1888,7 +1980,8 @@ export type FreepostcommentFindAllAndCountMessageEnum1 = "The resource you're tr
 export type FreepostcommentFindAllAndCountCodeEnum2 = 0;
 
 /** error message */
-export type FreepostcommentFindAllAndCountMessageEnum2 = "Server error. Please contact server developer";
+export type FreepostcommentFindAllAndCountMessageEnum2 =
+  "Server error. Please contact server developer";
 
 export interface FreepostcommentFindAllAndCountParams {
   /**
@@ -1923,7 +2016,8 @@ export interface FreepostcommentFindAllAndCountParams {
 export type FreepostcommentPutUpdateCodeEnum = 1;
 
 /** error message */
-export type FreepostcommentPutUpdateMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostcommentPutUpdateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1941,7 +2035,8 @@ export type FreepostcommentPutUpdateMessageEnum1 = "This token is invalid.";
 export type FreepostcommentPutUpdateCodeEnum2 = 4;
 
 /** error message */
-export type FreepostcommentPutUpdateMessageEnum2 = "You don't have permission to access it.";
+export type FreepostcommentPutUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1950,7 +2045,8 @@ export type FreepostcommentPutUpdateMessageEnum2 = "You don't have permission to
 export type FreepostcommentPutUpdateCodeEnum3 = 5;
 
 /** error message */
-export type FreepostcommentPutUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostcommentPutUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -1959,7 +2055,8 @@ export type FreepostcommentPutUpdateMessageEnum3 = "The resource you're trying t
 export type FreepostcommentPutUpdateCodeEnum4 = 0;
 
 /** error message */
-export type FreepostcommentPutUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostcommentPutUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -1968,7 +2065,8 @@ export type FreepostcommentPutUpdateMessageEnum4 = "Server error. Please contact
 export type FreepostcommentRemoveCodeEnum = 1;
 
 /** error message */
-export type FreepostcommentRemoveMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostcommentRemoveMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -1986,7 +2084,8 @@ export type FreepostcommentRemoveMessageEnum1 = "This token is invalid.";
 export type FreepostcommentRemoveCodeEnum2 = 4;
 
 /** error message */
-export type FreepostcommentRemoveMessageEnum2 = "You don't have permission to access it.";
+export type FreepostcommentRemoveMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -1995,7 +2094,8 @@ export type FreepostcommentRemoveMessageEnum2 = "You don't have permission to ac
 export type FreepostcommentRemoveCodeEnum3 = 5;
 
 /** error message */
-export type FreepostcommentRemoveMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostcommentRemoveMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2004,7 +2104,8 @@ export type FreepostcommentRemoveMessageEnum3 = "The resource you're trying to a
 export type FreepostcommentRemoveCodeEnum4 = 0;
 
 /** error message */
-export type FreepostcommentRemoveMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostcommentRemoveMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2013,7 +2114,8 @@ export type FreepostcommentRemoveMessageEnum4 = "Server error. Please contact se
 export type FreepostcommentCreateReactionCodeEnum = 1;
 
 /** error message */
-export type FreepostcommentCreateReactionMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostcommentCreateReactionMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2022,7 +2124,8 @@ export type FreepostcommentCreateReactionMessageEnum = "Invalid request paramete
 export type FreepostcommentCreateReactionCodeEnum1 = 3;
 
 /** error message */
-export type FreepostcommentCreateReactionMessageEnum1 = "This token is invalid.";
+export type FreepostcommentCreateReactionMessageEnum1 =
+  "This token is invalid.";
 
 /**
  * error code
@@ -2031,7 +2134,8 @@ export type FreepostcommentCreateReactionMessageEnum1 = "This token is invalid."
 export type FreepostcommentCreateReactionCodeEnum2 = 5;
 
 /** error message */
-export type FreepostcommentCreateReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostcommentCreateReactionMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2040,7 +2144,8 @@ export type FreepostcommentCreateReactionMessageEnum2 = "The resource you're try
 export type FreepostcommentCreateReactionCodeEnum3 = 4000;
 
 /** error message */
-export type FreepostcommentCreateReactionMessageEnum3 = "You've already liked it.";
+export type FreepostcommentCreateReactionMessageEnum3 =
+  "You've already liked it.";
 
 /**
  * error code
@@ -2049,7 +2154,8 @@ export type FreepostcommentCreateReactionMessageEnum3 = "You've already liked it
 export type FreepostcommentCreateReactionCodeEnum4 = 0;
 
 /** error message */
-export type FreepostcommentCreateReactionMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostcommentCreateReactionMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2058,7 +2164,8 @@ export type FreepostcommentCreateReactionMessageEnum4 = "Server error. Please co
 export type FreepostcommentRemoveReactionCodeEnum = 1;
 
 /** error message */
-export type FreepostcommentRemoveReactionMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostcommentRemoveReactionMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2067,7 +2174,8 @@ export type FreepostcommentRemoveReactionMessageEnum = "Invalid request paramete
 export type FreepostcommentRemoveReactionCodeEnum1 = 3;
 
 /** error message */
-export type FreepostcommentRemoveReactionMessageEnum1 = "This token is invalid.";
+export type FreepostcommentRemoveReactionMessageEnum1 =
+  "This token is invalid.";
 
 /**
  * error code
@@ -2076,7 +2184,8 @@ export type FreepostcommentRemoveReactionMessageEnum1 = "This token is invalid."
 export type FreepostcommentRemoveReactionCodeEnum2 = 5;
 
 /** error message */
-export type FreepostcommentRemoveReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostcommentRemoveReactionMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2085,7 +2194,8 @@ export type FreepostcommentRemoveReactionMessageEnum2 = "The resource you're try
 export type FreepostcommentRemoveReactionCodeEnum3 = 4001;
 
 /** error message */
-export type FreepostcommentRemoveReactionMessageEnum3 = "You haven't liked it yet.";
+export type FreepostcommentRemoveReactionMessageEnum3 =
+  "You haven't liked it yet.";
 
 /**
  * error code
@@ -2094,7 +2204,8 @@ export type FreepostcommentRemoveReactionMessageEnum3 = "You haven't liked it ye
 export type FreepostcommentRemoveReactionCodeEnum4 = 0;
 
 /** error message */
-export type FreepostcommentRemoveReactionMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostcommentRemoveReactionMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2103,7 +2214,8 @@ export type FreepostcommentRemoveReactionMessageEnum4 = "Server error. Please co
 export type FreepostreplycommentCreateCodeEnum = 1;
 
 /** error message */
-export type FreepostreplycommentCreateMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostreplycommentCreateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2121,7 +2233,8 @@ export type FreepostreplycommentCreateMessageEnum1 = "This token is invalid.";
 export type FreepostreplycommentCreateCodeEnum2 = 5;
 
 /** error message */
-export type FreepostreplycommentCreateMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostreplycommentCreateMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2130,7 +2243,8 @@ export type FreepostreplycommentCreateMessageEnum2 = "The resource you're trying
 export type FreepostreplycommentCreateCodeEnum3 = 0;
 
 /** error message */
-export type FreepostreplycommentCreateMessageEnum3 = "Server error. Please contact server developer";
+export type FreepostreplycommentCreateMessageEnum3 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2139,7 +2253,8 @@ export type FreepostreplycommentCreateMessageEnum3 = "Server error. Please conta
 export type FreepostreplycommentFindAllAndCountCodeEnum = 1;
 
 /** error message */
-export type FreepostreplycommentFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostreplycommentFindAllAndCountMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2148,7 +2263,8 @@ export type FreepostreplycommentFindAllAndCountMessageEnum = "Invalid request pa
 export type FreepostreplycommentFindAllAndCountCodeEnum1 = 5;
 
 /** error message */
-export type FreepostreplycommentFindAllAndCountMessageEnum1 = "The resource you're trying to access doesn't exist.";
+export type FreepostreplycommentFindAllAndCountMessageEnum1 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2157,7 +2273,8 @@ export type FreepostreplycommentFindAllAndCountMessageEnum1 = "The resource you'
 export type FreepostreplycommentFindAllAndCountCodeEnum2 = 0;
 
 /** error message */
-export type FreepostreplycommentFindAllAndCountMessageEnum2 = "Server error. Please contact server developer";
+export type FreepostreplycommentFindAllAndCountMessageEnum2 =
+  "Server error. Please contact server developer";
 
 export interface FreepostreplycommentFindAllAndCountParams {
   /**
@@ -2193,7 +2310,8 @@ export interface FreepostreplycommentFindAllAndCountParams {
 export type FreepostreplycommentPutUpdateCodeEnum = 1;
 
 /** error message */
-export type FreepostreplycommentPutUpdateMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostreplycommentPutUpdateMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2202,7 +2320,8 @@ export type FreepostreplycommentPutUpdateMessageEnum = "Invalid request paramete
 export type FreepostreplycommentPutUpdateCodeEnum1 = 3;
 
 /** error message */
-export type FreepostreplycommentPutUpdateMessageEnum1 = "This token is invalid.";
+export type FreepostreplycommentPutUpdateMessageEnum1 =
+  "This token is invalid.";
 
 /**
  * error code
@@ -2211,7 +2330,8 @@ export type FreepostreplycommentPutUpdateMessageEnum1 = "This token is invalid."
 export type FreepostreplycommentPutUpdateCodeEnum2 = 4;
 
 /** error message */
-export type FreepostreplycommentPutUpdateMessageEnum2 = "You don't have permission to access it.";
+export type FreepostreplycommentPutUpdateMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -2220,7 +2340,8 @@ export type FreepostreplycommentPutUpdateMessageEnum2 = "You don't have permissi
 export type FreepostreplycommentPutUpdateCodeEnum3 = 5;
 
 /** error message */
-export type FreepostreplycommentPutUpdateMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostreplycommentPutUpdateMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2229,7 +2350,8 @@ export type FreepostreplycommentPutUpdateMessageEnum3 = "The resource you're try
 export type FreepostreplycommentPutUpdateCodeEnum4 = 0;
 
 /** error message */
-export type FreepostreplycommentPutUpdateMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostreplycommentPutUpdateMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2238,7 +2360,8 @@ export type FreepostreplycommentPutUpdateMessageEnum4 = "Server error. Please co
 export type FreepostreplycommentRemoveCodeEnum = 1;
 
 /** error message */
-export type FreepostreplycommentRemoveMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostreplycommentRemoveMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2256,7 +2379,8 @@ export type FreepostreplycommentRemoveMessageEnum1 = "This token is invalid.";
 export type FreepostreplycommentRemoveCodeEnum2 = 4;
 
 /** error message */
-export type FreepostreplycommentRemoveMessageEnum2 = "You don't have permission to access it.";
+export type FreepostreplycommentRemoveMessageEnum2 =
+  "You don't have permission to access it.";
 
 /**
  * error code
@@ -2265,7 +2389,8 @@ export type FreepostreplycommentRemoveMessageEnum2 = "You don't have permission 
 export type FreepostreplycommentRemoveCodeEnum3 = 5;
 
 /** error message */
-export type FreepostreplycommentRemoveMessageEnum3 = "The resource you're trying to access doesn't exist.";
+export type FreepostreplycommentRemoveMessageEnum3 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2274,7 +2399,8 @@ export type FreepostreplycommentRemoveMessageEnum3 = "The resource you're trying
 export type FreepostreplycommentRemoveCodeEnum4 = 0;
 
 /** error message */
-export type FreepostreplycommentRemoveMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostreplycommentRemoveMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2283,7 +2409,8 @@ export type FreepostreplycommentRemoveMessageEnum4 = "Server error. Please conta
 export type FreepostreplycommentCreateReactionCodeEnum = 1;
 
 /** error message */
-export type FreepostreplycommentCreateReactionMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostreplycommentCreateReactionMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2292,7 +2419,8 @@ export type FreepostreplycommentCreateReactionMessageEnum = "Invalid request par
 export type FreepostreplycommentCreateReactionCodeEnum1 = 3;
 
 /** error message */
-export type FreepostreplycommentCreateReactionMessageEnum1 = "This token is invalid.";
+export type FreepostreplycommentCreateReactionMessageEnum1 =
+  "This token is invalid.";
 
 /**
  * error code
@@ -2301,7 +2429,8 @@ export type FreepostreplycommentCreateReactionMessageEnum1 = "This token is inva
 export type FreepostreplycommentCreateReactionCodeEnum2 = 5;
 
 /** error message */
-export type FreepostreplycommentCreateReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostreplycommentCreateReactionMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2310,7 +2439,8 @@ export type FreepostreplycommentCreateReactionMessageEnum2 = "The resource you'r
 export type FreepostreplycommentCreateReactionCodeEnum3 = 4000;
 
 /** error message */
-export type FreepostreplycommentCreateReactionMessageEnum3 = "You've already liked it.";
+export type FreepostreplycommentCreateReactionMessageEnum3 =
+  "You've already liked it.";
 
 /**
  * error code
@@ -2319,7 +2449,8 @@ export type FreepostreplycommentCreateReactionMessageEnum3 = "You've already lik
 export type FreepostreplycommentCreateReactionCodeEnum4 = 0;
 
 /** error message */
-export type FreepostreplycommentCreateReactionMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostreplycommentCreateReactionMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2328,7 +2459,8 @@ export type FreepostreplycommentCreateReactionMessageEnum4 = "Server error. Plea
 export type FreepostreplycommentRemoveReactionCodeEnum = 1;
 
 /** error message */
-export type FreepostreplycommentRemoveReactionMessageEnum = "Invalid request parameter. Please check your request.";
+export type FreepostreplycommentRemoveReactionMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2337,7 +2469,8 @@ export type FreepostreplycommentRemoveReactionMessageEnum = "Invalid request par
 export type FreepostreplycommentRemoveReactionCodeEnum1 = 3;
 
 /** error message */
-export type FreepostreplycommentRemoveReactionMessageEnum1 = "This token is invalid.";
+export type FreepostreplycommentRemoveReactionMessageEnum1 =
+  "This token is invalid.";
 
 /**
  * error code
@@ -2346,7 +2479,8 @@ export type FreepostreplycommentRemoveReactionMessageEnum1 = "This token is inva
 export type FreepostreplycommentRemoveReactionCodeEnum2 = 5;
 
 /** error message */
-export type FreepostreplycommentRemoveReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+export type FreepostreplycommentRemoveReactionMessageEnum2 =
+  "The resource you're trying to access doesn't exist.";
 
 /**
  * error code
@@ -2355,7 +2489,8 @@ export type FreepostreplycommentRemoveReactionMessageEnum2 = "The resource you'r
 export type FreepostreplycommentRemoveReactionCodeEnum3 = 4001;
 
 /** error message */
-export type FreepostreplycommentRemoveReactionMessageEnum3 = "You haven't liked it yet.";
+export type FreepostreplycommentRemoveReactionMessageEnum3 =
+  "You haven't liked it yet.";
 
 /**
  * error code
@@ -2364,7 +2499,8 @@ export type FreepostreplycommentRemoveReactionMessageEnum3 = "You haven't liked 
 export type FreepostreplycommentRemoveReactionCodeEnum4 = 0;
 
 /** error message */
-export type FreepostreplycommentRemoveReactionMessageEnum4 = "Server error. Please contact server developer";
+export type FreepostreplycommentRemoveReactionMessageEnum4 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2373,7 +2509,8 @@ export type FreepostreplycommentRemoveReactionMessageEnum4 = "Server error. Plea
 export type AuthsocialCheckRegistrationCodeEnum = 0;
 
 /** error message */
-export type AuthsocialCheckRegistrationMessageEnum = "Server error. Please contact server developer";
+export type AuthsocialCheckRegistrationMessageEnum =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2382,7 +2519,8 @@ export type AuthsocialCheckRegistrationMessageEnum = "Server error. Please conta
 export type AuthsocialSignUpCodeEnum = 1;
 
 /** error message */
-export type AuthsocialSignUpMessageEnum = "Invalid request parameter. Please check your request.";
+export type AuthsocialSignUpMessageEnum =
+  "Invalid request parameter. Please check your request.";
 
 /**
  * error code
@@ -2391,7 +2529,9 @@ export type AuthsocialSignUpMessageEnum = "Invalid request parameter. Please che
 export type AuthsocialSignUpCodeEnum1 = 2000 | 2001;
 
 /** error message */
-export type AuthsocialSignUpMessageEnum1 = "An email that already exists." | "A cell phone number that already exists.";
+export type AuthsocialSignUpMessageEnum1 =
+  | "An email that already exists."
+  | "A cell phone number that already exists.";
 
 /**
  * error code
@@ -2400,7 +2540,8 @@ export type AuthsocialSignUpMessageEnum1 = "An email that already exists." | "A 
 export type AuthsocialSignUpCodeEnum2 = 0;
 
 /** error message */
-export type AuthsocialSignUpMessageEnum2 = "Server error. Please contact server developer";
+export type AuthsocialSignUpMessageEnum2 =
+  "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2421,4 +2562,5 @@ export type AuthsocialSignInMessageEnum =
 export type AuthsocialSignInCodeEnum1 = 0;
 
 /** error message */
-export type AuthsocialSignInMessageEnum1 = "Server error. Please contact server developer";
+export type AuthsocialSignInMessageEnum1 =
+  "Server error. Please contact server developer";

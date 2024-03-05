@@ -68,7 +68,7 @@ export default function FreeBoard(props: { boardName: string }) {
             />
           )}
 
-          <SearchWriter />
+          <SearchWriter type="free" />
 
           <Pagination
             defaultPage={data?.currentPage}

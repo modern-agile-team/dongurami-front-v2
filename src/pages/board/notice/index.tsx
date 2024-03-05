@@ -67,7 +67,7 @@ export default function NoticeBoard(props: { boardName: string }) {
             />
           )}
 
-          <SearchWriter />
+          <SearchWriter type="notice" />
 
           <Pagination
             defaultPage={data?.currentPage}
