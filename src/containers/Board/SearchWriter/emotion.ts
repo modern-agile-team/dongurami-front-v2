@@ -1,11 +1,14 @@
 import { Button, Row } from "@/components";
 import { lightThemeColor } from "@/styles/theme";
 import styled from "@emotion/styled";
+import { Converter } from "@/utils";
 
 export const Container = styled(Row.div)`
-  margin-top: 80px;
-  width: calc(100% - 512px);
-  min-width: 1408px;
+  margin-top: ${Converter.pxToRem(80)};
+
+  width: calc(100% - ${Converter.pxToRem(512)});
+  min-width: ${Converter.pxToRem(1408)};
+  justify-content: space-between;
 `;
 
 export const WrapSearch = styled(Row.li)`
@@ -42,7 +45,7 @@ export const Input = styled.input`
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   width: 60%;
-  min-width: 844px;
+  min-width: ${Converter.pxToRem(844)};
   &::placeholder {
     font-size: 28px; /* Remove the quotes */
     line-height: normal; /* Remove the quotes */

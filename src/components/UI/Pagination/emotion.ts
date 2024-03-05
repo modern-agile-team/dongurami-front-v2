@@ -7,11 +7,12 @@
 import styled from "@emotion/styled";
 import { Button, Row } from "@/components";
 import { lightThemeColor } from "@/styles/theme";
+import { Converter } from "@/utils";
 
 export const PaginationButton = styled.button`
   border-radius: 10px;
-  width: 58px;
-  height: 58px;
+  width: ${Converter.pxToRem(58)};
+  height: ${Converter.pxToRem(58)};
   align-items: center;
   justify-content: center;
   border: 1px solid ${lightThemeColor.neutral_40};
@@ -19,8 +20,9 @@ export const PaginationButton = styled.button`
 
 export const ArrowButton = styled.button`
   border-radius: 10px;
-  padding: 6px;
   border: 0px;
+  width: ${Converter.pxToRem(58)};
+  height: ${Converter.pxToRem(58)};
   align-items: center;
   justify-content: center;
 `;
