@@ -10,21 +10,23 @@
  */
 
 import {
-  AuthGetProfileCodeEnum,
-  AuthGetProfileCodeEnum1,
-  AuthGetProfileMessageEnum,
-  AuthGetProfileMessageEnum1,
-  AuthSignInCodeEnum,
-  AuthSignInCodeEnum1,
-  AuthSignInMessageEnum,
-  AuthSignInMessageEnum1,
+  AdminCreateNewMajorCodeEnum,
+  AdminCreateNewMajorCodeEnum1,
+  AdminCreateNewMajorCodeEnum2,
+  AdminCreateNewMajorCodeEnum3,
+  AdminCreateNewMajorCodeEnum4,
+  AdminCreateNewMajorMessageEnum,
+  AdminCreateNewMajorMessageEnum1,
+  AdminCreateNewMajorMessageEnum2,
+  AdminCreateNewMajorMessageEnum3,
+  AdminCreateNewMajorMessageEnum4,
+  CreateMajorRequestBodyDto,
   CustomValidationError,
-  SignInRequestBodyDto,
-  UserDetailResponseDto,
+  MajorDetailResponseDto,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Auth<SecurityDataType = unknown> {
+export class Admin<SecurityDataType = unknown> {
   http: HttpClient<SecurityDataType>;
 
   constructor(http: HttpClient<SecurityDataType>) {
@@ -32,19 +34,17 @@ export class Auth<SecurityDataType = unknown> {
   }
 
   /**
-   * No description
+   * @description 관리자만 사용 가능하게끔 설정돼있지 않음 추후 추가 에정
    *
-   * @tags auth
-   * @name AuthSignIn
-   * @summary 로그인
-   * @request POST:/api/auth/sign-in
+   * @tags _admin
+   * @name AdminCreateNewMajor
+   * @summary 전공 코드 및 이름 생성
+   * @request POST:/api/admins/majors
+   * @secure
    */
-  authSignIn = (data: SignInRequestBodyDto, params: RequestParams = {}) =>
+  adminCreateNewMajor = (data: CreateMajorRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
-      {
-        /** access token */
-        accessToken?: string;
-      },
+      MajorDetailResponseDto,
       | {
           /**
            * 에러 발생 시각
@@ -62,53 +62,12 @@ export class Auth<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: AuthSignInCodeEnum;
+          code?: AdminCreateNewMajorCodeEnum;
           /** error message */
-          message?: AuthSignInMessageEnum;
+          message?: AdminCreateNewMajorMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: CustomValidationError[];
         }
-      | {
-          /**
-           * 에러 발생 시각
-           * @format date-time
-           */
-          timestamp?: string;
-          /**
-           * http status code
-           * @format integer
-           * @min 400
-           * @example 500
-           */
-          statusCode?: number;
-          /**
-           * error code
-           * @example 0
-           */
-          code?: AuthSignInCodeEnum1;
-          /** error message */
-          message?: AuthSignInMessageEnum1;
-        }
-    >({
-      path: `/api/auth/sign-in`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      format: "json",
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags auth
-   * @name AuthGetProfile
-   * @summary 로그인한 유저 정보 조회
-   * @request GET:/api/auth/profile
-   * @secure
-   */
-  authGetProfile = (params: RequestParams = {}) =>
-    this.http.request<
-      UserDetailResponseDto,
       | {
           /**
            * 에러 발생 시각
@@ -126,9 +85,51 @@ export class Auth<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: AuthGetProfileCodeEnum;
+          code?: AdminCreateNewMajorCodeEnum1;
           /** error message */
-          message?: AuthGetProfileMessageEnum;
+          message?: AdminCreateNewMajorMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: AdminCreateNewMajorCodeEnum2;
+          /** error message */
+          message?: AdminCreateNewMajorMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 409
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3000
+           */
+          code?: AdminCreateNewMajorCodeEnum3;
+          /** error message */
+          message?: AdminCreateNewMajorMessageEnum3;
         }
       | {
           /**
@@ -147,14 +148,16 @@ export class Auth<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: AuthGetProfileCodeEnum1;
+          code?: AdminCreateNewMajorCodeEnum4;
           /** error message */
-          message?: AuthGetProfileMessageEnum1;
+          message?: AdminCreateNewMajorMessageEnum4;
         }
     >({
-      path: `/api/auth/profile`,
-      method: "GET",
+      path: `/api/admins/majors`,
+      method: "POST",
+      body: data,
       secure: true,
+      type: ContentType.Json,
       format: "json",
       ...params,
     });

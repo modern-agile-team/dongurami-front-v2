@@ -12,67 +12,67 @@
 import {
   CreateFreePostCommentDto,
   CreateReactionDto,
+  CustomValidationError,
+  FreePostCommentCreateCodeEnum,
+  FreePostCommentCreateCodeEnum1,
+  FreePostCommentCreateCodeEnum2,
+  FreePostCommentCreateCodeEnum3,
+  FreePostCommentCreateMessageEnum,
+  FreePostCommentCreateMessageEnum1,
+  FreePostCommentCreateMessageEnum2,
+  FreePostCommentCreateMessageEnum3,
+  FreePostCommentCreateReactionCodeEnum,
+  FreePostCommentCreateReactionCodeEnum1,
+  FreePostCommentCreateReactionCodeEnum2,
+  FreePostCommentCreateReactionCodeEnum3,
+  FreePostCommentCreateReactionCodeEnum4,
+  FreePostCommentCreateReactionMessageEnum,
+  FreePostCommentCreateReactionMessageEnum1,
+  FreePostCommentCreateReactionMessageEnum2,
+  FreePostCommentCreateReactionMessageEnum3,
+  FreePostCommentCreateReactionMessageEnum4,
   FreePostCommentDetailResponseDto,
+  FreePostCommentFindAllAndCountCodeEnum,
+  FreePostCommentFindAllAndCountCodeEnum1,
+  FreePostCommentFindAllAndCountCodeEnum2,
+  FreePostCommentFindAllAndCountMessageEnum,
+  FreePostCommentFindAllAndCountMessageEnum1,
+  FreePostCommentFindAllAndCountMessageEnum2,
+  FreePostCommentFindAllAndCountParams,
+  FreePostCommentPutUpdateCodeEnum,
+  FreePostCommentPutUpdateCodeEnum1,
+  FreePostCommentPutUpdateCodeEnum2,
+  FreePostCommentPutUpdateCodeEnum3,
+  FreePostCommentPutUpdateCodeEnum4,
+  FreePostCommentPutUpdateMessageEnum,
+  FreePostCommentPutUpdateMessageEnum1,
+  FreePostCommentPutUpdateMessageEnum2,
+  FreePostCommentPutUpdateMessageEnum3,
+  FreePostCommentPutUpdateMessageEnum4,
+  FreePostCommentRemoveCodeEnum,
+  FreePostCommentRemoveCodeEnum1,
+  FreePostCommentRemoveCodeEnum2,
+  FreePostCommentRemoveCodeEnum3,
+  FreePostCommentRemoveCodeEnum4,
+  FreePostCommentRemoveMessageEnum,
+  FreePostCommentRemoveMessageEnum1,
+  FreePostCommentRemoveMessageEnum2,
+  FreePostCommentRemoveMessageEnum3,
+  FreePostCommentRemoveMessageEnum4,
+  FreePostCommentRemoveReactionCodeEnum,
+  FreePostCommentRemoveReactionCodeEnum1,
+  FreePostCommentRemoveReactionCodeEnum2,
+  FreePostCommentRemoveReactionCodeEnum3,
+  FreePostCommentRemoveReactionCodeEnum4,
+  FreePostCommentRemoveReactionMessageEnum,
+  FreePostCommentRemoveReactionMessageEnum1,
+  FreePostCommentRemoveReactionMessageEnum2,
+  FreePostCommentRemoveReactionMessageEnum3,
+  FreePostCommentRemoveReactionMessageEnum4,
   FreePostCommentsPaginationResponseDto,
   FreePostDeleteResponseDto,
-  FreepostcommentCreateCodeEnum,
-  FreepostcommentCreateCodeEnum1,
-  FreepostcommentCreateCodeEnum2,
-  FreepostcommentCreateCodeEnum3,
-  FreepostcommentCreateMessageEnum,
-  FreepostcommentCreateMessageEnum1,
-  FreepostcommentCreateMessageEnum2,
-  FreepostcommentCreateMessageEnum3,
-  FreepostcommentCreateReactionCodeEnum,
-  FreepostcommentCreateReactionCodeEnum1,
-  FreepostcommentCreateReactionCodeEnum2,
-  FreepostcommentCreateReactionCodeEnum3,
-  FreepostcommentCreateReactionCodeEnum4,
-  FreepostcommentCreateReactionMessageEnum,
-  FreepostcommentCreateReactionMessageEnum1,
-  FreepostcommentCreateReactionMessageEnum2,
-  FreepostcommentCreateReactionMessageEnum3,
-  FreepostcommentCreateReactionMessageEnum4,
-  FreepostcommentFindAllAndCountCodeEnum,
-  FreepostcommentFindAllAndCountCodeEnum1,
-  FreepostcommentFindAllAndCountCodeEnum2,
-  FreepostcommentFindAllAndCountMessageEnum,
-  FreepostcommentFindAllAndCountMessageEnum1,
-  FreepostcommentFindAllAndCountMessageEnum2,
-  FreepostcommentFindAllAndCountParams,
-  FreepostcommentPutUpdateCodeEnum,
-  FreepostcommentPutUpdateCodeEnum1,
-  FreepostcommentPutUpdateCodeEnum2,
-  FreepostcommentPutUpdateCodeEnum3,
-  FreepostcommentPutUpdateCodeEnum4,
-  FreepostcommentPutUpdateMessageEnum,
-  FreepostcommentPutUpdateMessageEnum1,
-  FreepostcommentPutUpdateMessageEnum2,
-  FreepostcommentPutUpdateMessageEnum3,
-  FreepostcommentPutUpdateMessageEnum4,
-  FreepostcommentRemoveCodeEnum,
-  FreepostcommentRemoveCodeEnum1,
-  FreepostcommentRemoveCodeEnum2,
-  FreepostcommentRemoveCodeEnum3,
-  FreepostcommentRemoveCodeEnum4,
-  FreepostcommentRemoveMessageEnum,
-  FreepostcommentRemoveMessageEnum1,
-  FreepostcommentRemoveMessageEnum2,
-  FreepostcommentRemoveMessageEnum3,
-  FreepostcommentRemoveMessageEnum4,
-  FreepostcommentRemoveReactionCodeEnum,
-  FreepostcommentRemoveReactionCodeEnum1,
-  FreepostcommentRemoveReactionCodeEnum2,
-  FreepostcommentRemoveReactionCodeEnum3,
-  FreepostcommentRemoveReactionCodeEnum4,
-  FreepostcommentRemoveReactionMessageEnum,
-  FreepostcommentRemoveReactionMessageEnum1,
-  FreepostcommentRemoveReactionMessageEnum2,
-  FreepostcommentRemoveReactionMessageEnum3,
-  FreepostcommentRemoveReactionMessageEnum4,
   PutUpdateFreePostCommentDto,
   RemoveReactionDto,
-  ValidationError,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
@@ -87,16 +87,12 @@ export class FreePostComment<SecurityDataType = unknown> {
    * No description
    *
    * @tags free-post-comment
-   * @name FreepostcommentCreate
+   * @name FreePostCommentCreate
    * @summary 자유 게시글 댓글 생성
    * @request POST:/api/free-posts/{postId}/comments
    * @secure
    */
-  freepostcommentCreate = (
-    postId: number,
-    data: CreateFreePostCommentDto,
-    params: RequestParams = {}
-  ) =>
+  freePostCommentCreate = (postId: number, data: CreateFreePostCommentDto, params: RequestParams = {}) =>
     this.http.request<
       FreePostCommentDetailResponseDto,
       | {
@@ -116,11 +112,11 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FreepostcommentCreateCodeEnum;
+          code?: FreePostCommentCreateCodeEnum;
           /** error message */
-          message?: FreepostcommentCreateMessageEnum;
+          message?: FreePostCommentCreateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -139,9 +135,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: FreepostcommentCreateCodeEnum1;
+          code?: FreePostCommentCreateCodeEnum1;
           /** error message */
-          message?: FreepostcommentCreateMessageEnum1;
+          message?: FreePostCommentCreateMessageEnum1;
         }
       | {
           /**
@@ -160,9 +156,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FreepostcommentCreateCodeEnum2;
+          code?: FreePostCommentCreateCodeEnum2;
           /** error message */
-          message?: FreepostcommentCreateMessageEnum2;
+          message?: FreePostCommentCreateMessageEnum2;
         }
       | {
           /**
@@ -181,9 +177,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: FreepostcommentCreateCodeEnum3;
+          code?: FreePostCommentCreateCodeEnum3;
           /** error message */
-          message?: FreepostcommentCreateMessageEnum3;
+          message?: FreePostCommentCreateMessageEnum3;
         }
     >({
       path: `/api/free-posts/${postId}/comments`,
@@ -198,12 +194,12 @@ export class FreePostComment<SecurityDataType = unknown> {
    * No description
    *
    * @tags free-post-comment
-   * @name FreepostcommentFindAllAndCount
+   * @name FreePostCommentFindAllAndCount
    * @summary 자유 게시글 댓글 전체조회(pagination)
    * @request GET:/api/free-posts/{postId}/comments
    */
-  freepostcommentFindAllAndCount = (
-    { postId, ...query }: FreepostcommentFindAllAndCountParams,
+  freePostCommentFindAllAndCount = (
+    { postId, ...query }: FreePostCommentFindAllAndCountParams,
     params: RequestParams = {}
   ) =>
     this.http.request<
@@ -225,11 +221,11 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FreepostcommentFindAllAndCountCodeEnum;
+          code?: FreePostCommentFindAllAndCountCodeEnum;
           /** error message */
-          message?: FreepostcommentFindAllAndCountMessageEnum;
+          message?: FreePostCommentFindAllAndCountMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -248,9 +244,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FreepostcommentFindAllAndCountCodeEnum1;
+          code?: FreePostCommentFindAllAndCountCodeEnum1;
           /** error message */
-          message?: FreepostcommentFindAllAndCountMessageEnum1;
+          message?: FreePostCommentFindAllAndCountMessageEnum1;
         }
       | {
           /**
@@ -269,9 +265,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: FreepostcommentFindAllAndCountCodeEnum2;
+          code?: FreePostCommentFindAllAndCountCodeEnum2;
           /** error message */
-          message?: FreepostcommentFindAllAndCountMessageEnum2;
+          message?: FreePostCommentFindAllAndCountMessageEnum2;
         }
     >({
       path: `/api/free-posts/${postId}/comments`,
@@ -284,12 +280,12 @@ export class FreePostComment<SecurityDataType = unknown> {
    * No description
    *
    * @tags free-post-comment
-   * @name FreepostcommentPutUpdate
+   * @name FreePostCommentPutUpdate
    * @summary 자유게시글 댓글 수정
    * @request PUT:/api/free-posts/{postId}/comments/{commentId}
    * @secure
    */
-  freepostcommentPutUpdate = (
+  freePostCommentPutUpdate = (
     postId: number,
     commentId: number,
     data: PutUpdateFreePostCommentDto,
@@ -314,11 +310,11 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FreepostcommentPutUpdateCodeEnum;
+          code?: FreePostCommentPutUpdateCodeEnum;
           /** error message */
-          message?: FreepostcommentPutUpdateMessageEnum;
+          message?: FreePostCommentPutUpdateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -337,9 +333,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: FreepostcommentPutUpdateCodeEnum1;
+          code?: FreePostCommentPutUpdateCodeEnum1;
           /** error message */
-          message?: FreepostcommentPutUpdateMessageEnum1;
+          message?: FreePostCommentPutUpdateMessageEnum1;
         }
       | {
           /**
@@ -358,9 +354,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 4
            */
-          code?: FreepostcommentPutUpdateCodeEnum2;
+          code?: FreePostCommentPutUpdateCodeEnum2;
           /** error message */
-          message?: FreepostcommentPutUpdateMessageEnum2;
+          message?: FreePostCommentPutUpdateMessageEnum2;
         }
       | {
           /**
@@ -379,9 +375,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FreepostcommentPutUpdateCodeEnum3;
+          code?: FreePostCommentPutUpdateCodeEnum3;
           /** error message */
-          message?: FreepostcommentPutUpdateMessageEnum3;
+          message?: FreePostCommentPutUpdateMessageEnum3;
         }
       | {
           /**
@@ -400,9 +396,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: FreepostcommentPutUpdateCodeEnum4;
+          code?: FreePostCommentPutUpdateCodeEnum4;
           /** error message */
-          message?: FreepostcommentPutUpdateMessageEnum4;
+          message?: FreePostCommentPutUpdateMessageEnum4;
         }
     >({
       path: `/api/free-posts/${postId}/comments/${commentId}`,
@@ -417,16 +413,12 @@ export class FreePostComment<SecurityDataType = unknown> {
    * No description
    *
    * @tags free-post-comment
-   * @name FreepostcommentRemove
+   * @name FreePostCommentRemove
    * @summary 자유게시글 댓글 삭제
    * @request DELETE:/api/free-posts/{postId}/comments/{commentId}
    * @secure
    */
-  freepostcommentRemove = (
-    postId: number,
-    commentId: number,
-    params: RequestParams = {}
-  ) =>
+  freePostCommentRemove = (postId: number, commentId: number, params: RequestParams = {}) =>
     this.http.request<
       FreePostDeleteResponseDto,
       | {
@@ -446,11 +438,11 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FreepostcommentRemoveCodeEnum;
+          code?: FreePostCommentRemoveCodeEnum;
           /** error message */
-          message?: FreepostcommentRemoveMessageEnum;
+          message?: FreePostCommentRemoveMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -469,9 +461,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: FreepostcommentRemoveCodeEnum1;
+          code?: FreePostCommentRemoveCodeEnum1;
           /** error message */
-          message?: FreepostcommentRemoveMessageEnum1;
+          message?: FreePostCommentRemoveMessageEnum1;
         }
       | {
           /**
@@ -490,9 +482,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 4
            */
-          code?: FreepostcommentRemoveCodeEnum2;
+          code?: FreePostCommentRemoveCodeEnum2;
           /** error message */
-          message?: FreepostcommentRemoveMessageEnum2;
+          message?: FreePostCommentRemoveMessageEnum2;
         }
       | {
           /**
@@ -511,9 +503,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FreepostcommentRemoveCodeEnum3;
+          code?: FreePostCommentRemoveCodeEnum3;
           /** error message */
-          message?: FreepostcommentRemoveMessageEnum3;
+          message?: FreePostCommentRemoveMessageEnum3;
         }
       | {
           /**
@@ -532,9 +524,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: FreepostcommentRemoveCodeEnum4;
+          code?: FreePostCommentRemoveCodeEnum4;
           /** error message */
-          message?: FreepostcommentRemoveMessageEnum4;
+          message?: FreePostCommentRemoveMessageEnum4;
         }
     >({
       path: `/api/free-posts/${postId}/comments/${commentId}`,
@@ -547,12 +539,12 @@ export class FreePostComment<SecurityDataType = unknown> {
    * No description
    *
    * @tags free-post-comment
-   * @name FreepostcommentCreateReaction
+   * @name FreePostCommentCreateReaction
    * @summary 자유 게시글 댓글 reaction 생성
    * @request POST:/api/free-posts/{postId}/comments/{commentId}/reaction
    * @secure
    */
-  freepostcommentCreateReaction = (
+  freePostCommentCreateReaction = (
     postId: number,
     commentId: number,
     data: CreateReactionDto,
@@ -577,11 +569,11 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FreepostcommentCreateReactionCodeEnum;
+          code?: FreePostCommentCreateReactionCodeEnum;
           /** error message */
-          message?: FreepostcommentCreateReactionMessageEnum;
+          message?: FreePostCommentCreateReactionMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -600,9 +592,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: FreepostcommentCreateReactionCodeEnum1;
+          code?: FreePostCommentCreateReactionCodeEnum1;
           /** error message */
-          message?: FreepostcommentCreateReactionMessageEnum1;
+          message?: FreePostCommentCreateReactionMessageEnum1;
         }
       | {
           /**
@@ -621,9 +613,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FreepostcommentCreateReactionCodeEnum2;
+          code?: FreePostCommentCreateReactionCodeEnum2;
           /** error message */
-          message?: FreepostcommentCreateReactionMessageEnum2;
+          message?: FreePostCommentCreateReactionMessageEnum2;
         }
       | {
           /**
@@ -642,9 +634,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 4000
            */
-          code?: FreepostcommentCreateReactionCodeEnum3;
+          code?: FreePostCommentCreateReactionCodeEnum3;
           /** error message */
-          message?: FreepostcommentCreateReactionMessageEnum3;
+          message?: FreePostCommentCreateReactionMessageEnum3;
         }
       | {
           /**
@@ -663,9 +655,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: FreepostcommentCreateReactionCodeEnum4;
+          code?: FreePostCommentCreateReactionCodeEnum4;
           /** error message */
-          message?: FreepostcommentCreateReactionMessageEnum4;
+          message?: FreePostCommentCreateReactionMessageEnum4;
         }
     >({
       path: `/api/free-posts/${postId}/comments/${commentId}/reaction`,
@@ -679,12 +671,12 @@ export class FreePostComment<SecurityDataType = unknown> {
    * No description
    *
    * @tags free-post-comment
-   * @name FreepostcommentRemoveReaction
+   * @name FreePostCommentRemoveReaction
    * @summary 자유 게시글 댓글 reaction 삭제
    * @request DELETE:/api/free-posts/{postId}/comments/{commentId}/reaction
    * @secure
    */
-  freepostcommentRemoveReaction = (
+  freePostCommentRemoveReaction = (
     postId: number,
     commentId: number,
     data: RemoveReactionDto,
@@ -709,11 +701,11 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: FreepostcommentRemoveReactionCodeEnum;
+          code?: FreePostCommentRemoveReactionCodeEnum;
           /** error message */
-          message?: FreepostcommentRemoveReactionMessageEnum;
+          message?: FreePostCommentRemoveReactionMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -732,9 +724,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: FreepostcommentRemoveReactionCodeEnum1;
+          code?: FreePostCommentRemoveReactionCodeEnum1;
           /** error message */
-          message?: FreepostcommentRemoveReactionMessageEnum1;
+          message?: FreePostCommentRemoveReactionMessageEnum1;
         }
       | {
           /**
@@ -753,9 +745,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: FreepostcommentRemoveReactionCodeEnum2;
+          code?: FreePostCommentRemoveReactionCodeEnum2;
           /** error message */
-          message?: FreepostcommentRemoveReactionMessageEnum2;
+          message?: FreePostCommentRemoveReactionMessageEnum2;
         }
       | {
           /**
@@ -774,9 +766,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 4001
            */
-          code?: FreepostcommentRemoveReactionCodeEnum3;
+          code?: FreePostCommentRemoveReactionCodeEnum3;
           /** error message */
-          message?: FreepostcommentRemoveReactionMessageEnum3;
+          message?: FreePostCommentRemoveReactionMessageEnum3;
         }
       | {
           /**
@@ -795,9 +787,9 @@ export class FreePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: FreepostcommentRemoveReactionCodeEnum4;
+          code?: FreePostCommentRemoveReactionCodeEnum4;
           /** error message */
-          message?: FreepostcommentRemoveReactionMessageEnum4;
+          message?: FreePostCommentRemoveReactionMessageEnum4;
         }
     >({
       path: `/api/free-posts/${postId}/comments/${commentId}/reaction`,

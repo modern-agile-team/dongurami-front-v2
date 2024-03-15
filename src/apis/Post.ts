@@ -9,10 +9,16 @@
  * ---------------------------------------------------------------
  */
 
-import { MajorFindAllMajorsCodeEnum, MajorFindAllMajorsMessageEnum, MajorsCommonResponseDto } from "./data-contracts";
+import {
+  CustomValidationError,
+  PostFindAllAndCountCodeEnum,
+  PostFindAllAndCountMessageEnum,
+  PostFindAllAndCountParams,
+  PostsPaginationResponseDto,
+} from "./data-contracts";
 import { HttpClient, RequestParams } from "./http-client";
 
-export class Majors<SecurityDataType = unknown> {
+export class Post<SecurityDataType = unknown> {
   http: HttpClient<SecurityDataType>;
 
   constructor(http: HttpClient<SecurityDataType>) {
@@ -22,14 +28,14 @@ export class Majors<SecurityDataType = unknown> {
   /**
    * No description
    *
-   * @tags majors
-   * @name MajorFindAllMajors
-   * @summary 전공 목록 전체 조회
-   * @request GET:/api/major
+   * @tags post
+   * @name PostFindAllAndCount
+   * @summary 게시글 전체 조회(자유, 공지)
+   * @request GET:/api/posts
    */
-  majorFindAllMajors = (params: RequestParams = {}) =>
+  postFindAllAndCount = (query: PostFindAllAndCountParams, params: RequestParams = {}) =>
     this.http.request<
-      MajorsCommonResponseDto,
+      PostsPaginationResponseDto,
       {
         /**
          * 에러 발생 시각
@@ -40,20 +46,23 @@ export class Majors<SecurityDataType = unknown> {
          * http status code
          * @format integer
          * @min 400
-         * @example 500
+         * @example 400
          */
         statusCode?: number;
         /**
          * error code
-         * @example 0
+         * @example 1
          */
-        code?: MajorFindAllMajorsCodeEnum;
+        code?: PostFindAllAndCountCodeEnum;
         /** error message */
-        message?: MajorFindAllMajorsMessageEnum;
+        message?: PostFindAllAndCountMessageEnum;
+        /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+        errors?: CustomValidationError[];
       }
     >({
-      path: `/api/major`,
+      path: `/api/posts`,
       method: "GET",
+      query: query,
       format: "json",
       ...params,
     });
