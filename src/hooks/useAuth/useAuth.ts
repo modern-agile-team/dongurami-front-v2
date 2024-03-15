@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { RESET } from "jotai/utils";
+import { signOut } from "next-auth/react";
 
 import { authAPI, instance } from "@/apis";
 import { accessTokenAtom } from "@/globalState";
@@ -42,6 +43,7 @@ export default function useAuth(args?: IUseAuth) {
 
   const logout = () => {
     setAccessToken(RESET);
+    signOut();
     args?.onLogout?.();
   };
 
