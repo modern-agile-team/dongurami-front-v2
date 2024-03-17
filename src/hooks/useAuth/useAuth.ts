@@ -35,7 +35,7 @@ export default function useAuth(args?: IUseAuth) {
     },
     onError(error) {
       const err = error as AxiosError<
-        SwaggerError.GeneralApiError<{ error: Swagger.ValidationError[] }>
+        SwaggerError.GeneralApiError<{ error: Swagger.CustomValidationError[] }>
       >;
       args?.onLoginError?.(err);
     },

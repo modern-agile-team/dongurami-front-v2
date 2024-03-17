@@ -964,6 +964,118 @@ export interface SignUpRequestBodyDto {
   profilePath: string | null;
 }
 
+export interface ClubCategoryDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /**
+   * 카테고리 생성 유저 고유 ID
+   * @format integer
+   */
+  userId: number;
+  /** 카테고리 명 */
+  name: string;
+}
+
+export interface ClubTagDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 태그 생성 유저 고유 ID
+   * @format integer
+   */
+  userId: number;
+  /** 태그 명 */
+  name: string;
+}
+
+export interface ClubsItemDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /** 동아리 명 */
+  name: string;
+  /** 동아리 로고 path */
+  logoPath: string | null;
+  /** 동아리 상태 */
+  status: ClubsItemDtoStatusEnum;
+  /** 동아리 카테고리 리스트 */
+  clubCategories: ClubCategoryDto[];
+  /** 동아리 태그 리스트 */
+  clubTags: ClubTagDto[];
+}
+
+export interface ClubsPaginationResponseDto {
+  /**
+   * 총 페이지 수
+   * @format integer
+   * @min 1
+   */
+  totalCount: number;
+  /**
+   * 한 요청에 대한 data 수
+   * @format integer
+   * @min 1
+   */
+  pageSize: number;
+  /**
+   * 현재 페이지 번호
+   * @format integer
+   * @min 1
+   */
+  currentPage: number;
+  /**
+   * 다음 페이지 번호, 다음 페이지가 없다면 null 반환
+   * @format integer
+   * @min 2
+   */
+  nextPage: number | null;
+  /**
+   * 다음 페이지 존재 여부
+   * @min 1
+   */
+  hasNext: boolean;
+  /**
+   * 마지막 페이지 번호
+   * @format integer
+   * @min 1
+   */
+  lastPage: number;
+  contents: ClubsItemDto[];
+}
+
 export interface AttachmentDto {
   /**
    * 첨부 파일 고유 ID
@@ -1129,6 +1241,9 @@ export type SignUpRequestBodyDtoRoleEnum = "admin" | "student";
 
 /** gender */
 export type SignUpRequestBodyDtoGenderEnum = "male" | "female";
+
+/** 동아리 상태 */
+export type ClubsItemDtoStatusEnum = "pending" | "active" | "inactive";
 
 export type ErrorCodeResponseDtoCodeEnum = "0" | "1" | "2" | "3" | "4" | "5" | "6";
 
@@ -2606,6 +2721,55 @@ export type AuthSocialSignInCodeEnum1 = 0;
 
 /** error message */
 export type AuthSocialSignInMessageEnum1 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindAllAndCountCodeEnum = 1;
+
+/** error message */
+export type ClubFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindAllAndCountCodeEnum1 = 0;
+
+/** error message */
+export type ClubFindAllAndCountMessageEnum1 = "Server error. Please contact server developer";
+
+export interface ClubFindAllAndCountParams {
+  /**
+   * 페이지번호
+   * @format integer
+   * @min 1
+   * @default 1
+   */
+  page?: number;
+  /**
+   * 페이지당 아이템 수
+   * @format integer
+   * @min 1
+   * @max 100
+   * @default 20
+   */
+  pageSize?: number;
+  /** 동아리 명 */
+  name?: string;
+  /** 동아리 카테고리 ID */
+  categoryId?: number;
+  /** 동아리 태그 ID */
+  tagId?: number;
+  /**
+   * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
+   * @format csv
+   * @default "id"
+   * @example "-id,updatedAt"
+   */
+  order?: string;
+}
 
 /**
  * error code

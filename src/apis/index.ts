@@ -5,13 +5,18 @@
  */
 
 import { Auth } from "./Auth";
+import { Admin } from "./Admin";
+import { Attachment } from "./Attachment";
 import { AuthSocial } from "./AuthSocial";
+import { Dev } from "./Dev";
 import { FreePost } from "./FreePost";
 import { FreePostComment } from "./FreePostComment";
 import { Majors } from "./Majors";
 import { NoticePost } from "./NoticePost";
-import { Root } from "./Root";
+import { NoticePostComment } from "./NoticePostComment";
+import { Post } from "./Post";
 import { User } from "./User";
+import { Club } from "./Club";
 import { HttpClient } from "./http-client";
 import { validator } from "@/utils";
 
@@ -42,5 +47,10 @@ export const freePostsAPI = new FreePost(httpClient);
 export const freePostCommentAPI = new FreePostComment(httpClient);
 export const majorsAPI = new Majors(httpClient);
 export const noticePostsAPI = new NoticePost(httpClient);
-export const rootAPI = new Root(httpClient);
 export const usersAPI = new User(httpClient);
+export const clubAPI = new Club(httpClient);
+export const adminAPI = new Admin(httpClient);
+export const attachmentAPI = new Attachment(httpClient);
+export const devAPI = new Dev(httpClient);
+export const noticePostCommentAPI = new NoticePostComment(httpClient);
+export const postAPI = new Post(httpClient);
