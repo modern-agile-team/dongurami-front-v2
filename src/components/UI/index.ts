@@ -8,3 +8,4 @@ export * from "./Quill";
 export * from "./Footer";
 export * from "./Header";
 export * from "./Banner";
+export * as Club from "./Club";
