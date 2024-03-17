@@ -11,7 +11,7 @@ export default function DetailNoticeBoard() {
 
   const { data, isFetched } = useQuery({
     queryFn: async () => {
-      const response = await noticePostsAPI.noticepostFindOneOrNotFound(
+      const response = await noticePostsAPI.noticePostFindOneOrNotFound(
         Number(postId)
       );
 
@@ -28,11 +28,11 @@ export default function DetailNoticeBoard() {
   }, [isFetched]);
 
   const incrementPostViews = async () => {
-    await noticePostsAPI.noticepostIncreaseHit(Number(postId));
+    await noticePostsAPI.noticePostIncreaseHit(Number(postId));
   };
 
   const handleClickDelete = () => {
-    noticePostsAPI.noticepostRemove(Number(postId)).then(() => {
+    noticePostsAPI.noticePostRemove(Number(postId)).then(() => {
       router.back();
     });
   };

@@ -11,7 +11,7 @@ export default function DetailFreeBoard() {
 
   const { data, isFetched } = useQuery({
     queryFn: async () => {
-      const response = await freePostsAPI.freepostFindOneOrNotFound(
+      const response = await freePostsAPI.freePostFindOneOrNotFound(
         Number(postId)
       );
 
@@ -29,11 +29,11 @@ export default function DetailFreeBoard() {
   }, [isFetched]);
 
   const incrementPostViews = async () => {
-    await freePostsAPI.freepostIncrementHit(Number(postId));
+    await freePostsAPI.freePostIncrementHit(Number(postId));
   };
 
   const handleClickDelete = () => {
-    freePostsAPI.freepostRemove(Number(postId)).then(() => {
+    freePostsAPI.freePostRemove(Number(postId)).then(() => {
       router.back();
     });
   };
