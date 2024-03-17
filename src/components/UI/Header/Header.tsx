@@ -31,16 +31,7 @@ export default function Header({}: {}) {
 
       case "free-board": {
         router.push({
-          pathname: "/board/free",
-          query: {
-            page: 1,
-          },
-        });
-        break;
-      }
-      case "notice-board": {
-        router.push({
-          pathname: "/board/notice",
+          pathname: "/board",
           query: {
             page: 1,
           },
@@ -99,18 +90,7 @@ export default function Header({}: {}) {
             }
             hoverTypoColor="neutral_90"
           >
-            수다 게시판
-          </Button.Text>
-          <Button.Text
-            onClick={handleRoute}
-            id="notice-board"
-            typoSize="Head5"
-            typoColor={
-              router.pathname === "/board/notice" ? "neutral_100" : "neutral_60"
-            }
-            hoverTypoColor="neutral_90"
-          >
-            공지 게시판
+            동아리 게시판
           </Button.Text>
         </Row.ul>
       </Row>

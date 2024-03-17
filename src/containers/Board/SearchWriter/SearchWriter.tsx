@@ -21,7 +21,8 @@ export default function SearchWriter({ type }: BoardType) {
 
   function handleClickPostWrite() {
     router.push({
-      pathname: `free/write/`,
+      pathname: `board/write/`,
+      query: type,
     });
   }
 

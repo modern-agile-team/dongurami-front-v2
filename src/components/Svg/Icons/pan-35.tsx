@@ -1,7 +1,7 @@
 import React, { forwardRef, Ref } from "react";
 import { IconProps } from "../Icon";
 import Svg from "../Svg";
-const SvgSearch30 = forwardRef(
+const SvgPan35 = forwardRef(
   (
     { size, title, desc, titleId, descId, ...props }: IconProps,
     ref: Ref<SVGSVGElement>
@@ -43,11 +43,11 @@ const SvgSearch30 = forwardRef(
     );
   }
 );
-SvgSearch30.defaultProps = {
+SvgPan35.defaultProps = {
   size: 30,
   focusable: false,
   "aria-hidden": true,
   role: "img",
   fill: "currentcolor",
 };
-export default SvgSearch30;
+export default SvgPan35;
