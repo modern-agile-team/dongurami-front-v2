@@ -9,6 +9,7 @@ import React, { useMemo, useState } from "react";
 import { Icon, Row, Typography, WhatIF } from "@/components";
 import * as S from "./emotion";
 import { lightThemeColor } from "@/styles/theme";
+import { Converter } from "@/utils";
 
 interface IPaginationProps {
   count: number;
@@ -52,8 +53,11 @@ export default function Pagination({
 
   return (
     <Row.li
+      horizonAlign="center"
       style={{
         margin: `80px 0px`,
+        width: `calc(100% - ${Converter.pxToRem(527)})`,
+        minWidth: `${Converter.pxToRem(753)}`,
       }}
       gap={20}
     >

@@ -84,12 +84,12 @@ export default function FreeBoard(props: { boardName: string }) {
       <Head>
         <title>동그라미 - 게시판</title>
       </Head>
-      <Column horizonAlign="center" gap={10}>
+      <Column horizonAlign="center" gap={0}>
         <Column
           horizonAlign="left"
           style={{
-            width: `calc(100% - ${Converter.pxToRem(512)})`,
-            minWidth: Converter.pxToRem(1408),
+            width: `calc(100% - ${Converter.pxToRem(527)})`,
+            minWidth: Converter.pxToRem(753),
             margin: `${Converter.pxToRem(20)} 0`,
           }}
         >
@@ -101,8 +101,8 @@ export default function FreeBoard(props: { boardName: string }) {
         <Column
           horizonAlign="center"
           style={{
-            width: `calc(100% - ${Converter.pxToRem(512)})`,
-            minWidth: Converter.pxToRem(1408),
+            width: `calc(100% - ${Converter.pxToRem(527)})`,
+            minWidth: Converter.pxToRem(753),
             margin: `${Converter.pxToRem(20)} 0`,
             justifyContent: "flex-end",
             flexDirection: "row",
@@ -131,9 +131,6 @@ export default function FreeBoard(props: { boardName: string }) {
                 marginRight: Converter.pxToRem(15),
                 backgroundColor: "#fff",
                 borderRadius: "3px",
-                // alignItems: "center",
-                // justifyContent: "center",
-                // display: "flex",
               }}
               onClick={toggleNoticeVisibility}
             >
@@ -146,21 +143,23 @@ export default function FreeBoard(props: { boardName: string }) {
           </Typography>
         </Column>
 
-        <TableHeader />
-
-        <WhatIF condition={!isLoadingFree} falsy={<Loader />}>
-          {isNoticeVisible ? (
-            <>
-              {noticeData && (
-                <Table
-                  data={noticeData}
-                  type="notice"
-                  handleClickPostDetail={handleClickPostDetail}
-                />
-              )}
-            </>
-          ) : (
-            <></>
+        <table
+          style={{
+            width: `calc(100% - ${Converter.pxToRem(527)})`,
+            minWidth: Converter.pxToRem(753),
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            borderCollapse: "collapse",
+          }}
+        >
+          <TableHeader />
+          {isNoticeVisible && noticeData && (
+            <Table
+              data={noticeData}
+              type="notice"
+              handleClickPostDetail={handleClickPostDetail}
+            />
           )}
 
           {freeData && (
@@ -170,22 +169,22 @@ export default function FreeBoard(props: { boardName: string }) {
               handleClickPostDetail={handleClickPostDetail}
             />
           )}
+        </table>
 
-          <SearchWriter type="free" />
+        <SearchWriter type="free" />
 
-          <Pagination
-            defaultPage={freeData?.currentPage}
-            count={freeData?.lastPage || 1}
-            onChange={(_, page) => {
-              router.push({
-                pathname: "/board/free",
-                query: {
-                  page,
-                },
-              });
-            }}
-          />
-        </WhatIF>
+        <Pagination
+          defaultPage={freeData?.currentPage}
+          count={freeData?.lastPage || 1}
+          onChange={(_, page) => {
+            router.push({
+              pathname: "/board/free",
+              query: {
+                page,
+              },
+            });
+          }}
+        />
       </Column>
     </>
   );

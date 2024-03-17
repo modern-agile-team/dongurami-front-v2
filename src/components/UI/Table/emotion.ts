@@ -7,13 +7,6 @@ interface Props {
   type?: string;
 }
 
-export const Table = styled.table`
-  width: calc(100% - ${Converter.pxToRem(1408)});
-  min-width: ${Converter.pxToRem(1408)};
-
-  border-collapse: collapse;
-`;
-
 export const Thead = styled.thead`
   background-color: ${lightThemeColor.secondary_10};
   border-top: 1px solid ${lightThemeColor.neutral_90};
@@ -26,7 +19,6 @@ export const Tbody = styled.tbody`
 
 export const Tr = styled.tr<Props>`
   border-bottom: 1px solid ${lightThemeColor.neutral_40};
-
   background-color: ${(props) =>
     props.type === "free" ? "#fff" : `${lightThemeColor.primary_10}`};
 `;
@@ -34,11 +26,12 @@ export const Tr = styled.tr<Props>`
 export const ThTitle = styled.th`
   border: none;
   padding: 20px 0px;
-  width: 50%;
+  width: 62.5%;
+  vertical-align: middle;
 `;
 
 export const Th = styled.th`
   border: none;
   padding: 20px 0px;
-  width: 12.5%;
+  vertical-align: middle;
 `;

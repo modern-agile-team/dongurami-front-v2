@@ -9,6 +9,7 @@ import React from "react";
 import * as S from "./emotion";
 import { Button, Typography } from "@/components";
 import { lightThemeColor } from "@/styles/theme";
+import { Converter } from "@/utils";
 
 interface PostData {
   id: number;
@@ -35,7 +36,11 @@ export default function Table({
   ) => {
     if (type === "free" && "isAnonymous" in post && post.isAnonymous) {
       return (
-        <S.Th>
+        <S.Th
+          style={{
+            width: 100,
+          }}
+        >
           <Typography typoColor="neutral_90" typoSize="Head6">
             익명
           </Typography>
@@ -43,7 +48,11 @@ export default function Table({
       );
     } else if (type === "free" && "isAnonymous" in post && !post.isAnonymous) {
       return (
-        <S.Th>
+        <S.Th
+          style={{
+            width: 100,
+          }}
+        >
           <Typography typoColor="neutral_90" typoSize="Head6">
             {post.userId}
           </Typography>
@@ -51,7 +60,11 @@ export default function Table({
       );
     } else if (type === "notice") {
       return (
-        <S.Th>
+        <S.Th
+          style={{
+            width: 100,
+          }}
+        >
           <Typography typoColor="neutral_90" typoSize="Head6">
             운영자
           </Typography>
@@ -61,55 +74,65 @@ export default function Table({
   };
 
   return (
-    <S.Table>
-      <S.Tbody>
-        {slicedData.map((post) => {
-          return (
-            <S.Tr
-              key={post.id}
-              onClick={() => handleClickPostDetail(post)}
-              type={type}
+    <S.Tbody>
+      {slicedData.map((post) => {
+        return (
+          <S.Tr
+            key={post.id}
+            onClick={() => handleClickPostDetail(post)}
+            type={type}
+          >
+            <S.Th
+              style={{
+                width: 100,
+              }}
             >
-              <S.Th>
-                {type === "free" ? (
-                  <Typography typoColor="neutral_90" typoSize="Head6">
-                    {post.id}
+              {type === "free" ? (
+                <Typography typoColor="neutral_90" typoSize="Head6">
+                  {post.id}
+                </Typography>
+              ) : (
+                <Button
+                  shape="square"
+                  backgroundColor="primary_20"
+                  style={{
+                    border: `1px solid ${lightThemeColor.primary_50}`,
+                  }}
+                >
+                  <Typography typoColor="primary_80" typoSize="Head7">
+                    공지
                   </Typography>
-                ) : (
-                  <Button
-                    shape="square"
-                    backgroundColor="primary_20"
-                    style={{
-                      border: `1px solid ${lightThemeColor.primary_50}`,
-                    }}
-                  >
-                    <Typography typoColor="primary_80" typoSize="Head7">
-                      공지
-                    </Typography>
-                  </Button>
-                )}
-              </S.Th>
-              <S.ThTitle>
-                <Typography typoColor="neutral_90" typoSize="Head6">
-                  {post.title}
-                </Typography>
-              </S.ThTitle>
+                </Button>
+              )}
+            </S.Th>
+            <S.ThTitle>
+              <Typography typoColor="neutral_90" typoSize="Head6">
+                {post.title}
+              </Typography>
+            </S.ThTitle>
 
-              {getAuthorType(post)}
-              <S.Th>
-                <Typography typoColor="neutral_90" typoSize="Head6">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </Typography>
-              </S.Th>
-              <S.Th>
-                <Typography typoColor="neutral_90" typoSize="Head6">
-                  {post.hit}
-                </Typography>
-              </S.Th>
-            </S.Tr>
-          );
-        })}
-      </S.Tbody>
-    </S.Table>
+            {getAuthorType(post)}
+            <S.Th
+              style={{
+                width: 150,
+              }}
+            >
+              <Typography typoColor="neutral_90" typoSize="Head6">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </Typography>
+            </S.Th>
+            <S.Th
+              style={{
+                width: 100,
+              }}
+            >
+              <Typography typoColor="neutral_90" typoSize="Head6">
+                {post.hit}
+              </Typography>
+            </S.Th>
+          </S.Tr>
+        );
+      })}
+    </S.Tbody>
   );
 }

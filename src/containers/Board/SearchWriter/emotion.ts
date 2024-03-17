@@ -6,8 +6,8 @@ import { Converter } from "@/utils";
 export const Container = styled(Row.div)`
   margin-top: ${Converter.pxToRem(80)};
 
-  width: calc(100% - ${Converter.pxToRem(512)});
-  min-width: ${Converter.pxToRem(1408)};
+  width: calc(100% - ${Converter.pxToRem(527)});
+  min-width: ${Converter.pxToRem(753)};
   justify-content: space-between;
 `;
 
@@ -45,7 +45,7 @@ export const Input = styled.input`
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   width: 60%;
-  min-width: ${Converter.pxToRem(844)};
+  min-width: ${Converter.pxToRem(231)};
   &::placeholder {
     font-size: 28px; /* Remove the quotes */
     line-height: normal; /* Remove the quotes */
