@@ -14,8 +14,10 @@ import { Button, Row, Typography } from "@/components";
 import Logo from "@/assets/main/logo.png";
 import { useAuth } from "@/hooks";
 import { WhatIF } from "@/components";
+import LoginModal from "../Modals/LoginModal";
 
 export default function Header({}: {}) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isLoggedIn, logout } = useAuth();
   const router = useRouter();
 
@@ -125,7 +127,7 @@ export default function Header({}: {}) {
                   id="sign-in"
                   typoSize="SubTitle2"
                   typoColor="neutral_60"
-                  onClick={handleRoute}
+                  onClick={() => setIsOpen(!isOpen)}
                   hoverTypoColor="neutral_90"
                 >
                   로그인
@@ -160,6 +162,7 @@ export default function Header({}: {}) {
           </Row.li>
         </WhatIF>
       </Row.ul>
+      <LoginModal isOpen={isOpen} />
     </S.Container>
   );
 }

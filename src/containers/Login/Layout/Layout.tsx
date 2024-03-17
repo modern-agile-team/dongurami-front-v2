@@ -5,17 +5,8 @@
  */
 
 import React from "react";
-
-import { Column } from "@/components";
+import * as S from "./emotion";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <Column
-      verticalAlign="center"
-      horizonAlign="center"
-      css={{ width: "100%", height: "100%" }}
-    >
-      {children}
-    </Column>
-  );
+  return <S.Wrap>{children}</S.Wrap>;
 }
