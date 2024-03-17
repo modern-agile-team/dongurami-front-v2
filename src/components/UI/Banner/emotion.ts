@@ -5,7 +5,7 @@
  */
 import styled from "@emotion/styled";
 
-import { Column } from "@/components";
+import { Column } from "../../Layouts";
 
 export const Wrapper = styled(Column)`
   background-color: ${({ theme }) => theme.color.secondary_10};
