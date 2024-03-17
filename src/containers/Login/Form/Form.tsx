@@ -4,50 +4,98 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { authSocialAPI } from "@/apis";
+import { accessTokenAtom } from "@/globalState";
+import { useAtom } from "jotai";
+import { useRouter } from "next/router";
+import { useAuth } from "@/hooks";
 
 export default function Form() {
   const { data } = useSession();
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const router = useRouter();
+  const { logout } = useAuth();
 
-  console.log(data);
+  useEffect(() => {
+    if (!accessToken) {
+      if (data) {
+        authSignIn(data!.user, setAccessToken);
+      }
+    } else {
+      router.push("/");
+    }
+    console.log(accessToken);
+  }, [accessToken, data]);
+
+  async function authSignIn(user: any, setItem: any) {
+    await authSocialAPI
+      .authSocialCheckRegistration({
+        loginType: user.provider.toUpperCase(),
+        snsToken: user.access_token,
+      })
+      .then((res) => {
+        if (res.data) {
+          authSocialAPI
+            .authSocialSignIn({
+              loginType: user.provider.toUpperCase(),
+              snsToken: user.access_token,
+            })
+            .then((res) => {
+              setItem(res.data.accessToken);
+            })
+            .catch((err) =>
+              //에러처리
+              console.log(err)
+            );
+        } else {
+          authSocialAPI
+            .authSocialSignUp({
+              loginType: user.provider.toUpperCase(),
+              snsToken: user.access_token,
+              name: null,
+              email: null,
+              role: "student",
+              phoneNumber: null,
+              grade: null,
+              gender: "male",
+              profilePath: null,
+              //@ts-ignore
+              majorId: null,
+            })
+            .then((res) => {
+              //@ts-ignore
+              setItem(res.data.accessToken);
+            })
+            .catch((err) =>
+              //에러처리
+              console.log(err.data)
+            );
+        }
+      })
+      .catch((err) =>
+        //에러처리
+        console.log(err)
+      );
+  }
+
   return (
     <div>
-      {!data ? (
+      {!accessToken ? (
         <div>
-          <button
-            onClick={() =>
-              signIn("kakao", {
-                redirect: true,
-                callbackUrl: "/",
-                // signIn 콜백 or nextauth 객체 콜백에서 백엔드에 티켓 보내기(api미완)
-              })
-            }
-          >
-            카카오
-          </button>
-          <button
-            onClick={() => {
-              signIn("google", {
-                redirect: true,
-                callbackUrl: "/",
-              });
-            }}
-          >
-            구글
-          </button>
-          <button
-            onClick={() =>
-              signIn("naver", {
-                redirect: true,
-                callbackUrl: "/",
-              })
-            }
-          >
-            네이버
-          </button>
+          <button onClick={async () => signIn("kakao")}>카카오</button>
+          <button onClick={() => signIn("google")}>구글</button>
+          <button onClick={() => signIn("naver")}>네이버</button>
         </div>
       ) : (
-        <button onClick={() => signOut()}>로그아웃</button>
+        <button
+          onClick={() => {
+            logout();
+          }}
+        >
+          로그아웃
+        </button>
       )}
     </div>
   );

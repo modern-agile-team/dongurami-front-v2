@@ -10,21 +10,19 @@
  */
 
 import {
-  AuthGetProfileCodeEnum,
-  AuthGetProfileCodeEnum1,
-  AuthGetProfileMessageEnum,
-  AuthGetProfileMessageEnum1,
-  AuthSignInCodeEnum,
-  AuthSignInCodeEnum1,
-  AuthSignInMessageEnum,
-  AuthSignInMessageEnum1,
+  AttachmentUploadFilesCodeEnum,
+  AttachmentUploadFilesCodeEnum1,
+  AttachmentUploadFilesCodeEnum2,
+  AttachmentUploadFilesMessageEnum,
+  AttachmentUploadFilesMessageEnum1,
+  AttachmentUploadFilesMessageEnum2,
+  AttachmentUploadFilesPayload,
+  AttachmentsCommonResponseDto,
   CustomValidationError,
-  SignInRequestBodyDto,
-  UserDetailResponseDto,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Auth<SecurityDataType = unknown> {
+export class Attachment<SecurityDataType = unknown> {
   http: HttpClient<SecurityDataType>;
 
   constructor(http: HttpClient<SecurityDataType>) {
@@ -34,17 +32,15 @@ export class Auth<SecurityDataType = unknown> {
   /**
    * No description
    *
-   * @tags auth
-   * @name AuthSignIn
-   * @summary 로그인
-   * @request POST:/api/auth/sign-in
+   * @tags attachment
+   * @name AttachmentUploadFiles
+   * @summary 파일 업로드 api
+   * @request POST:/api/attachments
+   * @secure
    */
-  authSignIn = (data: SignInRequestBodyDto, params: RequestParams = {}) =>
+  attachmentUploadFiles = (data: AttachmentUploadFilesPayload, params: RequestParams = {}) =>
     this.http.request<
-      {
-        /** access token */
-        accessToken?: string;
-      },
+      AttachmentsCommonResponseDto,
       | {
           /**
            * 에러 발생 시각
@@ -62,53 +58,12 @@ export class Auth<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: AuthSignInCodeEnum;
+          code?: AttachmentUploadFilesCodeEnum;
           /** error message */
-          message?: AuthSignInMessageEnum;
+          message?: AttachmentUploadFilesMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
           errors?: CustomValidationError[];
         }
-      | {
-          /**
-           * 에러 발생 시각
-           * @format date-time
-           */
-          timestamp?: string;
-          /**
-           * http status code
-           * @format integer
-           * @min 400
-           * @example 500
-           */
-          statusCode?: number;
-          /**
-           * error code
-           * @example 0
-           */
-          code?: AuthSignInCodeEnum1;
-          /** error message */
-          message?: AuthSignInMessageEnum1;
-        }
-    >({
-      path: `/api/auth/sign-in`,
-      method: "POST",
-      body: data,
-      type: ContentType.Json,
-      format: "json",
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags auth
-   * @name AuthGetProfile
-   * @summary 로그인한 유저 정보 조회
-   * @request GET:/api/auth/profile
-   * @secure
-   */
-  authGetProfile = (params: RequestParams = {}) =>
-    this.http.request<
-      UserDetailResponseDto,
       | {
           /**
            * 에러 발생 시각
@@ -126,9 +81,9 @@ export class Auth<SecurityDataType = unknown> {
            * error code
            * @example 3
            */
-          code?: AuthGetProfileCodeEnum;
+          code?: AttachmentUploadFilesCodeEnum1;
           /** error message */
-          message?: AuthGetProfileMessageEnum;
+          message?: AttachmentUploadFilesMessageEnum1;
         }
       | {
           /**
@@ -147,14 +102,16 @@ export class Auth<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: AuthGetProfileCodeEnum1;
+          code?: AttachmentUploadFilesCodeEnum2;
           /** error message */
-          message?: AuthGetProfileMessageEnum1;
+          message?: AttachmentUploadFilesMessageEnum2;
         }
     >({
-      path: `/api/auth/profile`,
-      method: "GET",
+      path: `/api/attachments`,
+      method: "POST",
+      body: data,
       secure: true,
+      type: ContentType.FormData,
       format: "json",
       ...params,
     });

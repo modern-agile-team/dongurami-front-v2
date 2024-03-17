@@ -26,7 +26,7 @@ export default function NoticeBoard(props: { boardName: string }) {
     queryFn: async () => {
       const page = router.query.page as string;
       return (
-        await noticePostsAPI.noticepostFindAllAndCount({
+        await noticePostsAPI.noticePostFindAllAndCount({
           page: Number(page),
           pageSize: 20,
         })

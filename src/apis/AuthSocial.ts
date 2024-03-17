@@ -10,23 +10,23 @@
  */
 
 import {
-  AuthsocialCheckRegistrationCodeEnum,
-  AuthsocialCheckRegistrationMessageEnum,
-  AuthsocialSignInCodeEnum,
-  AuthsocialSignInCodeEnum1,
-  AuthsocialSignInMessageEnum,
-  AuthsocialSignInMessageEnum1,
-  AuthsocialSignUpCodeEnum,
-  AuthsocialSignUpCodeEnum1,
-  AuthsocialSignUpCodeEnum2,
-  AuthsocialSignUpMessageEnum,
-  AuthsocialSignUpMessageEnum1,
-  AuthsocialSignUpMessageEnum2,
+  AuthSocialCheckRegistrationCodeEnum,
+  AuthSocialCheckRegistrationMessageEnum,
+  AuthSocialSignInCodeEnum,
+  AuthSocialSignInCodeEnum1,
+  AuthSocialSignInMessageEnum,
+  AuthSocialSignInMessageEnum1,
+  AuthSocialSignUpCodeEnum,
+  AuthSocialSignUpCodeEnum1,
+  AuthSocialSignUpCodeEnum2,
+  AuthSocialSignUpMessageEnum,
+  AuthSocialSignUpMessageEnum1,
+  AuthSocialSignUpMessageEnum2,
   CheckRegistrationRequestBodyDto,
+  CustomValidationError,
   SignInRequestBodyDto,
   SignUpRequestBodyDto,
   UserDetailResponseDto,
-  ValidationError,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
@@ -41,11 +41,11 @@ export class AuthSocial<SecurityDataType = unknown> {
    * No description
    *
    * @tags auth-social
-   * @name AuthsocialCheckRegistration
+   * @name AuthSocialCheckRegistration
    * @summary 소셜 유저 프로필 유무 조회
    * @request POST:/api/auth/social/check-registration
    */
-  authsocialCheckRegistration = (data: CheckRegistrationRequestBodyDto, params: RequestParams = {}) =>
+  authSocialCheckRegistration = (data: CheckRegistrationRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       boolean,
       {
@@ -65,9 +65,9 @@ export class AuthSocial<SecurityDataType = unknown> {
          * error code
          * @example 0
          */
-        code?: AuthsocialCheckRegistrationCodeEnum;
+        code?: AuthSocialCheckRegistrationCodeEnum;
         /** error message */
-        message?: AuthsocialCheckRegistrationMessageEnum;
+        message?: AuthSocialCheckRegistrationMessageEnum;
       }
     >({
       path: `/api/auth/social/check-registration`,
@@ -81,11 +81,11 @@ export class AuthSocial<SecurityDataType = unknown> {
    * No description
    *
    * @tags auth-social
-   * @name AuthsocialSignUp
+   * @name AuthSocialSignUp
    * @summary 소셜 회원가입
    * @request POST:/api/auth/social/signup
    */
-  authsocialSignUp = (data: SignUpRequestBodyDto, params: RequestParams = {}) =>
+  authSocialSignUp = (data: SignUpRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
       | {
@@ -105,11 +105,11 @@ export class AuthSocial<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: AuthsocialSignUpCodeEnum;
+          code?: AuthSocialSignUpCodeEnum;
           /** error message */
-          message?: AuthsocialSignUpMessageEnum;
+          message?: AuthSocialSignUpMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -128,9 +128,9 @@ export class AuthSocial<SecurityDataType = unknown> {
            * error code
            * @example 2000
            */
-          code?: AuthsocialSignUpCodeEnum1;
+          code?: AuthSocialSignUpCodeEnum1;
           /** error message */
-          message?: AuthsocialSignUpMessageEnum1;
+          message?: AuthSocialSignUpMessageEnum1;
         }
       | {
           /**
@@ -149,9 +149,9 @@ export class AuthSocial<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: AuthsocialSignUpCodeEnum2;
+          code?: AuthSocialSignUpCodeEnum2;
           /** error message */
-          message?: AuthsocialSignUpMessageEnum2;
+          message?: AuthSocialSignUpMessageEnum2;
         }
     >({
       path: `/api/auth/social/signup`,
@@ -165,11 +165,11 @@ export class AuthSocial<SecurityDataType = unknown> {
    * No description
    *
    * @tags auth-social
-   * @name AuthsocialSignIn
+   * @name AuthSocialSignIn
    * @summary 소셜 로그인
    * @request POST:/api/auth/social/signin
    */
-  authsocialSignIn = (data: SignInRequestBodyDto, params: RequestParams = {}) =>
+  authSocialSignIn = (data: SignInRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       {
         /** access token */
@@ -192,11 +192,11 @@ export class AuthSocial<SecurityDataType = unknown> {
            * error code
            * @example 1
            */
-          code?: AuthsocialSignInCodeEnum;
+          code?: AuthSocialSignInCodeEnum;
           /** error message */
-          message?: AuthsocialSignInMessageEnum;
+          message?: AuthSocialSignInMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -215,9 +215,9 @@ export class AuthSocial<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: AuthsocialSignInCodeEnum1;
+          code?: AuthSocialSignInCodeEnum1;
           /** error message */
-          message?: AuthsocialSignInMessageEnum1;
+          message?: AuthSocialSignInMessageEnum1;
         }
     >({
       path: `/api/auth/social/signin`,

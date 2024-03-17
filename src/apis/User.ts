@@ -11,6 +11,7 @@
 
 import {
   CreateUserDto,
+  CustomValidationError,
   PutUpdateUserDto,
   UserCreateCodeEnum,
   UserCreateCodeEnum1,
@@ -35,7 +36,6 @@ import {
   UserPutUpdateMessageEnum2,
   UserPutUpdateMessageEnum3,
   UserPutUpdateMessageEnum4,
-  ValidationError,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
@@ -78,7 +78,7 @@ export class User<SecurityDataType = unknown> {
           /** error message */
           message?: UserCreateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -162,7 +162,7 @@ export class User<SecurityDataType = unknown> {
           /** error message */
           message?: UserFindOneUserOrNotFoundMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -245,7 +245,7 @@ export class User<SecurityDataType = unknown> {
           /** error message */
           message?: UserPutUpdateMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**

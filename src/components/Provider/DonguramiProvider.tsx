@@ -15,6 +15,7 @@ import {
   typographyTheme,
   lightThemeColor,
   darkThemeColor,
+  breakpointsTheme,
 } from "@/styles/theme";
 import { themeModeAtom } from "@/globalState";
 import { useClientEffect } from "@/hooks";
@@ -70,6 +71,7 @@ const DonguramiThemeProvider = (props: HTMLAttributes<HTMLElement>) => {
         color: mode === "light" ? lightThemeColor : darkThemeColor,
         typography: typographyTheme,
         mode,
+        breakpoints: breakpointsTheme,
       }}
     >
       {props.children}
