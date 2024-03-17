@@ -5,4 +5,5 @@
  */
 
 export * from "./color";
+export { default as breakpointsTheme } from "./breakpoints";
 export { default as typographyTheme } from "./typography";
