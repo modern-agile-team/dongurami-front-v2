@@ -31,7 +31,7 @@ export default function Header({}: {}) {
 
       case "free-board": {
         router.push({
-          pathname: "/board/free",
+          pathname: "/board",
           query: {
             page: 1,
           },

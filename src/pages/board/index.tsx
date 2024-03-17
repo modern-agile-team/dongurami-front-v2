@@ -59,7 +59,7 @@ export default function FreeBoard(props: { boardName: string }) {
     queryFn: async () => {
       const page = router.query.page as string;
       return (
-        await noticePostsAPI.noticepostFindAllAndCount({
+        await noticePostsAPI.noticePostFindAllAndCount({
           page: Number(page),
           pageSize: 5,
         })
@@ -69,7 +69,7 @@ export default function FreeBoard(props: { boardName: string }) {
 
   function handleClickPostDetail(el: PostData) {
     router.push({
-      pathname: `free/detail/${el.id}`,
+      pathname: `/detail/${el.id}`,
     });
   }
 
