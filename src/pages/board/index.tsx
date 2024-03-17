@@ -19,7 +19,7 @@ import {
   WhatIF,
 } from "@/components";
 import { freePostsAPI, noticePostsAPI } from "@/apis";
-import { Table, TableHeader } from "@/components/UI/Table";
+import { Table, TableHeader } from "@/components/UI/Board/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 import { Converter } from "@/utils";
 import { lightThemeColor } from "@/styles/theme";
@@ -27,6 +27,7 @@ import { useState } from "react";
 
 interface PostData {
   id: number;
+  type: string;
 }
 
 export default function FreeBoard(props: { boardName: string }) {
@@ -67,9 +68,10 @@ export default function FreeBoard(props: { boardName: string }) {
     },
   });
 
-  function handleClickPostDetail(el: PostData) {
+  function handleClickPostDetail({ id, type }: PostData) {
     router.push({
-      pathname: `/detail/${el.id}`,
+      pathname: `board/detail/${id}/`,
+      query: { type },
     });
   }
 

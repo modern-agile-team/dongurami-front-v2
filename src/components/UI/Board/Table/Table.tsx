@@ -13,6 +13,7 @@ import { Converter } from "@/utils";
 
 interface PostData {
   id: number;
+  type: string;
 }
 
 interface TableData {
@@ -20,7 +21,7 @@ interface TableData {
     | Swagger.Api.FreePostFindAllAndCount.ResponseBody
     | Swagger.Api.NoticePostFindAllAndCount.ResponseBody;
   type: string;
-  handleClickPostDetail: (el: PostData) => void;
+  handleClickPostDetail: ({ id, type }: PostData) => void;
 }
 
 export default function Table({
@@ -79,7 +80,7 @@ export default function Table({
         return (
           <S.Tr
             key={post.id}
-            onClick={() => handleClickPostDetail(post)}
+            onClick={() => handleClickPostDetail({ id: post.id, type })}
             type={type}
           >
             <S.Th

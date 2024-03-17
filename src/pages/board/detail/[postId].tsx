@@ -6,7 +6,7 @@
 
 import Head from "next/head";
 
-import { DetailFreeBoard } from "@/containers/Board";
+import { DetailBoard } from "@/containers/Board";
 
 export default function PostDetailPage() {
   return (
@@ -14,7 +14,7 @@ export default function PostDetailPage() {
       <Head>
         <title>동그라미 - 자유 게시글</title>
       </Head>
-      <DetailFreeBoard />
+      <DetailBoard />
     </>
   );
 }
