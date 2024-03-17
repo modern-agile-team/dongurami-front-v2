@@ -25,15 +25,23 @@ export default function Card({
   return (
     <S.CardWrap onClick={onClick}>
       <S.ClubImage src={src} title={name} />
-      <Column>
-        <Typography>{name}</Typography>
-        <Typography>{category}</Typography>
+      <Column css={{ padding: "8px 5px" }}>
+        <Typography typoSize="Head6" typoColor="primary_100">
+          {name}
+        </Typography>
       </Column>
-      <Row>
-        {tags.map((tag) => {
-          return <Typography key={tag}>#{tag}</Typography>;
-        })}
-      </Row>
+      <Column gap={10} css={{ padding: "4px 5px 10px 5px" }}>
+        <Typography typoColor="neutral_50">{category}</Typography>
+        <Row>
+          {tags.map((tag) => {
+            return (
+              <Typography key={tag} typoColor="neutral_30">
+                #{tag}
+              </Typography>
+            );
+          })}
+        </Row>
+      </Column>
     </S.CardWrap>
   );
 }
