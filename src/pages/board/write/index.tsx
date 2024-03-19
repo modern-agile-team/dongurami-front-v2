@@ -1,14 +1,14 @@
 import Head from "next/head";
 
-import { WriteFreeBoard } from "@/containers/Board";
+import { WriteBoard } from "@/containers/Board";
 
-export default function FreeWritePage() {
+export default function WritePage() {
   return (
     <>
       <Head>
         <title>동그라미 - 자유 게시글 작성</title>
       </Head>
-      <WriteFreeBoard />
+      <WriteBoard />
     </>
   );
 }

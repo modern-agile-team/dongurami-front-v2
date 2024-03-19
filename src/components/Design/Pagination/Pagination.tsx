@@ -6,9 +6,10 @@
 
 import React, { useMemo, useState } from "react";
 
-import { Icon, Row, WhatIF } from "@/components";
+import { Icon, Row, Typography, WhatIF } from "@/components";
 import * as S from "./emotion";
 import { lightThemeColor } from "@/styles/theme";
+import { Converter } from "@/utils";
 
 interface IPaginationProps {
   count: number;
@@ -52,8 +53,11 @@ export default function Pagination({
 
   return (
     <Row.li
+      horizonAlign="center"
       style={{
         margin: `80px 0px`,
+        width: `calc(100% - ${Converter.pxToRem(527)})`,
+        minWidth: `${Converter.pxToRem(753)}`,
       }}
       gap={20}
     >
@@ -64,7 +68,7 @@ export default function Pagination({
           props.onChange?.(ev, Number(prevPage));
         }}
       >
-        <Icon id="left" size={54} name="LeftArrow24" />
+        <Icon id="left" size={36} name="LeftArrow24" fill="neutral_90" />
       </S.ArrowButton>
       {totalList.map((page) => {
         return (
@@ -83,7 +87,6 @@ export default function Pagination({
                     `${page}` === `${currentPage}`
                       ? "white"
                       : `${lightThemeColor.neutral_90}`,
-                  fontSize: 34,
                 }}
                 disabled={`${currentPage}` === `${page}`}
                 onClick={(ev) => {
@@ -91,7 +94,7 @@ export default function Pagination({
                   props.onChange?.(ev, Number(page));
                 }}
               >
-                {page}
+                <Typography typoSize="Head5">{page}</Typography>
               </S.PaginationButton>
             </WhatIF>
           </Row.li>
@@ -105,7 +108,7 @@ export default function Pagination({
           props.onChange?.(ev, Number(nextPage));
         }}
       >
-        <Icon id="right" size={54} name="RightArrow24" />
+        <Icon id="right" size={36} name="RightArrow24" fill="neutral_90" />
       </S.ArrowButton>
     </Row.li>
   );

@@ -6,7 +6,5 @@
 
 export * from "./InfinityScrollBoard";
 export * from "./PaginationBoard";
-export * from "./DetailFreeBoard";
-export * from "./DetailNoticeBoard";
-export * from "./WriteFreeBoard";
-export * from "./WriteNoticeBoard";
+export * from "./DetailBoard";
+export * from "./WriteBoard";

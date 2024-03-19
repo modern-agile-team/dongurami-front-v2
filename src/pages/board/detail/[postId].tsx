@@ -6,15 +6,15 @@
 
 import Head from "next/head";
 
-import { DetailNoticeBoard } from "@/containers/Board";
+import { DetailBoard } from "@/containers/Board";
 
 export default function PostDetailPage() {
   return (
     <>
       <Head>
-        <title>동그라미 - 공지 게시글</title>
+        <title>동그라미 - 자유 게시글</title>
       </Head>
-      <DetailNoticeBoard />
+      <DetailBoard />
     </>
   );
 }
