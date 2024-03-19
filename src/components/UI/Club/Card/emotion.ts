@@ -5,8 +5,10 @@
  */
 
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-import { Column } from "../../../Layouts";
+import { Typography } from "@/components/Utilities";
+import { Column } from "@/components/Layouts";
 
 export const CardWrap = styled(Column)`
   width: 200px;
@@ -21,4 +23,15 @@ export const ClubImage = styled.div<{ src: string }>`
   background-size: cover;
   width: 100%;
   height: 185px;
+`;
+
+export const textOverflowCSS = css`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+export const Title = styled(Typography)`
+  width: 100%;
+  ${textOverflowCSS}
 `;
