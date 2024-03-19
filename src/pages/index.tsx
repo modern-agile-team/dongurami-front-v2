@@ -1,6 +1,6 @@
 import { Column } from "@/components/Layouts";
 import { Banner } from "@/components/UI";
-import { Home } from "@/containers";
+import * as Home from "@/containers/Home";
 
 export default function HomePage() {
   return (

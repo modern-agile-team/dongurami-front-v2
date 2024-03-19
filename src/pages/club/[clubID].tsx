@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { Club } from "@/containers";
+import * as Club from "@/containers/Club";
 import { Row } from "@/components/Layouts";
 import { SwitchCase } from "@/components/Utilities";
 
