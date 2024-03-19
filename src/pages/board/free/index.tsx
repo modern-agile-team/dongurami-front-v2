@@ -10,11 +10,11 @@ import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 
 import { freePostsAPI } from "@/apis";
-import { Table } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 import { Column } from "@/components/Layouts";
 import { Typography, WhatIF } from "@/components/Utilities";
 import { Loader, Pagination } from "@/components/Design";
+import { Table } from "@/components/UI/Board/Table";
 
 interface PostData {
   id: number;
