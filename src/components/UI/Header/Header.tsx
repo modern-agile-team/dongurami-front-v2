@@ -9,11 +9,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import * as S from "./emotion";
-import { Button, Row, Typography } from "@/components";
 import { useAuth } from "@/hooks";
-import { WhatIF } from "@/components";
 
 import Logo from "@/assets/main/logo.png";
+import { Row } from "@/components/Layouts";
+import { Button } from "@/components/Design";
+import { Typography, WhatIF } from "@/components/Utilities";
 
 export default function Header({}: {}) {
   const { isLoggedIn, logout } = useAuth();

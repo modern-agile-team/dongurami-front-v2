@@ -7,7 +7,7 @@
 import React from "react";
 
 import * as S from "./emotion";
-import { Typography } from "@/components";
+import { Typography } from "@/components/Utilities";
 
 interface PostData {
   id: number;

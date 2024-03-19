@@ -6,8 +6,9 @@
 
 import { useTheme } from "@emotion/react";
 
-import { Column, Grid, Typography } from "@/components";
+import { Column, Grid } from "@/components/Layouts";
 import { Converter } from "@/utils";
+import { Typography } from "@/components/Utilities";
 
 export default function RecruitingClubs() {
   const theme = useTheme();

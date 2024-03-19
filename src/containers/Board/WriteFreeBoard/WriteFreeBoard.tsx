@@ -3,8 +3,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import * as S from "./emotion";
-import { Quill } from "@/components";
 import { freePostsAPI } from "@/apis";
+import { Quill } from "@/components/UI";
 
 export default function WriteFreeBoard() {
   const router = useRouter();

@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { DonguramiProvider } from "@/components";
+import { DonguramiProvider } from "@/components/Provider";
 import TestRouterProvider from "./TestRouterProvider";
 import { HTMLAttributes } from "react";
 import { NextRouter } from "next/router";

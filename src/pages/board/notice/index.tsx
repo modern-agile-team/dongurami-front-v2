@@ -9,10 +9,12 @@ import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 
-import { Column, Loader, Pagination, Typography, WhatIF } from "@/components";
 import { noticePostsAPI } from "@/apis";
 import { Table } from "@/components/UI/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
+import { Column } from "@/components/Layouts";
+import { Typography, WhatIF } from "@/components/Utilities";
+import { Loader, Pagination } from "@/components/Design";
 
 interface PostData {
   id: number;

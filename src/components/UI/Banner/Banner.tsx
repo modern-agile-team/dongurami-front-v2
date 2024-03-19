@@ -6,8 +6,9 @@
 
 import { useRouter } from "next/router";
 
-import { Button, Typography } from "@/components";
 import * as S from "./emotion";
+import { Typography } from "@/components/Utilities";
+import { Button } from "@/components/Design";
 
 export default function Banner() {
   const router = useRouter();

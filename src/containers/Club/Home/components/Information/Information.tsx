@@ -7,8 +7,9 @@
 import { useTheme } from "@emotion/react";
 import Image from "next/image";
 
-import { Column, Row, Typography } from "@/components";
+import { Column, Row } from "@/components/Layouts";
 import * as S from "./emotion";
+import { Typography } from "@/components/Utilities";
 
 export default function Information() {
   const theme = useTheme();

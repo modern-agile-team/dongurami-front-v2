@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { Row, SwitchCase } from "@/components";
 import { Club } from "@/containers";
+import { Row } from "@/components/Layouts";
+import { SwitchCase } from "@/components/Utilities";
 
 const CLUB_TABS: Record<string, string> = {
   home: "홈",

@@ -1,4 +1,5 @@
-import { Banner, Column } from "@/components";
+import { Column } from "@/components/Layouts";
+import { Banner } from "@/components/UI";
 import { Home } from "@/containers";
 
 export default function HomePage() {

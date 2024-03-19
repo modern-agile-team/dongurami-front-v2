@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import * as S from "./emotion";
-import { Typography, Icon } from "@/components";
 import { useAuth } from "@/hooks";
+import { Typography } from "@/components/Utilities";
+import { Icon } from "@/components/Svg";
 
 interface BoardType {
   type: string;

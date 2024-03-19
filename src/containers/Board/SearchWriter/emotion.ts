@@ -1,4 +1,5 @@
-import { Button, Row } from "@/components";
+import { Button } from "@/components/Design";
+import { Row } from "@/components/Layouts";
 import { lightThemeColor } from "@/styles/theme";
 import styled from "@emotion/styled";
 
