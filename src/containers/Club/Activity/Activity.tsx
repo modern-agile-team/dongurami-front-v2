@@ -4,7 +4,6 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Search30 } from "@/components/Svg/Icons";
 import * as S from "./emotion";
 
 export default function Activity() {
@@ -49,7 +48,7 @@ export default function Activity() {
     <S.Wrap horizonAlign="center">
       <S.SearchForm>
         <S.SearchInput placeholder="궁금한게 있다면?" />
-        <S.SearchIcon />
+        <S.SearchIcon name="Search30" />
       </S.SearchForm>
       {dummyData.map((el, idx) => {
         return (

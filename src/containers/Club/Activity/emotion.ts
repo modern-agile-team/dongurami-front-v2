@@ -1,5 +1,5 @@
-import { Column, Row } from "@/components";
-import { Search30 } from "@/components/Svg/Icons";
+import { Column, Row } from "@/components/Layouts";
+import { Icon } from "@/components/Svg";
 import styled from "@emotion/styled";
 
 export const Wrap = styled(Column)`
@@ -17,6 +17,6 @@ export const SearchInput = styled.input`
   /* 기획 완료되면 완성시킬 예정 */
 `;
 
-export const SearchIcon = styled(Search30)`
+export const SearchIcon = styled(Icon)`
   color: white;
 `;
