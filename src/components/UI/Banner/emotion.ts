@@ -3,8 +3,9 @@
  *
  * Copyright (c) 2024 Your Company
  */
-import { Column } from "@/components";
 import styled from "@emotion/styled";
+
+import { Column } from "../../Layouts";
 
 export const Wrapper = styled(Column)`
   background-color: ${({ theme }) => theme.color.secondary_10};

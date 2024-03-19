@@ -6,7 +6,7 @@
 
 import styled from "@emotion/styled";
 
-import { Column } from "@/components";
+import { Column } from "@/components/Layouts";
 
 export const FormLayout = styled(Column.form)`
   padding: 20px 10px;

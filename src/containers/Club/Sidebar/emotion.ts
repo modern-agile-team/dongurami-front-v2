@@ -6,7 +6,7 @@
 
 import styled from "@emotion/styled";
 
-import { Column, Row } from "@/components";
+import { Column, Row } from "@/components/Layouts";
 import { Converter } from "@/utils";
 
 export const SidebarWrapper = styled(Column.ul)<{ isOpen: boolean }>`

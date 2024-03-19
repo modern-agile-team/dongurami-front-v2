@@ -8,7 +8,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import * as S from "./emotion";
-import { Icon, Row, Typography } from "@/components";
+import { Icon } from "@/components/Svg";
+import { Typography } from "@/components/Utilities";
+import { Row } from "@/components/Layouts";
 
 interface IClubSidebar {
   tabList: Record<string, string>;

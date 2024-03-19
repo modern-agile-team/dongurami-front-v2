@@ -6,8 +6,13 @@
 
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import { Button, Column, TextField, Row, Icon } from "@/components";
+import { Column, Row } from "@/components/Layouts";
+import { Button, TextField } from "@/components/Design";
+import { Icon } from "@/components/Svg";
+import { Club } from "@/components/UI";
+import { clubAPI } from "@/apis";
 import { Converter } from "@/utils";
 
 const categories = {
@@ -25,6 +30,14 @@ export default function ClubPreview() {
   const theme = useTheme();
   const [selectedCategory, setSelectedCategory] =
     useState<keyof typeof categories>("all");
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["clubList", selectedCategory],
+    queryFn: async () => {
+      return (await clubAPI.clubFindAllAndCount({ pageSize: 5, categoryId: 1 }))
+        .data;
+    },
+  });
 
   return (
     <Column
@@ -61,18 +74,25 @@ export default function ClubPreview() {
             );
           })}
         </Row.ul>
+        {isLoading && (
+          <Row.ul css={{ width: "100%" }} gap={44}>
+            {new Array(5).fill(1).map((_, index) => {
+              return (
+                <Column
+                  key={index}
+                  css={{
+                    width: Converter.pxToRem(200),
+                    height: Converter.pxToRem(300),
+                    border: `4px solid ${theme.color.primary_30}`,
+                  }}
+                />
+              );
+            })}
+          </Row.ul>
+        )}
         <Row.ul css={{ width: "100%" }} gap={44}>
-          {new Array(5).fill(1).map((_, index) => {
-            return (
-              <Column
-                key={index}
-                css={{
-                  width: Converter.pxToRem(200),
-                  height: Converter.pxToRem(300),
-                  border: `4px solid ${theme.color.primary_30}`,
-                }}
-              />
-            );
+          {data?.contents.map((clubData) => {
+            return <Club.Card key={clubData.id} contents={clubData} />;
           })}
         </Row.ul>
       </Column>

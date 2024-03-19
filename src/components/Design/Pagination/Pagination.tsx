@@ -6,7 +6,9 @@
 
 import React, { useMemo, useState } from "react";
 
-import { Icon, Row, Typography, WhatIF } from "@/components";
+import { WhatIF, Typography } from "@/components/Utilities";
+import { Icon } from "@/components/Svg";
+import { Row } from "@/components/Layouts";
 import * as S from "./emotion";
 import { lightThemeColor } from "@/styles/theme";
 import { Converter } from "@/utils";

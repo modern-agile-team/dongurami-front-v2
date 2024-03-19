@@ -5,7 +5,7 @@
  */
 
 import styled from "@emotion/styled";
-import { Button, Row } from "@/components";
+
 import { lightThemeColor } from "@/styles/theme";
 import { Converter } from "@/utils";
 

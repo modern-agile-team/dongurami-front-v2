@@ -4,16 +4,17 @@
  * Copyright (c) 2024 Your Company
  */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
 
 import * as S from "./emotion";
-import { Button, Row, Typography } from "@/components";
-import Logo from "@/assets/main/logo.png";
 import { useAuth } from "@/hooks";
-import { WhatIF } from "@/components";
+
+import Logo from "@/assets/main/logo.png";
+import { Row } from "@/components/Layouts";
+import { Button } from "@/components/Design";
+import { Typography, WhatIF } from "@/components/Utilities";
 
 export default function Header({}: {}) {
   const { isLoggedIn, logout } = useAuth();
@@ -40,7 +41,7 @@ export default function Header({}: {}) {
       }
 
       case "club": {
-        router.push("/club/1?tab=home");
+        router.push("/club/list");
         break;
       }
 
@@ -64,9 +65,7 @@ export default function Header({}: {}) {
             onClick={handleRoute}
             typoSize="Head5"
             typoColor={
-              router.pathname === "/club/[clubID]"
-                ? "neutral_100"
-                : "neutral_60"
+              router.pathname === "/club/list" ? "neutral_100" : "neutral_60"
             }
             hoverTypoColor="neutral_90"
           >
