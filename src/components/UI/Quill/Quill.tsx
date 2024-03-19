@@ -22,13 +22,19 @@ const modules = {
 
 const formats = [
   "header",
-  "font",
-  "size",
   "bold",
   "italic",
   "underline",
   "strike",
   "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "align",
+  "color",
+  "background",
 ];
 
 interface QuillProps {
@@ -79,6 +85,7 @@ export default function Quill({
       }}
     >
       <label htmlFor="title">Title</label>
+
       <input
         type="text"
         value={value.title}
@@ -87,14 +94,16 @@ export default function Quill({
         onChange={handleTitleChange}
         required
       />
+      <Button>{value ? "생성" : "수정"}</Button>
+
       <QuillNoSSRWrapper
         modules={modules}
         formats={formats}
         value={value.description}
         onChange={handleContentChange}
         theme="snow"
+        style={{ height: "600px" }}
       />
-      <Button>{value ? "생성" : "수정"}</Button>
       <div dangerouslySetInnerHTML={{ __html: value.description }} />
     </form>
   );
