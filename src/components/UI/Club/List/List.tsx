@@ -8,7 +8,7 @@ import { useTheme } from "@emotion/react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { Column, Row } from "@/components/Layouts";
+import { Column, Grid, Row } from "@/components/Layouts";
 import { Button, TextField } from "@/components/Design";
 import { Icon } from "@/components/Svg";
 import { Club } from "@/components/UI";
@@ -26,15 +26,19 @@ const categories = {
   etc: "기타",
 };
 
-export default function ClubPreview() {
+interface ListProps {
+  pageSize: number;
+}
+
+export default function List({ pageSize }: ListProps) {
   const theme = useTheme();
   const [selectedCategory, setSelectedCategory] =
     useState<keyof typeof categories>("all");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["clubList", selectedCategory],
+    queryKey: ["clubList", { selectedCategory, pageSize }],
     queryFn: async () => {
-      return (await clubAPI.clubFindAllAndCount({ pageSize: 5, categoryId: 1 }))
+      return (await clubAPI.clubFindAllAndCount({ pageSize, categoryId: 1 }))
         .data;
     },
   });
@@ -75,8 +79,8 @@ export default function ClubPreview() {
           })}
         </Row.ul>
         {isLoading && (
-          <Row.ul css={{ width: "100%" }} gap={44}>
-            {new Array(5).fill(1).map((_, index) => {
+          <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
+            {new Array(pageSize).fill(1).map((_, index) => {
               return (
                 <Column
                   key={index}
@@ -88,13 +92,13 @@ export default function ClubPreview() {
                 />
               );
             })}
-          </Row.ul>
+          </Grid.ul>
         )}
-        <Row.ul css={{ width: "100%" }} gap={44}>
+        <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
           {data?.contents.map((clubData) => {
             return <Club.Card key={clubData.id} contents={clubData} />;
           })}
-        </Row.ul>
+        </Grid.ul>
       </Column>
     </Column>
   );

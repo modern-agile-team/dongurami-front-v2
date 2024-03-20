@@ -4,6 +4,8 @@
  * Copyright (c) 2024 Your Company
  */
 
+import { Club } from "@/components/UI";
+
 export default function List() {
-  return <div>리스트</div>;
+  return <Club.List pageSize={20} />;
 }
