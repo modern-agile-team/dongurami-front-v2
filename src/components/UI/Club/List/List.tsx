@@ -16,6 +16,8 @@ import { Club } from "@/components/UI";
 import { clubAPI } from "@/apis";
 import { Converter } from "@/utils";
 
+import * as S from "./emotion";
+
 const categories = {
   all: "전체",
   art: "문화/예술",
@@ -73,6 +75,12 @@ export default function List({ pageSize }: ListProps) {
     setSearchText(undefined);
   };
 
+  const handleClickClubButton = (
+    clubData: Swagger.Api.ClubFindAllAndCount.ResponseBody["contents"][number]
+  ) => {
+    router.push(`/club/${clubData.id}`);
+  };
+
   return (
     <Column
       gap={56}
@@ -125,7 +133,14 @@ export default function List({ pageSize }: ListProps) {
         )}
         <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
           {data?.contents.map((clubData) => {
-            return <Club.Card key={clubData.id} contents={clubData} />;
+            return (
+              <S.ClubButton
+                key={clubData.id}
+                onClick={() => handleClickClubButton(clubData)}
+              >
+                <Club.Card contents={clubData} />
+              </S.ClubButton>
+            );
           })}
         </Grid.ul>
       </Column>
