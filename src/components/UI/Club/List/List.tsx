@@ -67,7 +67,11 @@ export default function List({ pageSize }: ListProps) {
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    if (!searchText || searchText?.trim().length === 0) return;
+    if (!searchText || searchText?.trim().length === 0) {
+      router.replace({ pathname: "/club/list" });
+      setSearchText(undefined);
+      return;
+    }
     router.replace({ pathname: "/club/list", query: { search: searchText } });
     setSearchText(undefined);
   };

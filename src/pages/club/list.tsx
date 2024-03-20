@@ -7,5 +7,9 @@
 import { Club } from "@/components/UI";
 
 export default function List() {
-  return <Club.List pageSize={20} />;
+  return (
+    <div css={{ minHeight: "100%" }}>
+      <Club.List pageSize={20} />
+    </div>
+  );
 }
