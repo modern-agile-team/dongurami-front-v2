@@ -17,6 +17,7 @@ import { clubAPI } from "@/apis";
 import { Converter } from "@/utils";
 
 import * as S from "./emotion";
+import { Typography } from "@/components/Utilities";
 
 const categories = {
   all: "전체",
@@ -66,6 +67,7 @@ export default function List({ pageSize }: ListProps) {
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
+    if (!searchText || searchText?.trim().length === 0) return;
     router.replace({ pathname: "/club/list", query: { search: searchText } });
     setSearchText(undefined);
   };
@@ -90,6 +92,7 @@ export default function List({ pageSize }: ListProps) {
       <form onSubmit={handleSubmit}>
         <TextField
           css={{ width: "30rem" }}
+          value={searchText}
           typoColor="neutral_100"
           placeholder="동아리를 검색해보세요"
           onChange={handleChange}
@@ -130,6 +133,14 @@ export default function List({ pageSize }: ListProps) {
               );
             })}
           </Grid.ul>
+        )}
+        {data?.contents.length === 0 && (
+          <Row>
+            <Typography typoSize="Head4">{router.query.search}</Typography>
+            <Typography typoSize="Head4">
+              에 대한 검색 결과가 없습니다
+            </Typography>
+          </Row>
         )}
         <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
           {data?.contents.map((clubData) => {
