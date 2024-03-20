@@ -8,6 +8,7 @@ import { useTheme } from "@emotion/react";
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 import { Column, Grid, Row } from "@/components/Layouts";
 import { Button, TextField } from "@/components/Design";
@@ -16,7 +17,6 @@ import { Club } from "@/components/UI";
 import { clubAPI } from "@/apis";
 import { Converter } from "@/utils";
 
-import * as S from "./emotion";
 import { Typography } from "@/components/Utilities";
 
 const categories = {
@@ -75,12 +75,6 @@ export default function List({ pageSize }: ListProps) {
   const selectCategory = (ev: React.MouseEvent<HTMLButtonElement>) => {
     setSelectedCategory(ev.currentTarget.value as keyof typeof categories);
     setSearchText(undefined);
-  };
-
-  const handleClickClubButton = (
-    clubData: Swagger.Api.ClubFindAllAndCount.ResponseBody["contents"][number]
-  ) => {
-    router.push(`/club/${clubData.id}`);
   };
 
   return (
@@ -145,12 +139,13 @@ export default function List({ pageSize }: ListProps) {
         <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
           {data?.contents.map((clubData) => {
             return (
-              <S.ClubButton
+              <Link
+                href={`/club/${clubData.id}?tab=home`}
                 key={clubData.id}
-                onClick={() => handleClickClubButton(clubData)}
+                title={clubData.name}
               >
                 <Club.Card contents={clubData} />
-              </S.ClubButton>
+              </Link>
             );
           })}
         </Grid.ul>
