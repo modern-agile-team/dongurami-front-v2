@@ -5,8 +5,9 @@
  */
 
 import { useTheme } from "@emotion/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 import { Column, Grid, Row } from "@/components/Layouts";
 import { Button, TextField } from "@/components/Design";
@@ -31,17 +32,46 @@ interface ListProps {
 }
 
 export default function List({ pageSize }: ListProps) {
+  const router = useRouter();
   const theme = useTheme();
+
+  const [searchText, setSearchText] = useState<string | undefined>(undefined);
   const [selectedCategory, setSelectedCategory] =
     useState<keyof typeof categories>("all");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["clubList", { selectedCategory, pageSize }],
+    queryKey: [
+      "clubList",
+      { selectedCategory, pageSize, searchText: router.query.search },
+    ],
     queryFn: async () => {
-      return (await clubAPI.clubFindAllAndCount({ pageSize, categoryId: 1 }))
-        .data;
+      return (
+        await clubAPI.clubFindAllAndCount({
+          pageSize,
+          categoryId: 1,
+          name: router.query.search
+            ? (router.query.search as string)
+            : undefined,
+        })
+      ).data;
     },
   });
+
+  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const target = ev.target as HTMLInputElement;
+    setSearchText(target.value);
+  };
+
+  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    router.replace({ pathname: "/club/list", query: { search: searchText } });
+    setSearchText(undefined);
+  };
+
+  const selectCategory = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    setSelectedCategory(ev.currentTarget.value as keyof typeof categories);
+    setSearchText(undefined);
+  };
 
   return (
     <Column
@@ -49,12 +79,15 @@ export default function List({ pageSize }: ListProps) {
       css={{ width: "100%", marginTop: "35px" }}
       horizonAlign="center"
     >
-      <TextField
-        css={{ width: "30rem" }}
-        typoColor="neutral_100"
-        placeholder="동아리를 검색해보세요"
-        endEnhancer={<Icon name="Search30" fill="primary_100" size={24} />}
-      />
+      <form onSubmit={handleSubmit}>
+        <TextField
+          css={{ width: "30rem" }}
+          typoColor="neutral_100"
+          placeholder="동아리를 검색해보세요"
+          onChange={handleChange}
+          endEnhancer={<Icon name="Search30" fill="primary_100" size={24} />}
+        />
+      </form>
       <Column gap={62}>
         <Row.ul css={{ width: "100%" }} horizonAlign="distribute" gap={44}>
           {Object.keys(categories).map((category) => {
@@ -67,11 +100,7 @@ export default function List({ pageSize }: ListProps) {
                 }
                 key={category}
                 value={category}
-                onClick={(ev) => {
-                  setSelectedCategory(
-                    ev.currentTarget.value as keyof typeof categories
-                  );
-                }}
+                onClick={selectCategory}
               >
                 {categories[category as keyof typeof categories]}
               </Button.Text>
