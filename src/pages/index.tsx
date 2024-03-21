@@ -1,5 +1,5 @@
 import { Column } from "@/components/Layouts";
-import { Banner } from "@/components/UI";
+import { Banner, Club } from "@/components/UI";
 import * as Home from "@/containers/Home";
 
 export default function HomePage() {
@@ -8,7 +8,7 @@ export default function HomePage() {
       <Column>
         <Banner />
         <Column css={{ margin: "0 auto" }}>
-          <Home.ClubPreview />
+          <Club.List pageSize={5} />
           <Home.RecruitingClubs />
         </Column>
       </Column>
