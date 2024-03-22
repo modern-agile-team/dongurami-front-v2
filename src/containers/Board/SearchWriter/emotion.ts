@@ -11,7 +11,7 @@ export const Container = styled(Row.div)`
   justify-content: space-between;
 `;
 
-export const WrapSearch = styled(Row.li)`
+export const WrapSearch = styled(Row.div)`
   width: 1088px;
 `;
 

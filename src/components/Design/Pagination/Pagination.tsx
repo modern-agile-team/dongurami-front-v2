@@ -52,7 +52,7 @@ export default function Pagination({
   }, [props.count, currentPage]);
 
   return (
-    <Row.li
+    <Row.ul
       horizonAlign="center"
       style={{
         margin: `80px 0px`,
@@ -110,6 +110,6 @@ export default function Pagination({
       >
         <Icon id="right" size={36} name="RightArrow24" fill="neutral_90" />
       </S.ArrowButton>
-    </Row.li>
+    </Row.ul>
   );
 }
