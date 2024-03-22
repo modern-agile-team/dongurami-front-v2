@@ -18,6 +18,7 @@ export default function Footer() {
         borderTop: `1px solid ${theme.color.neutral_10}`,
         height: Converter.pxToRem(136),
         backgroundColor: theme.color.secondary_10,
+        marginTop: "40px",
       }}
     ></div>
   );

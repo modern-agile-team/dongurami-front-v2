@@ -8,22 +8,17 @@ import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
+import { useState } from "react";
 
-import {
-  Button,
-  Column,
-  Icon,
-  Loader,
-  Pagination,
-  Typography,
-  WhatIF,
-} from "@/components";
 import { freePostsAPI, noticePostsAPI } from "@/apis";
 import { Table, TableHeader } from "@/components/UI/Board/Table";
 import { SearchWriter } from "@/containers/Board/SearchWriter";
 import { Converter } from "@/utils";
 import { lightThemeColor } from "@/styles/theme";
-import { useState } from "react";
+import { Column } from "@/components/Layouts";
+import { Typography } from "@/components/Utilities";
+import { Button, Pagination } from "@/components/Design";
+import { Icon } from "@/components/Svg";
 
 interface PostData {
   id: number;

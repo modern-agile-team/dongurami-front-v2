@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Column } from "@/components";
+import { Column } from "@/components/Layouts";
 
 import * as C from "./components";
 

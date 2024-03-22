@@ -7,9 +7,10 @@
 import React from "react";
 
 import * as S from "./emotion";
-import { Button, Typography } from "@/components";
 import { lightThemeColor } from "@/styles/theme";
 import { Converter } from "@/utils";
+import { Typography } from "@/components/Utilities";
+import { Button } from "@/components/Design";
 
 interface PostData {
   id: number;

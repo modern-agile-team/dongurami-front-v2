@@ -6,7 +6,7 @@
 
 import React from "react";
 
-import { Column } from "@/components";
+import { Column } from "@/components/Layouts";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

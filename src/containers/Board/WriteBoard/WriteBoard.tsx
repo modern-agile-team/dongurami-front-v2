@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 import * as S from "./emotion";
-import { Quill } from "@/components";
+import { Quill } from "@/components/UI";
 import { freePostsAPI, noticePostsAPI } from "@/apis";
 
 export default function WriteBoard() {

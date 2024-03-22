@@ -7,7 +7,7 @@
 import React from "react";
 import { Theme, ThemeColor, useTheme } from "@emotion/react";
 
-import { Typography } from "@/components";
+import { Typography } from "@/components/Utilities/Typography";
 import { filterHTMLAttribute } from "@/utils";
 import * as S from "./emotion";
 

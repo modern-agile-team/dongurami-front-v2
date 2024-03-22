@@ -1,4 +1,5 @@
-import { Button, Row } from "@/components";
+import { Button } from "@/components/Design";
+import { Row } from "@/components/Layouts";
 import styled from "@emotion/styled";
 
 export const Container = styled.div`

@@ -7,7 +7,7 @@
 import styled from "@emotion/styled";
 import { Theme } from "@emotion/react";
 
-import { Column, Row } from "@/components";
+import { Column, Row } from "@/components/Layouts";
 import { Converter } from "@/utils";
 import { TypographyCSS } from "@/components/Utilities/Typography/Typography";
 

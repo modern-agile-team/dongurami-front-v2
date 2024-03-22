@@ -9,15 +9,12 @@ import Head from "next/head";
 import { useAtom } from "jotai";
 
 import "@/styles/globals.css";
-import {
-  Button,
-  DonguramiProvider,
-  Footer,
-  Header,
-  SwitchCase,
-  Typography,
-} from "@/components";
+
 import { themeModeAtom } from "@/globalState";
+import { DonguramiProvider } from "@/components/Provider";
+import { Footer, Header } from "@/components/UI";
+import { Button } from "@/components/Design";
+import { SwitchCase, Typography } from "@/components/Utilities";
 
 export default function App({
   Component,

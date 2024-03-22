@@ -4,6 +4,4 @@
  * Copyright (c) 2024 Your Company
  */
 
-export * from "./Banner";
-export * from "./ClubPreview";
 export * from "./RecruitingClubs";
