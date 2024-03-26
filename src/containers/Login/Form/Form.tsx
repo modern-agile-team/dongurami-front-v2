@@ -12,7 +12,6 @@ import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import { useAuth } from "@/hooks";
 import * as S from "./emotion";
-import Image from "next/image";
 import Logo from "@/assets/main/logo_2.png";
 
 export default function Form() {
