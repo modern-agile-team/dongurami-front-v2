@@ -96,19 +96,25 @@ export default function Form() {
         {!accessToken ? (
           <S.ButtonDiv>
             <S.Button bgColor="#34AD37" onClick={() => signIn("naver")}>
-              <S.ButtonLogo bgColor="#2D843A" src={Naver} alt="naverIcon" />
+              <S.ButtonLogoDiv bgColor="#2D843A">
+                <S.ButtonLogo src={Naver} alt="naverIcon" />
+              </S.ButtonLogoDiv>
               <S.ButtonText textColor="white">
                 네이버 계정으로 가입
               </S.ButtonText>
             </S.Button>
             <S.Button bgColor="#FFC63A" onClick={() => signIn("kakao")}>
-              <S.ButtonLogo bgColor="#FFBB12" src={Kakao} alt="kakaoIcon" />
+              <S.ButtonLogoDiv bgColor="#FFBB12">
+                <S.ButtonLogo src={Kakao} alt="kakaoIcon" />
+              </S.ButtonLogoDiv>
               <S.ButtonText textColor="white">
                 카카오 계정으로 가입
               </S.ButtonText>
             </S.Button>
             <S.Button bgColor="white" onClick={() => signIn("google")}>
-              <S.ButtonLogo bgColor="white" src={Google} alt="googleIcon" />
+              <S.ButtonLogoDiv bgColor="white">
+                <S.ButtonLogo src={Google} alt="googleIcon" />
+              </S.ButtonLogoDiv>
               <S.ButtonText textColor="black">구글 계정으로 가입</S.ButtonText>
             </S.Button>
           </S.ButtonDiv>
