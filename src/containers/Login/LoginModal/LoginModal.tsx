@@ -5,12 +5,17 @@
  */
 
 import { Modal } from "@/components/Design";
-import { useState } from "react";
 import { Form } from "..";
 
-export default function LoginModal({ isOpen }: { isOpen: boolean }) {
+export default function LoginModal({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form />
     </Modal>
   );

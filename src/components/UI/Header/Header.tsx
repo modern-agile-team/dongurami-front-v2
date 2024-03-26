@@ -4,7 +4,7 @@
  * Copyright (c) 2024 Your Company
  */
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -15,9 +15,11 @@ import Logo from "@/assets/main/logo.png";
 import { Row } from "@/components/Layouts";
 import { Button } from "@/components/Design";
 import { Typography, WhatIF } from "@/components/Utilities";
+import { LoginModal } from "@/containers/Login";
 
 export default function Header({}: {}) {
   const { isLoggedIn, logout } = useAuth();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
@@ -54,6 +56,8 @@ export default function Header({}: {}) {
 
   return (
     <S.Container horizonAlign="distribute" verticalAlign="center">
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
+
       <Row gap={66}>
         <Button.Text id="root" onClick={handleRoute}>
           <Image width="155" height="37" src={Logo} alt="메인헤더로고" />
@@ -104,7 +108,10 @@ export default function Header({}: {}) {
                   id="sign-in"
                   typoSize="SubTitle2"
                   typoColor="neutral_60"
-                  onClick={handleRoute}
+                  onClick={() => {
+                    setIsOpen(!isOpen);
+                    console.log(isOpen);
+                  }}
                   hoverTypoColor="neutral_90"
                 >
                   로그인
