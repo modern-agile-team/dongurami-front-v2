@@ -47,6 +47,20 @@ export const RightLogo = styled(Icon)`
   height: 300px;
 `;
 
+export const Regist = styled.h2``;
 export const ButtonDiv = styled.div``;
 
-export const Button = styled.div``;
+export const Button = styled.div<{ bgColor: string }>`
+  cursor: pointer;
+  background-color: ${(props) => props.bgColor};
+
+  border: 1px solid red;
+`;
+
+export const ButtonLogo = styled(Image)<{ bgColor: string }>`
+  background-color: ${(props) => props.bgColor};
+`;
+
+export const ButtonText = styled.span<{ textColor: string }>`
+  color: ${(props) => props.textColor};
+`;
