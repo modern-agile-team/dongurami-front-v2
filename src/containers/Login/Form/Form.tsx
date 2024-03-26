@@ -11,6 +11,9 @@ import { accessTokenAtom } from "@/globalState";
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import { useAuth } from "@/hooks";
+import * as S from "./emotion";
+import Image from "next/image";
+import Logo from "@/assets/main/logo_2.png";
 
 export default function Form() {
   const { data } = useSession();
@@ -81,22 +84,28 @@ export default function Form() {
   }
 
   return (
-    <div>
-      {!accessToken ? (
-        <div>
-          <button onClick={async () => signIn("kakao")}>카카오</button>
-          <button onClick={() => signIn("google")}>구글</button>
-          <button onClick={() => signIn("naver")}>네이버</button>
-        </div>
-      ) : (
-        <button
-          onClick={() => {
-            logout();
-          }}
-        >
-          로그아웃
-        </button>
-      )}
-    </div>
+    <S.Wrap>
+      <S.Left>
+        <S.LeftLogo src={Logo} alt="LeftLogo" />
+      </S.Left>
+      <S.Right>
+        <S.RightLogo name="Logo" fill="primary_100" />
+        {!accessToken ? (
+          <div>
+            <button onClick={async () => signIn("kakao")}>카카오</button>
+            <button onClick={() => signIn("google")}>구글</button>
+            <button onClick={() => signIn("naver")}>네이버</button>
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              logout();
+            }}
+          >
+            로그아웃
+          </button>
+        )}
+      </S.Right>
+    </S.Wrap>
   );
 }
