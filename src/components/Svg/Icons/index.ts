@@ -6,3 +6,6 @@ export { default as LeftArrow24 } from "./left-arrow-24";
 export { default as ReRight48 } from "./re-right-48";
 export { default as RightArrow24 } from "./right-arrow-24";
 export { default as Search30 } from "./search-30";
+export { default as Pan35 } from "./pan-35";
+export { default as CheckSquare35 } from "./check-square-35";
+export { default as Logo } from "./logo";

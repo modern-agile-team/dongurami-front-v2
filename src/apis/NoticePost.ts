@@ -11,6 +11,7 @@
 
 import {
   CreateNoticePostDto,
+  CreateReactionDto,
   CustomValidationError,
   NoticePostCreateCodeEnum,
   NoticePostCreateCodeEnum1,
@@ -18,6 +19,16 @@ import {
   NoticePostCreateMessageEnum,
   NoticePostCreateMessageEnum1,
   NoticePostCreateMessageEnum2,
+  NoticePostCreateReactionCodeEnum,
+  NoticePostCreateReactionCodeEnum1,
+  NoticePostCreateReactionCodeEnum2,
+  NoticePostCreateReactionCodeEnum3,
+  NoticePostCreateReactionCodeEnum4,
+  NoticePostCreateReactionMessageEnum,
+  NoticePostCreateReactionMessageEnum1,
+  NoticePostCreateReactionMessageEnum2,
+  NoticePostCreateReactionMessageEnum3,
+  NoticePostCreateReactionMessageEnum4,
   NoticePostDeleteResponseDto,
   NoticePostDetailResponseDto,
   NoticePostFindAllAndCountCodeEnum,
@@ -67,9 +78,20 @@ import {
   NoticePostRemoveMessageEnum2,
   NoticePostRemoveMessageEnum3,
   NoticePostRemoveMessageEnum4,
+  NoticePostRemoveReactionCodeEnum,
+  NoticePostRemoveReactionCodeEnum1,
+  NoticePostRemoveReactionCodeEnum2,
+  NoticePostRemoveReactionCodeEnum3,
+  NoticePostRemoveReactionCodeEnum4,
+  NoticePostRemoveReactionMessageEnum,
+  NoticePostRemoveReactionMessageEnum1,
+  NoticePostRemoveReactionMessageEnum2,
+  NoticePostRemoveReactionMessageEnum3,
+  NoticePostRemoveReactionMessageEnum4,
   NoticePostsPaginationResponseDto,
   PatchUpdateNoticePostDto,
   PutUpdateNoticePostDto,
+  RemoveReactionDto,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
@@ -771,6 +793,260 @@ export class NoticePost<SecurityDataType = unknown> {
     >({
       path: `/api/notice-posts/${postId}/hit`,
       method: "PUT",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags notice-post
+   * @name NoticePostCreateReaction
+   * @summary 공지 게시글 reaction 생성
+   * @request POST:/api/notice-posts/{postId}/reaction
+   * @secure
+   */
+  noticePostCreateReaction = (postId: number, data: CreateReactionDto, params: RequestParams = {}) =>
+    this.http.request<
+      void,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: NoticePostCreateReactionCodeEnum;
+          /** error message */
+          message?: NoticePostCreateReactionMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: NoticePostCreateReactionCodeEnum1;
+          /** error message */
+          message?: NoticePostCreateReactionMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: NoticePostCreateReactionCodeEnum2;
+          /** error message */
+          message?: NoticePostCreateReactionMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 409
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4000
+           */
+          code?: NoticePostCreateReactionCodeEnum3;
+          /** error message */
+          message?: NoticePostCreateReactionMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: NoticePostCreateReactionCodeEnum4;
+          /** error message */
+          message?: NoticePostCreateReactionMessageEnum4;
+        }
+    >({
+      path: `/api/notice-posts/${postId}/reaction`,
+      method: "POST",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags notice-post
+   * @name NoticePostRemoveReaction
+   * @summary 공지 게시글 reaction 삭제
+   * @request DELETE:/api/notice-posts/{postId}/reaction
+   * @secure
+   */
+  noticePostRemoveReaction = (postId: number, data: RemoveReactionDto, params: RequestParams = {}) =>
+    this.http.request<
+      void,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: NoticePostRemoveReactionCodeEnum;
+          /** error message */
+          message?: NoticePostRemoveReactionMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: NoticePostRemoveReactionCodeEnum1;
+          /** error message */
+          message?: NoticePostRemoveReactionMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: NoticePostRemoveReactionCodeEnum2;
+          /** error message */
+          message?: NoticePostRemoveReactionMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 409
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4001
+           */
+          code?: NoticePostRemoveReactionCodeEnum3;
+          /** error message */
+          message?: NoticePostRemoveReactionMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: NoticePostRemoveReactionCodeEnum4;
+          /** error message */
+          message?: NoticePostRemoveReactionMessageEnum4;
+        }
+    >({
+      path: `/api/notice-posts/${postId}/reaction`,
+      method: "DELETE",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
       ...params,
     });
 }
