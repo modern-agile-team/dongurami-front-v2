@@ -4,12 +4,9 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { authSocialAPI } from "@/apis";
+import { signIn } from "next-auth/react";
 import { accessTokenAtom } from "@/globalState";
 import { useAtom } from "jotai";
-import { useRouter } from "next/router";
 import { useAuth } from "@/hooks";
 import * as S from "./emotion";
 import Logo from "@/assets/main/logo_2.png";
@@ -19,72 +16,8 @@ import Kakao from "@/assets/social/kakao.png";
 import { Typography } from "@/components/Utilities";
 
 export default function Form() {
-  const { data } = useSession();
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
-  const router = useRouter();
   const { logout } = useAuth();
-
-  useEffect(() => {
-    if (!accessToken) {
-      if (data) {
-        authSignIn(data!.user, setAccessToken);
-      }
-    } else {
-      router.push("/");
-    }
-    console.log(accessToken);
-  }, [accessToken, data]);
-
-  async function authSignIn(user: any, setItem: any) {
-    await authSocialAPI
-      .authSocialCheckRegistration({
-        loginType: user.provider.toUpperCase(),
-        snsToken: user.access_token,
-      })
-      .then((res) => {
-        if (res.data) {
-          authSocialAPI
-            .authSocialSignIn({
-              loginType: user.provider.toUpperCase(),
-              snsToken: user.access_token,
-            })
-            .then((res) => {
-              setItem(res.data.accessToken);
-            })
-            .catch((err) =>
-              //에러처리
-              console.log(err)
-            );
-        } else {
-          authSocialAPI
-            .authSocialSignUp({
-              loginType: user.provider.toUpperCase(),
-              snsToken: user.access_token,
-              name: null,
-              email: null,
-              role: "student",
-              phoneNumber: null,
-              grade: null,
-              gender: "male",
-              profilePath: null,
-              //@ts-ignore
-              majorId: null,
-            })
-            .then((res) => {
-              //@ts-ignore
-              setItem(res.data.accessToken);
-            })
-            .catch((err) =>
-              //에러처리
-              console.log(err.data)
-            );
-        }
-      })
-      .catch((err) =>
-        //에러처리
-        console.log(err)
-      );
-  }
 
   return (
     <S.Wrap>

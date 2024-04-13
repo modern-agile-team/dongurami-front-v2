@@ -4,12 +4,16 @@
  * Copyright (c) 2024 Your Company
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useAtom } from "jotai";
+import { useSession } from "next-auth/react";
 
 import * as S from "./emotion";
 import { useAuth } from "@/hooks";
+import { accessTokenAtom } from "@/globalState";
+import { authSocialAPI } from "@/apis";
 
 import Logo from "@/assets/main/logo.png";
 import { Row } from "@/components/Layouts";
@@ -21,6 +25,19 @@ export default function Header({}: {}) {
   const { isLoggedIn, logout } = useAuth();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
+
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const { data } = useSession();
+
+  useEffect(() => {
+    if (!accessToken) {
+      if (data) {
+        authSignIn(data!.user, setAccessToken);
+      }
+    } else {
+      setIsOpen(false);
+    }
+  }, [accessToken, data]);
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.currentTarget as HTMLButtonElement;
@@ -53,6 +70,57 @@ export default function Header({}: {}) {
       }
     }
   };
+
+  async function authSignIn(user: any, setItem: any) {
+    await authSocialAPI
+      .authSocialCheckRegistration({
+        loginType: user.provider.toUpperCase(),
+        snsToken: user.access_token,
+      })
+      .then((res) => {
+        if (res.data) {
+          authSocialAPI
+            .authSocialSignIn({
+              loginType: user.provider.toUpperCase(),
+              snsToken: user.access_token,
+            })
+            .then((res) => {
+              setItem(res.data.accessToken);
+            })
+            .catch((err) =>
+              //에러처리
+              console.log(err)
+            );
+        } else {
+          authSocialAPI
+            .authSocialSignUp({
+              loginType: user.provider.toUpperCase(),
+              snsToken: user.access_token,
+              name: null,
+              email: null,
+              role: "student",
+              phoneNumber: null,
+              grade: null,
+              gender: "male",
+              profilePath: null,
+              //@ts-ignore
+              majorId: null,
+            })
+            .then((res) => {
+              //@ts-ignore
+              setItem(res.data.accessToken);
+            })
+            .catch((err) =>
+              //에러처리
+              console.log(err.data)
+            );
+        }
+      })
+      .catch((err) =>
+        //에러처리
+        console.log(err)
+      );
+  }
 
   return (
     <S.Container horizonAlign="distribute" verticalAlign="center">
