@@ -16,6 +16,7 @@ import * as S from "./emotion";
 export default function Modal({
   children,
   isOpen = false,
+  setIsOpen,
   focusTrap = false,
   shouldCloseToClickOutside = true,
   horizonAlign = "center",
@@ -24,6 +25,7 @@ export default function Modal({
 }: {
   children: React.ReactNode;
   isOpen?: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   shouldCloseToClickOutside?: boolean;
   horizonAlign?: "center" | "left" | "right";
   verticalAlign?: "center" | "top" | "bottom";
@@ -45,6 +47,7 @@ export default function Modal({
       return;
     setShow(false);
     rest.onClose?.();
+    setIsOpen(false);
   };
 
   useEffect(() => {
