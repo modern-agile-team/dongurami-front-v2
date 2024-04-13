@@ -76,8 +76,341 @@ export interface MajorDetailResponseDto {
   major: MajorDto;
 }
 
+export interface ClubCategoryDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /**
+   * 카테고리 생성 유저 고유 ID
+   * @format integer
+   */
+  userId: number;
+  /** 카테고리 명 */
+  name: string;
+}
+
+export interface ClubTagDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 태그 생성 유저 고유 ID
+   * @format integer
+   */
+  userId: number;
+  /** 태그 명 */
+  name: string;
+}
+
+export interface ClubWithCategoryAndTagDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /** 동아리 명 */
+  name: string;
+  /** 동아리 소개 */
+  introduce: string | null;
+  /** 동아리 로고 path */
+  logoPath: string | null;
+  /** 동아리 상태 */
+  status: ClubWithCategoryAndTagDtoStatusEnum;
+  /** 클럽 카테고리 item */
+  clubCategories: ClubCategoryDto[];
+  /** 클럽 태그 item */
+  clubTags: ClubTagDto[];
+}
+
+export interface CreateClubRequestBodyDto {
+  /**
+   * 동아리 명
+   * @minLength 1
+   * @maxLength 255
+   */
+  name: string;
+  /** 동아리 소개 */
+  introduce: string | null;
+  /**
+   * 동아리 로고 (url이 아닌 path)
+   * @minLength 1
+   * @maxLength 255
+   */
+  logoPath: string | null;
+  /**
+   * 동아리 태그 명
+   * @uniqueItems true
+   * @default []
+   */
+  tagNames?: string[];
+  /**
+   * 동아리 카테고리 명(존재하는 카테고리 명을 보내야 함.)
+   * @minItems 1
+   * @uniqueItems true
+   */
+  categoryNames: string[];
+}
+
+export interface ClubDetailResponseDto {
+  club: ClubDto;
+}
+
+export interface CreateClubCategoryRequestBodyDto {
+  /**
+   * 동아리 카테고리 이름
+   * @minLength 1
+   * @maxLength 20
+   */
+  name: string;
+  /**
+   * 메모
+   * @minLength 1
+   * @maxLength 255
+   */
+  memo: string;
+}
+
+export interface ClubCategoryDetailResponseDto {
+  clubCategory: ClubCategoryDto;
+}
+
 export interface MajorsCommonResponseDto {
   majors: MajorDto[];
+}
+
+export interface ClubsItemDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /** 동아리 명 */
+  name: string;
+  /** 동아리 로고 path */
+  logoPath: string | null;
+  /** 동아리 상태 */
+  status: ClubsItemDtoStatusEnum;
+  /** 동아리 카테고리 리스트 */
+  clubCategories: ClubCategoryDto[];
+  /** 동아리 태그 리스트 */
+  clubTags: ClubTagDto[];
+}
+
+export interface ClubsPaginationResponseDto {
+  /**
+   * 총 페이지 수
+   * @format integer
+   * @min 1
+   */
+  totalCount: number;
+  /**
+   * 한 요청에 대한 data 수
+   * @format integer
+   * @min 1
+   */
+  pageSize: number;
+  /**
+   * 현재 페이지 번호
+   * @format integer
+   * @min 1
+   */
+  currentPage: number;
+  /**
+   * 다음 페이지 번호, 다음 페이지가 없다면 null 반환
+   * @format integer
+   * @min 2
+   */
+  nextPage: number | null;
+  /**
+   * 다음 페이지 존재 여부
+   * @min 1
+   */
+  hasNext: boolean;
+  /**
+   * 마지막 페이지 번호
+   * @format integer
+   * @min 1
+   */
+  lastPage: number;
+  contents: ClubsItemDto[];
+}
+
+export interface ClubDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /** 동아리 명 */
+  name: string;
+  /** 동아리 소개 */
+  introduce: string | null;
+  /** 동아리 로고 path */
+  logoPath: string | null;
+  /** 동아리 상태 */
+  status: ClubDtoStatusEnum;
+}
+
+export interface ClubMemberItemDto {
+  majorId: number;
+  studentNumber: string | null;
+  /** 유저 이름 */
+  name: string;
+  nickname: string | null;
+  /**
+   * 이메일
+   * @format email
+   */
+  email: string;
+  /**
+   * 핸드폰 번호
+   * @format /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/
+   * @example "010-0000-0000"
+   */
+  phoneNumber: string | null;
+  /**
+   * 학년 (0이면 졸업)
+   * @min 0
+   * @max 4
+   */
+  grade: number | null;
+  /** 성별 */
+  gender: ClubMemberItemDtoGenderEnum;
+  /**
+   * profile image path
+   * @example "path/user-image.jpeg"
+   */
+  profilePath: string | null;
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /** 동아리원의 역할 리스트 */
+  roles: string[];
+}
+
+export interface ClubMembersCommonResponseDto {
+  clubMembers: ClubMemberItemDto[];
+}
+
+export interface ClubTagsCommonResponseDto {
+  clubTags: ClubTagDto[];
+}
+
+export interface BulkAppendClubTagDto {
+  /**
+   * 동아리 태그 리스트
+   * @uniqueItems true
+   */
+  tagNames: string[];
+}
+
+export interface ClubTagDeleteResponseDto {
+  /**
+   * 삭제된 리소스 개수
+   * @format integer
+   */
+  count: number;
+}
+
+export interface ClubCategoriesCommonResponseDto {
+  clubCategories: ClubCategoryDto[];
+}
+
+export interface ClubApplicationFormDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 수정일자
+   * @format date-time
+   */
+  updatedAt: string;
+  /** 공통 기본 지원서 질문항목 */
+  commonQuestion: string[];
+  /** 커스텀 질문 항목 */
+  customQuestion: string[];
+  /**
+   * 지원서 시작일자
+   * @format date-time
+   */
+  startsAt: string;
+  /**
+   * 지원서 종료일자
+   * @format date-time
+   */
+  endsAt: string;
+}
+
+export interface ClubApplicationFormDetailResponseDto {
+  clubApplicationForm: ClubApplicationFormDto;
 }
 
 export interface SignInRequestBodyDto {
@@ -206,6 +539,26 @@ export interface PutUpdateUserDto {
   profilePath: string | null;
 }
 
+export interface PostTagDto {
+  /**
+   * 고유 ID
+   * @min 1
+   */
+  id: number;
+  /**
+   * 생성일자
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * 태그 생성 유저 고유 ID
+   * @format integer
+   */
+  userId: number;
+  /** 태그 명 */
+  name: string;
+}
+
 export interface NoticePostDto {
   /**
    * 고유 ID
@@ -246,6 +599,8 @@ export interface NoticePostDto {
    * @default true
    */
   isAllowComment: boolean;
+  /** 게시글 태그 리스트 */
+  postTags: PostTagDto[];
 }
 
 export interface CreateNoticePostDto {
@@ -262,6 +617,12 @@ export interface CreateNoticePostDto {
    * @default true
    */
   isAllowComment: boolean;
+  /**
+   * 태그 명
+   * @maxItems 10
+   * @minItems 0
+   */
+  tagNames: string[];
 }
 
 export interface NoticePostDetailResponseDto {
@@ -306,6 +667,8 @@ export interface NoticePostsItemDto {
    * @default true
    */
   isAllowComment: boolean;
+  /** 게시글 작성 유저 정보 */
+  user: UserDto;
 }
 
 export interface NoticePostsPaginationResponseDto {
@@ -361,6 +724,12 @@ export interface PutUpdateNoticePostDto {
    * @default true
    */
   isAllowComment: boolean;
+  /**
+   * 태그 명
+   * @maxItems 10
+   * @minItems 0
+   */
+  tagNames: string[];
 }
 
 export interface PatchUpdateNoticePostDto {
@@ -374,6 +743,12 @@ export interface PatchUpdateNoticePostDto {
   description?: string;
   /** 댓글 허용 여부 (false: 비활성화, true: 허용) */
   isAllowComment?: boolean;
+  /**
+   * 태그 명
+   * @maxItems 10
+   * @minItems 0
+   */
+  tagNames?: string[];
 }
 
 export interface NoticePostDeleteResponseDto {
@@ -382,6 +757,29 @@ export interface NoticePostDeleteResponseDto {
    * @format integer
    */
   count: number;
+}
+
+export interface CreateReactionDto {
+  /** reaction type */
+  type: CreateReactionDtoTypeEnum;
+}
+
+export interface RemoveReactionDto {
+  /** reaction type */
+  type: RemoveReactionDtoTypeEnum;
+}
+
+export interface CreatePostTagDto {
+  /**
+   * 태그 명
+   * @minLength 1
+   * @maxLength 15
+   */
+  name: string;
+}
+
+export interface PostTagDetailResponseDto {
+  postTag: PostTagDto;
 }
 
 export interface NoticePostCommentDto {
@@ -497,8 +895,10 @@ export interface NoticePostCommentsItemDto {
   description: string;
   /** 익명 여부 */
   isAnonymous: boolean;
+  /** 댓글 작성 유저 정보 */
+  user: UserDto;
   /** 댓글의 하위 댓글 nested 구조 */
-  children: NoticePostCommentDto[];
+  children: NoticePostCommentsItemDto[];
 }
 
 export interface NoticePostCommentsPaginationResponseDto {
@@ -556,16 +956,6 @@ export interface PutUpdateNoticePostCommentDto {
   isAnonymous: boolean;
 }
 
-export interface CreateReactionDto {
-  /** reaction type */
-  type: CreateReactionDtoTypeEnum;
-}
-
-export interface RemoveReactionDto {
-  /** reaction type */
-  type: RemoveReactionDtoTypeEnum;
-}
-
 export interface FreePostDto {
   /**
    * 고유 ID
@@ -603,6 +993,8 @@ export interface FreePostDto {
   hit: number;
   /** 익명 여부 */
   isAnonymous: boolean;
+  /** 게시글 태그 리스트 */
+  postTags: PostTagDto[];
 }
 
 export interface CreateFreePostDto {
@@ -619,6 +1011,12 @@ export interface CreateFreePostDto {
    * @default false
    */
   isAnonymous: boolean;
+  /**
+   * 태그 명
+   * @maxItems 10
+   * @minItems 0
+   */
+  tagNames: string[];
 }
 
 export interface FreePostDetailResponseDto {
@@ -660,6 +1058,8 @@ export interface FreePostsItemDto {
   hit: number;
   /** 익명 여부 */
   isAnonymous: boolean;
+  /** 게시글 작성 유저 정보 */
+  user: UserDto;
 }
 
 export interface FreePostsPaginationResponseDto {
@@ -710,6 +1110,12 @@ export interface PutUpdateFreePostDto {
   title: string;
   /** 본문 */
   description: string;
+  /**
+   * 태그 명
+   * @maxItems 10
+   * @minItems 0
+   */
+  tagNames: string[];
   /** 익명 여부 */
   isAnonymous: boolean;
 }
@@ -725,6 +1131,12 @@ export interface PatchUpdateFreePostDto {
   description?: string;
   /** 익명 여부 */
   isAnonymous?: boolean;
+  /**
+   * 태그 명
+   * @maxItems 10
+   * @minItems 0
+   */
+  tagNames?: string[];
 }
 
 export interface FreePostDeleteResponseDto {
@@ -848,8 +1260,10 @@ export interface FreePostCommentsItemDto {
   description: string;
   /** 익명 여부 */
   isAnonymous: boolean;
+  /** 댓글 작성 유저 정보 */
+  user: UserDto;
   /** 댓글의 하위 댓글 nested 구조 */
-  children: FreePostCommentDto[];
+  children: FreePostCommentsItemDto[];
 }
 
 export interface FreePostCommentsPaginationResponseDto {
@@ -955,118 +1369,6 @@ export interface SignUpRequestBodyDto {
   profilePath: string | null;
 }
 
-export interface ClubCategoryDto {
-  /**
-   * 고유 ID
-   * @min 1
-   */
-  id: number;
-  /**
-   * 생성일자
-   * @format date-time
-   */
-  createdAt: string;
-  /**
-   * 수정일자
-   * @format date-time
-   */
-  updatedAt: string;
-  /**
-   * 카테고리 생성 유저 고유 ID
-   * @format integer
-   */
-  userId: number;
-  /** 카테고리 명 */
-  name: string;
-}
-
-export interface ClubTagDto {
-  /**
-   * 고유 ID
-   * @min 1
-   */
-  id: number;
-  /**
-   * 생성일자
-   * @format date-time
-   */
-  createdAt: string;
-  /**
-   * 태그 생성 유저 고유 ID
-   * @format integer
-   */
-  userId: number;
-  /** 태그 명 */
-  name: string;
-}
-
-export interface ClubsItemDto {
-  /**
-   * 고유 ID
-   * @min 1
-   */
-  id: number;
-  /**
-   * 생성일자
-   * @format date-time
-   */
-  createdAt: string;
-  /**
-   * 수정일자
-   * @format date-time
-   */
-  updatedAt: string;
-  /** 동아리 명 */
-  name: string;
-  /** 동아리 로고 path */
-  logoPath: string | null;
-  /** 동아리 상태 */
-  status: ClubsItemDtoStatusEnum;
-  /** 동아리 카테고리 리스트 */
-  clubCategories: ClubCategoryDto[];
-  /** 동아리 태그 리스트 */
-  clubTags: ClubTagDto[];
-}
-
-export interface ClubsPaginationResponseDto {
-  /**
-   * 총 페이지 수
-   * @format integer
-   * @min 1
-   */
-  totalCount: number;
-  /**
-   * 한 요청에 대한 data 수
-   * @format integer
-   * @min 1
-   */
-  pageSize: number;
-  /**
-   * 현재 페이지 번호
-   * @format integer
-   * @min 1
-   */
-  currentPage: number;
-  /**
-   * 다음 페이지 번호, 다음 페이지가 없다면 null 반환
-   * @format integer
-   * @min 2
-   */
-  nextPage: number | null;
-  /**
-   * 다음 페이지 존재 여부
-   * @min 1
-   */
-  hasNext: boolean;
-  /**
-   * 마지막 페이지 번호
-   * @format integer
-   * @min 1
-   */
-  lastPage: number;
-  contents: ClubsItemDto[];
-}
-
 export interface AttachmentDto {
   /**
    * 첨부 파일 고유 ID
@@ -1159,6 +1461,8 @@ export interface PostsItemDto {
    * @default 0
    */
   hit: number;
+  /** 게시글 작성 유저 정보 */
+  user: UserDto;
 }
 
 export interface PostsPaginationResponseDto {
@@ -1200,6 +1504,18 @@ export interface PostsPaginationResponseDto {
   contents: PostsItemDto[];
 }
 
+/** 동아리 상태 */
+export type ClubWithCategoryAndTagDtoStatusEnum = "pending" | "active" | "inactive";
+
+/** 동아리 상태 */
+export type ClubsItemDtoStatusEnum = "pending" | "active" | "inactive";
+
+/** 동아리 상태 */
+export type ClubDtoStatusEnum = "pending" | "active" | "inactive";
+
+/** 성별 */
+export type ClubMemberItemDtoGenderEnum = "male" | "female";
+
 /** 유저 로그인 타입 */
 export type UserDtoLoginTypeEnum = "KAKAO" | "GOOGLE" | "NAVER";
 
@@ -1232,9 +1548,6 @@ export type SignUpRequestBodyDtoRoleEnum = "admin" | "student";
 
 /** gender */
 export type SignUpRequestBodyDtoGenderEnum = "male" | "female";
-
-/** 동아리 상태 */
-export type ClubsItemDtoStatusEnum = "pending" | "active" | "inactive";
 
 export type ErrorCodeResponseDtoCodeEnum = "0" | "1" | "2" | "3" | "4" | "5" | "6";
 
@@ -1316,12 +1629,419 @@ export type AdminCreateNewMajorMessageEnum4 = "Server error. Please contact serv
 
 /**
  * error code
+ * @example 1
+ */
+export type AdminCreateNewClubCodeEnum = 1;
+
+/** error message */
+export type AdminCreateNewClubMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type AdminCreateNewClubCodeEnum1 = 3;
+
+/** error message */
+export type AdminCreateNewClubMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 4
+ */
+export type AdminCreateNewClubCodeEnum2 = 4;
+
+/** error message */
+export type AdminCreateNewClubMessageEnum2 = "You don't have permission to access it.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type AdminCreateNewClubCodeEnum3 = 5;
+
+/** error message */
+export type AdminCreateNewClubMessageEnum3 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 1
+ */
+export type AdminCreateNewClubCodeEnum4 = 1;
+
+/** error message */
+export type AdminCreateNewClubMessageEnum4 = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type AdminCreateNewClubCodeEnum5 = 0;
+
+/** error message */
+export type AdminCreateNewClubMessageEnum5 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type AdminCreateNewClubCategoryCodeEnum = 1;
+
+/** error message */
+export type AdminCreateNewClubCategoryMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type AdminCreateNewClubCategoryCodeEnum1 = 3;
+
+/** error message */
+export type AdminCreateNewClubCategoryMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 4
+ */
+export type AdminCreateNewClubCategoryCodeEnum2 = 4;
+
+/** error message */
+export type AdminCreateNewClubCategoryMessageEnum2 = "You don't have permission to access it.";
+
+/**
+ * error code
+ * @example 5000
+ */
+export type AdminCreateNewClubCategoryCodeEnum3 = 5000;
+
+/** error message */
+export type AdminCreateNewClubCategoryMessageEnum3 = "A category name that already exists.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type AdminCreateNewClubCategoryCodeEnum4 = 0;
+
+/** error message */
+export type AdminCreateNewClubCategoryMessageEnum4 = "Server error. Please contact server developer";
+
+/**
+ * error code
  * @example 0
  */
 export type MajorFindAllMajorsCodeEnum = 0;
 
 /** error message */
 export type MajorFindAllMajorsMessageEnum = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindAllAndCountCodeEnum = 1;
+
+/** error message */
+export type ClubFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindAllAndCountCodeEnum1 = 0;
+
+/** error message */
+export type ClubFindAllAndCountMessageEnum1 = "Server error. Please contact server developer";
+
+export interface ClubFindAllAndCountParams {
+  /**
+   * 페이지번호
+   * @format integer
+   * @min 1
+   * @default 1
+   */
+  page?: number;
+  /**
+   * 페이지당 아이템 수
+   * @format integer
+   * @min 1
+   * @max 100
+   * @default 20
+   */
+  pageSize?: number;
+  /** 동아리 명 */
+  name?: string;
+  /** 동아리 카테고리 ID */
+  categoryId?: number;
+  /** 동아리 태그 ID */
+  tagId?: number;
+  /**
+   * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
+   * @format csv
+   * @default "id"
+   * @example "-id,updatedAt"
+   */
+  order?: string;
+}
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindOneOrNotFoundCodeEnum = 1;
+
+/** error message */
+export type ClubFindOneOrNotFoundMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubFindOneOrNotFoundCodeEnum1 = 5;
+
+/** error message */
+export type ClubFindOneOrNotFoundMessageEnum1 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindOneOrNotFoundCodeEnum2 = 0;
+
+/** error message */
+export type ClubFindOneOrNotFoundMessageEnum2 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindAllMembersCodeEnum = 1;
+
+/** error message */
+export type ClubFindAllMembersMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubFindAllMembersCodeEnum1 = 5;
+
+/** error message */
+export type ClubFindAllMembersMessageEnum1 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindAllMembersCodeEnum2 = 0;
+
+/** error message */
+export type ClubFindAllMembersMessageEnum2 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindAllTagsCodeEnum = 1;
+
+/** error message */
+export type ClubFindAllTagsMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubFindAllTagsCodeEnum1 = 5;
+
+/** error message */
+export type ClubFindAllTagsMessageEnum1 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindAllTagsCodeEnum2 = 0;
+
+/** error message */
+export type ClubFindAllTagsMessageEnum2 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubAppendTagsCodeEnum = 1;
+
+/** error message */
+export type ClubAppendTagsMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type ClubAppendTagsCodeEnum1 = 3;
+
+/** error message */
+export type ClubAppendTagsMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 4
+ */
+export type ClubAppendTagsCodeEnum2 = 4;
+
+/** error message */
+export type ClubAppendTagsMessageEnum2 = "You don't have permission to access it.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubAppendTagsCodeEnum3 = 5;
+
+/** error message */
+export type ClubAppendTagsMessageEnum3 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubAppendTagsCodeEnum4 = 0;
+
+/** error message */
+export type ClubAppendTagsMessageEnum4 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubRemoveTagsCodeEnum = 1;
+
+/** error message */
+export type ClubRemoveTagsMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type ClubRemoveTagsCodeEnum1 = 3;
+
+/** error message */
+export type ClubRemoveTagsMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 4
+ */
+export type ClubRemoveTagsCodeEnum2 = 4;
+
+/** error message */
+export type ClubRemoveTagsMessageEnum2 = "You don't have permission to access it.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubRemoveTagsCodeEnum3 = 5;
+
+/** error message */
+export type ClubRemoveTagsMessageEnum3 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubRemoveTagsCodeEnum4 = 0;
+
+/** error message */
+export type ClubRemoveTagsMessageEnum4 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindAllCategoriesCodeEnum = 1;
+
+/** error message */
+export type ClubFindAllCategoriesMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubFindAllCategoriesCodeEnum1 = 5;
+
+/** error message */
+export type ClubFindAllCategoriesMessageEnum1 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindAllCategoriesCodeEnum2 = 0;
+
+/** error message */
+export type ClubFindAllCategoriesMessageEnum2 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubFindLatestApplicationFormCodeEnum = 1;
+
+/** error message */
+export type ClubFindLatestApplicationFormMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type ClubFindLatestApplicationFormCodeEnum1 = 5;
+
+/** error message */
+export type ClubFindLatestApplicationFormMessageEnum1 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubFindLatestApplicationFormCodeEnum2 = 0;
+
+/** error message */
+export type ClubFindLatestApplicationFormMessageEnum2 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type ClubCategoryFindAllCodeEnum = 1;
+
+/** error message */
+export type ClubCategoryFindAllMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type ClubCategoryFindAllCodeEnum1 = 0;
+
+/** error message */
+export type ClubCategoryFindAllMessageEnum1 = "Server error. Please contact server developer";
+
+export interface ClubCategoryFindAllParams {
+  /**
+   * 카테고리 명 필터링
+   * @minLength 1
+   * @maxLength 20
+   */
+  name?: string;
+  /**
+   * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
+   * @format csv
+   * @default "id"
+   * @example "-id,updatedAt"
+   */
+  order?: string;
+}
 
 /**
  * error code
@@ -1743,6 +2463,123 @@ export type NoticePostIncreaseHitCodeEnum2 = 0;
 
 /** error message */
 export type NoticePostIncreaseHitMessageEnum2 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type NoticePostCreateReactionCodeEnum = 1;
+
+/** error message */
+export type NoticePostCreateReactionMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type NoticePostCreateReactionCodeEnum1 = 3;
+
+/** error message */
+export type NoticePostCreateReactionMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type NoticePostCreateReactionCodeEnum2 = 5;
+
+/** error message */
+export type NoticePostCreateReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 4000
+ */
+export type NoticePostCreateReactionCodeEnum3 = 4000;
+
+/** error message */
+export type NoticePostCreateReactionMessageEnum3 = "You've already liked it.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type NoticePostCreateReactionCodeEnum4 = 0;
+
+/** error message */
+export type NoticePostCreateReactionMessageEnum4 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type NoticePostRemoveReactionCodeEnum = 1;
+
+/** error message */
+export type NoticePostRemoveReactionMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type NoticePostRemoveReactionCodeEnum1 = 3;
+
+/** error message */
+export type NoticePostRemoveReactionMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 5
+ */
+export type NoticePostRemoveReactionCodeEnum2 = 5;
+
+/** error message */
+export type NoticePostRemoveReactionMessageEnum2 = "The resource you're trying to access doesn't exist.";
+
+/**
+ * error code
+ * @example 4001
+ */
+export type NoticePostRemoveReactionCodeEnum3 = 4001;
+
+/** error message */
+export type NoticePostRemoveReactionMessageEnum3 = "You haven't liked it yet.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type NoticePostRemoveReactionCodeEnum4 = 0;
+
+/** error message */
+export type NoticePostRemoveReactionMessageEnum4 = "Server error. Please contact server developer";
+
+/**
+ * error code
+ * @example 1
+ */
+export type PostTagCreateCodeEnum = 1;
+
+/** error message */
+export type PostTagCreateMessageEnum = "Invalid request parameter. Please check your request.";
+
+/**
+ * error code
+ * @example 3
+ */
+export type PostTagCreateCodeEnum1 = 3;
+
+/** error message */
+export type PostTagCreateMessageEnum1 = "This token is invalid.";
+
+/**
+ * error code
+ * @example 0
+ */
+export type PostTagCreateCodeEnum2 = 0;
+
+/** error message */
+export type PostTagCreateMessageEnum2 = "Server error. Please contact server developer";
 
 /**
  * error code
@@ -2717,55 +3554,6 @@ export type AuthSocialSignInMessageEnum1 = "Server error. Please contact server 
  * error code
  * @example 1
  */
-export type ClubFindAllAndCountCodeEnum = 1;
-
-/** error message */
-export type ClubFindAllAndCountMessageEnum = "Invalid request parameter. Please check your request.";
-
-/**
- * error code
- * @example 0
- */
-export type ClubFindAllAndCountCodeEnum1 = 0;
-
-/** error message */
-export type ClubFindAllAndCountMessageEnum1 = "Server error. Please contact server developer";
-
-export interface ClubFindAllAndCountParams {
-  /**
-   * 페이지번호
-   * @format integer
-   * @min 1
-   * @default 1
-   */
-  page?: number;
-  /**
-   * 페이지당 아이템 수
-   * @format integer
-   * @min 1
-   * @max 100
-   * @default 20
-   */
-  pageSize?: number;
-  /** 동아리 명 */
-  name?: string;
-  /** 동아리 카테고리 ID */
-  categoryId?: number;
-  /** 동아리 태그 ID */
-  tagId?: number;
-  /**
-   * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
-   * @format csv
-   * @default "id"
-   * @example "-id,updatedAt"
-   */
-  order?: string;
-}
-
-/**
- * error code
- * @example 1
- */
 export type AttachmentUploadFilesCodeEnum = 1;
 
 /** error message */
@@ -2878,6 +3666,36 @@ export namespace Api {
     export type ResponseBody = MajorDetailResponseDto;
   }
   /**
+   * @description 관리자만 사용 가능하게끔 설정돼있지 않음 추후 추가 예정
+   * @tags _admin
+   * @name AdminCreateNewClub
+   * @summary 동아리 생성
+   * @request POST:/api/admins/clubs
+   * @secure
+   */
+  export namespace AdminCreateNewClub {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = CreateClubRequestBodyDto;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubDetailResponseDto;
+  }
+  /**
+   * @description 관리자만 사용 가능하게끔 설정돼있지 않음 추후 추가 예정
+   * @tags _admin
+   * @name AdminCreateNewClubCategory
+   * @summary 클럽 카테고리 생성
+   * @request POST:/api/admins/club-categories
+   * @secure
+   */
+  export namespace AdminCreateNewClubCategory {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = CreateClubCategoryRequestBodyDto;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubCategoryDetailResponseDto;
+  }
+  /**
    * No description
    * @tags majors
    * @name MajorFindAllMajors
@@ -2890,6 +3708,193 @@ export namespace Api {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = MajorsCommonResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubFindAllAndCount
+   * @summary 동아리 리스트 조회
+   * @request GET:/api/clubs
+   */
+  export namespace ClubFindAllAndCount {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * 페이지번호
+       * @format integer
+       * @min 1
+       * @default 1
+       */
+      page?: number;
+      /**
+       * 페이지당 아이템 수
+       * @format integer
+       * @min 1
+       * @max 100
+       * @default 20
+       */
+      pageSize?: number;
+      /** 동아리 명 */
+      name?: string;
+      /** 동아리 카테고리 ID */
+      categoryId?: number;
+      /** 동아리 태그 ID */
+      tagId?: number;
+      /**
+       * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
+       * @format csv
+       * @default "id"
+       * @example "-id,updatedAt"
+       */
+      order?: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubsPaginationResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubFindOneOrNotFound
+   * @summary 동아리 상세 조회
+   * @request GET:/api/clubs/{clubId}
+   */
+  export namespace ClubFindOneOrNotFound {
+    export type RequestParams = {
+      clubId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubDetailResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubFindAllMembers
+   * @summary 동아리 구성원 리스트 조회
+   * @request GET:/api/clubs/{clubId}/members
+   */
+  export namespace ClubFindAllMembers {
+    export type RequestParams = {
+      clubId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubMembersCommonResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubFindAllTags
+   * @summary 동아리 태그 리스트 조회
+   * @request GET:/api/clubs/{clubId}/tags
+   */
+  export namespace ClubFindAllTags {
+    export type RequestParams = {
+      clubId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubTagsCommonResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubAppendTags
+   * @summary 동아리에 태그 추가
+   * @request POST:/api/clubs/{clubId}/tags
+   * @secure
+   */
+  export namespace ClubAppendTags {
+    export type RequestParams = {
+      clubId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = BulkAppendClubTagDto;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubTagsCommonResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubRemoveTags
+   * @summary 동아리 태그 제거
+   * @request DELETE:/api/clubs/{clubId}/tags/{tagIds}
+   * @secure
+   */
+  export namespace ClubRemoveTags {
+    export type RequestParams = {
+      clubId: number;
+      /** ","로 구분된 tagId */
+      tagIds: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubTagDeleteResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubFindAllCategories
+   * @summary 동아리 카테고리 리스트 조회
+   * @request GET:/api/clubs/{clubId}/categories
+   */
+  export namespace ClubFindAllCategories {
+    export type RequestParams = {
+      clubId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubCategoriesCommonResponseDto;
+  }
+  /**
+   * No description
+   * @tags club
+   * @name ClubFindLatestApplicationForm
+   * @summary 최신 동아리 지원서 폼 조회
+   * @request GET:/api/clubs/{clubId}/application-form/latest
+   */
+  export namespace ClubFindLatestApplicationForm {
+    export type RequestParams = {
+      clubId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubApplicationFormDetailResponseDto;
+  }
+  /**
+   * No description
+   * @tags club-category
+   * @name ClubCategoryFindAll
+   * @summary 모든 동아리 카테고리 전체 조회
+   * @request GET:/api/club-categories
+   */
+  export namespace ClubCategoryFindAll {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * 카테고리 명 필터링
+       * @minLength 1
+       * @maxLength 20
+       */
+      name?: string;
+      /**
+       * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
+       * @format csv
+       * @default "id"
+       * @example "-id,updatedAt"
+       */
+      order?: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = ClubCategoriesCommonResponseDto;
   }
   /**
    * No description
@@ -3122,6 +4127,55 @@ export namespace Api {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags notice-post
+   * @name NoticePostCreateReaction
+   * @summary 공지 게시글 reaction 생성
+   * @request POST:/api/notice-posts/{postId}/reaction
+   * @secure
+   */
+  export namespace NoticePostCreateReaction {
+    export type RequestParams = {
+      postId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = CreateReactionDto;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @tags notice-post
+   * @name NoticePostRemoveReaction
+   * @summary 공지 게시글 reaction 삭제
+   * @request DELETE:/api/notice-posts/{postId}/reaction
+   * @secure
+   */
+  export namespace NoticePostRemoveReaction {
+    export type RequestParams = {
+      postId: number;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = RemoveReactionDto;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * @description 태그만 생성하고 게시글에 추가되진 않음 </br> 동일한 태그명이 존재한다면 존재하는 태그를 반환함
+   * @tags post-tag
+   * @name PostTagCreate
+   * @summary 게시글 태그 생성
+   * @request POST:/api/post-tags
+   * @secure
+   */
+  export namespace PostTagCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = CreatePostTagDto;
+    export type RequestHeaders = {};
+    export type ResponseBody = PostTagDetailResponseDto;
   }
   /**
    * No description
@@ -3609,49 +4663,6 @@ export namespace Api {
       /** access token */
       accessToken?: string;
     };
-  }
-  /**
-   * No description
-   * @tags club
-   * @name ClubFindAllAndCount
-   * @summary 동아리 리스트 조회
-   * @request GET:/api/clubs
-   */
-  export namespace ClubFindAllAndCount {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      /**
-       * 페이지번호
-       * @format integer
-       * @min 1
-       * @default 1
-       */
-      page?: number;
-      /**
-       * 페이지당 아이템 수
-       * @format integer
-       * @min 1
-       * @max 100
-       * @default 20
-       */
-      pageSize?: number;
-      /** 동아리 명 */
-      name?: string;
-      /** 동아리 카테고리 ID */
-      categoryId?: number;
-      /** 동아리 태그 ID */
-      tagId?: number;
-      /**
-       * 정렬 필드<br>csv 형태로 보내야합니다.<br>- 가 붙으면 내림차순 - 가 붙지 않으면 오름차순<br>허용된 filed: [id, name, createdAt]
-       * @format csv
-       * @default "id"
-       * @example "-id,updatedAt"
-       */
-      order?: string;
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = ClubsPaginationResponseDto;
   }
   /**
    * No description

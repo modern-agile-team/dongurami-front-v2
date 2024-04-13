@@ -59,7 +59,7 @@ const DonguramiThemeProvider = (props: HTMLAttributes<HTMLElement>) => {
         break;
       }
       case "light": {
-        document.body.style.backgroundColor = lightThemeColor.white;
+        document.body.style.backgroundColor = "#fff";
         break;
       }
     }
