@@ -69,6 +69,7 @@ export default function WriteBoard() {
         const { data } = await freePostsAPI.freePostCreate({
           ...params,
           isAnonymous: value.isAnonymous,
+          tagNames: [],
         });
         router.replace({
           pathname: `/board/free/detail/${data.freePost.id}`,
@@ -82,6 +83,7 @@ export default function WriteBoard() {
         const { data } = await noticePostsAPI.noticePostCreate({
           ...params,
           isAllowComment: value.isAllowComment,
+          tagNames: [],
         });
         router.replace({
           pathname: `/board/notice/detail/${data.noticePost.id}`,
