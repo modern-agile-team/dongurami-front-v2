@@ -4,5 +4,4 @@
  * Copyright (c) 2024 Your Company
  */
 
-export * from "./useClubDetail";
-export * from "./useClubMembers";
+export { default as useClubMembers } from "./useClubMembers";
