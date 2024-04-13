@@ -12,12 +12,12 @@ describe("동아리 페이지 테스트", () => {
   };
   beforeEach(() => {
     mockRouter.setCurrentUrl("/club/[clubID]");
-    mockRouter.query = { clubID: "1" };
+    mockRouter.query = { clubID: "1", tab: "home" };
   });
   it("1. 동아리 페이지에서는 홈이 먼저 표시된다.", async () => {
     render(
       <TestProvider router={mockRouter} session={session}>
-        <ClubPage />
+        <ClubPage clubID={1} tab="home" />
       </TestProvider>
     );
 
@@ -27,7 +27,7 @@ describe("동아리 페이지 테스트", () => {
   it("2. 탭 전환 버튼을 클릭하면 쿼리스트링이 바뀐다.", async () => {
     render(
       <TestProvider router={mockRouter} session={session}>
-        <ClubPage />
+        <ClubPage clubID={1} tab="home" />
       </TestProvider>
     );
     const calendarButton = await screen.findByRole("button", {
@@ -41,7 +41,7 @@ describe("동아리 페이지 테스트", () => {
     mockRouter.query = { ...mockRouter.query, tab: "wrong_tab" };
     render(
       <TestProvider router={mockRouter} session={session}>
-        <ClubPage />
+        <ClubPage clubID={1} tab="잘못된 탭" />
       </TestProvider>
     );
     expect(mockRouter.query.tab).toBe("home");
