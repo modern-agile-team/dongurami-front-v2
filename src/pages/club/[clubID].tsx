@@ -7,7 +7,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { dehydrate } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 
 import * as Club from "@/containers/Club";
@@ -15,6 +15,7 @@ import { Row } from "@/components/Layouts";
 import { SwitchCase } from "@/components/Utilities";
 import { clubAPI } from "@/apis";
 import { useClubDetail } from "@/hooks/club";
+import queryClient from "@/globalState/queryClient";
 
 const CLUB_TABS: Record<string, string> = {
   home: "홈",
@@ -91,8 +92,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!clubID) throw "일치하는 동아리가 없습니다.";
 
   if (!tab) throw "올바른 탭이 아닙니다.";
-
-  const queryClient = new QueryClient();
 
   try {
     await queryClient.prefetchQuery({
