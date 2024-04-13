@@ -43,3 +43,36 @@ export const WrapDesc = styled.div`
 `;
 
 export const Desc = styled.span``;
+
+export const WrapCommentInput = styled(Row.ul)`
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid ${lightThemeColor.secondary_30};
+  height: ${Converter.pxToRem(157)};
+  padding: 14px 20px;
+  position: relative;
+`;
+
+export const Input = styled.textarea`
+  font-size: 14px;
+  line-height: normal;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: ${Converter.pxToRem(100)};
+  resize: none;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+  }
+
+  &::placeholder {
+    font-size: 14px; /* Remove the quotes */
+    line-height: normal; /* Remove the quotes */
+    font-weight: 400;
+    color: ${lightThemeColor.neutral_20}; /* Color of the placeholder text */
+  }
+`;

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import * as S from "./emotion";
 import { freePostsAPI, noticePostsAPI } from "@/apis";
@@ -12,12 +12,15 @@ import { Column, Row } from "@/components/Layouts";
 import { Typography } from "@/components/Utilities/Typography";
 import { Converter } from "@/utils";
 import { lightThemeColor } from "@/styles/theme";
+import { Comment } from "@/components/UI/Board/Comment";
 
 export default function DetailBoard() {
   const router = useRouter();
   const { postId, type } = router.query;
+  const inputRef = useRef(null);
 
-  const [unixTimestamp, setUnixTimestamp] = useState(0);
+  const [unixTimestamp, setUnixTimestamp] = useState<number>(0);
+  const [inputValue, setInputValue] = useState<string>("");
 
   const { data } = useQuery({
     queryFn: async () => {
@@ -79,6 +82,110 @@ export default function DetailBoard() {
       },
     });
   };
+
+  const handleClickHit = async () => {
+    const res = freePostsAPI.freePostIncrementHit(Number(postId));
+
+    console.log(res);
+  };
+
+  const postComment = () => {
+    console.log(inputValue);
+  };
+
+  const freePostCommentsMockData: Swagger.Api.FreePostCommentFindAllAndCount.ResponseBody =
+    {
+      totalCount: 1,
+      pageSize: 1,
+      currentPage: 1,
+      nextPage: 2,
+      hasNext: true,
+      lastPage: 1,
+      contents: [
+        {
+          id: 1,
+          createdAt: "2024-04-13T16:17:21.782Z",
+          updatedAt: "2024-04-13T16:17:21.782Z",
+          freePostId: 1,
+          userId: 1,
+          parentId: null,
+          depth: 0,
+          description: "This is a comment for free type",
+          isAnonymous: false,
+          children: [
+            {
+              id: 1,
+              createdAt: "2024-04-13T16:17:21.782Z",
+              updatedAt: "2024-04-13T16:17:21.782Z",
+              freePostId: 1,
+              userId: 1,
+              parentId: null,
+              depth: 1,
+              description: "This is a comment for free type",
+              isAnonymous: false,
+            },
+            {
+              id: 1,
+              createdAt: "2024-04-13T16:17:21.782Z",
+              updatedAt: "2024-04-13T16:17:21.782Z",
+              freePostId: 1,
+              userId: 2,
+              parentId: null,
+              depth: 1,
+              description: "This is a comment for free type",
+              isAnonymous: false,
+            },
+          ], // Assuming children is an array of FreePostCommentDto
+        },
+      ],
+    };
+
+  const noticePostCommentsMockData: Swagger.Api.NoticePostCommentFindAllAndCount.ResponseBody =
+    {
+      totalCount: 1,
+      pageSize: 1,
+      currentPage: 1,
+      nextPage: 2,
+      hasNext: true,
+      lastPage: 1,
+      contents: [
+        {
+          id: 1,
+          createdAt: "2024-04-13T16:17:21.782Z",
+          updatedAt: "2024-04-13T16:17:21.782Z",
+          noticePostId: 1,
+          userId: 1,
+          parentId: null,
+          depth: 0,
+          description: "This is a comment for notice type",
+          isAnonymous: false,
+          children: [
+            {
+              id: 1,
+              createdAt: "2024-04-13T16:17:21.782Z",
+              updatedAt: "2024-04-13T16:17:21.782Z",
+              noticePostId: 1,
+              userId: 2,
+              parentId: null,
+              depth: 0,
+              description: "This is a comment for free type",
+              isAnonymous: false,
+            },
+            {
+              id: 1,
+              createdAt: "2024-04-13T16:17:21.782Z",
+              updatedAt: "2024-04-13T16:17:21.782Z",
+              noticePostId: 1,
+              userId: 2,
+              parentId: null,
+              depth: 0,
+              description: "This is a comment for free type",
+              isAnonymous: false,
+            },
+          ], // Assuming children is an array of NoticePostCommentDto
+        },
+      ],
+    };
 
   return (
     <Column
@@ -151,7 +258,7 @@ export default function DetailBoard() {
               border: `1px solid ${lightThemeColor.accent_100}`,
               marginRight: 15,
             }}
-            onClick={handleClickUpdate}
+            onClick={handleClickHit}
           >
             <Typography typoSize="Body1" typoColor="accent_100">
               좋아요 {data?.hit}개
@@ -189,6 +296,36 @@ export default function DetailBoard() {
           </S.Btn>
         </Row.li>
       </S.WrapBar>
+
+      <S.WrapCommentInput>
+        <S.Input
+          placeholder="게시글의 댓글을 남겨주세요"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+
+        <S.Btn
+          style={{
+            border: `1px solid ${lightThemeColor.accent_100}`,
+            position: "absolute",
+            bottom: 14,
+            right: 20,
+          }}
+          onClick={postComment}
+        >
+          <Typography typoSize="Body1" typoColor="accent_40">
+            등록
+          </Typography>
+        </S.Btn>
+      </S.WrapCommentInput>
+
+      <Comment
+        data={
+          type === "free"
+            ? freePostCommentsMockData
+            : noticePostCommentsMockData
+        }
+      />
     </Column>
   );
 }

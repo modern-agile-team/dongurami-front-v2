@@ -49,6 +49,20 @@ class Converter {
 
     return Math.round(daysDifference);
   }
+
+  // 2024-04-13T07:55:24.000Z
+  // 이 같은 시간 데이터가 있을때
+  // 24.04.13 07:55
+
+  public timeToCustomFormat(timestamp: string) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear().toString().slice(2); // Get the last two digits of the year
+    const month = ("0" + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+    const day = ("0" + date.getDate()).slice(-2); // Add leading zero if needed
+    const hours = ("0" + date.getHours()).slice(-2); // Add leading zero if needed
+    const minutes = ("0" + date.getMinutes()).slice(-2); // Add leading zero if needed
+    return `${year}.${month}.${day} ${hours}:${minutes}`;
+  }
 }
 
 export default new Converter();
