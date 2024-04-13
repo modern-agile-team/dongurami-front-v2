@@ -4,4 +4,4 @@
  * Copyright (c) 2024 Your Company
  */
 
-export * from "./useClubInformation";
+export * from "./useClubDetail";

@@ -4,12 +4,13 @@
  * Copyright (c) 2024 Your Company
  */
 
-import { clubAPI } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
+
+import { clubAPI } from "@/apis";
 
 export default function useClubInformation(clubID: number) {
   return useQuery({
-    queryKey: ["GET_CLUB", { clubID }],
+    queryKey: ["GET_CLUB_DETAIL", { clubID }],
     queryFn: async () =>
       (await clubAPI.clubFindOneOrNotFound(Number(clubID))).data,
   });

@@ -10,24 +10,24 @@ import Image from "next/image";
 import { Column, Row } from "@/components/Layouts";
 import * as S from "./emotion";
 import { Typography } from "@/components/Utilities";
-import { useClubInformation } from "@/hooks/club";
+import { useClubDetail } from "@/hooks/club";
 
 export default function Information({ clubID }: { clubID: number }) {
   const theme = useTheme();
 
-  const { data } = useClubInformation(clubID);
+  const { data: detail } = useClubDetail(clubID);
 
   return (
     <S.Wrapper gap={67} verticalAlign="center">
       <S.LogoWrapper>
-        <Image fill alt="동아리 로고" src={data?.club.logoPath || ""} />
+        <Image fill alt="동아리 로고" src={detail?.club.logoPath || ""} />
       </S.LogoWrapper>
       <S.DetailWrapper gap={16}>
         <S.ClubName
           typoSize="Head2"
           css={{ borderBottom: `5px solid ${theme.color.neutral_10}` }}
         >
-          {data?.club.name}
+          {detail?.club.name}
         </S.ClubName>
         <S.ClubName typoSize="Head5">밴드</S.ClubName>
         <Column className="leader-info" gap={10}>

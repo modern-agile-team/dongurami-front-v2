@@ -14,7 +14,7 @@ import * as Club from "@/containers/Club";
 import { Row } from "@/components/Layouts";
 import { SwitchCase } from "@/components/Utilities";
 import { clubAPI } from "@/apis";
-import { useClubInformation } from "@/hooks/club";
+import { useClubDetail } from "@/hooks/club";
 
 const CLUB_TABS: Record<string, string> = {
   home: "홈",
@@ -35,7 +35,7 @@ export default function ClubPage({
 }) {
   const router = useRouter();
 
-  const { data } = useClubInformation(Number(clubID));
+  const { data: detail } = useClubDetail(Number(clubID));
 
   const changeTab = (to: string) => {
     router.push(
@@ -56,7 +56,7 @@ export default function ClubPage({
   return (
     <Row css={{ height: "100%" }}>
       <Head>
-        <title>동그라미 - {data?.club.name}</title>
+        <title>동그라미 - {detail?.club.name}</title>
       </Head>
       <Club.Sidebar tabList={CLUB_TABS} />
       <div
@@ -96,9 +96,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   try {
     await queryClient.prefetchQuery({
-      queryKey: ["GET_CLUB", { clubID }],
+      queryKey: ["GET_CLUB_DETAIL", { clubID }],
       queryFn: async () =>
         (await clubAPI.clubFindOneOrNotFound(Number(clubID))).data,
+    });
+
+    await queryClient.prefetchQuery({
+      queryKey: ["GET_CLUB_MEMBERS", { clubID }],
+      queryFn: async () =>
+        (await clubAPI.clubFindAllMembers(Number(clubID))).data,
     });
 
     return {
