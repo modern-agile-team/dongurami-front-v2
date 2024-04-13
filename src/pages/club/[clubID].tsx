@@ -14,7 +14,7 @@ import * as Club from "@/containers/Club";
 import { Row } from "@/components/Layouts";
 import { SwitchCase } from "@/components/Utilities";
 import { clubAPI } from "@/apis";
-import { useClubInformation } from "@/hooks";
+import { useClubInformation } from "@/hooks/club";
 
 const CLUB_TABS: Record<string, string> = {
   home: "홈",

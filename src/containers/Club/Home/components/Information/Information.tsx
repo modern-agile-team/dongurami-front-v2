@@ -10,7 +10,7 @@ import Image from "next/image";
 import { Column, Row } from "@/components/Layouts";
 import * as S from "./emotion";
 import { Typography } from "@/components/Utilities";
-import { useClubInformation } from "@/hooks";
+import { useClubInformation } from "@/hooks/club";
 
 export default function Information({ clubID }: { clubID: number }) {
   const theme = useTheme();

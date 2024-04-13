@@ -7,4 +7,3 @@
 export * from "./useIntersectionObserver";
 export * from "./useAuth";
 export * from "./useClientEffect";
-export * from "./useClubInformation";
