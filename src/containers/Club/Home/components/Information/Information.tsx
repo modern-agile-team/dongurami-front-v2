@@ -10,27 +10,24 @@ import Image from "next/image";
 import { Column, Row } from "@/components/Layouts";
 import * as S from "./emotion";
 import { Typography } from "@/components/Utilities";
+import { useClubInformation } from "@/hooks";
 
-export default function Information() {
+export default function Information({ clubID }: { clubID: number }) {
   const theme = useTheme();
+
+  const { data } = useClubInformation(clubID);
 
   return (
     <S.Wrapper gap={67} verticalAlign="center">
       <S.LogoWrapper>
-        <Image
-          fill
-          alt="동아리 로고"
-          src={
-            "https://file.miricanvas.com/template_thumb/2020/01/06/6090-1578287704703/535c5d06-c174-499a-b200-c98b9532843f/thumb.jpg"
-          }
-        />
+        <Image fill alt="동아리 로고" src={data?.club.logoPath || ""} />
       </S.LogoWrapper>
       <S.DetailWrapper gap={16}>
         <S.ClubName
           typoSize="Head2"
           css={{ borderBottom: `5px solid ${theme.color.neutral_10}` }}
         >
-          프리버드
+          {data?.club.name}
         </S.ClubName>
         <S.ClubName typoSize="Head5">밴드</S.ClubName>
         <Column className="leader-info" gap={10}>

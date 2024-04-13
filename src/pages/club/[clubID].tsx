@@ -7,10 +7,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { GetServerSideProps } from "next";
 
 import * as Club from "@/containers/Club";
 import { Row } from "@/components/Layouts";
 import { SwitchCase } from "@/components/Utilities";
+import { clubAPI } from "@/apis";
+import { useClubInformation } from "@/hooks";
 
 const CLUB_TABS: Record<string, string> = {
   home: "홈",
@@ -22,9 +26,16 @@ const CLUB_TABS: Record<string, string> = {
   manage: "관리",
 };
 
-export default function ClubPage() {
+export default function ClubPage({
+  clubID,
+  tab,
+}: {
+  clubID: number;
+  tab: string;
+}) {
   const router = useRouter();
-  const { clubID, tab } = router.query as { clubID: string; tab?: string };
+
+  const { data } = useClubInformation(Number(clubID));
 
   const changeTab = (to: string) => {
     router.push(
@@ -45,7 +56,7 @@ export default function ClubPage() {
   return (
     <Row css={{ height: "100%" }}>
       <Head>
-        <title>동그라미 - 모던 애자일</title>
+        <title>동그라미 - {data?.club.name}</title>
       </Head>
       <Club.Sidebar tabList={CLUB_TABS} />
       <div
@@ -57,7 +68,7 @@ export default function ClubPage() {
         <SwitchCase
           condition={tab}
           cases={{
-            home: <Club.Home />,
+            home: <Club.Home clubID={clubID} />,
             community: <Club.Notice />,
             gallery: <Club.Activity />,
             calendar: <Club.Schedule />,
@@ -69,3 +80,35 @@ export default function ClubPage() {
     </Row>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  query,
+}) => {
+  const clubID = params?.clubID;
+  const tab = query?.tab;
+
+  if (!clubID) throw "일치하는 동아리가 없습니다.";
+
+  if (!tab) throw "올바른 탭이 아닙니다.";
+
+  const queryClient = new QueryClient();
+
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: ["GET_CLUB", { clubID }],
+      queryFn: async () =>
+        (await clubAPI.clubFindOneOrNotFound(Number(clubID))).data,
+    });
+
+    return {
+      props: {
+        tab: typeof tab === "string" ? tab : tab[0],
+        clubID: typeof clubID === "string" ? Number(clubID) : Number(clubID[0]),
+        dehydratedProps: dehydrate(queryClient),
+      },
+    };
+  } catch {
+    throw Error("서버 요청에 실패했습니다. 개발자에게 문의해주세요.");
+  }
+};
