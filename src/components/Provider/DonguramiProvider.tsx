@@ -20,16 +20,7 @@ import {
 import { themeModeAtom } from "@/globalState";
 import { useClientEffect } from "@/hooks";
 import ErrorBoundary from "./ErrorBoundary";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 1000,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    },
-  },
-});
+import queryClient from "@/globalState/queryClient";
 
 const store = createStore();
 
