@@ -41,6 +41,7 @@ export default function FreeBoard(props: { boardName: string }) {
         await freePostsAPI.freePostFindAllAndCount({
           page: Number(page),
           pageSize: 20,
+          order: "-id",
         })
       ).data;
     },
