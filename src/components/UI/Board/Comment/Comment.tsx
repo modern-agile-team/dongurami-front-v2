@@ -16,7 +16,7 @@ import Profile from "@/assets/main/profile.png";
 import { Icon } from "@/components/Svg";
 
 interface CommentData {
-  data:
+  data?:
     | Swagger.Api.FreePostCommentFindAllAndCount.ResponseBody
     | Swagger.Api.NoticePostCommentFindAllAndCount.ResponseBody;
   // type: string;
@@ -26,7 +26,7 @@ interface CommentData {
 export default function Comment({ data }: CommentData) {
   return (
     <>
-      {data.contents.map((content) => {
+      {data?.contents.map((content) => {
         return (
           <>
             <S.WrapComment>

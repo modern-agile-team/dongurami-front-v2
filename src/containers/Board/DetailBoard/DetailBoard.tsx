@@ -3,7 +3,12 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 
 import * as S from "./emotion";
-import { freePostsAPI, noticePostsAPI } from "@/apis";
+import {
+  freePostCommentAPI,
+  freePostsAPI,
+  noticePostCommentAPI,
+  noticePostsAPI,
+} from "@/apis";
 import {
   FreePostDetailResponseDto,
   NoticePostDetailResponseDto,
@@ -17,12 +22,13 @@ import { Comment } from "@/components/UI/Board/Comment";
 export default function DetailBoard() {
   const router = useRouter();
   const { postId, type } = router.query;
-  const inputRef = useRef(null);
 
   const [unixTimestamp, setUnixTimestamp] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
 
-  const { data } = useQuery({
+  const { data: postData } = useQuery({
+    queryKey: ["post", postId, type],
+
     queryFn: async () => {
       let response;
       if (type === "free") {
@@ -37,7 +43,28 @@ export default function DetailBoard() {
       }
     },
 
-    queryKey: ["post", postId, type],
+    enabled: postId !== undefined,
+  });
+
+  const { data: commentData } = useQuery({
+    queryKey: ["comment", postId],
+
+    queryFn: async () => {
+      let response;
+      if (type === "free") {
+        response = await freePostCommentAPI.freePostCommentFindAllAndCount({
+          postId: Number(postId),
+        });
+        return response.data;
+      } else {
+        response = await noticePostCommentAPI.noticePostCommentFindAllAndCount({
+          postId: Number(postId),
+        });
+
+        return response.data;
+      }
+    },
+
     enabled: postId !== undefined,
   });
 
@@ -52,7 +79,7 @@ export default function DetailBoard() {
       }
     },
     onSuccess() {
-      console.log(data);
+      // console.log(postData);
     },
     onError(error) {
       console.log(error);
@@ -60,13 +87,13 @@ export default function DetailBoard() {
   });
 
   useEffect(() => {
-    if (data) {
+    if (postData) {
       mutate();
 
-      const dateObject = new Date(data.createdAt);
+      const dateObject = new Date(postData.createdAt);
       setUnixTimestamp(dateObject.getTime());
     }
-  }, [data, mutate]);
+  }, [postData, mutate]);
 
   const handleClickDelete = () => {
     freePostsAPI.freePostRemove(Number(postId)).then(() => {
@@ -83,109 +110,20 @@ export default function DetailBoard() {
     });
   };
 
-  const handleClickHit = async () => {
-    const res = freePostsAPI.freePostIncrementHit(Number(postId));
+  const handleClickHit = async () => {};
 
-    console.log(res);
-  };
-
-  const postComment = () => {
-    console.log(inputValue);
-  };
-
-  const freePostCommentsMockData: Swagger.Api.FreePostCommentFindAllAndCount.ResponseBody =
-    {
-      totalCount: 1,
-      pageSize: 1,
-      currentPage: 1,
-      nextPage: 2,
-      hasNext: true,
-      lastPage: 1,
-      contents: [
-        {
-          id: 1,
-          createdAt: "2024-04-13T16:17:21.782Z",
-          updatedAt: "2024-04-13T16:17:21.782Z",
-          freePostId: 1,
-          userId: 1,
-          parentId: null,
-          depth: 0,
-          description: "This is a comment for free type",
-          isAnonymous: false,
-          children: [
-            {
-              id: 1,
-              createdAt: "2024-04-13T16:17:21.782Z",
-              updatedAt: "2024-04-13T16:17:21.782Z",
-              freePostId: 1,
-              userId: 1,
-              parentId: null,
-              depth: 1,
-              description: "This is a comment for free type",
-              isAnonymous: false,
-            },
-            {
-              id: 1,
-              createdAt: "2024-04-13T16:17:21.782Z",
-              updatedAt: "2024-04-13T16:17:21.782Z",
-              freePostId: 1,
-              userId: 2,
-              parentId: null,
-              depth: 1,
-              description: "This is a comment for free type",
-              isAnonymous: false,
-            },
-          ], // Assuming children is an array of FreePostCommentDto
-        },
-      ],
+  const postComment = async () => {
+    const query = {
+      // parentId: 1,
+      description: inputValue,
+      isAnonymous: false,
     };
-
-  const noticePostCommentsMockData: Swagger.Api.NoticePostCommentFindAllAndCount.ResponseBody =
-    {
-      totalCount: 1,
-      pageSize: 1,
-      currentPage: 1,
-      nextPage: 2,
-      hasNext: true,
-      lastPage: 1,
-      contents: [
-        {
-          id: 1,
-          createdAt: "2024-04-13T16:17:21.782Z",
-          updatedAt: "2024-04-13T16:17:21.782Z",
-          noticePostId: 1,
-          userId: 1,
-          parentId: null,
-          depth: 0,
-          description: "This is a comment for notice type",
-          isAnonymous: false,
-          children: [
-            {
-              id: 1,
-              createdAt: "2024-04-13T16:17:21.782Z",
-              updatedAt: "2024-04-13T16:17:21.782Z",
-              noticePostId: 1,
-              userId: 2,
-              parentId: null,
-              depth: 0,
-              description: "This is a comment for free type",
-              isAnonymous: false,
-            },
-            {
-              id: 1,
-              createdAt: "2024-04-13T16:17:21.782Z",
-              updatedAt: "2024-04-13T16:17:21.782Z",
-              noticePostId: 1,
-              userId: 2,
-              parentId: null,
-              depth: 0,
-              description: "This is a comment for free type",
-              isAnonymous: false,
-            },
-          ], // Assuming children is an array of NoticePostCommentDto
-        },
-      ],
-    };
+    if (type === "free") {
+      await freePostCommentAPI.freePostCommentCreate(Number(postId), query);
+    } else {
+      await noticePostCommentAPI.noticePostCommentCreate(Number(postId), query);
+    }
+  };
 
   return (
     <Column
@@ -198,7 +136,7 @@ export default function DetailBoard() {
       <S.WrapTitle verticalAlign="center" horizonAlign="distribute">
         <S.Title>
           <Typography typoSize="Head6" typoColor="accent_100">
-            {data?.title}
+            {postData?.title}
           </Typography>
         </S.Title>
 
@@ -247,7 +185,7 @@ export default function DetailBoard() {
 
       <S.WrapDesc>
         <S.Desc>
-          <S.Title>{data?.description}</S.Title>
+          <S.Title>{postData?.description}</S.Title>
         </S.Desc>
       </S.WrapDesc>
 
@@ -261,7 +199,7 @@ export default function DetailBoard() {
             onClick={handleClickHit}
           >
             <Typography typoSize="Body1" typoColor="accent_100">
-              좋아요 {data?.hit}개
+              좋아요 {postData?.hit}개
             </Typography>
           </S.Btn>
           <S.Btn
@@ -319,13 +257,7 @@ export default function DetailBoard() {
         </S.Btn>
       </S.WrapCommentInput>
 
-      <Comment
-        data={
-          type === "free"
-            ? freePostCommentsMockData
-            : noticePostCommentsMockData
-        }
-      />
+      <Comment data={commentData} />
     </Column>
   );
 }
