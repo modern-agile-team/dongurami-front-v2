@@ -9,15 +9,13 @@ import {
   noticePostCommentAPI,
   noticePostsAPI,
 } from "@/apis";
-import {
-  FreePostDetailResponseDto,
-  NoticePostDetailResponseDto,
-} from "@/apis/data-contracts";
+import { FreePostDetailResponseDto } from "@/apis/data-contracts";
 import { Column, Row } from "@/components/Layouts";
 import { Typography } from "@/components/Utilities/Typography";
 import { Converter } from "@/utils";
 import { lightThemeColor } from "@/styles/theme";
 import { Comment } from "@/components/UI/Board/Comment";
+import type { CreateReactionDtoTypeEnum } from "@/apis/data-contracts";
 
 export default function DetailBoard() {
   const router = useRouter();
@@ -46,7 +44,7 @@ export default function DetailBoard() {
     enabled: postId !== undefined,
   });
 
-  const { data: commentData } = useQuery({
+  const { data: commentData, refetch } = useQuery({
     queryKey: ["comment", postId],
 
     queryFn: async () => {
@@ -93,6 +91,8 @@ export default function DetailBoard() {
       const dateObject = new Date(postData.createdAt);
       setUnixTimestamp(dateObject.getTime());
     }
+
+    document.body.scrollTo(0, 0);
   }, [postData, mutate]);
 
   const handleClickDelete = () => {
@@ -110,7 +110,23 @@ export default function DetailBoard() {
     });
   };
 
-  const handleClickHit = async () => {};
+  const handleClickLike = async () => {
+    const query: { type: CreateReactionDtoTypeEnum } = {
+      type: "like",
+    };
+
+    // if (type === "free") {
+    //   await freePostsAPI.freePostCreateReaction(Number(postId), query);
+    // } else {
+    //   await noticePostsAPI.noticePostCreateReaction(Number(postId), query);
+    // }
+
+    if (type === "free") {
+      await freePostsAPI.freePostRemoveReaction(Number(postId), query);
+    } else {
+      await noticePostsAPI.noticePostRemoveReaction(Number(postId), query);
+    }
+  };
 
   const postComment = async () => {
     const query = {
@@ -196,7 +212,7 @@ export default function DetailBoard() {
               border: `1px solid ${lightThemeColor.accent_100}`,
               marginRight: 15,
             }}
-            onClick={handleClickHit}
+            onClick={handleClickLike}
           >
             <Typography typoSize="Body1" typoColor="accent_100">
               좋아요 {postData?.hit}개
