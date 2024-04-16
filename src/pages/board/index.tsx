@@ -58,6 +58,7 @@ export default function FreeBoard(props: { boardName: string }) {
         await noticePostsAPI.noticePostFindAllAndCount({
           page: Number(page),
           pageSize: 5,
+          order: "-id",
         })
       ).data;
     },
