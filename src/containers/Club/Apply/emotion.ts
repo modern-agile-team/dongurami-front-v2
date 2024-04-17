@@ -27,12 +27,18 @@ export const HeadDiv = styled(Row.div)`
   border-radius: 9.572px;
   width: ${pxToRem(751.419)};
   height: ${pxToRem(110.08)};
+  margin-bottom: ${pxToRem(30)};
+  margin-top: ${pxToRem(73)};
 `;
 
 export const QuestionDiv = styled(Column.div)`
   width: ${pxToRem(751.419)};
-
+  margin: ${pxToRem(12)} 0;
   border-radius: 9.572px;
   border: 0.479px solid var(--dark-primary-80, #9fadd3);
   background: white;
+`;
+
+export const QuestionHeader = styled.h3`
+  /* margin: 1px; */
 `;
