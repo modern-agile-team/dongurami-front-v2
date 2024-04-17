@@ -57,6 +57,16 @@ const typography: Theme["typography"] = {
     lineHeight: "normal",
     fontWeight: 700,
   },
+  Head11: {
+    fontSize: "0.8125rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
+  Head12: {
+    fontSize: "0.75rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
   SubTitle1: {
     fontSize: "1.75rem",
     lineHeight: "normal",

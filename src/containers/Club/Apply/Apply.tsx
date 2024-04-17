@@ -38,7 +38,7 @@ export default function Apply({ clubID }: { clubID: number }) {
             </S.ClubName>
 
             <S.ApplyDuration>
-              <Typography typoSize="Head10" typoColor="accent_30">
+              <Typography typoSize="Head12" typoColor="accent_30">
                 지원기간{" "}
                 {data?.data.clubApplicationForm.startsAt.substring(0, 10)} ~{" "}
                 {data?.data.clubApplicationForm.endsAt.substring(0, 10)}
