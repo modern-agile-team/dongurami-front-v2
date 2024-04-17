@@ -29,6 +29,29 @@ export const HeadDiv = styled(Row.div)`
   height: ${pxToRem(110.08)};
   margin-bottom: ${pxToRem(30)};
   margin-top: ${pxToRem(73)};
+
+  justify-content: space-between;
+  /* padding: 100px; */
+`;
+
+export const HeadLeft = styled(Row.div)``;
+export const ClubLogoWrapper = styled.div`
+  width: ${pxToRem(62)};
+  height: ${pxToRem(62)};
+
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+export const ClubInfo = styled(Column.div)``;
+
+export const ClubName = styled.h3``;
+
+export const ApplyDuration = styled.h3``;
+
+export const HeadRight = styled(Row.div)`
+  height: 100%;
 `;
 
 export const QuestionDiv = styled(Column.div)`
@@ -37,8 +60,31 @@ export const QuestionDiv = styled(Column.div)`
   border-radius: 9.572px;
   border: 0.479px solid var(--dark-primary-80, #9fadd3);
   background: white;
+  padding: ${pxToRem(19)} ${pxToRem(41)};
+  padding-bottom: ${pxToRem(8)} !important ;
 `;
 
 export const QuestionHeader = styled.h3`
-  /* margin: 1px; */
+  margin-bottom: ${pxToRem(15)};
+`;
+
+export const QuestionInputText = styled.input`
+  margin-bottom: ${pxToRem(11)};
+  border: none;
+  border-bottom: 1px solid #8f8f8f;
+  padding-bottom: ${pxToRem(4)};
+  &:focus {
+    outline: none;
+    //포커싱 시 스타일 기획 완료시 수정
+  }
+`;
+
+export const QuestionInputRadio = styled.input`
+  margin-bottom: ${pxToRem(11)};
+  margin-right: ${pxToRem(7)};
+`;
+
+export const SubmitButtonWrapper = styled(Row.div)`
+  width: ${pxToRem(751.419)};
+  margin-top: ${pxToRem(30)};
 `;
