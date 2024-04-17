@@ -31,18 +31,20 @@ export const HeadDiv = styled(Row.div)`
   margin-top: ${pxToRem(73)};
 
   justify-content: space-between;
-  /* padding: 100px; */
+  padding: ${pxToRem(19)} ${pxToRem(26)};
 `;
 
 export const HeadLeft = styled(Row.div)``;
 export const ClubLogoWrapper = styled.div`
-  width: ${pxToRem(62)};
-  height: ${pxToRem(62)};
+  width: ${pxToRem(71)};
+  height: ${pxToRem(71)};
 
   position: relative;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
+  background-color: white;
+  margin-right: ${pxToRem(23.93)};
 `;
 export const ClubInfo = styled(Column.div)``;
 
