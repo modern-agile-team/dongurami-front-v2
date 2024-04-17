@@ -74,7 +74,7 @@ export default function ClubPage({
             gallery: <Club.Activity />,
             calendar: <Club.Schedule />,
             review: <Club.Review />,
-            apply: <Club.Apply />,
+            apply: <Club.Apply clubID={clubID} />,
           }}
         />
       </div>
