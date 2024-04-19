@@ -52,7 +52,7 @@ export default function SearchWriter({ type }: BoardType) {
       </S.WrapSearch>
 
       {/* 관리자 구분 값 필요 */}
-      {!isLoggedIn && type === "free" ? (
+      {isLoggedIn ? (
         <S.WrapButton onClick={handleClickPostWrite}>
           <Icon name="Pan35" size={40} fill="neutral_10" />
           <Typography

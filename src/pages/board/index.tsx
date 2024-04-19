@@ -36,11 +36,12 @@ export default function FreeBoard(props: { boardName: string }) {
   } = useQuery({
     queryKey: ["board", "free", router.query.page],
     queryFn: async () => {
-      const page = router.query.page as string;
+      const page = (router.query.page as string) || 1;
       return (
         await freePostsAPI.freePostFindAllAndCount({
           page: Number(page),
           pageSize: 20,
+          order: "-id",
         })
       ).data;
     },
@@ -53,11 +54,12 @@ export default function FreeBoard(props: { boardName: string }) {
   } = useQuery({
     queryKey: ["board", "notice", router.query.page],
     queryFn: async () => {
-      const page = router.query.page as string;
+      const page = (router.query.page as string) || 1;
       return (
         await noticePostsAPI.noticePostFindAllAndCount({
           page: Number(page),
           pageSize: 5,
+          order: "-id",
         })
       ).data;
     },
