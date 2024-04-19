@@ -92,7 +92,10 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 리스트 조회
    * @request GET:/api/clubs
    */
-  clubFindAllAndCount = (query: ClubFindAllAndCountParams, params: RequestParams = {}) =>
+  clubFindAllAndCount = (
+    query: ClubFindAllAndCountParams,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubsPaginationResponseDto,
       | {
@@ -401,7 +404,11 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/tags
    * @secure
    */
-  clubAppendTags = (clubId: number, data: BulkAppendClubTagDto, params: RequestParams = {}) =>
+  clubAppendTags = (
+    clubId: number,
+    data: BulkAppendClubTagDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubTagsCommonResponseDto,
       | {
@@ -529,7 +536,11 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/tags/{tagIds}
    * @secure
    */
-  clubRemoveTags = (clubId: number, tagIds: string, params: RequestParams = {}) =>
+  clubRemoveTags = (
+    clubId: number,
+    tagIds: string,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubTagDeleteResponseDto,
       | {
@@ -736,7 +747,10 @@ export class Club<SecurityDataType = unknown> {
    * @summary 최신 동아리 지원서 폼 조회
    * @request GET:/api/clubs/{clubId}/application-form/latest
    */
-  clubFindLatestApplicationForm = (clubId: number, params: RequestParams = {}) =>
+  clubFindLatestApplicationForm = (
+    clubId: number,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubApplicationFormDetailResponseDto,
       | {
@@ -805,7 +819,7 @@ export class Club<SecurityDataType = unknown> {
           message?: ClubFindLatestApplicationFormMessageEnum2;
         }
     >({
-      path: `/api/clubs/${clubId}/application-form/latest`,
+      path: `/api/clubs/${clubId}/application-forms/latest`,
       method: "GET",
       format: "json",
       ...params,

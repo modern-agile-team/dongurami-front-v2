@@ -28,17 +28,42 @@ const typography: Theme["typography"] = {
     fontWeight: 600,
   },
   Head5: {
-    fontSize: "1.5rem",
+    fontSize: "1.75rem",
     lineHeight: "normal",
     fontWeight: 600,
   },
   Head6: {
-    fontSize: "1.3125rem",
+    fontSize: "1.5rem",
     lineHeight: "normal",
     fontWeight: 500,
   },
   Head7: {
     fontSize: "1.3125rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
+  Head8: {
+    fontSize: "1.125rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
+  Head9: {
+    fontSize: "1rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
+  Head10: {
+    fontSize: "0.875rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
+  Head11: {
+    fontSize: "0.8125rem",
+    lineHeight: "normal",
+    fontWeight: 700,
+  },
+  Head12: {
+    fontSize: "0.75rem",
     lineHeight: "normal",
     fontWeight: 700,
   },
