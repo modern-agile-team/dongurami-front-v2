@@ -14,6 +14,7 @@ import { lightThemeColor } from "@/styles/theme";
 import { Row } from "@/components/Layouts";
 import { Converter } from "@/utils";
 import { useRouter } from "next/router";
+import { Icon } from "@/components/Svg";
 
 interface Props {
   data: {
@@ -159,10 +160,63 @@ export default function Alert({ isOpen, setIsOpen, data }: Props) {
     }
   };
 
+  const checkSvg = () => {
+    switch (checkType) {
+      case "notice":
+        return (
+          <Icon
+            name="Notice32"
+            size={24}
+            fill="accent_100"
+            style={{
+              marginRight: 6,
+            }}
+          />
+        );
+      case "comment":
+        return (
+          <Icon
+            name="Chat30"
+            size={24}
+            color="accent_100"
+            fill="accent_100"
+            style={{
+              marginRight: 6,
+            }}
+          />
+        );
+      case "update" || "commentUpdate":
+        return (
+          <Icon
+            name="Warning32"
+            size={24}
+            fill="accent_100"
+            style={{
+              marginRight: 6,
+            }}
+          />
+        );
+      case "delete" || "commentDelete":
+        return (
+          <Icon
+            name="Deletion32"
+            size={24}
+            fill="accent_100"
+            style={{
+              marginRight: 6,
+            }}
+          />
+        );
+      default:
+        return;
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <S.WrapAlert verticalAlign="center" horizonAlign="center">
-        <Row>
+        <Row verticalAlign="center">
+          {checkSvg()}
           {textList.map((item, index) => {
             return (
               <Typography
