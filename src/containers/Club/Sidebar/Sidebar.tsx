@@ -14,20 +14,13 @@ import { Row } from "@/components/Layouts";
 
 interface IClubSidebar {
   tabList: Record<string, string>;
+  changeTab: (tab: string) => void;
 }
 
-export default function Sidebar({ tabList }: IClubSidebar) {
+export default function Sidebar({ tabList, changeTab }: IClubSidebar) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
   const currentTab = router.query.tab as string;
-
-  const changeTab = (to: string) => {
-    router.push(
-      { pathname: router.pathname, query: { ...router.query, tab: to } },
-      undefined,
-      { shallow: true }
-    );
-  };
 
   const handleClickTabButton = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.currentTarget as HTMLButtonElement;
