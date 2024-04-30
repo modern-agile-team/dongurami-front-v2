@@ -8,6 +8,7 @@ export { default as HeartFull24 } from "./heart-full-24";
 export { default as LeftArrow24 } from "./left-arrow-24";
 export { default as Logo } from "./logo";
 export { default as Notice32 } from "./notice-32";
+export { default as Pan35 } from "./pan-35";
 export { default as ReRight48 } from "./re-right-48";
 export { default as RightArrow24 } from "./right-arrow-24";
 export { default as Search30 } from "./search-30";
