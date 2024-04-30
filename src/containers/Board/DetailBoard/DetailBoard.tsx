@@ -16,6 +16,7 @@ import { lightThemeColor } from "@/styles/theme";
 import { Comment } from "@/components/UI/Board/Comment";
 import type { CreateReactionDtoTypeEnum } from "@/apis/data-contracts";
 import { Alert } from "@/components/UI/Alert";
+import { Icon } from "@/components/Svg";
 
 export default function DetailBoard() {
   const router = useRouter();
@@ -142,6 +143,8 @@ export default function DetailBoard() {
     } else {
       await noticePostCommentAPI.noticePostCommentCreate(Number(postId), query);
     }
+
+    refetch();
   };
 
   const handleAlert = (type: string) => {
@@ -230,6 +233,15 @@ export default function DetailBoard() {
             }}
             onClick={handleClickLike}
           >
+            <Icon
+              name="Good32"
+              size={20}
+              fill="accent_100"
+              style={{
+                marginRight: 6,
+              }}
+            />
+
             <Typography typoSize="BHead14" typoColor="accent_100">
               좋아요 {postData?.hit}개
             </Typography>
@@ -240,6 +252,14 @@ export default function DetailBoard() {
             }}
             onClick={handleClickDelete}
           >
+            <Icon
+              name="Chat30"
+              size={20}
+              fill="accent_100"
+              style={{
+                marginRight: 6,
+              }}
+            />
             <Typography typoSize="BHead14" typoColor="accent_100">
               댓글 쓰기
             </Typography>

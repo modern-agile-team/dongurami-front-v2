@@ -34,6 +34,9 @@ export const WrapBar = styled(Row.ul)`
 export const Btn = styled(Button)`
   padding: 3px 20px;
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const WrapDesc = styled.div`
