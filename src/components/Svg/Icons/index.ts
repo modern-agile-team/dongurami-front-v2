@@ -1,11 +1,14 @@
 export { default as Chat24 } from "./chat-24";
+export { default as Chat30 } from "./chat-30";
 export { default as Check35 } from "./check-35";
+export { default as Deletion32 } from "./deletion-32";
+export { default as Good32 } from "./good-32";
 export { default as Heart24 } from "./heart-24";
 export { default as HeartFull24 } from "./heart-full-24";
 export { default as LeftArrow24 } from "./left-arrow-24";
+export { default as Logo } from "./logo";
+export { default as Notice32 } from "./notice-32";
 export { default as ReRight48 } from "./re-right-48";
 export { default as RightArrow24 } from "./right-arrow-24";
 export { default as Search30 } from "./search-30";
-export { default as Pan35 } from "./pan-35";
-export { default as CheckSquare35 } from "./check-square-35";
-export { default as Logo } from "./logo";
+export { default as Warning32 } from "./warning-32";
