@@ -9,13 +9,13 @@ import {
   noticePostCommentAPI,
   noticePostsAPI,
 } from "@/apis";
-import { FreePostDetailResponseDto } from "@/apis/data-contracts";
 import { Column, Row } from "@/components/Layouts";
 import { Typography } from "@/components/Utilities/Typography";
 import { Converter } from "@/utils";
 import { lightThemeColor } from "@/styles/theme";
 import { Comment } from "@/components/UI/Board/Comment";
 import type { CreateReactionDtoTypeEnum } from "@/apis/data-contracts";
+import { Alert } from "@/components/UI/Alert";
 
 export default function DetailBoard() {
   const router = useRouter();
@@ -23,6 +23,8 @@ export default function DetailBoard() {
 
   const [unixTimestamp, setUnixTimestamp] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [alertType, setAlertType] = useState<string>("");
 
   const { data: postData } = useQuery({
     queryKey: ["post", postId, type],
@@ -141,6 +143,23 @@ export default function DetailBoard() {
     }
   };
 
+  const handleAlert = (type: string) => {
+    switch (type) {
+      case "comment":
+        setAlertType(type);
+        setIsOpen(true);
+        break;
+
+      case "notice":
+        setAlertType(type);
+        setIsOpen(true);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <Column
       horizonAlign="center"
@@ -156,21 +175,25 @@ export default function DetailBoard() {
           </Typography>
         </S.Title>
 
-        <S.Btn
-          color="accent_100"
-          style={{
-            border: `1px solid ${lightThemeColor.accent_100}`,
-          }}
-          onClick={handleClickUpdate}
-        >
-          <Typography typoSize="Body2" typoColor="accent_100">
-            공지로 등록
-          </Typography>
-        </S.Btn>
+        {type === "free" ?? (
+          <S.Btn
+            color="accent_100"
+            style={{
+              border: `1px solid ${lightThemeColor.accent_100}`,
+            }}
+            onClick={() => {
+              handleAlert("notice");
+            }}
+          >
+            <Typography typoSize="Body2" typoColor="accent_100">
+              공지로 등록
+            </Typography>
+          </S.Btn>
+        )}
       </S.WrapTitle>
 
       <S.WrapTag horizonAlign="left">
-        <Typography typoSize="Head7" typoColor="neutral_30">
+        <Typography typoSize="Head12" typoColor="neutral_30">
           #공지 #어쩌구 #저쩌구
         </Typography>
       </S.WrapTag>
@@ -188,12 +211,12 @@ export default function DetailBoard() {
             marginRight: 12,
           }}
         >
-          <Typography typoSize="Body1" typoColor="neutral_70">
+          <Typography typoSize="BHead14" typoColor="neutral_70">
             유저이름
           </Typography>
         </Row.li>
         <Row.li>
-          <Typography typoSize="Body1" typoColor="neutral_70">
+          <Typography typoSize="BHead14" typoColor="neutral_70">
             {Converter.timestampToDate(unixTimestamp)}
           </Typography>
         </Row.li>
@@ -201,7 +224,11 @@ export default function DetailBoard() {
 
       <S.WrapDesc>
         <S.Desc>
-          <S.Title>{postData?.description}</S.Title>
+          <S.Title>
+            <Typography typoSize="Head10" typoColor="neutral_80">
+              {postData?.description}
+            </Typography>
+          </S.Title>
         </S.Desc>
       </S.WrapDesc>
 
@@ -214,7 +241,7 @@ export default function DetailBoard() {
             }}
             onClick={handleClickLike}
           >
-            <Typography typoSize="Body1" typoColor="accent_100">
+            <Typography typoSize="BHead14" typoColor="accent_100">
               좋아요 {postData?.hit}개
             </Typography>
           </S.Btn>
@@ -224,7 +251,7 @@ export default function DetailBoard() {
             }}
             onClick={handleClickDelete}
           >
-            <Typography typoSize="Body1" typoColor="accent_100">
+            <Typography typoSize="BHead14" typoColor="accent_100">
               댓글 쓰기
             </Typography>
           </S.Btn>
@@ -238,7 +265,9 @@ export default function DetailBoard() {
             }}
             onClick={handleClickUpdate}
           >
-            수정
+            <Typography typoSize="Head12" typoColor="neutral_30">
+              수정
+            </Typography>
           </S.Btn>
           <S.Btn
             style={{
@@ -246,7 +275,9 @@ export default function DetailBoard() {
             }}
             onClick={handleClickDelete}
           >
-            삭제
+            <Typography typoSize="Head12" typoColor="neutral_30">
+              삭제
+            </Typography>
           </S.Btn>
         </Row.li>
       </S.WrapBar>
@@ -265,15 +296,17 @@ export default function DetailBoard() {
             bottom: 14,
             right: 20,
           }}
-          onClick={postComment}
+          onClick={() => postComment()}
         >
-          <Typography typoSize="Body1" typoColor="accent_40">
+          <Typography typoSize="Head12" typoColor="accent_40">
             등록
           </Typography>
         </S.Btn>
       </S.WrapCommentInput>
 
       <Comment data={commentData} />
+
+      <Alert isOpen={isOpen} setIsOpen={setIsOpen} type={alertType} />
     </Column>
   );
 }
