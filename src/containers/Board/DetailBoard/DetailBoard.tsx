@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 
 import * as S from "./emotion";
@@ -20,6 +20,7 @@ import { Alert } from "@/components/UI/Alert";
 export default function DetailBoard() {
   const router = useRouter();
   const { postId, type } = router.query;
+  const queryClient = useQueryClient();
 
   const [unixTimestamp, setUnixTimestamp] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
@@ -144,20 +145,8 @@ export default function DetailBoard() {
   };
 
   const handleAlert = (type: string) => {
-    switch (type) {
-      case "comment":
-        setAlertType(type);
-        setIsOpen(true);
-        break;
-
-      case "notice":
-        setAlertType(type);
-        setIsOpen(true);
-        break;
-
-      default:
-        break;
-    }
+    setAlertType(type);
+    setIsOpen(true);
   };
 
   return (
@@ -175,7 +164,7 @@ export default function DetailBoard() {
           </Typography>
         </S.Title>
 
-        {type === "free" ?? (
+        {type === "free" && (
           <S.Btn
             color="accent_100"
             style={{
@@ -263,7 +252,7 @@ export default function DetailBoard() {
               border: `1px solid ${lightThemeColor.neutral_20}`,
               marginRight: 9,
             }}
-            onClick={handleClickUpdate}
+            onClick={() => handleAlert("update")}
           >
             <Typography typoSize="Head12" typoColor="neutral_30">
               수정
@@ -273,7 +262,7 @@ export default function DetailBoard() {
             style={{
               border: `1px solid ${lightThemeColor.neutral_20}`,
             }}
-            onClick={handleClickDelete}
+            onClick={() => handleAlert("delete")}
           >
             <Typography typoSize="Head12" typoColor="neutral_30">
               삭제
@@ -296,7 +285,7 @@ export default function DetailBoard() {
             bottom: 14,
             right: 20,
           }}
-          onClick={() => postComment()}
+          onClick={() => handleAlert("comment")}
         >
           <Typography typoSize="Head12" typoColor="accent_40">
             등록
@@ -306,7 +295,11 @@ export default function DetailBoard() {
 
       <Comment data={commentData} />
 
-      <Alert isOpen={isOpen} setIsOpen={setIsOpen} type={alertType} />
+      <Alert
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        data={{ type: alertType, postComment }}
+      />
     </Column>
   );
 }
