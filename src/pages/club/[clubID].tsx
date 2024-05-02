@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { dehydrate } from "@tanstack/react-query";
@@ -27,14 +27,16 @@ const CLUB_TABS: Record<string, string> = {
   manage: "관리",
 };
 
-export default function ClubPage({
-  clubID,
-  tab,
-}: {
-  clubID: number;
-  tab: string;
-}) {
+export default function ClubPage({ clubID }: { clubID: number }) {
   const router = useRouter();
+
+  const currentTab = !router.query.tab
+    ? "home"
+    : typeof router.query.tab === "string"
+      ? router.query.tab
+      : router.query.tab[0];
+
+  const [tab, setTab] = useState<string>(currentTab);
 
   const { data: detail } = useClubDetail(Number(clubID));
 
@@ -44,14 +46,19 @@ export default function ClubPage({
       undefined,
       { shallow: true }
     );
+
+    setTab(to);
   };
 
   useEffect(() => {
     if (!clubID) return;
+  }, [clubID]);
+
+  useEffect(() => {
     if (!tab || !CLUB_TABS[tab]) {
       changeTab("home");
     }
-  }, [clubID, tab]);
+  }, [tab]);
 
   if (!tab) return;
   return (
@@ -59,7 +66,7 @@ export default function ClubPage({
       <Head>
         <title>동그라미 - {detail?.club.name}</title>
       </Head>
-      <Club.Sidebar tabList={CLUB_TABS} />
+      <Club.Sidebar tabList={CLUB_TABS} changeTab={changeTab} />
       <div
         css={{
           width: "100%",
@@ -87,11 +94,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   query,
 }) => {
   const clubID = params?.clubID;
-  const tab = query?.tab;
 
   if (!clubID) throw "일치하는 동아리가 없습니다.";
-
-  if (!tab) throw "올바른 탭이 아닙니다.";
 
   try {
     await queryClient.prefetchQuery({
@@ -108,7 +112,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 
     return {
       props: {
-        tab: typeof tab === "string" ? tab : tab[0],
         clubID: typeof clubID === "string" ? Number(clubID) : Number(clubID[0]),
         dehydratedProps: dehydrate(queryClient),
       },
