@@ -4,9 +4,7 @@
  * Copyright (c) 2024 Your Company
  */
 
-import { useTheme } from "@emotion/react";
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -14,21 +12,9 @@ import { Column, Grid, Row } from "@/components/Layouts";
 import { Button, TextField } from "@/components/Design";
 import { Icon } from "@/components/Svg";
 import { Club } from "@/components/UI";
-import { clubAPI } from "@/apis";
-import { Converter } from "@/utils";
 
 import { Typography } from "@/components/Utilities";
-
-const categories = {
-  all: "전체",
-  art: "문화/예술",
-  volunteer: "봉사/사회활동",
-  business: "창업/취업",
-  IT: "IT",
-  language: "어학",
-  sports: "스포츠",
-  etc: "기타",
-};
+import { useAllClubCategories, useClubList } from "@/hooks/clubList";
 
 interface ListProps {
   pageSize: number;
@@ -36,36 +22,25 @@ interface ListProps {
 
 export default function List({ pageSize }: ListProps) {
   const router = useRouter();
-  const theme = useTheme();
 
   const [searchText, setSearchText] = useState<string | undefined>(undefined);
-  const [selectedCategory, setSelectedCategory] =
-    useState<keyof typeof categories>("all");
+  const [selectedCategory, setSelectedCategory] = useState<
+    Swagger.ClubCategoryDto | undefined
+  >(undefined);
 
-  const { data, isLoading } = useQuery({
-    queryKey: [
-      "clubList",
-      { selectedCategory, pageSize, searchText: router.query.search },
-    ],
-    queryFn: async () => {
-      return (
-        await clubAPI.clubFindAllAndCount({
-          pageSize,
-          categoryId: 1,
-          name: router.query.search
-            ? (router.query.search as string)
-            : undefined,
-        })
-      ).data;
-    },
+  const allClubCategories = useAllClubCategories();
+  const clubListAPI = useClubList({
+    name: searchText,
+    pageSize,
+    categoryId: selectedCategory?.id,
   });
 
-  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+  const changeSearchText = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const target = ev.target as HTMLInputElement;
     setSearchText(target.value);
   };
 
-  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  const searchClub = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     if (!searchText || searchText?.trim().length === 0) {
       router.replace({ pathname: "/club/list" });
@@ -76,8 +51,8 @@ export default function List({ pageSize }: ListProps) {
     setSearchText(undefined);
   };
 
-  const selectCategory = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    setSelectedCategory(ev.currentTarget.value as keyof typeof categories);
+  const selectCategory = (category?: Swagger.ClubCategoryDto) => {
+    setSelectedCategory(category);
     setSearchText(undefined);
   };
 
@@ -87,61 +62,60 @@ export default function List({ pageSize }: ListProps) {
       css={{ width: "100%", marginTop: "35px" }}
       horizonAlign="center"
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={searchClub}>
         <TextField
           css={{ width: "30rem" }}
           value={searchText}
           typoColor="neutral_100"
           placeholder="동아리를 검색해보세요"
-          onChange={handleChange}
+          onChange={changeSearchText}
           endEnhancer={<Icon name="Search30" fill="primary_100" size={24} />}
         />
       </form>
       <Column gap={62}>
         <Row.ul css={{ width: "100%" }} horizonAlign="distribute" gap={44}>
-          {Object.keys(categories).map((category) => {
-            return (
-              <Button.Text
-                typoSize="Head6"
-                hoverTypoColor="neutral_90"
-                typoColor={
-                  selectedCategory === category ? "neutral_90" : "neutral_40"
-                }
-                key={category}
-                value={category}
-                onClick={selectCategory}
-              >
-                {categories[category as keyof typeof categories]}
-              </Button.Text>
-            );
-          })}
-        </Row.ul>
-        {isLoading && (
-          <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
-            {new Array(pageSize).fill(1).map((_, index) => {
+          <li>
+            <Button.Text
+              typoSize="Head6"
+              hoverTypoColor="neutral_90"
+              typoColor={!selectedCategory ? "neutral_90" : "neutral_40"}
+              onClick={() => selectCategory()}
+            >
+              전체
+            </Button.Text>
+          </li>
+          {allClubCategories.data?.clubCategories
+            .slice(0, 5)
+            .map((category) => {
               return (
-                <Column
-                  key={index}
-                  css={{
-                    width: Converter.pxToRem(200),
-                    height: Converter.pxToRem(300),
-                    border: `4px solid ${theme.color.primary_30}`,
-                  }}
-                />
+                <li key={category.id}>
+                  <Button.Text
+                    typoSize="Head6"
+                    hoverTypoColor="neutral_90"
+                    typoColor={
+                      selectedCategory?.id === category.id
+                        ? "neutral_90"
+                        : "neutral_40"
+                    }
+                    onClick={() => selectCategory(category)}
+                  >
+                    {category.name}
+                  </Button.Text>
+                </li>
               );
             })}
-          </Grid.ul>
-        )}
-        {data?.contents.length === 0 && (
+        </Row.ul>
+
+        {clubListAPI.data?.contents.length === 0 && (
           <Row>
-            <Typography typoSize="Head4">{router.query.search}</Typography>
+            <Typography typoSize="Head4">{selectedCategory?.name}</Typography>
             <Typography typoSize="Head4">
               에 대한 검색 결과가 없습니다
             </Typography>
           </Row>
         )}
         <Grid.ul css={{ width: "100%" }} gridGap={44} column={5}>
-          {data?.contents.map((clubData) => {
+          {clubListAPI.data?.contents.map((clubData) => {
             return (
               <Link
                 href={`/club/${clubData.id}?tab=home`}
