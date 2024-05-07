@@ -173,7 +173,7 @@ export default function DetailBoard() {
           rightText: "등록",
           leftText: "취소",
           rightBtn: () => {
-            setAlertType("noticeComplete");
+            handleAlert("noticeComplete");
           },
           leftBtn: () => setIsOpen(false),
         });
