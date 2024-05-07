@@ -21,11 +21,24 @@ import { Icon } from "@/components/Svg";
 export default function DetailBoard() {
   const router = useRouter();
   const { postId, type } = router.query;
-  const queryClient = useQueryClient();
 
   const [unixTimestamp, setUnixTimestamp] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [textList, setTextList] = useState<string[]>(["default", "text"]);
+  const [alertContent, setAlertContent] = useState<{
+    subTitle?: string;
+    rightText: string;
+    leftText: string;
+    rightBtn: () => void;
+    leftBtn: () => void;
+  }>({
+    subTitle: "",
+    rightText: "",
+    leftText: "",
+    rightBtn: () => {},
+    leftBtn: () => {},
+  });
   const [alertType, setAlertType] = useState<string>("");
 
   const { data: postData } = useQuery({
@@ -145,10 +158,116 @@ export default function DetailBoard() {
     }
 
     refetch();
+    setInputValue("");
   };
 
   const handleAlert = (type: string) => {
     setAlertType(type);
+
+    let checkType = type;
+    switch (checkType) {
+      case "notice":
+        setTextList(["게시글을 ", "공지", "로 등록 하시겠습니까?"]);
+        setAlertContent({
+          subTitle: "동아리원들에게 이야기를 공유해요",
+          rightText: "등록",
+          leftText: "취소",
+          rightBtn: () => {
+            setAlertType("noticeComplete");
+          },
+          leftBtn: () => setIsOpen(false),
+        });
+        break;
+      case "noticeComplete":
+        setTextList(["공지 등록", "완료", "!"]);
+        setAlertContent({
+          subTitle: "동아리원들에게 이야기를 공유해요",
+          rightText: "공지 보러가기",
+          leftText: "홈으로 돌아가기",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+
+            router.push("/board?page=1");
+          },
+        });
+        break;
+
+      case "comment":
+        setTextList(["댓글을 ", "등록", "하시겠습니까?"]);
+        setAlertContent({
+          subTitle: "동아리원들과 함께 소통해요",
+          rightText: "등록",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+            postComment();
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+      case "commentDelete":
+        setTextList(["댓글을 ", "삭제", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "삭제",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+      case "commentUpdate":
+        setTextList(["댓글을 ", "수정", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "수정",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+
+      case "delete":
+        setTextList(["게시글을 ", "삭제", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "삭제",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+
+      case "update":
+        setTextList(["게시글을 ", "수정", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "수정",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+
+      default:
+        return;
+    }
     setIsOpen(true);
   };
 
@@ -318,7 +437,7 @@ export default function DetailBoard() {
       <Alert
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        data={{ type: alertType, postComment }}
+        data={{ type: alertType, textList, alertContent }}
       />
     </Column>
   );
