@@ -271,6 +271,23 @@ export default function DetailBoard() {
     setIsOpen(true);
   };
 
+  const getIconName = (type: string) => {
+    switch (type) {
+      case "notice":
+        return "Notice32";
+      case "comment":
+        return "Chat30";
+      case "update":
+      case "commentUpdate":
+        return "Warning32";
+      case "delete":
+      case "commentDelete":
+        return "Deletion32";
+      default:
+        return "Deletion32";
+    }
+  };
+
   return (
     <Column
       horizonAlign="center"
@@ -438,6 +455,7 @@ export default function DetailBoard() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         data={{ type: alertType, textList, alertContent }}
+        getIconName={() => getIconName(alertType)}
       />
     </Column>
   );

@@ -14,6 +14,8 @@ import { lightThemeColor } from "@/styles/theme";
 import { Row } from "@/components/Layouts";
 import { Icon } from "@/components/Svg";
 
+type IconName = "Notice32" | "Chat30" | "Warning32" | "Deletion32";
+
 interface Props {
   data: {
     type: string;
@@ -28,66 +30,22 @@ interface Props {
   };
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  getIconName: (type: string) => IconName;
 }
 
-export default function Alert({ isOpen, setIsOpen, data }: Props) {
-  const checkSvg = () => {
-    switch (data.type) {
-      case "notice":
-        return (
-          <Icon
-            name="Notice32"
-            size={24}
-            fill="accent_100"
-            style={{
-              marginRight: 6,
-            }}
-          />
-        );
-      case "comment":
-        return (
-          <Icon
-            name="Chat30"
-            size={24}
-            color="accent_100"
-            fill="accent_100"
-            style={{
-              marginRight: 6,
-            }}
-          />
-        );
-      case "update" || "commentUpdate":
-        return (
-          <Icon
-            name="Warning32"
-            size={24}
-            fill="accent_100"
-            style={{
-              marginRight: 6,
-            }}
-          />
-        );
-      case "delete" || "commentDelete":
-        return (
-          <Icon
-            name="Deletion32"
-            size={24}
-            fill="accent_100"
-            style={{
-              marginRight: 6,
-            }}
-          />
-        );
-      default:
-        return;
-    }
-  };
-
+export default function Alert({ isOpen, setIsOpen, data, getIconName }: Props) {
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <S.WrapAlert verticalAlign="center" horizonAlign="center">
         <Row verticalAlign="center">
-          {checkSvg()}
+          <Icon
+            name={getIconName(data.type)}
+            size={24}
+            fill="accent_100"
+            style={{
+              marginRight: 6,
+            }}
+          />
           {data.textList.map((item, index) => {
             return (
               <Typography
