@@ -27,7 +27,7 @@ export default function Card({ contents, onClick }: CardProps) {
           src={contents.logoPath || Logo}
           title={contents.name}
           quality={30}
-          height={185}
+          fill
         />
       </S.ClubImage>
       <Column css={{ padding: "2px 5px", width: "100%" }}>
