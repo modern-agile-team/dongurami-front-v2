@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 
 import * as S from "./emotion";
@@ -9,13 +9,14 @@ import {
   noticePostCommentAPI,
   noticePostsAPI,
 } from "@/apis";
-import { FreePostDetailResponseDto } from "@/apis/data-contracts";
 import { Column, Row } from "@/components/Layouts";
 import { Typography } from "@/components/Utilities/Typography";
 import { Converter } from "@/utils";
 import { lightThemeColor } from "@/styles/theme";
 import { Comment } from "@/components/UI/Board/Comment";
 import type { CreateReactionDtoTypeEnum } from "@/apis/data-contracts";
+import { Alert } from "@/components/UI/Alert";
+import { Icon } from "@/components/Svg";
 
 export default function DetailBoard() {
   const router = useRouter();
@@ -23,6 +24,22 @@ export default function DetailBoard() {
 
   const [unixTimestamp, setUnixTimestamp] = useState<number>(0);
   const [inputValue, setInputValue] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [textList, setTextList] = useState<string[]>(["default", "text"]);
+  const [alertContent, setAlertContent] = useState<{
+    subTitle?: string;
+    rightText: string;
+    leftText: string;
+    rightBtn: () => void;
+    leftBtn: () => void;
+  }>({
+    subTitle: "",
+    rightText: "",
+    leftText: "",
+    rightBtn: () => {},
+    leftBtn: () => {},
+  });
+  const [alertType, setAlertType] = useState<string>("");
 
   const { data: postData } = useQuery({
     queryKey: ["post", postId, type],
@@ -139,6 +156,136 @@ export default function DetailBoard() {
     } else {
       await noticePostCommentAPI.noticePostCommentCreate(Number(postId), query);
     }
+
+    refetch();
+    setInputValue("");
+  };
+
+  const handleAlert = (type: string) => {
+    setAlertType(type);
+
+    let checkType = type;
+    switch (checkType) {
+      case "notice":
+        setTextList(["게시글을 ", "공지", "로 등록 하시겠습니까?"]);
+        setAlertContent({
+          subTitle: "동아리원들에게 이야기를 공유해요",
+          rightText: "등록",
+          leftText: "취소",
+          rightBtn: () => {
+            handleAlert("noticeComplete");
+          },
+          leftBtn: () => setIsOpen(false),
+        });
+        break;
+      case "noticeComplete":
+        setTextList(["공지 등록", "완료", "!"]);
+        setAlertContent({
+          subTitle: "동아리원들에게 이야기를 공유해요",
+          rightText: "공지 보러가기",
+          leftText: "홈으로 돌아가기",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+
+            router.push("/board?page=1");
+          },
+        });
+        break;
+
+      case "comment":
+        setTextList(["댓글을 ", "등록", "하시겠습니까?"]);
+        setAlertContent({
+          subTitle: "동아리원들과 함께 소통해요",
+          rightText: "등록",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+            postComment();
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+      case "commentDelete":
+        setTextList(["댓글을 ", "삭제", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "삭제",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+      case "commentUpdate":
+        setTextList(["댓글을 ", "수정", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "수정",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+
+      case "delete":
+        setTextList(["게시글을 ", "삭제", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "삭제",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+
+      case "update":
+        setTextList(["게시글을 ", "수정", "하시겠습니까?"]);
+        setAlertContent({
+          rightText: "수정",
+          leftText: "취소",
+          rightBtn: () => {
+            setIsOpen(false);
+          },
+          leftBtn: () => {
+            setIsOpen(false);
+          },
+        });
+        break;
+
+      default:
+        return;
+    }
+    setIsOpen(true);
+  };
+
+  const getIconName = (type: string) => {
+    switch (type) {
+      case "notice":
+        return "Notice32";
+      case "comment":
+        return "Chat30";
+      case "update":
+      case "commentUpdate":
+        return "Warning32";
+      case "delete":
+      case "commentDelete":
+        return "Deletion32";
+      default:
+        return "Deletion32";
+    }
   };
 
   return (
@@ -156,21 +303,25 @@ export default function DetailBoard() {
           </Typography>
         </S.Title>
 
-        <S.Btn
-          color="accent_100"
-          style={{
-            border: `1px solid ${lightThemeColor.accent_100}`,
-          }}
-          onClick={handleClickUpdate}
-        >
-          <Typography typoSize="Body2" typoColor="accent_100">
-            공지로 등록
-          </Typography>
-        </S.Btn>
+        {type === "free" && (
+          <S.Btn
+            color="accent_100"
+            style={{
+              border: `1px solid ${lightThemeColor.accent_100}`,
+            }}
+            onClick={() => {
+              handleAlert("notice");
+            }}
+          >
+            <Typography typoSize="Body2" typoColor="accent_100">
+              공지로 등록
+            </Typography>
+          </S.Btn>
+        )}
       </S.WrapTitle>
 
       <S.WrapTag horizonAlign="left">
-        <Typography typoSize="Head7" typoColor="neutral_30">
+        <Typography typoSize="Head12" typoColor="neutral_30">
           #공지 #어쩌구 #저쩌구
         </Typography>
       </S.WrapTag>
@@ -188,12 +339,12 @@ export default function DetailBoard() {
             marginRight: 12,
           }}
         >
-          <Typography typoSize="Body1" typoColor="neutral_70">
+          <Typography typoSize="BHead14" typoColor="neutral_70">
             유저이름
           </Typography>
         </Row.li>
         <Row.li>
-          <Typography typoSize="Body1" typoColor="neutral_70">
+          <Typography typoSize="BHead14" typoColor="neutral_70">
             {Converter.timestampToDate(unixTimestamp)}
           </Typography>
         </Row.li>
@@ -201,7 +352,11 @@ export default function DetailBoard() {
 
       <S.WrapDesc>
         <S.Desc>
-          <S.Title>{postData?.description}</S.Title>
+          <S.Title>
+            <Typography typoSize="Head10" typoColor="neutral_80">
+              {postData?.description}
+            </Typography>
+          </S.Title>
         </S.Desc>
       </S.WrapDesc>
 
@@ -214,7 +369,16 @@ export default function DetailBoard() {
             }}
             onClick={handleClickLike}
           >
-            <Typography typoSize="Body1" typoColor="accent_100">
+            <Icon
+              name="Good32"
+              size={20}
+              fill="accent_100"
+              style={{
+                marginRight: 6,
+              }}
+            />
+
+            <Typography typoSize="BHead14" typoColor="accent_100">
               좋아요 {postData?.hit}개
             </Typography>
           </S.Btn>
@@ -224,7 +388,15 @@ export default function DetailBoard() {
             }}
             onClick={handleClickDelete}
           >
-            <Typography typoSize="Body1" typoColor="accent_100">
+            <Icon
+              name="Chat30"
+              size={20}
+              fill="accent_100"
+              style={{
+                marginRight: 6,
+              }}
+            />
+            <Typography typoSize="BHead14" typoColor="accent_100">
               댓글 쓰기
             </Typography>
           </S.Btn>
@@ -236,17 +408,21 @@ export default function DetailBoard() {
               border: `1px solid ${lightThemeColor.neutral_20}`,
               marginRight: 9,
             }}
-            onClick={handleClickUpdate}
+            onClick={() => handleAlert("update")}
           >
-            수정
+            <Typography typoSize="Head12" typoColor="neutral_30">
+              수정
+            </Typography>
           </S.Btn>
           <S.Btn
             style={{
               border: `1px solid ${lightThemeColor.neutral_20}`,
             }}
-            onClick={handleClickDelete}
+            onClick={() => handleAlert("delete")}
           >
-            삭제
+            <Typography typoSize="Head12" typoColor="neutral_30">
+              삭제
+            </Typography>
           </S.Btn>
         </Row.li>
       </S.WrapBar>
@@ -265,15 +441,22 @@ export default function DetailBoard() {
             bottom: 14,
             right: 20,
           }}
-          onClick={postComment}
+          onClick={() => handleAlert("comment")}
         >
-          <Typography typoSize="Body1" typoColor="accent_40">
+          <Typography typoSize="Head12" typoColor="accent_40">
             등록
           </Typography>
         </S.Btn>
       </S.WrapCommentInput>
 
       <Comment data={commentData} />
+
+      <Alert
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        data={{ type: alertType, textList, alertContent }}
+        getIconName={() => getIconName(alertType)}
+      />
     </Column>
   );
 }

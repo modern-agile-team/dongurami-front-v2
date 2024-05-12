@@ -61,35 +61,36 @@ export default function WriteBoard() {
       isCreate = !id;
     }
 
-    if (type === "free") {
-      if (id) {
-        await freePostsAPI.freePostPatchUpdate(Number(id), params);
-        router.back();
-      } else {
-        const { data } = await freePostsAPI.freePostCreate({
-          ...params,
-          isAnonymous: value.isAnonymous,
-          tagNames: [],
-        });
-        router.replace({
-          pathname: `/board/free/detail/${data.freePost.id}`,
-        });
-      }
+    // if (type === "free") {
+    if (id) {
+      await freePostsAPI.freePostPatchUpdate(Number(id), params);
+      router.back();
     } else {
-      if (id) {
-        await noticePostsAPI.noticePostPatchUpdate(Number(id), params);
-        router.back();
-      } else {
-        const { data } = await noticePostsAPI.noticePostCreate({
-          ...params,
-          isAllowComment: value.isAllowComment,
-          tagNames: [],
-        });
-        router.replace({
-          pathname: `/board/notice/detail/${data.noticePost.id}`,
-        });
-      }
+      const { data } = await freePostsAPI.freePostCreate({
+        ...params,
+        isAnonymous: value.isAnonymous,
+        tagNames: [],
+      });
+      router.replace({
+        pathname: `/board/detail/${data.freePost.id}`,
+        query: { type: "free" },
+      });
     }
+    // } else {
+    //   if (id) {
+    //     await noticePostsAPI.noticePostPatchUpdate(Number(id), params);
+    //     router.back();
+    //   } else {
+    //     const { data } = await noticePostsAPI.noticePostCreate({
+    //       ...params,
+    //       isAllowComment: value.isAllowComment,
+    //       tagNames: [],
+    //     });
+    //     router.replace({
+    //       pathname: `/board/notice/detail/${data.noticePost.id}`,
+    //     });
+    //   }
+    // }
 
     queryClient.removeQueries();
   };

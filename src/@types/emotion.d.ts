@@ -82,6 +82,9 @@ declare module "@emotion/react" {
       Head10: ThemeTypography;
       Head11: ThemeTypography;
       Head12: ThemeTypography;
+      RHead13: ThemeTypography;
+      BHead14: ThemeTypography;
+      RHead14: ThemeTypography;
       SubTitle1: ThemeTypography;
       SubTitle2: ThemeTypography;
       SubTitle3: ThemeTypography;
