@@ -4,6 +4,29 @@
  * Copyright (c) 2024 Your Company
  */
 
+import { useState } from "react";
+import { ManageHeader } from "./ManageHeader";
+import { SwitchCase } from "@/components/Utilities";
+import { ManageMember } from "./ManageMember";
+import { ApplyMember } from "./ApplyMember";
+import { ManageApplyForm } from "./ManageApplyForm";
+
 export default function Manage() {
-  return <>123</>;
+  const [manageTab, setManageTab] = useState<
+    "member" | "applyMember" | "applyForm"
+  >("member");
+
+  return (
+    <>
+      <ManageHeader setManageTab={setManageTab} />
+      <SwitchCase
+        condition={manageTab}
+        cases={{
+          member: <ManageMember />,
+          applyMember: <ApplyMember />,
+          applyForm: <ManageApplyForm />,
+        }}
+      />
+    </>
+  );
 }
