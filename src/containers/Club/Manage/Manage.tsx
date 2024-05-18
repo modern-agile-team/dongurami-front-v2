@@ -7,9 +7,7 @@
 import { useState } from "react";
 import { ManageHeader } from "./ManageHeader";
 import { SwitchCase } from "@/components/Utilities";
-import { ManageMember } from "./ManageMember";
-import { ApplyMember } from "./ApplyMember";
-import { ManageApplyForm } from "./ManageApplyForm";
+import * as Contents from "./Contents";
 
 export default function Manage() {
   const [manageTab, setManageTab] = useState<
@@ -22,9 +20,9 @@ export default function Manage() {
       <SwitchCase
         condition={manageTab}
         cases={{
-          member: <ManageMember />,
-          applyMember: <ApplyMember />,
-          applyForm: <ManageApplyForm />,
+          member: <Contents.ManageMember />,
+          applyMember: <Contents.ApplyMember />,
+          applyForm: <Contents.ManageApplyForm />,
         }}
       />
     </>
