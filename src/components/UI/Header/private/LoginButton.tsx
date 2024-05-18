@@ -4,12 +4,13 @@
  * Copyright (c) 2024 Your Company
  */
 
+import { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
+import { useSession } from "next-auth/react";
+
 import { Button } from "@/components/Design";
 import { LoginModal } from "@/containers/Login";
 import { accessTokenAtom } from "@/globalState";
-import { useAtomValue } from "jotai";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 
 export default function LoginButton() {
   const [isOpen, setIsOpen] = useState(false);
