@@ -82,6 +82,7 @@ export default function ClubPage({ clubID }: { clubID: number }) {
             calendar: <Club.Schedule />,
             review: <Club.Review />,
             apply: <Club.Apply clubID={clubID} />,
+            manage: <Club.Manage />,
           }}
         />
       </div>
