@@ -23,7 +23,6 @@ export default function Apply({ clubID }: { clubID: number }) {
 
   const { data: detail } = useClubDetail(clubID);
 
-  console.log(data);
   return (
     <S.Wrap horizonAlign="center">
       <S.HeadDiv>
