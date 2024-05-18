@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Typography } from "@/components/Utilities";
 import Image from "next/image";
 import { Button } from "@/components/Design";
+import dayjs from "dayjs";
 
 export default function Apply({ clubID }: { clubID: number }) {
   const router = useRouter();
@@ -26,7 +27,8 @@ export default function Apply({ clubID }: { clubID: number }) {
   const { data: detail } = useClubDetail(clubID);
 
   if (!data) return;
-
+  const startDate = dayjs(data.clubApplicationForm.startsAt);
+  const endDate = dayjs(data.clubApplicationForm.endsAt);
   return (
     <S.Wrap horizonAlign="center">
       <S.HeadDiv>
@@ -43,13 +45,10 @@ export default function Apply({ clubID }: { clubID: number }) {
 
             <S.ApplyDuration>
               <Typography typoSize="Head12" typoColor="accent_30">
-                지원기간{" "}
-                {data.clubApplicationForm.startsAt
-                  ? data.clubApplicationForm.startsAt.substring(0, 10)
-                  : "-"}
-                {data.clubApplicationForm.endsAt
-                  ? data.clubApplicationForm.endsAt.substring(0, 10)
-                  : "-"}
+                {`지원기간 ${
+                  startDate.isValid() ? startDate.format("yyyy.mm.dd") : "-"
+                } ~ ${endDate.isValid() ? endDate.format("yyyy.mm.dd") : "-"}  
+                `}
               </Typography>
             </S.ApplyDuration>
           </S.ClubInfo>
