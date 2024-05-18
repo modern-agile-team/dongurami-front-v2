@@ -13,19 +13,9 @@ import { validator } from "@/utils";
 
 import * as S from "./emotion";
 
-export default function Modal({
-  children,
-  isOpen = false,
-  setIsOpen,
-  focusTrap = false,
-  shouldCloseToClickOutside = true,
-  horizonAlign = "center",
-  verticalAlign = "center",
-  ...rest
-}: {
+interface ModalProps {
   children: React.ReactNode;
   isOpen?: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   shouldCloseToClickOutside?: boolean;
   horizonAlign?: "center" | "left" | "right";
   verticalAlign?: "center" | "top" | "bottom";
@@ -33,10 +23,29 @@ export default function Modal({
   focusTrap?: boolean;
   onClose?: () => void;
   onOpen?: () => void;
-}) {
+}
+
+export default function Modal({
+  isOpen = false,
+  focusTrap = false,
+  shouldCloseToClickOutside = true,
+  horizonAlign = "center",
+  verticalAlign = "center",
+  ...props
+}: ModalProps) {
   const [show, setShow] = useState(isOpen);
 
   const FocusTrap = focusTrap ? FocusTrapReact : React.Fragment;
+
+  const open = () => {
+    setShow(true);
+    props.onOpen?.();
+  };
+
+  const close = () => {
+    setShow(false);
+    props.onClose?.();
+  };
 
   const handleClose = (ev: React.MouseEvent) => {
     const target = ev.target as HTMLElement;
@@ -45,20 +54,16 @@ export default function Modal({
       !target.classList.contains("modal-dimmed")
     )
       return;
-    setShow(false);
-    rest.onClose?.();
-    setIsOpen(false);
+    close();
   };
 
   useEffect(() => {
-    setShow(isOpen);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (show) {
-      rest.onOpen?.();
+    if (isOpen) {
+      open();
+    } else {
+      close();
     }
-  }, [show]);
+  }, [isOpen]);
 
   if (!show || !validator.isClient) return;
   return (
@@ -69,10 +74,10 @@ export default function Modal({
             className="modal-dimmed"
             horizonAlign={horizonAlign}
             verticalAlign={verticalAlign}
-            css={rest.customStyle}
+            css={props.customStyle}
             onClick={handleClose}
           >
-            {children}
+            {props.children}
           </S.ModalWrapper>
         </FocusTrap>,
         document.body

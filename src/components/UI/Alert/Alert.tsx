@@ -35,7 +35,7 @@ interface Props {
 
 export default function Alert({ isOpen, setIsOpen, data, getIconName }: Props) {
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
       <S.WrapAlert verticalAlign="center" horizonAlign="center">
         <Row verticalAlign="center">
           <Icon

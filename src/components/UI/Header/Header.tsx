@@ -18,26 +18,15 @@ import { authSocialAPI } from "@/apis";
 import Logo from "@/assets/main/logo.png";
 import { Row } from "@/components/Layouts";
 import { Button } from "@/components/Design";
-import { Typography, WhatIF } from "@/components/Utilities";
-import { LoginModal } from "@/containers/Login";
+import { WhatIF } from "@/components/Utilities";
+import { LoginButton } from "./private";
 
 export default function Header({}: {}) {
   const { isLoggedIn, logout } = useAuth();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
 
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const { data } = useSession();
-
-  useEffect(() => {
-    if (!accessToken) {
-      if (data) {
-        authSignIn(data!.user, setAccessToken);
-      }
-    } else {
-      setIsOpen(false);
-    }
-  }, [accessToken, data]);
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.currentTarget as HTMLButtonElement;
@@ -122,10 +111,16 @@ export default function Header({}: {}) {
       );
   }
 
+  useEffect(() => {
+    if (!accessToken) {
+      if (data) {
+        authSignIn(data!.user, setAccessToken);
+      }
+    }
+  }, [accessToken, data]);
+
   return (
     <S.Container horizonAlign="distribute" verticalAlign="center">
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
-
       <Row gap={66}>
         <Button.Text id="root" onClick={handleRoute}>
           <Image width="155" height="37" src={Logo} alt="메인헤더로고" />
@@ -170,36 +165,9 @@ export default function Header({}: {}) {
         <WhatIF
           condition={isLoggedIn}
           falsy={
-            <>
-              <Row.li>
-                <Button.Text
-                  id="sign-in"
-                  typoSize="SubTitle2"
-                  typoColor="neutral_60"
-                  onClick={() => {
-                    setIsOpen(!isOpen);
-                    console.log(isOpen);
-                  }}
-                  hoverTypoColor="neutral_90"
-                >
-                  로그인
-                </Button.Text>
-              </Row.li>
-              <Typography typoSize="SubTitle2" typoColor="neutral_60">
-                ㅣ
-              </Typography>
-              <Row.li>
-                <Button.Text
-                  id="sign-up"
-                  typoSize="SubTitle2"
-                  typoColor="neutral_60"
-                  onClick={handleRoute}
-                  hoverTypoColor="neutral_90"
-                >
-                  회원가입
-                </Button.Text>
-              </Row.li>
-            </>
+            <Row.li>
+              <LoginButton />
+            </Row.li>
           }
         >
           <Row.li>

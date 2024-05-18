@@ -9,13 +9,13 @@ import { Form } from "..";
 
 export default function LoginModal({
   isOpen,
-  setIsOpen,
+  onClose,
 }: {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
 }) {
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <Form />
     </Modal>
   );
