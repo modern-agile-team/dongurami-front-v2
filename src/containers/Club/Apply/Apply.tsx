@@ -5,14 +5,16 @@
  */
 
 import { useRouter } from "next/router";
-import { clubAPI } from "@/apis";
-import * as S from "./emotion";
-import { useClubDetail } from "@/hooks/club";
-import { useQuery } from "@tanstack/react-query";
-import { Typography } from "@/components/Utilities";
-import Image from "next/image";
-import { Button } from "@/components/Design";
 import dayjs from "dayjs";
+import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+
+import { clubAPI } from "@/apis";
+import { useClubDetail } from "@/hooks/club";
+import { Typography } from "@/components/Utilities";
+import { Button } from "@/components/Design";
+
+import * as S from "./emotion";
 
 export default function Apply({ clubID }: { clubID: number }) {
   const router = useRouter();
