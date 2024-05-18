@@ -18,10 +18,14 @@ export default function Apply({ clubID }: { clubID: number }) {
 
   const { isLoading, data, isError, error } = useQuery({
     queryKey: ["GET_APPLY_FORM"],
-    queryFn: async () => await clubAPI.clubFindLatestApplicationForm(clubID),
+    queryFn: async () => {
+      return (await clubAPI.clubFindLatestApplicationForm(clubID)).data;
+    },
   });
 
   const { data: detail } = useClubDetail(clubID);
+
+  if (!data) return;
 
   return (
     <S.Wrap horizonAlign="center">
@@ -40,11 +44,11 @@ export default function Apply({ clubID }: { clubID: number }) {
             <S.ApplyDuration>
               <Typography typoSize="Head12" typoColor="accent_30">
                 지원기간{" "}
-                {data?.data.clubApplicationForm.startsAt
-                  ? data?.data.clubApplicationForm.startsAt.substring(0, 10)
+                {data.clubApplicationForm.startsAt
+                  ? data.clubApplicationForm.startsAt.substring(0, 10)
                   : "-"}
-                {data?.data.clubApplicationForm.endsAt
-                  ? data?.data.clubApplicationForm.endsAt.substring(0, 10)
+                {data.clubApplicationForm.endsAt
+                  ? data.clubApplicationForm.endsAt.substring(0, 10)
                   : "-"}
               </Typography>
             </S.ApplyDuration>
@@ -56,8 +60,8 @@ export default function Apply({ clubID }: { clubID: number }) {
           </Button>
         </S.HeadRight>
       </S.HeadDiv>
-      {data?.data.clubApplicationForm.commonQuestion
-        .concat(data?.data.clubApplicationForm.customQuestion)
+      {data.clubApplicationForm.commonQuestion
+        .concat(data.clubApplicationForm.customQuestion)
         .map((question, idx) => {
           return (
             <S.QuestionDiv key={idx}>
