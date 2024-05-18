@@ -17,10 +17,12 @@ import {
   NoticePostCommentCreateCodeEnum1,
   NoticePostCommentCreateCodeEnum2,
   NoticePostCommentCreateCodeEnum3,
+  NoticePostCommentCreateCodeEnum4,
   NoticePostCommentCreateMessageEnum,
   NoticePostCommentCreateMessageEnum1,
   NoticePostCommentCreateMessageEnum2,
   NoticePostCommentCreateMessageEnum3,
+  NoticePostCommentCreateMessageEnum4,
   NoticePostCommentCreateReactionCodeEnum,
   NoticePostCommentCreateReactionCodeEnum1,
   NoticePostCommentCreateReactionCodeEnum2,
@@ -149,6 +151,27 @@ export class NoticePostComment<SecurityDataType = unknown> {
            * http status code
            * @format integer
            * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 7000
+           */
+          code?: NoticePostCommentCreateCodeEnum2;
+          /** error message */
+          message?: NoticePostCommentCreateMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
            * @example 404
            */
           statusCode?: number;
@@ -156,9 +179,9 @@ export class NoticePostComment<SecurityDataType = unknown> {
            * error code
            * @example 5
            */
-          code?: NoticePostCommentCreateCodeEnum2;
+          code?: NoticePostCommentCreateCodeEnum3;
           /** error message */
-          message?: NoticePostCommentCreateMessageEnum2;
+          message?: NoticePostCommentCreateMessageEnum3;
         }
       | {
           /**
@@ -177,9 +200,9 @@ export class NoticePostComment<SecurityDataType = unknown> {
            * error code
            * @example 0
            */
-          code?: NoticePostCommentCreateCodeEnum3;
+          code?: NoticePostCommentCreateCodeEnum4;
           /** error message */
-          message?: NoticePostCommentCreateMessageEnum3;
+          message?: NoticePostCommentCreateMessageEnum4;
         }
     >({
       path: `/api/notice-posts/${postId}/comments`,
