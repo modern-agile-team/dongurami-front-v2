@@ -2,11 +2,11 @@ import React from "react";
 import type { Preview } from "@storybook/react";
 import { ThemeProvider } from "@emotion/react";
 
-import colorTheme from "../src/styles/color";
-import fontTheme from "../src/styles/font";
+import { lightThemeColor } from "../src/styles/theme/color";
+import fontTheme from "../src/styles/theme/typography";
 
 const theme = {
-  color: colorTheme,
+  color: lightThemeColor,
   font: fontTheme,
 };
 
