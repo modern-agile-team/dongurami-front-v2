@@ -5,7 +5,7 @@
  */
 
 import styled from "@emotion/styled";
-import { Row, Column } from "@/components/Layouts";
+import { Row } from "@/components/Layouts";
 import { Converter } from "@/utils";
 
 const { pxToRem } = Converter;

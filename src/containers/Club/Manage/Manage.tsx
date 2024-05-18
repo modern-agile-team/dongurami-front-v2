@@ -5,8 +5,11 @@
  */
 
 import { useState } from "react";
-import { ManageHeader } from "./ManageHeader";
+
 import { SwitchCase } from "@/components/Utilities";
+
+import { ManageHeader } from "./ManageHeader";
+import { SearchBar } from "./SearchBar";
 import * as Contents from "./Contents";
 
 export default function Manage() {
@@ -17,6 +20,7 @@ export default function Manage() {
   return (
     <>
       <ManageHeader setManageTab={setManageTab} />
+      {manageTab !== "applyForm" && <SearchBar />}
       <SwitchCase
         condition={manageTab}
         cases={{
