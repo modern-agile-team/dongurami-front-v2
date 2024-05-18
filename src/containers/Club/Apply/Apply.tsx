@@ -5,24 +5,32 @@
  */
 
 import { useRouter } from "next/router";
-import { clubAPI } from "@/apis";
-import * as S from "./emotion";
-import { useClubDetail } from "@/hooks/club";
-import { useQuery } from "@tanstack/react-query";
-import { Typography } from "@/components/Utilities";
+import dayjs from "dayjs";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+
+import { clubAPI } from "@/apis";
+import { useClubDetail } from "@/hooks/club";
+import { Typography } from "@/components/Utilities";
 import { Button } from "@/components/Design";
+
+import * as S from "./emotion";
 
 export default function Apply({ clubID }: { clubID: number }) {
   const router = useRouter();
 
   const { isLoading, data, isError, error } = useQuery({
     queryKey: ["GET_APPLY_FORM"],
-    queryFn: async () => await clubAPI.clubFindLatestApplicationForm(clubID),
+    queryFn: async () => {
+      return (await clubAPI.clubFindLatestApplicationForm(clubID)).data;
+    },
   });
 
   const { data: detail } = useClubDetail(clubID);
 
+  if (!data) return;
+  const startDate = dayjs(data.clubApplicationForm.startsAt);
+  const endDate = dayjs(data.clubApplicationForm.endsAt);
   return (
     <S.Wrap horizonAlign="center">
       <S.HeadDiv>
@@ -39,9 +47,10 @@ export default function Apply({ clubID }: { clubID: number }) {
 
             <S.ApplyDuration>
               <Typography typoSize="Head12" typoColor="accent_30">
-                지원기간{" "}
-                {data?.data.clubApplicationForm.startsAt.substring(0, 10)} ~{" "}
-                {data?.data.clubApplicationForm.endsAt.substring(0, 10)}
+                {`지원기간 ${
+                  startDate.isValid() ? startDate.format("yyyy.mm.dd") : "-"
+                } ~ ${endDate.isValid() ? endDate.format("yyyy.mm.dd") : "-"}  
+                `}
               </Typography>
             </S.ApplyDuration>
           </S.ClubInfo>
@@ -52,8 +61,8 @@ export default function Apply({ clubID }: { clubID: number }) {
           </Button>
         </S.HeadRight>
       </S.HeadDiv>
-      {data?.data.clubApplicationForm.commonQuestion
-        .concat(data?.data.clubApplicationForm.customQuestion)
+      {data.clubApplicationForm.commonQuestion
+        .concat(data.clubApplicationForm.customQuestion)
         .map((question, idx) => {
           return (
             <S.QuestionDiv key={idx}>
