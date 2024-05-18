@@ -4,6 +4,8 @@
  * Copyright (c) 2024 Your Company
  */
 
+import * as S from "./emotion";
+
 export default function ManageApplyForm() {
-  return <div>지원서관리</div>;
+  return <S.Wrap>ㅎㅇ</S.Wrap>;
 }
