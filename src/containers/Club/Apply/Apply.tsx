@@ -23,6 +23,7 @@ export default function Apply({ clubID }: { clubID: number }) {
 
   const { data: detail } = useClubDetail(clubID);
 
+  console.log(data);
   return (
     <S.Wrap horizonAlign="center">
       <S.HeadDiv>
@@ -40,8 +41,12 @@ export default function Apply({ clubID }: { clubID: number }) {
             <S.ApplyDuration>
               <Typography typoSize="Head12" typoColor="accent_30">
                 지원기간{" "}
-                {data?.data.clubApplicationForm.startsAt.substring(0, 10)} ~{" "}
-                {data?.data.clubApplicationForm.endsAt.substring(0, 10)}
+                {data?.data.clubApplicationForm.startsAt
+                  ? data?.data.clubApplicationForm.startsAt.substring(0, 10)
+                  : "-"}
+                {data?.data.clubApplicationForm.endsAt
+                  ? data?.data.clubApplicationForm.endsAt.substring(0, 10)
+                  : "-"}
               </Typography>
             </S.ApplyDuration>
           </S.ClubInfo>
