@@ -10,7 +10,7 @@ export default {
     width: {
       control: {
         type: "radio",
-        options: [440, 600],
+        options: [440, 660],
       },
     },
     fitContent: {
@@ -41,7 +41,7 @@ const Template: StoryFn = (args) => {
     <>
       <button onClick={handleOpen}>Open Modal</button>
       <ModalPopup {...args} open={open} onClose={handleClose}>
-        <ModalPopup.Title titleTypography={{ typoSize: "Head4" }}>
+        <ModalPopup.Title titleTypography={{ typoSize: "Head10" }}>
           Modal Title
         </ModalPopup.Title>
         <ModalPopup.Contents>123</ModalPopup.Contents>
