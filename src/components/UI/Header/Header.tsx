@@ -16,13 +16,13 @@ import { accessTokenAtom } from "@/globalState";
 import { authSocialAPI } from "@/apis";
 
 import Logo from "@/assets/main/logo.png";
-import { Row } from "@/components/Layouts";
+import { Column, Row } from "@/components/Layouts";
 import { Button } from "@/components/Design";
 import { WhatIF } from "@/components/Utilities";
-import { LoginButton } from "./private";
+import { LoginButton, LoggedIn } from "./private";
 
 export default function Header({}: {}) {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn } = useAuth();
   const router = useRouter();
 
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
@@ -170,16 +170,7 @@ export default function Header({}: {}) {
             </Row.li>
           }
         >
-          <Row.li>
-            <Button.Text
-              onClick={logout}
-              typoSize="Head5"
-              typoColor="neutral_60"
-              hoverTypoColor="neutral_90"
-            >
-              로그아웃
-            </Button.Text>
-          </Row.li>
+          <LoggedIn />
         </WhatIF>
       </Row.ul>
     </S.Container>
