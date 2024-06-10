@@ -1,7 +1,21 @@
 import { useEffect, useState } from "react";
 
 interface User {
-  user: Swagger.Api.AuthGetProfile.RequestBody;
+  id: number;
+  majorId: number | null;
+  loginType: string;
+  snsId: string;
+  studentNumber: number | null;
+  name: string | null;
+  nickname: string;
+  email: string | null;
+  phoneNumber: string | null;
+  grade: number | null;
+  gender: string | null;
+  profilePath: string | null;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function useUser() {
