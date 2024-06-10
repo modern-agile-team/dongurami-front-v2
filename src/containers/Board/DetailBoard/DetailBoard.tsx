@@ -351,7 +351,7 @@ export default function DetailBoard() {
         </S.Btn>
       </S.WrapCommentInput>
 
-      <Comment data={commentData} />
+      <Comment data={commentData} openModal={openModal} />
 
       <ModalPopup open={isOpen} onClose={() => setIsOpen(false)}>
         <SwitchCase
