@@ -17,6 +17,7 @@ import type { CreateReactionDtoTypeEnum } from "@/apis/data-contracts";
 import { Icon } from "@/components/Svg";
 import { ModalPopup } from "@/components/Design";
 import { SwitchCase } from "@/components/Utilities";
+import { useUser } from "@/hooks";
 
 import * as S from "./emotion";
 import {
@@ -28,6 +29,8 @@ import {
 
 export default function DetailBoard() {
   const router = useRouter();
+
+  const { user } = useUser();
 
   const { postId, type } = router.query;
 
@@ -297,29 +300,31 @@ export default function DetailBoard() {
           </S.Btn>
         </Row.li>
 
-        <Row.li>
-          <S.Btn
-            style={{
-              border: `1px solid ${lightThemeColor.neutral_20}`,
-              marginRight: 9,
-            }}
-            onClick={() => openModal("update")}
-          >
-            <Typography typoSize="Head12" typoColor="neutral_30">
-              수정
-            </Typography>
-          </S.Btn>
-          <S.Btn
-            style={{
-              border: `1px solid ${lightThemeColor.neutral_20}`,
-            }}
-            onClick={() => openModal("delete")}
-          >
-            <Typography typoSize="Head12" typoColor="neutral_30">
-              삭제
-            </Typography>
-          </S.Btn>
-        </Row.li>
+        {user && user?.id && postData?.userId && (
+          <Row.li>
+            <S.Btn
+              style={{
+                border: `1px solid ${lightThemeColor.neutral_20}`,
+                marginRight: 9,
+              }}
+              onClick={() => openModal("update")}
+            >
+              <Typography typoSize="Head12" typoColor="neutral_30">
+                수정
+              </Typography>
+            </S.Btn>
+            <S.Btn
+              style={{
+                border: `1px solid ${lightThemeColor.neutral_20}`,
+              }}
+              onClick={() => openModal("delete")}
+            >
+              <Typography typoSize="Head12" typoColor="neutral_30">
+                삭제
+              </Typography>
+            </S.Btn>
+          </Row.li>
+        )}
       </S.WrapBar>
 
       <S.WrapCommentInput>
