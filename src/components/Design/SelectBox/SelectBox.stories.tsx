@@ -10,7 +10,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    options: ["12340", "한글", "English", "Aa10테스트"],
+    options: [
+      { name: "1학년", value: "1" },
+      { name: "2학년", value: "2" },
+    ],
+
+    defaultName: "학년",
+    isRequired: true,
   },
 };
 

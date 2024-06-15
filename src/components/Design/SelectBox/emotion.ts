@@ -1,43 +1,37 @@
 /*
- * Created on Fri Feb 16 2024
+ * Created on Sat June 15 2024
  *
- * Copyright (c) 2024 Your Company
+ * Copyright (c) 2023 Your Company
  */
 
-import { Row } from "@/components/Layouts";
-import { Theme } from "@emotion/react";
+import { Column } from "@/components/Layouts";
 import styled from "@emotion/styled";
 
-export const CommonStyledSelectField = styled(Row.select)<{
-  backgroundColor?: keyof Theme["color"];
-  typoColor?: keyof Theme["color"];
-  typoSize?: keyof Theme["typography"];
-  shape?: "round" | "square";
-  boxSize?: "xs" | "s" | "m" | "l" | "xl";
-}>`
-  background-color: ${({ theme, backgroundColor }) =>
-    theme.color[!backgroundColor ? "white" : backgroundColor]};
+export const SelectBoxWrap = styled(Column.div)`
+  border: 1px solid red;
+  position: relative;
+  cursor: pointer;
 
-  border-radius: ${({ shape }) => (shape === "round" ? "16px" : "3px")};
-  border: 1px solid #8f8f8f;
+  &::before {
+    content: "⌵";
+    position: absolute;
+    top: 1px;
+    right: 8px;
+    font-size: 20px;
+  }
 
-  padding: ${({ boxSize }) => {
-    switch (boxSize) {
-      case "xl":
-        return "8px 14px";
-      case "l":
-        return "6px 12px";
-      case "m":
-        return "4px 8px";
-      case "s":
-        return "2px 6px";
-      case "xs":
-        return "2px 4px";
-
-      default:
-        return "4px 8px";
-    }
-  }};
+  padding: 10px;
+  /* 의논필요 */
+  /* width: 200px;
+  border-radius: 10px; */
 `;
 
-export const CommonstyledOption = styled.option``;
+export const OptionUl = styled.ul<{ isShow: boolean }>`
+  max-height: ${(props) => (props.isShow ? "none" : "0")};
+  position: absolute;
+  list-style: none;
+  top: 18px;
+  left: 0;
+  overflow: hidden;
+  padding: 0;
+`;

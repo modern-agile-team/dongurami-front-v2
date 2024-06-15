@@ -4,33 +4,57 @@
  * Copyright (c) 2024 Your Company
  */
 
-import { InputHTMLAttributes } from "react";
-
-import { Theme } from "@emotion/react";
+import { useState, useRef } from "react";
 
 import * as S from "./emotion";
 
-interface ISelectBoxProps extends InputHTMLAttributes<HTMLInputElement> {
-  backgroundColor?: keyof Theme["color"];
-  typoColor?: keyof Theme["color"];
-  typoSize?: keyof Theme["typography"];
-  shape?: "square" | "round";
-  options: string[];
-  boxSize?: "xs" | "s" | "m" | "l" | "xl";
+interface OptionInterface {
+  name: string;
+  value: string;
+}
+interface SelectboxProps {
+  options: OptionInterface[];
+  defaultName: string;
+  isRequired: boolean;
 }
 
-export default function SelectBox(props: ISelectBoxProps) {
+export default function SelectBox({
+  options,
+  defaultName = "값을 선택하세요.",
+  isRequired = false,
+}: SelectboxProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedName, setSelectedName] = useState(defaultName);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
+
+  //마지막에 밖에다 빼줘야되는 정보
+  // const returnOption:OptionInterface  = options[selectedIndex]
+
+  function handleOnChangeOption(e: any) {
+    setSelectedName(e.target.innerHTML);
+    setSelectedIndex(e.target.id);
+    setIsChanged(true);
+  }
+
   return (
-    <div>
-      <S.CommonStyledSelectField
-        backgroundColor={props.backgroundColor}
-        shape={props.shape}
-        boxSize={props.boxSize}
-      >
-        {props.options.map((el, idx) => {
-          return <S.CommonstyledOption key={idx}>{el}</S.CommonstyledOption>;
+    <S.SelectBoxWrap
+      onClick={() => setIsOpen(!isOpen)}
+      verticalAlign="center"
+      horizonAlign="center"
+    >
+      <label>{selectedName}</label>
+      <S.OptionUl isShow={isOpen}>
+        {options.map((option, idx) => {
+          return (
+            <li key={idx} id={String(idx)} onClick={handleOnChangeOption}>
+              {option.name}
+            </li>
+          );
         })}
-      </S.CommonStyledSelectField>
-    </div>
+      </S.OptionUl>
+
+      {!isChanged && isRequired ? <div>필수값입니다.</div> : <></>}
+    </S.SelectBoxWrap>
   );
 }
