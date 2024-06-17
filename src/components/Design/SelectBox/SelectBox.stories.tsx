@@ -14,7 +14,6 @@ interface OptionInterface {
 }
 
 function setSelectOption(result: OptionInterface) {
-  console.log(result);
   return result;
 }
 

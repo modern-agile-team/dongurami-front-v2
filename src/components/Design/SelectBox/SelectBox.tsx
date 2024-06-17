@@ -30,9 +30,6 @@ export default function SelectBox({
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const [isChanged, setIsChanged] = useState<boolean>(false);
 
-  //마지막에 밖에다 빼줘야되는 정보
-  // const returnOption:OptionInterface  = options[selectedIndex]
-
   function handleOnChangeOption(e: any) {
     setSelectedName(e.target.innerHTML);
     setSelectedIndex(e.target.id);
