@@ -28,12 +28,10 @@ export default function SelectBox({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedName, setSelectedName] = useState(defaultName);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
-  const [isChanged, setIsChanged] = useState<boolean>(false);
 
   function handleOnChangeOption(e: any) {
     setSelectedName(e.target.innerHTML);
     setSelectedIndex(e.target.id);
-    setIsChanged(true);
   }
 
   useEffect(() => {
@@ -46,18 +44,24 @@ export default function SelectBox({
       verticalAlign="center"
       horizonAlign="center"
     >
-      <label>{selectedName}</label>
+      <S.SelectedDiv verticalAlign="center" horizonAlign="center">
+        {isRequired ? <S.RequireNotice>*</S.RequireNotice> : <></>}
+        <label>{selectedName}</label>
+        <span>⌵</span>
+      </S.SelectedDiv>
       <S.OptionUl isShow={isOpen}>
         {options.map((option, idx) => {
           return (
-            <li key={idx} id={String(idx)} onClick={handleOnChangeOption}>
+            <S.OptionListItem
+              key={idx}
+              id={String(idx)}
+              onClick={handleOnChangeOption}
+            >
               {option.name}
-            </li>
+            </S.OptionListItem>
           );
         })}
       </S.OptionUl>
-
-      {!isChanged && isRequired ? <div>필수값입니다.</div> : <></>}
     </S.SelectBoxWrap>
   );
 }

@@ -4,7 +4,7 @@
  * Copyright (c) 2023 Your Company
  */
 
-import { Column } from "@/components/Layouts";
+import { Column, Row } from "@/components/Layouts";
 import styled from "@emotion/styled";
 
 export const SelectBoxWrap = styled(Column.div)`
@@ -12,18 +12,9 @@ export const SelectBoxWrap = styled(Column.div)`
   position: relative;
   cursor: pointer;
 
-  &::before {
-    content: "⌵";
-    position: absolute;
-    top: 1px;
-    right: 8px;
-    font-size: 20px;
-  }
-
   padding: 10px;
-  /* 의논필요 */
-  /* width: 200px;
-  border-radius: 10px; */
+  width: 200px;
+  border-radius: 10px;
 `;
 
 export const OptionUl = styled.ul<{ isShow: boolean }>`
@@ -34,4 +25,24 @@ export const OptionUl = styled.ul<{ isShow: boolean }>`
   left: 0;
   overflow: hidden;
   padding: 0;
+  border: 1px solid blue;
+  border-top: none;
+  width: 100%;
+  margin-top: 22px;
+`;
+
+export const RequireNotice = styled.span`
+  color: red;
+`;
+
+export const SelectedDiv = styled(Row.div)`
+  width: 100%;
+  justify-content: space-between;
+`;
+
+export const OptionListItem = styled.li`
+  background-color: white;
+  &:hover {
+    background-color: black;
+  }
 `;
