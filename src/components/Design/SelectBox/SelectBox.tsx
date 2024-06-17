@@ -4,7 +4,7 @@
  * Copyright (c) 2024 Your Company
  */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import * as S from "./emotion";
 
@@ -16,12 +16,14 @@ interface SelectboxProps {
   options: OptionInterface[];
   defaultName: string;
   isRequired: boolean;
+  setSelectOption: (result: OptionInterface) => OptionInterface; // setState or object
 }
 
 export default function SelectBox({
   options,
   defaultName = "값을 선택하세요.",
   isRequired = false,
+  setSelectOption,
 }: SelectboxProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedName, setSelectedName] = useState(defaultName);
@@ -36,6 +38,10 @@ export default function SelectBox({
     setSelectedIndex(e.target.id);
     setIsChanged(true);
   }
+
+  useEffect(() => {
+    if (selectedIndex >= 0) setSelectOption(options[selectedIndex]);
+  }, [selectedIndex]);
 
   return (
     <S.SelectBoxWrap

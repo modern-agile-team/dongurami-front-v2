@@ -8,6 +8,16 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
+interface OptionInterface {
+  name: string;
+  value: string;
+}
+
+function setSelectOption(result: OptionInterface) {
+  console.log(result);
+  return result;
+}
+
 export const Primary: Story = {
   args: {
     options: [
@@ -17,6 +27,7 @@ export const Primary: Story = {
 
     defaultName: "학년",
     isRequired: true,
+    setSelectOption: setSelectOption,
   },
 };
 
