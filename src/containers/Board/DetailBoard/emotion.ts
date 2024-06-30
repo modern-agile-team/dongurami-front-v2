@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 export const WrapTitle = styled(Row.ul)`
   margin-top: 80px;
   width: 100%;
+  margin-bottom: 24px;
 `;
 
 export const Title = styled(Row.div)``;
@@ -15,7 +16,7 @@ export const WrapTag = styled(Row.ul)`
   padding: 6px 8px;
   width: 100%;
   background-color: ${lightThemeColor.accent_20};
-  margin: 24px 0px;
+
   border-radius: 16px;
 `;
 

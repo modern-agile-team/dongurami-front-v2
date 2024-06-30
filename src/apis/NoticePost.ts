@@ -36,6 +36,13 @@ import {
   NoticePostFindAllAndCountMessageEnum,
   NoticePostFindAllAndCountMessageEnum1,
   NoticePostFindAllAndCountParams,
+  NoticePostFindAllAndCountReactionsCodeEnum,
+  NoticePostFindAllAndCountReactionsCodeEnum1,
+  NoticePostFindAllAndCountReactionsCodeEnum2,
+  NoticePostFindAllAndCountReactionsMessageEnum,
+  NoticePostFindAllAndCountReactionsMessageEnum1,
+  NoticePostFindAllAndCountReactionsMessageEnum2,
+  NoticePostFindAllAndCountReactionsParams,
   NoticePostFindOneOrNotFoundCodeEnum,
   NoticePostFindOneOrNotFoundCodeEnum1,
   NoticePostFindOneOrNotFoundCodeEnum2,
@@ -91,6 +98,7 @@ import {
   NoticePostsPaginationResponseDto,
   PatchUpdateNoticePostDto,
   PutUpdateNoticePostDto,
+  ReactionsPaginationResponseDto,
   RemoveReactionDto,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
@@ -793,6 +801,92 @@ export class NoticePost<SecurityDataType = unknown> {
     >({
       path: `/api/notice-posts/${postId}/hit`,
       method: "PUT",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags notice-post
+   * @name NoticePostFindAllAndCountReactions
+   * @summary 특정 공지 게시글 reactions 전체 조회(pagination)
+   * @request GET:/api/notice-posts/{postId}/reactions
+   */
+  noticePostFindAllAndCountReactions = (
+    { postId, ...query }: NoticePostFindAllAndCountReactionsParams,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ReactionsPaginationResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: NoticePostFindAllAndCountReactionsCodeEnum;
+          /** error message */
+          message?: NoticePostFindAllAndCountReactionsMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: NoticePostFindAllAndCountReactionsCodeEnum1;
+          /** error message */
+          message?: NoticePostFindAllAndCountReactionsMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: NoticePostFindAllAndCountReactionsCodeEnum2;
+          /** error message */
+          message?: NoticePostFindAllAndCountReactionsMessageEnum2;
+        }
+    >({
+      path: `/api/notice-posts/${postId}/reactions`,
+      method: "GET",
+      query: query,
+      format: "json",
       ...params,
     });
   /**

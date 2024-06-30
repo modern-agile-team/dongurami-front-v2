@@ -17,9 +17,10 @@ import { Column, Row } from "../../Layouts";
 import { Typography } from "@/components/Utilities";
 import { Button } from "../Button";
 import Modal from "./Modal";
+import { lightThemeColor } from "@/styles/theme";
 
 interface PopupProps {
-  width?: 440 | 600;
+  width?: 440 | 660;
   open?: boolean;
   fitContent?: boolean;
   children: React.ReactNode;
@@ -88,7 +89,7 @@ const ModalPopup = (props: PopupProps & PopupEvents) => {
     <PopupContext.Provider value={{ ...props, open: isOpen, show, hide }}>
       <Modal isOpen={isOpen} onClose={hide}>
         <StyledPopup
-          width={props.width ?? 440}
+          width={props.width ?? 660}
           fitContent={Boolean(props.fitContent)}
         >
           {props.children}
@@ -103,7 +104,7 @@ const Title = (props: PopupTitleProps) => {
   if (!popup) throw Error("ModalPopup Context가 없습니다.");
 
   return (
-    <Column css={{ width: "100%", marginBottom: "20px" }}>
+    <StyledPopupTitle>
       {typeof props.children === "string" ? (
         <Typography
           {...props.titleTypography}
@@ -114,7 +115,7 @@ const Title = (props: PopupTitleProps) => {
       ) : (
         props.children
       )}
-    </Column>
+    </StyledPopupTitle>
   );
 };
 
@@ -123,7 +124,7 @@ const Contents = (props: PopupContentsProps) => {
   if (!popup) throw Error("ModalPopup Context가 없습니다.");
 
   return (
-    <StyledPopupContents width={popup.width ?? 440}>
+    <StyledPopupContents width={popup.width ?? 660}>
       {props.children}
     </StyledPopupContents>
   );
@@ -148,7 +149,8 @@ const Bottom = (props: PopupBottomProps) => {
 
   const buttonCSS = {
     width: props.stretch ? "100%" : "auto",
-    minWidth: "120px",
+    minWidth: "185px",
+    minHeight: "33px",
   };
 
   if (!popup) throw Error("ModalPopup Context가 없습니다.");
@@ -160,8 +162,13 @@ const Bottom = (props: PopupBottomProps) => {
           size="l"
           css={buttonCSS}
           filled="contained"
-          backgroundColor="neutral_100"
+          backgroundColor="white"
           onClick={cancel}
+          style={{
+            border: `1px solid ${lightThemeColor.neutral_20}`,
+            borderRadius: 12,
+          }}
+          color="neutral_40"
         >
           {props.cancelText}
         </Button>
@@ -171,8 +178,11 @@ const Bottom = (props: PopupBottomProps) => {
           size="l"
           css={buttonCSS}
           filled="contained"
-          backgroundColor="primary_100"
+          backgroundColor="secondary_80"
           onClick={confirm}
+          style={{
+            borderRadius: 12,
+          }}
         >
           {props.confirmText}
         </Button>
@@ -192,38 +202,47 @@ ModalPopup.Bottom = Bottom;
 
 export default ModalPopup;
 
-const getPopupHeight = (width: 440 | 600, fitContent: boolean) => {
-  if (width === 600) {
-    return fitContent ? "auto" : "640px";
+const getPopupHeight = (width: 440 | 660, fitContent: boolean) => {
+  if (width === 660) {
+    return fitContent ? "auto" : "160px";
   }
   return "auto";
 };
 
-const getPopupMaxHeight = (width: 440 | 600) => {
+const getPopupMaxHeight = (width: 440 | 660) => {
   return width === 440 ? "640px" : "auto";
 };
 
-const getPopupMinHeight = (width: 440 | 600) => {
+const getPopupMinHeight = (width: 440 | 660) => {
   return width === 440 ? "240px" : "auto";
 };
 
-const StyledPopup = styled(Column)<{ width: 440 | 600; fitContent: boolean }>`
+const StyledPopup = styled(Column)<{ width: 440 | 660; fitContent: boolean }>`
   border-radius: 12px;
   background: ${({ theme }) => theme.color.white};
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.2);
-  padding: 28px 32px 4px 32px;
   width: ${({ width }) => width}px;
   height: ${({ fitContent, width }) => getPopupHeight(width, fitContent)};
   min-height: ${({ width }) => getPopupMinHeight(width)};
   max-height: ${({ width }) => getPopupMaxHeight(width)};
 `;
 
-const StyledPopupContents = styled(Column)<{ width: 440 | 600 }>`
+const StyledPopupTitle = styled(Column)`
+  width: 100%;
+  overflow-y: auto;
+  margin: 20px 0px 8px 0px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledPopupContents = styled(Column)<{ width: 440 | 660 }>`
   width: 100%;
   overflow-y: auto;
   margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
   max-height: ${({ width }) => {
-    if (width === 600) {
+    if (width === 660) {
       return "640px";
     }
   }};
@@ -232,6 +251,8 @@ const StyledPopupContents = styled(Column)<{ width: 440 | 600 }>`
 const StyledPopupBottom = styled(Row)`
   margin-top: auto;
   width: 100%;
-  padding: 10px 12px;
   border-top: 1px solid ${({ theme }) => theme.color.white};
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 `;

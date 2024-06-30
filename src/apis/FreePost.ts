@@ -36,6 +36,13 @@ import {
   FreePostFindAllAndCountMessageEnum,
   FreePostFindAllAndCountMessageEnum1,
   FreePostFindAllAndCountParams,
+  FreePostFindAllAndCountReactionsCodeEnum,
+  FreePostFindAllAndCountReactionsCodeEnum1,
+  FreePostFindAllAndCountReactionsCodeEnum2,
+  FreePostFindAllAndCountReactionsMessageEnum,
+  FreePostFindAllAndCountReactionsMessageEnum1,
+  FreePostFindAllAndCountReactionsMessageEnum2,
+  FreePostFindAllAndCountReactionsParams,
   FreePostFindOneOrNotFoundCodeEnum,
   FreePostFindOneOrNotFoundCodeEnum1,
   FreePostFindOneOrNotFoundCodeEnum2,
@@ -91,6 +98,7 @@ import {
   FreePostsPaginationResponseDto,
   PatchUpdateFreePostDto,
   PutUpdateFreePostDto,
+  ReactionsPaginationResponseDto,
   RemoveReactionDto,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
@@ -1047,6 +1055,92 @@ export class FreePost<SecurityDataType = unknown> {
       body: data,
       secure: true,
       type: ContentType.Json,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags free-post
+   * @name FreePostFindAllAndCountReactions
+   * @summary 특정 자유 게시글 reactions 전체 조회(pagination)
+   * @request GET:/api/free-posts/{postId}/reactions
+   */
+  freePostFindAllAndCountReactions = (
+    { postId, ...query }: FreePostFindAllAndCountReactionsParams,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ReactionsPaginationResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: FreePostFindAllAndCountReactionsCodeEnum;
+          /** error message */
+          message?: FreePostFindAllAndCountReactionsMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: FreePostFindAllAndCountReactionsCodeEnum1;
+          /** error message */
+          message?: FreePostFindAllAndCountReactionsMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: FreePostFindAllAndCountReactionsCodeEnum2;
+          /** error message */
+          message?: FreePostFindAllAndCountReactionsMessageEnum2;
+        }
+    >({
+      path: `/api/free-posts/${postId}/reactions`,
+      method: "GET",
+      query: query,
+      format: "json",
       ...params,
     });
 }

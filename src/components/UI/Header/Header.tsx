@@ -13,12 +13,13 @@ import { useSession } from "next-auth/react";
 import * as S from "./emotion";
 import { useAuth } from "@/hooks";
 import { accessTokenAtom } from "@/globalState";
-import { authSocialAPI } from "@/apis";
+import { authAPI, authSocialAPI } from "@/apis";
 
 import Logo from "@/assets/main/logo.png";
 import { Column, Row } from "@/components/Layouts";
 import { Button } from "@/components/Design";
 import { WhatIF } from "@/components/Utilities";
+import { useMutation } from "@tanstack/react-query";
 import { LoginButton, LoggedIn } from "./private";
 
 export default function Header({}: {}) {
@@ -27,6 +28,26 @@ export default function Header({}: {}) {
 
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const { data } = useSession();
+
+  const { mutate } = useMutation({
+    mutationKey: ["post", isLoggedIn],
+    mutationFn: async () => {
+      const response = await authAPI.authGetProfile();
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+    },
+
+    onError(error) {
+      console.log(error);
+    },
+  });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      mutate();
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [mutate, isLoggedIn]);
 
   const handleRoute = (ev: React.MouseEvent<HTMLButtonElement>) => {
     const target = ev.currentTarget as HTMLButtonElement;
