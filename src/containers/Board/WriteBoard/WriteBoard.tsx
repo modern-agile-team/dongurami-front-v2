@@ -15,9 +15,9 @@ export default function WriteBoard() {
     queryFn: async () => {
       let response;
       if (type === "free") {
-        response = await freePostsAPI.freePostFindOneOrNotFound(Number(id));
+        response = await freePostsAPI.freePostFindOneOrNotFound(String(id));
       } else {
-        response = await noticePostsAPI.noticePostFindOneOrNotFound(Number(id));
+        response = await noticePostsAPI.noticePostFindOneOrNotFound(String(id));
       }
 
       return response.data;
@@ -63,7 +63,7 @@ export default function WriteBoard() {
 
     // if (type === "free") {
     if (id) {
-      await freePostsAPI.freePostPatchUpdate(Number(id), params);
+      await freePostsAPI.freePostPatchUpdate(String(id), params);
       router.back();
     } else {
       const { data } = await freePostsAPI.freePostCreate({

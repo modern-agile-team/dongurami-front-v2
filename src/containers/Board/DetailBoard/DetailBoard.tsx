@@ -46,11 +46,11 @@ export default function DetailBoard() {
     queryFn: async () => {
       let response;
       if (type === "free") {
-        response = await freePostsAPI.freePostFindOneOrNotFound(Number(postId));
+        response = await freePostsAPI.freePostFindOneOrNotFound(String(postId));
         return response.data.freePost;
       } else {
         response = await noticePostsAPI.noticePostFindOneOrNotFound(
-          Number(postId)
+          String(postId)
         );
 
         return response.data.noticePost;
@@ -67,12 +67,12 @@ export default function DetailBoard() {
       let response;
       if (type === "free") {
         response = await freePostCommentAPI.freePostCommentFindAllAndCount({
-          postId: Number(postId),
+          postId: String(postId),
         });
         return response.data;
       } else {
         response = await noticePostCommentAPI.noticePostCommentFindAllAndCount({
-          postId: Number(postId),
+          postId: String(postId),
         });
 
         return response.data;
@@ -89,12 +89,12 @@ export default function DetailBoard() {
       let response;
       if (type === "free") {
         response = await freePostsAPI.freePostFindAllAndCountReactions({
-          postId: Number(postId),
+          postId: String(postId),
         });
         return response.data;
       } else {
         response = await noticePostsAPI.noticePostFindAllAndCountReactions({
-          postId: Number(postId),
+          postId: String(postId),
           type: "like",
         });
 
@@ -110,9 +110,9 @@ export default function DetailBoard() {
     mutationFn: async () => {
       let response;
       if (type === "free") {
-        response = await freePostsAPI.freePostIncrementHit(Number(postId));
+        response = await freePostsAPI.freePostIncrementHit(String(postId));
       } else {
-        response = await noticePostsAPI.noticePostIncreaseHit(Number(postId));
+        response = await noticePostsAPI.noticePostIncreaseHit(String(postId));
       }
     },
     onSuccess() {
@@ -135,7 +135,7 @@ export default function DetailBoard() {
   }, [postData, mutate]);
 
   const handleClickDelete = () => {
-    freePostsAPI.freePostRemove(Number(postId)).then(() => {
+    freePostsAPI.freePostRemove(String(postId)).then(() => {
       router.back();
     });
   };
@@ -164,15 +164,15 @@ export default function DetailBoard() {
     };
 
     if (type === "free") {
-      await freePostsAPI.freePostCreateReaction(Number(postId), query);
+      await freePostsAPI.freePostCreateReaction(String(postId), query);
     } else {
-      await noticePostsAPI.noticePostCreateReaction(Number(postId), query);
+      await noticePostsAPI.noticePostCreateReaction(String(postId), query);
     }
 
     // if (type === "free") {
-    //   await freePostsAPI.freePostRemoveReaction(Number(postId), query);
+    //   await freePostsAPI.freePostRemoveReaction(String(postId), query);
     // } else {
-    //   await noticePostsAPI.noticePostRemoveReaction(Number(postId), query);
+    //   await noticePostsAPI.noticePostRemoveReaction(String(postId), query);
     // }
   };
 
@@ -183,9 +183,9 @@ export default function DetailBoard() {
       isAnonymous: false,
     };
     if (type === "free") {
-      await freePostCommentAPI.freePostCommentCreate(Number(postId), query);
+      await freePostCommentAPI.freePostCommentCreate(String(postId), query);
     } else {
-      await noticePostCommentAPI.noticePostCommentCreate(Number(postId), query);
+      await noticePostCommentAPI.noticePostCommentCreate(String(postId), query);
     }
 
     refetch();
