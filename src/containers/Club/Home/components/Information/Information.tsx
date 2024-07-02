@@ -12,7 +12,7 @@ import * as S from "./emotion";
 import { Typography } from "@/components/Utilities";
 import { useClubDetail } from "@/hooks/club";
 
-export default function Information({ clubID }: { clubID: number }) {
+export default function Information({ clubID }: { clubID: string }) {
   const theme = useTheme();
 
   const { data: detail } = useClubDetail(clubID);
