@@ -42,11 +42,31 @@ import {
   ClubCreateClubPostCodeEnum2,
   ClubCreateClubPostCodeEnum3,
   ClubCreateClubPostCodeEnum4,
+  ClubCreateClubPostCommentCodeEnum,
+  ClubCreateClubPostCommentCodeEnum1,
+  ClubCreateClubPostCommentCodeEnum2,
+  ClubCreateClubPostCommentCodeEnum3,
+  ClubCreateClubPostCommentCodeEnum4,
+  ClubCreateClubPostCommentMessageEnum,
+  ClubCreateClubPostCommentMessageEnum1,
+  ClubCreateClubPostCommentMessageEnum2,
+  ClubCreateClubPostCommentMessageEnum3,
+  ClubCreateClubPostCommentMessageEnum4,
   ClubCreateClubPostMessageEnum,
   ClubCreateClubPostMessageEnum1,
   ClubCreateClubPostMessageEnum2,
   ClubCreateClubPostMessageEnum3,
   ClubCreateClubPostMessageEnum4,
+  ClubCreateClubPostReactionCodeEnum,
+  ClubCreateClubPostReactionCodeEnum1,
+  ClubCreateClubPostReactionCodeEnum2,
+  ClubCreateClubPostReactionCodeEnum3,
+  ClubCreateClubPostReactionCodeEnum4,
+  ClubCreateClubPostReactionMessageEnum,
+  ClubCreateClubPostReactionMessageEnum1,
+  ClubCreateClubPostReactionMessageEnum2,
+  ClubCreateClubPostReactionMessageEnum3,
+  ClubCreateClubPostReactionMessageEnum4,
   ClubCreateClubReviewCodeEnum,
   ClubCreateClubReviewCodeEnum1,
   ClubCreateClubReviewCodeEnum2,
@@ -81,6 +101,27 @@ import {
   ClubFindAllAndCountClubApplicationsMessageEnum3,
   ClubFindAllAndCountClubApplicationsMessageEnum4,
   ClubFindAllAndCountClubApplicationsParams,
+  ClubFindAllAndCountClubPostCommentsCodeEnum,
+  ClubFindAllAndCountClubPostCommentsCodeEnum1,
+  ClubFindAllAndCountClubPostCommentsCodeEnum2,
+  ClubFindAllAndCountClubPostCommentsMessageEnum,
+  ClubFindAllAndCountClubPostCommentsMessageEnum1,
+  ClubFindAllAndCountClubPostCommentsMessageEnum2,
+  ClubFindAllAndCountClubPostCommentsParams,
+  ClubFindAllAndCountClubPostsCodeEnum,
+  ClubFindAllAndCountClubPostsCodeEnum1,
+  ClubFindAllAndCountClubPostsCodeEnum2,
+  ClubFindAllAndCountClubPostsMessageEnum,
+  ClubFindAllAndCountClubPostsMessageEnum1,
+  ClubFindAllAndCountClubPostsMessageEnum2,
+  ClubFindAllAndCountClubPostsParams,
+  ClubFindAllAndCountClubReviewsCodeEnum,
+  ClubFindAllAndCountClubReviewsCodeEnum1,
+  ClubFindAllAndCountClubReviewsCodeEnum2,
+  ClubFindAllAndCountClubReviewsMessageEnum,
+  ClubFindAllAndCountClubReviewsMessageEnum1,
+  ClubFindAllAndCountClubReviewsMessageEnum2,
+  ClubFindAllAndCountClubReviewsParams,
   ClubFindAllAndCountCodeEnum,
   ClubFindAllAndCountCodeEnum1,
   ClubFindAllAndCountMessageEnum,
@@ -126,6 +167,12 @@ import {
   ClubFindOneOrNotFoundMessageEnum,
   ClubFindOneOrNotFoundMessageEnum1,
   ClubFindOneOrNotFoundMessageEnum2,
+  ClubGetClubReviewsScoreCodeEnum,
+  ClubGetClubReviewsScoreCodeEnum1,
+  ClubGetClubReviewsScoreCodeEnum2,
+  ClubGetClubReviewsScoreMessageEnum,
+  ClubGetClubReviewsScoreMessageEnum1,
+  ClubGetClubReviewsScoreMessageEnum2,
   ClubMembersCommonResponseDto,
   ClubPatchUpdateClubApplicationCodeEnum,
   ClubPatchUpdateClubApplicationCodeEnum1,
@@ -137,7 +184,43 @@ import {
   ClubPatchUpdateClubApplicationMessageEnum2,
   ClubPatchUpdateClubApplicationMessageEnum3,
   ClubPatchUpdateClubApplicationMessageEnum4,
+  ClubPatchUpdateClubPostCodeEnum,
+  ClubPatchUpdateClubPostCodeEnum1,
+  ClubPatchUpdateClubPostCodeEnum2,
+  ClubPatchUpdateClubPostCodeEnum3,
+  ClubPatchUpdateClubPostCodeEnum4,
+  ClubPatchUpdateClubPostCommentCodeEnum,
+  ClubPatchUpdateClubPostCommentCodeEnum1,
+  ClubPatchUpdateClubPostCommentCodeEnum2,
+  ClubPatchUpdateClubPostCommentCodeEnum3,
+  ClubPatchUpdateClubPostCommentCodeEnum4,
+  ClubPatchUpdateClubPostCommentMessageEnum,
+  ClubPatchUpdateClubPostCommentMessageEnum1,
+  ClubPatchUpdateClubPostCommentMessageEnum2,
+  ClubPatchUpdateClubPostCommentMessageEnum3,
+  ClubPatchUpdateClubPostCommentMessageEnum4,
+  ClubPatchUpdateClubPostMessageEnum,
+  ClubPatchUpdateClubPostMessageEnum1,
+  ClubPatchUpdateClubPostMessageEnum2,
+  ClubPatchUpdateClubPostMessageEnum3,
+  ClubPatchUpdateClubPostMessageEnum4,
+  ClubPatchUpdateClubReviewCodeEnum,
+  ClubPatchUpdateClubReviewCodeEnum1,
+  ClubPatchUpdateClubReviewCodeEnum2,
+  ClubPatchUpdateClubReviewCodeEnum3,
+  ClubPatchUpdateClubReviewCodeEnum4,
+  ClubPatchUpdateClubReviewMessageEnum,
+  ClubPatchUpdateClubReviewMessageEnum1,
+  ClubPatchUpdateClubReviewMessageEnum2,
+  ClubPatchUpdateClubReviewMessageEnum3,
+  ClubPatchUpdateClubReviewMessageEnum4,
+  ClubPostCommentDeleteResponseDto,
+  ClubPostCommentDetailResponseDto,
+  ClubPostCommentsPaginationResponseDto,
   ClubPostCommonResponseDto,
+  ClubPostDeleteResponseDto,
+  ClubPostDetailResponseDto,
+  ClubPostsPaginationResponseDto,
   ClubPutUpdateApplicationFormCodeEnum,
   ClubPutUpdateApplicationFormCodeEnum1,
   ClubPutUpdateApplicationFormCodeEnum2,
@@ -148,6 +231,46 @@ import {
   ClubPutUpdateApplicationFormMessageEnum2,
   ClubPutUpdateApplicationFormMessageEnum3,
   ClubPutUpdateApplicationFormMessageEnum4,
+  ClubRemoveClubPostCodeEnum,
+  ClubRemoveClubPostCodeEnum1,
+  ClubRemoveClubPostCodeEnum2,
+  ClubRemoveClubPostCodeEnum3,
+  ClubRemoveClubPostCodeEnum4,
+  ClubRemoveClubPostCommentCodeEnum,
+  ClubRemoveClubPostCommentCodeEnum1,
+  ClubRemoveClubPostCommentCodeEnum2,
+  ClubRemoveClubPostCommentCodeEnum3,
+  ClubRemoveClubPostCommentCodeEnum4,
+  ClubRemoveClubPostCommentMessageEnum,
+  ClubRemoveClubPostCommentMessageEnum1,
+  ClubRemoveClubPostCommentMessageEnum2,
+  ClubRemoveClubPostCommentMessageEnum3,
+  ClubRemoveClubPostCommentMessageEnum4,
+  ClubRemoveClubPostMessageEnum,
+  ClubRemoveClubPostMessageEnum1,
+  ClubRemoveClubPostMessageEnum2,
+  ClubRemoveClubPostMessageEnum3,
+  ClubRemoveClubPostMessageEnum4,
+  ClubRemoveClubPostReactionCodeEnum,
+  ClubRemoveClubPostReactionCodeEnum1,
+  ClubRemoveClubPostReactionCodeEnum2,
+  ClubRemoveClubPostReactionCodeEnum3,
+  ClubRemoveClubPostReactionCodeEnum4,
+  ClubRemoveClubPostReactionMessageEnum,
+  ClubRemoveClubPostReactionMessageEnum1,
+  ClubRemoveClubPostReactionMessageEnum2,
+  ClubRemoveClubPostReactionMessageEnum3,
+  ClubRemoveClubPostReactionMessageEnum4,
+  ClubRemoveClubReviewCodeEnum,
+  ClubRemoveClubReviewCodeEnum1,
+  ClubRemoveClubReviewCodeEnum2,
+  ClubRemoveClubReviewCodeEnum3,
+  ClubRemoveClubReviewCodeEnum4,
+  ClubRemoveClubReviewMessageEnum,
+  ClubRemoveClubReviewMessageEnum1,
+  ClubRemoveClubReviewMessageEnum2,
+  ClubRemoveClubReviewMessageEnum3,
+  ClubRemoveClubReviewMessageEnum4,
   ClubRemoveClubReviewReactionCodeEnum,
   ClubRemoveClubReviewReactionCodeEnum1,
   ClubRemoveClubReviewReactionCodeEnum2,
@@ -169,6 +292,7 @@ import {
   ClubRemoveTagsMessageEnum3,
   ClubRemoveTagsMessageEnum4,
   ClubReviewDetailResponseDto,
+  ClubReviewsPaginationResponseDto,
   ClubTagDeleteResponseDto,
   ClubTagsCommonResponseDto,
   ClubUpdateClubApplicationStatusCodeEnum,
@@ -184,14 +308,20 @@ import {
   ClubUpdateClubApplicationStatusMessageEnum4,
   ClubUpdateClubApplicationStatusMessageEnum5,
   ClubsPaginationResponseDto,
+  CountDeleteResponseDto,
   CreateClubApplicationRequestBodyDto,
+  CreateClubPostCommentRequestBodyDto,
   CreateClubPostRequestBodyDto,
   CreateClubReviewRequestBodyDto,
   CreateReactionDto,
   CustomValidationError,
   PatchUpdateClubApplicationDto,
+  PatchUpdateClubPostCommentRequestBodyDto,
+  PatchUpdateClubPostRequestBodyDto,
+  PatchUpdateClubReviewRequestDto,
   PutUpdateClubApplicationFormDto,
   RemoveReactionDto,
+  ScoreDetailResponseDto,
   UpdateClubApplicationStatusDto,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
@@ -211,7 +341,10 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 리스트 조회
    * @request GET:/api/clubs
    */
-  clubFindAllAndCount = (query: ClubFindAllAndCountParams, params: RequestParams = {}) =>
+  clubFindAllAndCount = (
+    query: ClubFindAllAndCountParams,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubsPaginationResponseDto,
       | {
@@ -273,7 +406,7 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 상세 조회
    * @request GET:/api/clubs/{clubId}
    */
-  clubFindOneOrNotFound = (clubId: number, params: RequestParams = {}) =>
+  clubFindOneOrNotFound = (clubId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubDetailResponseDto,
       | {
@@ -355,7 +488,7 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 구성원 리스트 조회
    * @request GET:/api/clubs/{clubId}/members
    */
-  clubFindAllMembers = (clubId: number, params: RequestParams = {}) =>
+  clubFindAllMembers = (clubId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubMembersCommonResponseDto,
       | {
@@ -437,7 +570,7 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 태그 리스트 조회
    * @request GET:/api/clubs/{clubId}/tags
    */
-  clubFindAllTags = (clubId: number, params: RequestParams = {}) =>
+  clubFindAllTags = (clubId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubTagsCommonResponseDto,
       | {
@@ -520,7 +653,11 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/tags
    * @secure
    */
-  clubAppendTags = (clubId: number, data: BulkAppendClubTagDto, params: RequestParams = {}) =>
+  clubAppendTags = (
+    clubId: string,
+    data: BulkAppendClubTagDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubTagsCommonResponseDto,
       | {
@@ -648,7 +785,11 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/tags/{tagIds}
    * @secure
    */
-  clubRemoveTags = (clubId: number, tagIds: string, params: RequestParams = {}) =>
+  clubRemoveTags = (
+    clubId: string,
+    tagIds: string,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubTagDeleteResponseDto,
       | {
@@ -773,7 +914,7 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 카테고리 리스트 조회
    * @request GET:/api/clubs/{clubId}/categories
    */
-  clubFindAllCategories = (clubId: number, params: RequestParams = {}) =>
+  clubFindAllCategories = (clubId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubCategoriesCommonResponseDto,
       | {
@@ -856,7 +997,11 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/posts
    * @secure
    */
-  clubCreateClubPost = (clubId: number, data: CreateClubPostRequestBodyDto, params: RequestParams = {}) =>
+  clubCreateClubPost = (
+    clubId: string,
+    data: CreateClubPostRequestBodyDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubPostCommonResponseDto,
       | {
@@ -979,11 +1124,1111 @@ export class Club<SecurityDataType = unknown> {
    * No description
    *
    * @tags club
+   * @name ClubFindAllAndCountClubPosts
+   * @summary 동아리 게시글 Pagination 조회
+   * @request GET:/api/clubs/{clubId}/posts
+   */
+  clubFindAllAndCountClubPosts = (
+    { clubId, ...query }: ClubFindAllAndCountClubPostsParams,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostsPaginationResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubFindAllAndCountClubPostsCodeEnum;
+          /** error message */
+          message?: ClubFindAllAndCountClubPostsMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubFindAllAndCountClubPostsCodeEnum1;
+          /** error message */
+          message?: ClubFindAllAndCountClubPostsMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubFindAllAndCountClubPostsCodeEnum2;
+          /** error message */
+          message?: ClubFindAllAndCountClubPostsMessageEnum2;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubPatchUpdateClubPost
+   * @summary 특정 동아리 게시글 Patch 업데이트
+   * @request PATCH:/api/clubs/{clubId}/posts/{postId}
+   * @secure
+   */
+  clubPatchUpdateClubPost = (
+    clubId: string,
+    postId: string,
+    data: PatchUpdateClubPostRequestBodyDto,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostDetailResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubPatchUpdateClubPostCodeEnum;
+          /** error message */
+          message?: ClubPatchUpdateClubPostMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubPatchUpdateClubPostCodeEnum1;
+          /** error message */
+          message?: ClubPatchUpdateClubPostMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubPatchUpdateClubPostCodeEnum2;
+          /** error message */
+          message?: ClubPatchUpdateClubPostMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubPatchUpdateClubPostCodeEnum3;
+          /** error message */
+          message?: ClubPatchUpdateClubPostMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubPatchUpdateClubPostCodeEnum4;
+          /** error message */
+          message?: ClubPatchUpdateClubPostMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}`,
+      method: "PATCH",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubRemoveClubPost
+   * @summary 특정 동아리 게시글 삭제
+   * @request DELETE:/api/clubs/{clubId}/posts/{postId}
+   * @secure
+   */
+  clubRemoveClubPost = (
+    clubId: string,
+    postId: string,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostDeleteResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubRemoveClubPostCodeEnum;
+          /** error message */
+          message?: ClubRemoveClubPostMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubRemoveClubPostCodeEnum1;
+          /** error message */
+          message?: ClubRemoveClubPostMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubRemoveClubPostCodeEnum2;
+          /** error message */
+          message?: ClubRemoveClubPostMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubRemoveClubPostCodeEnum3;
+          /** error message */
+          message?: ClubRemoveClubPostMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubRemoveClubPostCodeEnum4;
+          /** error message */
+          message?: ClubRemoveClubPostMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}`,
+      method: "DELETE",
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubCreateClubPostReaction
+   * @summary 특정 동아리 게시글 리액션 생성
+   * @request POST:/api/clubs/{clubId}/posts/{postId}/reaction
+   * @secure
+   */
+  clubCreateClubPostReaction = (
+    clubId: string,
+    postId: string,
+    data: CreateReactionDto,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      void,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubCreateClubPostReactionCodeEnum;
+          /** error message */
+          message?: ClubCreateClubPostReactionMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubCreateClubPostReactionCodeEnum1;
+          /** error message */
+          message?: ClubCreateClubPostReactionMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubCreateClubPostReactionCodeEnum2;
+          /** error message */
+          message?: ClubCreateClubPostReactionMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 409
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4000
+           */
+          code?: ClubCreateClubPostReactionCodeEnum3;
+          /** error message */
+          message?: ClubCreateClubPostReactionMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubCreateClubPostReactionCodeEnum4;
+          /** error message */
+          message?: ClubCreateClubPostReactionMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}/reaction`,
+      method: "POST",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubRemoveClubPostReaction
+   * @summary 특정 동아리 게시글 리액션 제거
+   * @request DELETE:/api/clubs/{clubId}/posts/{postId}/reaction
+   * @secure
+   */
+  clubRemoveClubPostReaction = (
+    clubId: string,
+    postId: string,
+    data: RemoveReactionDto,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      void,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubRemoveClubPostReactionCodeEnum;
+          /** error message */
+          message?: ClubRemoveClubPostReactionMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubRemoveClubPostReactionCodeEnum1;
+          /** error message */
+          message?: ClubRemoveClubPostReactionMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubRemoveClubPostReactionCodeEnum2;
+          /** error message */
+          message?: ClubRemoveClubPostReactionMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 409
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4001
+           */
+          code?: ClubRemoveClubPostReactionCodeEnum3;
+          /** error message */
+          message?: ClubRemoveClubPostReactionMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubRemoveClubPostReactionCodeEnum4;
+          /** error message */
+          message?: ClubRemoveClubPostReactionMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}/reaction`,
+      method: "DELETE",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubCreateClubPostComment
+   * @summary 동아리 게시글 댓글 생성
+   * @request POST:/api/clubs/{clubId}/posts/{postId}/comments
+   * @secure
+   */
+  clubCreateClubPostComment = (
+    clubId: string,
+    postId: string,
+    data: CreateClubPostCommentRequestBodyDto,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostCommentDetailResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubCreateClubPostCommentCodeEnum;
+          /** error message */
+          message?: ClubCreateClubPostCommentMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubCreateClubPostCommentCodeEnum1;
+          /** error message */
+          message?: ClubCreateClubPostCommentMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubCreateClubPostCommentCodeEnum2;
+          /** error message */
+          message?: ClubCreateClubPostCommentMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubCreateClubPostCommentCodeEnum3;
+          /** error message */
+          message?: ClubCreateClubPostCommentMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubCreateClubPostCommentCodeEnum4;
+          /** error message */
+          message?: ClubCreateClubPostCommentMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}/comments`,
+      method: "POST",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubFindAllAndCountClubPostComments
+   * @summary 동아리 게시글 댓글 Pagination 조회
+   * @request GET:/api/clubs/{clubId}/posts/{postId}/comments
+   */
+  clubFindAllAndCountClubPostComments = (
+    { clubId, postId, ...query }: ClubFindAllAndCountClubPostCommentsParams,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostCommentsPaginationResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubFindAllAndCountClubPostCommentsCodeEnum;
+          /** error message */
+          message?: ClubFindAllAndCountClubPostCommentsMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubFindAllAndCountClubPostCommentsCodeEnum1;
+          /** error message */
+          message?: ClubFindAllAndCountClubPostCommentsMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubFindAllAndCountClubPostCommentsCodeEnum2;
+          /** error message */
+          message?: ClubFindAllAndCountClubPostCommentsMessageEnum2;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}/comments`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubPatchUpdateClubPostComment
+   * @summary 특정 동아리 게시글 댓글 Patch 업데이트
+   * @request PATCH:/api/clubs/{clubId}/posts/{postId}/comments/{commentId}
+   * @secure
+   */
+  clubPatchUpdateClubPostComment = (
+    clubId: string,
+    postId: string,
+    commentId: string,
+    data: PatchUpdateClubPostCommentRequestBodyDto,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostCommentDetailResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubPatchUpdateClubPostCommentCodeEnum;
+          /** error message */
+          message?: ClubPatchUpdateClubPostCommentMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubPatchUpdateClubPostCommentCodeEnum1;
+          /** error message */
+          message?: ClubPatchUpdateClubPostCommentMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubPatchUpdateClubPostCommentCodeEnum2;
+          /** error message */
+          message?: ClubPatchUpdateClubPostCommentMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubPatchUpdateClubPostCommentCodeEnum3;
+          /** error message */
+          message?: ClubPatchUpdateClubPostCommentMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubPatchUpdateClubPostCommentCodeEnum4;
+          /** error message */
+          message?: ClubPatchUpdateClubPostCommentMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}/comments/${commentId}`,
+      method: "PATCH",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubRemoveClubPostComment
+   * @summary 특정 동아리 게시글 댓글 삭제
+   * @request DELETE:/api/clubs/{clubId}/posts/{postId}/comments/{commentId}
+   * @secure
+   */
+  clubRemoveClubPostComment = (
+    clubId: string,
+    postId: string,
+    commentId: string,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubPostCommentDeleteResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubRemoveClubPostCommentCodeEnum;
+          /** error message */
+          message?: ClubRemoveClubPostCommentMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubRemoveClubPostCommentCodeEnum1;
+          /** error message */
+          message?: ClubRemoveClubPostCommentMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubRemoveClubPostCommentCodeEnum2;
+          /** error message */
+          message?: ClubRemoveClubPostCommentMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubRemoveClubPostCommentCodeEnum3;
+          /** error message */
+          message?: ClubRemoveClubPostCommentMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubRemoveClubPostCommentCodeEnum4;
+          /** error message */
+          message?: ClubRemoveClubPostCommentMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/posts/${postId}/comments/${commentId}`,
+      method: "DELETE",
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
    * @name ClubFindLatestApplicationForm
    * @summary 최신 동아리 지원서 폼 조회
    * @request GET:/api/clubs/{clubId}/application-forms/latest
    */
-  clubFindLatestApplicationForm = (clubId: number, params: RequestParams = {}) =>
+  clubFindLatestApplicationForm = (
+    clubId: string,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubApplicationFormDetailResponseDto,
       | {
@@ -1067,8 +2312,8 @@ export class Club<SecurityDataType = unknown> {
    * @secure
    */
   clubPutUpdateApplicationForm = (
-    clubId: number,
-    formId: number,
+    clubId: string,
+    formId: string,
     data: PutUpdateClubApplicationFormDto,
     params: RequestParams = {}
   ) =>
@@ -1199,7 +2444,11 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/reviews
    * @secure
    */
-  clubCreateClubReview = (clubId: number, data: CreateClubReviewRequestBodyDto, params: RequestParams = {}) =>
+  clubCreateClubReview = (
+    clubId: string,
+    data: CreateClubReviewRequestBodyDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubReviewDetailResponseDto,
       | {
@@ -1343,14 +2592,445 @@ export class Club<SecurityDataType = unknown> {
    * No description
    *
    * @tags club
+   * @name ClubFindAllAndCountClubReviews
+   * @summary 동아리 후기 페이지네이션
+   * @request GET:/api/clubs/{clubId}/reviews
+   */
+  clubFindAllAndCountClubReviews = (
+    { clubId, ...query }: ClubFindAllAndCountClubReviewsParams,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubReviewsPaginationResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubFindAllAndCountClubReviewsCodeEnum;
+          /** error message */
+          message?: ClubFindAllAndCountClubReviewsMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubFindAllAndCountClubReviewsCodeEnum1;
+          /** error message */
+          message?: ClubFindAllAndCountClubReviewsMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubFindAllAndCountClubReviewsCodeEnum2;
+          /** error message */
+          message?: ClubFindAllAndCountClubReviewsMessageEnum2;
+        }
+    >({
+      path: `/api/clubs/${clubId}/reviews`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubPatchUpdateClubReview
+   * @summary 동아리 후기 업데이트
+   * @request PATCH:/api/clubs/{clubId}/reviews/{reviewId}
+   * @secure
+   */
+  clubPatchUpdateClubReview = (
+    clubId: string,
+    reviewId: string,
+    data: PatchUpdateClubReviewRequestDto,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      ClubReviewDetailResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubPatchUpdateClubReviewCodeEnum;
+          /** error message */
+          message?: ClubPatchUpdateClubReviewMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubPatchUpdateClubReviewCodeEnum1;
+          /** error message */
+          message?: ClubPatchUpdateClubReviewMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubPatchUpdateClubReviewCodeEnum2;
+          /** error message */
+          message?: ClubPatchUpdateClubReviewMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubPatchUpdateClubReviewCodeEnum3;
+          /** error message */
+          message?: ClubPatchUpdateClubReviewMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubPatchUpdateClubReviewCodeEnum4;
+          /** error message */
+          message?: ClubPatchUpdateClubReviewMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/reviews/${reviewId}`,
+      method: "PATCH",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubRemoveClubReview
+   * @summary 동아리 후기 삭제
+   * @request DELETE:/api/clubs/{clubId}/reviews/{reviewId}
+   * @secure
+   */
+  clubRemoveClubReview = (
+    clubId: string,
+    reviewId: string,
+    params: RequestParams = {}
+  ) =>
+    this.http.request<
+      CountDeleteResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubRemoveClubReviewCodeEnum;
+          /** error message */
+          message?: ClubRemoveClubReviewMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: ClubRemoveClubReviewCodeEnum1;
+          /** error message */
+          message?: ClubRemoveClubReviewMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 403
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 4
+           */
+          code?: ClubRemoveClubReviewCodeEnum2;
+          /** error message */
+          message?: ClubRemoveClubReviewMessageEnum2;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubRemoveClubReviewCodeEnum3;
+          /** error message */
+          message?: ClubRemoveClubReviewMessageEnum3;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubRemoveClubReviewCodeEnum4;
+          /** error message */
+          message?: ClubRemoveClubReviewMessageEnum4;
+        }
+    >({
+      path: `/api/clubs/${clubId}/reviews/${reviewId}`,
+      method: "DELETE",
+      secure: true,
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
+   * @name ClubGetClubReviewsScore
+   * @summary 특정 동아리에 대한 전체 별점 및 평균 조회
+   * @request GET:/api/clubs/{clubId}/reviews/score
+   */
+  clubGetClubReviewsScore = (clubId: string, params: RequestParams = {}) =>
+    this.http.request<
+      ScoreDetailResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubGetClubReviewsScoreCodeEnum;
+          /** error message */
+          message?: ClubGetClubReviewsScoreMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubGetClubReviewsScoreCodeEnum1;
+          /** error message */
+          message?: ClubGetClubReviewsScoreMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubGetClubReviewsScoreCodeEnum2;
+          /** error message */
+          message?: ClubGetClubReviewsScoreMessageEnum2;
+        }
+    >({
+      path: `/api/clubs/${clubId}/reviews/score`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
    * @name ClubCreateClubReviewReaction
    * @summary 동아리 후기 reaction 생성
    * @request POST:/api/clubs/{clubId}/reviews/{reviewId}/reaction
    * @secure
    */
   clubCreateClubReviewReaction = (
-    clubId: number,
-    reviewId: number,
+    clubId: string,
+    reviewId: string,
     data: CreateReactionDto,
     params: RequestParams = {}
   ) =>
@@ -1481,8 +3161,8 @@ export class Club<SecurityDataType = unknown> {
    * @secure
    */
   clubRemoveClubReviewReaction = (
-    clubId: number,
-    reviewId: number,
+    clubId: string,
+    reviewId: string,
     data: RemoveReactionDto,
     params: RequestParams = {}
   ) =>
@@ -1608,11 +3288,15 @@ export class Club<SecurityDataType = unknown> {
    *
    * @tags club
    * @name ClubCreateClubApplication
-   * @summary 동아리 지원서 생성
+   * @summary 동아리 지원내역 생성
    * @request POST:/api/clubs/{clubId}/applications
    * @secure
    */
-  clubCreateClubApplication = (clubId: number, data: CreateClubApplicationRequestBodyDto, params: RequestParams = {}) =>
+  clubCreateClubApplication = (
+    clubId: string,
+    data: CreateClubApplicationRequestBodyDto,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubApplicationDetailResponseDto,
       | {
@@ -1757,7 +3441,7 @@ export class Club<SecurityDataType = unknown> {
    *
    * @tags club
    * @name ClubFindAllAndCountClubApplications
-   * @summary 동아리 지원서 페이지네이션
+   * @summary 동아리 지원내역 페이지네이션
    * @request GET:/api/clubs/{clubId}/applications
    * @secure
    */
@@ -1887,11 +3571,15 @@ export class Club<SecurityDataType = unknown> {
    *
    * @tags club
    * @name ClubFindOneClubApplication
-   * @summary 동아리 지원서 상세조회
+   * @summary 동아리 지원내역 상세조회
    * @request GET:/api/clubs/{clubId}/applications/{applicationId}
    * @secure
    */
-  clubFindOneClubApplication = (clubId: number, applicationId: number, params: RequestParams = {}) =>
+  clubFindOneClubApplication = (
+    clubId: string,
+    applicationId: string,
+    params: RequestParams = {}
+  ) =>
     this.http.request<
       ClubApplicationDetailResponseDto,
       | {
@@ -2013,13 +3701,13 @@ export class Club<SecurityDataType = unknown> {
    *
    * @tags club
    * @name ClubPatchUpdateClubApplication
-   * @summary 동아리 지원서 업데이트
+   * @summary 동아리 지원내역 업데이트
    * @request PATCH:/api/clubs/{clubId}/applications/{applicationId}
    * @secure
    */
   clubPatchUpdateClubApplication = (
-    clubId: number,
-    applicationId: number,
+    clubId: string,
+    applicationId: string,
     data: PatchUpdateClubApplicationDto,
     params: RequestParams = {}
   ) =>
@@ -2146,13 +3834,13 @@ export class Club<SecurityDataType = unknown> {
    *
    * @tags club
    * @name ClubUpdateClubApplicationStatus
-   * @summary 동아리 지원서 상태 업데이트
+   * @summary 동아리 지원내역 상태 업데이트
    * @request PUT:/api/clubs/{clubId}/applications/{applicationId}/status
    * @secure
    */
   clubUpdateClubApplicationStatus = (
-    clubId: number,
-    applicationId: number,
+    clubId: string,
+    applicationId: string,
     data: UpdateClubApplicationStatusDto,
     params: RequestParams = {}
   ) =>

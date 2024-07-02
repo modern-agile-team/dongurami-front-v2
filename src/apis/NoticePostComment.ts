@@ -94,7 +94,7 @@ export class NoticePostComment<SecurityDataType = unknown> {
    * @request POST:/api/notice-posts/{postId}/comments
    * @secure
    */
-  noticePostCommentCreate = (postId: number, data: CreateNoticePostCommentDto, params: RequestParams = {}) =>
+  noticePostCommentCreate = (postId: string, data: CreateNoticePostCommentDto, params: RequestParams = {}) =>
     this.http.request<
       NoticePostCommentDetailResponseDto,
       | {
@@ -309,8 +309,8 @@ export class NoticePostComment<SecurityDataType = unknown> {
    * @secure
    */
   noticePostCommentPutUpdate = (
-    postId: number,
-    commentId: number,
+    postId: string,
+    commentId: string,
     data: PutUpdateNoticePostCommentDto,
     params: RequestParams = {}
   ) =>
@@ -441,7 +441,7 @@ export class NoticePostComment<SecurityDataType = unknown> {
    * @request DELETE:/api/notice-posts/{postId}/comments/{commentId}
    * @secure
    */
-  noticePostCommentRemove = (postId: number, commentId: number, params: RequestParams = {}) =>
+  noticePostCommentRemove = (postId: string, commentId: string, params: RequestParams = {}) =>
     this.http.request<
       NoticePostDeleteResponseDto,
       | {
@@ -568,8 +568,8 @@ export class NoticePostComment<SecurityDataType = unknown> {
    * @secure
    */
   noticePostCommentCreateReaction = (
-    postId: number,
-    commentId: number,
+    postId: string,
+    commentId: string,
     data: CreateReactionDto,
     params: RequestParams = {}
   ) =>
@@ -700,8 +700,8 @@ export class NoticePostComment<SecurityDataType = unknown> {
    * @secure
    */
   noticePostCommentRemoveReaction = (
-    postId: number,
-    commentId: number,
+    postId: string,
+    commentId: string,
     data: RemoveReactionDto,
     params: RequestParams = {}
   ) =>

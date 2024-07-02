@@ -266,7 +266,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @summary 공지게시글 상세조회
    * @request GET:/api/notice-posts/{postId}
    */
-  noticePostFindOneOrNotFound = (postId: number, params: RequestParams = {}) =>
+  noticePostFindOneOrNotFound = (postId: string, params: RequestParams = {}) =>
     this.http.request<
       NoticePostDetailResponseDto,
       | {
@@ -349,7 +349,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request PUT:/api/notice-posts/{postId}
    * @secure
    */
-  noticePostPutUpdate = (postId: number, data: PutUpdateNoticePostDto, params: RequestParams = {}) =>
+  noticePostPutUpdate = (postId: string, data: PutUpdateNoticePostDto, params: RequestParams = {}) =>
     this.http.request<
       NoticePostDetailResponseDto,
       | {
@@ -477,7 +477,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request PATCH:/api/notice-posts/{postId}
    * @secure
    */
-  noticePostPatchUpdate = (postId: number, data: PatchUpdateNoticePostDto, params: RequestParams = {}) =>
+  noticePostPatchUpdate = (postId: string, data: PatchUpdateNoticePostDto, params: RequestParams = {}) =>
     this.http.request<
       NoticePostDetailResponseDto,
       | {
@@ -605,7 +605,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request DELETE:/api/notice-posts/{postId}
    * @secure
    */
-  noticePostRemove = (postId: number, params: RequestParams = {}) =>
+  noticePostRemove = (postId: string, params: RequestParams = {}) =>
     this.http.request<
       NoticePostDeleteResponseDto,
       | {
@@ -730,7 +730,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @summary 조회수 1 증가
    * @request PUT:/api/notice-posts/{postId}/hit
    */
-  noticePostIncreaseHit = (postId: number, params: RequestParams = {}) =>
+  noticePostIncreaseHit = (postId: string, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {
@@ -898,7 +898,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request POST:/api/notice-posts/{postId}/reaction
    * @secure
    */
-  noticePostCreateReaction = (postId: number, data: CreateReactionDto, params: RequestParams = {}) =>
+  noticePostCreateReaction = (postId: string, data: CreateReactionDto, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {
@@ -1025,7 +1025,7 @@ export class NoticePost<SecurityDataType = unknown> {
    * @request DELETE:/api/notice-posts/{postId}/reaction
    * @secure
    */
-  noticePostRemoveReaction = (postId: number, data: RemoveReactionDto, params: RequestParams = {}) =>
+  noticePostRemoveReaction = (postId: string, data: RemoveReactionDto, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {

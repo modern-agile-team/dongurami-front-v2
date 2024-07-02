@@ -92,7 +92,7 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @request POST:/api/free-posts/{postId}/comments
    * @secure
    */
-  freePostCommentCreate = (postId: number, data: CreateFreePostCommentDto, params: RequestParams = {}) =>
+  freePostCommentCreate = (postId: string, data: CreateFreePostCommentDto, params: RequestParams = {}) =>
     this.http.request<
       FreePostCommentDetailResponseDto,
       | {
@@ -286,8 +286,8 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @secure
    */
   freePostCommentPutUpdate = (
-    postId: number,
-    commentId: number,
+    postId: string,
+    commentId: string,
     data: PutUpdateFreePostCommentDto,
     params: RequestParams = {}
   ) =>
@@ -418,7 +418,7 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @request DELETE:/api/free-posts/{postId}/comments/{commentId}
    * @secure
    */
-  freePostCommentRemove = (postId: number, commentId: number, params: RequestParams = {}) =>
+  freePostCommentRemove = (postId: string, commentId: string, params: RequestParams = {}) =>
     this.http.request<
       FreePostDeleteResponseDto,
       | {
@@ -545,8 +545,8 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @secure
    */
   freePostCommentCreateReaction = (
-    postId: number,
-    commentId: number,
+    postId: string,
+    commentId: string,
     data: CreateReactionDto,
     params: RequestParams = {}
   ) =>
@@ -677,8 +677,8 @@ export class FreePostComment<SecurityDataType = unknown> {
    * @secure
    */
   freePostCommentRemoveReaction = (
-    postId: number,
-    commentId: number,
+    postId: string,
+    commentId: string,
     data: RemoveReactionDto,
     params: RequestParams = {}
   ) =>

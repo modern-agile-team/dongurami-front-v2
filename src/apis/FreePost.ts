@@ -266,7 +266,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @summary 자유게시글 상세조회
    * @request GET:/api/free-posts/{postId}
    */
-  freePostFindOneOrNotFound = (postId: number, params: RequestParams = {}) =>
+  freePostFindOneOrNotFound = (postId: string, params: RequestParams = {}) =>
     this.http.request<
       FreePostDetailResponseDto,
       | {
@@ -349,7 +349,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @request PUT:/api/free-posts/{postId}
    * @secure
    */
-  freePostPutUpdate = (postId: number, data: PutUpdateFreePostDto, params: RequestParams = {}) =>
+  freePostPutUpdate = (postId: string, data: PutUpdateFreePostDto, params: RequestParams = {}) =>
     this.http.request<
       FreePostDetailResponseDto,
       | {
@@ -477,7 +477,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @request PATCH:/api/free-posts/{postId}
    * @secure
    */
-  freePostPatchUpdate = (postId: number, data: PatchUpdateFreePostDto, params: RequestParams = {}) =>
+  freePostPatchUpdate = (postId: string, data: PatchUpdateFreePostDto, params: RequestParams = {}) =>
     this.http.request<
       FreePostDetailResponseDto,
       | {
@@ -605,7 +605,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @request DELETE:/api/free-posts/{postId}
    * @secure
    */
-  freePostRemove = (postId: number, params: RequestParams = {}) =>
+  freePostRemove = (postId: string, params: RequestParams = {}) =>
     this.http.request<
       FreePostDeleteResponseDto,
       | {
@@ -730,7 +730,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @summary 조회수 증가(1)
    * @request PUT:/api/free-posts/{postId}/hit
    */
-  freePostIncrementHit = (postId: number, params: RequestParams = {}) =>
+  freePostIncrementHit = (postId: string, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {
@@ -812,7 +812,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @request POST:/api/free-posts/{postId}/reaction
    * @secure
    */
-  freePostCreateReaction = (postId: number, data: CreateReactionDto, params: RequestParams = {}) =>
+  freePostCreateReaction = (postId: string, data: CreateReactionDto, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {
@@ -939,7 +939,7 @@ export class FreePost<SecurityDataType = unknown> {
    * @request DELETE:/api/free-posts/{postId}/reaction
    * @secure
    */
-  freePostRemoveReaction = (postId: number, data: RemoveReactionDto, params: RequestParams = {}) =>
+  freePostRemoveReaction = (postId: string, data: RemoveReactionDto, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {

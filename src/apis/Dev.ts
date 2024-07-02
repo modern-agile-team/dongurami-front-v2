@@ -36,7 +36,7 @@ export class Dev<SecurityDataType = unknown> {
    * @summary 개발용으로 생성된 accessToken 생성 api
    * @request GET:/api/dev/access-token/{userId}
    */
-  devGetAccessToken = (userId: number, params: RequestParams = {}) =>
+  devGetAccessToken = (userId: string, params: RequestParams = {}) =>
     this.http.request<
       string,
       | {
