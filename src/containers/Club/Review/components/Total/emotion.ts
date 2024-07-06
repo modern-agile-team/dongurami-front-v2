@@ -1,7 +1,8 @@
+import styled from "@emotion/styled";
+
 import { Button } from "@/components/Design";
 import { Column, Row } from "@/components/Layouts";
 import { lightThemeColor } from "@/styles/theme";
-import styled from "@emotion/styled";
 
 export const WrapTitle = styled(Row.ul)`
   margin-top: 80px;
@@ -57,6 +58,7 @@ export const ScoreBarFill = styled.div<{ width: number }>`
   height: 100%;
   background-color: #ffaa00;
   width: ${({ width }) => width}%;
+  border-radius: 4px;
 `;
 
 export const ReviewButton = styled(Button)`
