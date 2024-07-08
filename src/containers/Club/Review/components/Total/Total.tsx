@@ -8,7 +8,13 @@ import { Icon } from "@/components/Svg";
 
 import * as S from "./emotion";
 
-const Total = ({ total }: { total?: Swagger.ScoreDto }) => {
+const Total = ({
+  total,
+  totalCount,
+}: {
+  total?: Swagger.ScoreDto;
+  totalCount?: number;
+}) => {
   const data = {
     "5점": total?.five,
     "4점": total?.four,
@@ -18,7 +24,7 @@ const Total = ({ total }: { total?: Swagger.ScoreDto }) => {
   };
 
   return (
-    <Column css={{ width: Converter.pxToRem(787), height: "100vh" }}>
+    <Column css={{ width: Converter.pxToRem(787) }}>
       <S.WrapTitle verticalAlign="center" horizonAlign="distribute">
         <S.Title verticalAlign="center">
           <Icon name="MedalStar32" size={32} fill={"secondary_50"} />
@@ -28,7 +34,7 @@ const Total = ({ total }: { total?: Swagger.ScoreDto }) => {
         </S.Title>
 
         <Typography typoSize="Body2" typoColor="neutral_70">
-          총 ?개의 리뷰
+          총 {totalCount}개의 리뷰
         </Typography>
       </S.WrapTitle>
 
@@ -36,15 +42,13 @@ const Total = ({ total }: { total?: Swagger.ScoreDto }) => {
 
       <S.SummarySection verticalAlign="center" horizonAlign="distribute">
         <S.WrapScore verticalAlign="bottom">
-          <S.Score>0.0점</S.Score>
+          <S.Score>{total?.average ?? 0.0}점</S.Score>
           <Typography typoSize="Head8" typoColor="secondary_100">
             만족
           </Typography>
         </S.WrapScore>
         <S.ScoreBreakdown>
           {Object.entries(data).map(([score, value]) => {
-            console.log(typeof value?.toFixed(1));
-
             return (
               <S.ScoreRow key={score}>
                 <S.ScoreLabel>{score}</S.ScoreLabel>

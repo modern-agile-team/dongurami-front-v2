@@ -3,18 +3,24 @@ import styled from "@emotion/styled";
 import { Column, Row } from "@/components/Layouts";
 import { lightThemeColor } from "@/styles/theme";
 import { Converter } from "@/utils";
-import { Button } from "@/components/Design";
 
 export const Container = styled.div`
   width: 100%;
   margin-top: 40px;
 `;
 
-export const Best = styled.div`
-  background-color: ${lightThemeColor.secondary_20};
+export const Review = styled.div<{ type?: string }>`
+  background-color: ${(props) =>
+    props.type === "best"
+      ? lightThemeColor.secondary_20
+      : lightThemeColor.white};
+  border: ${(props) =>
+    props.type === "best"
+      ? `none`
+      : `1px solid ${lightThemeColor.secondary_20}`};
   padding: 20px;
   position: relative;
-  height: ${Converter.pxToRem(160)};
+  height: ${(props) => Converter.pxToRem(props.type === "best" ? 160 : 80)};
 `;
 
 export const Header = styled(Row.div)`
@@ -28,14 +34,3 @@ export const Description = styled(Column.div)`
 `;
 
 export const Icon = styled.div``;
-
-export const ReviewActions = styled(Row.div)`
-  margin-top: 10px;
-`;
-
-export const Btn = styled(Button)`
-  padding: 8px 22px;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-`;
