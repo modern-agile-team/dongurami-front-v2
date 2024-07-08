@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
 import * as S from "./emotion";
 import { Icon } from "@/components/Svg";
 
 interface StarRatingProps {
-  rating: number;
+  initialRating?: number;
   totalStars?: number;
+  defaultRating?: number;
 }
 
 interface StarProps {
   fill: number;
+  onClick?: () => void;
 }
 
-const Star: React.FC<StarProps> = ({ fill }) => {
+const Star: React.FC<StarProps> = ({ fill, onClick }) => {
   return (
-    <S.StarWrapper>
+    <S.StarWrapper onClick={onClick}>
       <Icon name="Star32" size={32} fill={fill ? "accent_100" : "neutral_20"} />
     </S.StarWrapper>
   );
 };
 
-const StarRating: React.FC<StarRatingProps> = ({ rating, totalStars = 5 }) => {
+const StarRating: React.FC<StarRatingProps> = ({
+  initialRating = 0,
+  totalStars = 5,
+  defaultRating,
+}) => {
+  const [rating, setRating] = useState(
+    defaultRating ? defaultRating : initialRating
+  );
+
+  const handleStarClick = (index: number) => {
+    setRating(index + 1);
+  };
+
   const getStarFill = (index: number): number => {
     const starValue = index + 1;
     if (starValue <= rating) {
@@ -35,7 +49,13 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, totalStars = 5 }) => {
   return (
     <S.RatingWrapper>
       {Array.from({ length: totalStars }, (_, index) => (
-        <Star key={index} fill={getStarFill(index)} />
+        <Star
+          key={index}
+          fill={getStarFill(index)}
+          onClick={() => {
+            defaultRating ? null : handleStarClick(index);
+          }}
+        />
       ))}
     </S.RatingWrapper>
   );

@@ -8,13 +8,13 @@ import { Icon } from "@/components/Svg";
 
 import * as S from "./emotion";
 
-const Total = ({
-  total,
-  totalCount,
-}: {
+interface TotalProps {
   total?: Swagger.ScoreDto;
   totalCount?: number;
-}) => {
+  openModal: (type: string) => void;
+}
+
+const Total = ({ total, totalCount, openModal }: TotalProps) => {
   const data = {
     "5점": total?.five,
     "4점": total?.four,
@@ -65,6 +65,7 @@ const Total = ({
           shape="round"
           backgroundColor="white"
           color="accent_100"
+          onClick={() => openModal("post")}
         >
           나의 후기 등록하기
         </S.ReviewButton>

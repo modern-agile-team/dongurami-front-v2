@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Column, Row } from "@/components/Layouts";
 import { lightThemeColor } from "@/styles/theme";
 import { Converter } from "@/utils";
+import { Button } from "@/components/Design";
 
 export const Container = styled.div`
   width: 100%;

@@ -9,14 +9,15 @@ import { Converter } from "@/utils";
 import { Action } from "@/containers/Club/Review/components/Action";
 
 import * as S from "./emotion";
+import { lightThemeColor } from "@/styles/theme";
 
-const ReviewItem = ({
-  type,
-  review,
-}: {
+interface ItemProps {
   type?: string;
   review?: Swagger.ClubReviewDto;
-}) => {
+  openModal: (type: string) => void;
+}
+
+const ReviewItem = ({ type, review, openModal }: ItemProps) => {
   return (
     <S.Container>
       <S.Review type={type}>
@@ -29,7 +30,7 @@ const ReviewItem = ({
               </Typography>
             )}
 
-            <StarRating rating={1.5} />
+            <StarRating defaultRating={1.5} />
           </Column>
         </S.Header>
 
@@ -48,7 +49,7 @@ const ReviewItem = ({
         </Typography>
       </S.Review>
 
-      <Action review={review} />
+      <Action review={review} openModal={openModal} />
     </S.Container>
   );
 };

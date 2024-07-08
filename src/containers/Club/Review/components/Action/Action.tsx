@@ -8,7 +8,12 @@ import { useUser } from "@/hooks";
 
 import * as S from "./emotion";
 
-const Action = ({ review }: { review?: Swagger.ClubReviewDto }) => {
+interface ItemProps {
+  review?: Swagger.ClubReviewDto;
+  openModal: (type: string) => void;
+}
+
+const Action = ({ review, openModal }: ItemProps) => {
   const { user } = useUser();
 
   return (
@@ -35,14 +40,14 @@ const Action = ({ review }: { review?: Swagger.ClubReviewDto }) => {
           </Typography>
         </S.Btn>
       </Row.li>
-      {review?.userId && user?.id && (
+      {user && user?.id && review?.userId && (
         <Row.li>
           <S.Btn
             style={{
               border: `1px solid ${lightThemeColor.neutral_20}`,
               marginRight: 9,
             }}
-            // onClick={() => openModal("update")}
+            onClick={() => openModal("update")}
           >
             <Typography typoSize="Head12" typoColor="neutral_30">
               수정
@@ -52,7 +57,7 @@ const Action = ({ review }: { review?: Swagger.ClubReviewDto }) => {
             style={{
               border: `1px solid ${lightThemeColor.neutral_20}`,
             }}
-            // onClick={() => openModal("delete")}
+            onClick={() => openModal("delete")}
           >
             <Typography typoSize="Head12" typoColor="neutral_30">
               삭제

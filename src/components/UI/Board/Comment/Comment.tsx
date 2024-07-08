@@ -29,7 +29,6 @@ export default function Comment({ data, openModal }: CommentData) {
   return (
     <>
       {data?.contents.map((content) => {
-        console.log(user?.id, content?.userId);
         return (
           <Row key={content.id} style={{ width: "100%" }}>
             <S.WrapComment>
