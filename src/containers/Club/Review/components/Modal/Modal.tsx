@@ -144,7 +144,6 @@ export const PostModal: React.FC<ComponentProps> = ({ onClick }) => {
       </ModalPopup.Title>
       <ModalPopup.Contents>
         <Input
-          type="text"
           placeholder="동아리 활동에 대한 의견을 남겨주세요."
           value={input}
           onChange={(e) => setInput(e.target.value)}
