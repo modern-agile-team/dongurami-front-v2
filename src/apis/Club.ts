@@ -145,6 +145,12 @@ import {
   ClubFindAllTagsMessageEnum,
   ClubFindAllTagsMessageEnum1,
   ClubFindAllTagsMessageEnum2,
+  ClubFindBestClubReviewCodeEnum,
+  ClubFindBestClubReviewCodeEnum1,
+  ClubFindBestClubReviewCodeEnum2,
+  ClubFindBestClubReviewMessageEnum,
+  ClubFindBestClubReviewMessageEnum1,
+  ClubFindBestClubReviewMessageEnum2,
   ClubFindLatestApplicationFormCodeEnum,
   ClubFindLatestApplicationFormCodeEnum1,
   ClubFindLatestApplicationFormCodeEnum2,
@@ -292,6 +298,7 @@ import {
   ClubRemoveTagsMessageEnum3,
   ClubRemoveTagsMessageEnum4,
   ClubReviewDetailResponseDto,
+  ClubReviewPaginationResponseDto,
   ClubReviewsPaginationResponseDto,
   ClubTagDeleteResponseDto,
   ClubTagsCommonResponseDto,
@@ -341,10 +348,7 @@ export class Club<SecurityDataType = unknown> {
    * @summary 동아리 리스트 조회
    * @request GET:/api/clubs
    */
-  clubFindAllAndCount = (
-    query: ClubFindAllAndCountParams,
-    params: RequestParams = {}
-  ) =>
+  clubFindAllAndCount = (query: ClubFindAllAndCountParams, params: RequestParams = {}) =>
     this.http.request<
       ClubsPaginationResponseDto,
       | {
@@ -653,11 +657,7 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/tags
    * @secure
    */
-  clubAppendTags = (
-    clubId: string,
-    data: BulkAppendClubTagDto,
-    params: RequestParams = {}
-  ) =>
+  clubAppendTags = (clubId: string, data: BulkAppendClubTagDto, params: RequestParams = {}) =>
     this.http.request<
       ClubTagsCommonResponseDto,
       | {
@@ -785,11 +785,7 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/tags/{tagIds}
    * @secure
    */
-  clubRemoveTags = (
-    clubId: string,
-    tagIds: string,
-    params: RequestParams = {}
-  ) =>
+  clubRemoveTags = (clubId: string, tagIds: string, params: RequestParams = {}) =>
     this.http.request<
       ClubTagDeleteResponseDto,
       | {
@@ -997,11 +993,7 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/posts
    * @secure
    */
-  clubCreateClubPost = (
-    clubId: string,
-    data: CreateClubPostRequestBodyDto,
-    params: RequestParams = {}
-  ) =>
+  clubCreateClubPost = (clubId: string, data: CreateClubPostRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       ClubPostCommonResponseDto,
       | {
@@ -1348,11 +1340,7 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/posts/{postId}
    * @secure
    */
-  clubRemoveClubPost = (
-    clubId: string,
-    postId: string,
-    params: RequestParams = {}
-  ) =>
+  clubRemoveClubPost = (clubId: string, postId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubPostDeleteResponseDto,
       | {
@@ -1478,12 +1466,7 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/posts/{postId}/reaction
    * @secure
    */
-  clubCreateClubPostReaction = (
-    clubId: string,
-    postId: string,
-    data: CreateReactionDto,
-    params: RequestParams = {}
-  ) =>
+  clubCreateClubPostReaction = (clubId: string, postId: string, data: CreateReactionDto, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {
@@ -1610,12 +1593,7 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/posts/{postId}/reaction
    * @secure
    */
-  clubRemoveClubPostReaction = (
-    clubId: string,
-    postId: string,
-    data: RemoveReactionDto,
-    params: RequestParams = {}
-  ) =>
+  clubRemoveClubPostReaction = (clubId: string, postId: string, data: RemoveReactionDto, params: RequestParams = {}) =>
     this.http.request<
       void,
       | {
@@ -2095,12 +2073,7 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/posts/{postId}/comments/{commentId}
    * @secure
    */
-  clubRemoveClubPostComment = (
-    clubId: string,
-    postId: string,
-    commentId: string,
-    params: RequestParams = {}
-  ) =>
+  clubRemoveClubPostComment = (clubId: string, postId: string, commentId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubPostCommentDeleteResponseDto,
       | {
@@ -2225,10 +2198,7 @@ export class Club<SecurityDataType = unknown> {
    * @summary 최신 동아리 지원서 폼 조회
    * @request GET:/api/clubs/{clubId}/application-forms/latest
    */
-  clubFindLatestApplicationForm = (
-    clubId: string,
-    params: RequestParams = {}
-  ) =>
+  clubFindLatestApplicationForm = (clubId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubApplicationFormDetailResponseDto,
       | {
@@ -2444,11 +2414,7 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/reviews
    * @secure
    */
-  clubCreateClubReview = (
-    clubId: string,
-    data: CreateClubReviewRequestBodyDto,
-    params: RequestParams = {}
-  ) =>
+  clubCreateClubReview = (clubId: string, data: CreateClubReviewRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       ClubReviewDetailResponseDto,
       | {
@@ -2678,6 +2644,88 @@ export class Club<SecurityDataType = unknown> {
    * No description
    *
    * @tags club
+   * @name ClubFindBestClubReview
+   * @summary 동아리 Best review 조회
+   * @request GET:/api/clubs/{clubId}/reviews/best
+   */
+  clubFindBestClubReview = (clubId: string, params: RequestParams = {}) =>
+    this.http.request<
+      ClubReviewPaginationResponseDto,
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 400
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 1
+           */
+          code?: ClubFindBestClubReviewCodeEnum;
+          /** error message */
+          message?: ClubFindBestClubReviewMessageEnum;
+          /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
+          errors?: CustomValidationError[];
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 404
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 5
+           */
+          code?: ClubFindBestClubReviewCodeEnum1;
+          /** error message */
+          message?: ClubFindBestClubReviewMessageEnum1;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: ClubFindBestClubReviewCodeEnum2;
+          /** error message */
+          message?: ClubFindBestClubReviewMessageEnum2;
+        }
+    >({
+      path: `/api/clubs/${clubId}/reviews/best`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags club
    * @name ClubPatchUpdateClubReview
    * @summary 동아리 후기 업데이트
    * @request PATCH:/api/clubs/{clubId}/reviews/{reviewId}
@@ -2816,11 +2864,7 @@ export class Club<SecurityDataType = unknown> {
    * @request DELETE:/api/clubs/{clubId}/reviews/{reviewId}
    * @secure
    */
-  clubRemoveClubReview = (
-    clubId: string,
-    reviewId: string,
-    params: RequestParams = {}
-  ) =>
+  clubRemoveClubReview = (clubId: string, reviewId: string, params: RequestParams = {}) =>
     this.http.request<
       CountDeleteResponseDto,
       | {
@@ -3292,11 +3336,7 @@ export class Club<SecurityDataType = unknown> {
    * @request POST:/api/clubs/{clubId}/applications
    * @secure
    */
-  clubCreateClubApplication = (
-    clubId: string,
-    data: CreateClubApplicationRequestBodyDto,
-    params: RequestParams = {}
-  ) =>
+  clubCreateClubApplication = (clubId: string, data: CreateClubApplicationRequestBodyDto, params: RequestParams = {}) =>
     this.http.request<
       ClubApplicationDetailResponseDto,
       | {
@@ -3575,11 +3615,7 @@ export class Club<SecurityDataType = unknown> {
    * @request GET:/api/clubs/{clubId}/applications/{applicationId}
    * @secure
    */
-  clubFindOneClubApplication = (
-    clubId: string,
-    applicationId: string,
-    params: RequestParams = {}
-  ) =>
+  clubFindOneClubApplication = (clubId: string, applicationId: string, params: RequestParams = {}) =>
     this.http.request<
       ClubApplicationDetailResponseDto,
       | {
