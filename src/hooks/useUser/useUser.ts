@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuth } from "..";
 
 interface User {
   id: number;
@@ -20,9 +21,11 @@ interface User {
 
 export default function useUser() {
   const [user, setUser] = useState<User | null>(null);
+  const { isLoggedIn } = useAuth();
 
-  const checkUser = () => {
+  const checkUser = async () => {
     const storedUser = localStorage.getItem("user");
+
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser) as User);
@@ -33,8 +36,13 @@ export default function useUser() {
   };
 
   useEffect(() => {
-    checkUser();
-  }, []);
+    if (isLoggedIn) {
+      setTimeout(() => {
+        checkUser();
+      }, 300);
+      checkUser();
+    }
+  }, [isLoggedIn]);
 
   return {
     user,
