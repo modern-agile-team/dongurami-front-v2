@@ -15,5 +15,5 @@ export default function useClubReviewTotal(clubId: string) {
       return response.data.score;
     },
   });
-  return data.data;
+  return data;
 }

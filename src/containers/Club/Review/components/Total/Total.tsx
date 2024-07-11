@@ -7,14 +7,17 @@ import { Converter } from "@/utils";
 import { Icon } from "@/components/Svg";
 
 import * as S from "./emotion";
+import { useUser } from "@/hooks";
 
 interface TotalProps {
   total?: Swagger.ScoreDto;
   totalCount?: number;
-  openModal: (type: string) => void;
+  openModal: (type: string, review?: any) => void;
 }
 
 const Total = ({ total, totalCount, openModal }: TotalProps) => {
+  const { user } = useUser();
+
   const data = {
     "5점": total?.five,
     "4점": total?.four,
@@ -60,16 +63,18 @@ const Total = ({ total, totalCount, openModal }: TotalProps) => {
           })}
         </S.ScoreBreakdown>
       </S.SummarySection>
-      <Row css={{ width: "100%", paddingRight: 20 }} horizonAlign="right">
-        <S.ReviewButton
-          shape="round"
-          backgroundColor="white"
-          color="accent_100"
-          onClick={() => openModal("post")}
-        >
-          나의 후기 등록하기
-        </S.ReviewButton>
-      </Row>
+      {user && (
+        <Row css={{ width: "100%", paddingRight: 20 }} horizonAlign="right">
+          <S.ReviewButton
+            shape="round"
+            backgroundColor="white"
+            color="accent_100"
+            onClick={() => openModal("post")}
+          >
+            나의 후기 등록하기
+          </S.ReviewButton>
+        </Row>
+      )}
     </Column>
   );
 };
