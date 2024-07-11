@@ -30,13 +30,13 @@ const ReviewItem = ({ type, review, openModal }: ItemProps) => {
               </Typography>
             )}
 
-            <StarRating defaultRating={1.5} />
+            <StarRating defaultRating={review?.starRate} />
           </Column>
         </S.Header>
 
         <S.Description>
           <Typography typoSize="Head10" typoColor="primary_100">
-            최고다 최고
+            {review?.description}
           </Typography>
         </S.Description>
 

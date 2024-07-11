@@ -8,12 +8,12 @@ import { useCallback, useEffect, useState } from "react";
 import { Column } from "@/components/Layouts";
 import { Converter } from "@/utils";
 import { ReviewItem } from "@/components/UI/Review";
-
-import { Total } from "./components/Total";
+import { clubAPI } from "@/apis";
 import { useClubReview, useClubReviewTotal } from "@/hooks/clubReview";
 import { SwitchCase } from "@/components/Utilities";
 import { ModalPopup } from "@/components/Design";
 
+import { Total } from "./components/Total";
 import { PostModal, ReviewModal } from "./components/Modal/Modal";
 
 export default function Review({ clubID }: { clubID: string }) {
@@ -49,8 +49,13 @@ export default function Review({ clubID }: { clubID: string }) {
 
   const handleClickUpdate = async () => {};
 
-  const handleClickPost = async (input: string) => {
-    console.log(input);
+  const handleClickPost = async (input: string, rating: number) => {
+    const query = {
+      starRate: rating,
+      description: input,
+      isAnonymous: false,
+    };
+    await clubAPI.clubCreateClubReview(clubID, query);
   };
 
   return (

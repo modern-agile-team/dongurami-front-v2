@@ -14,7 +14,7 @@ interface ModalTitleProps {
 
 interface ComponentProps {
   openModal?: (type: string) => void;
-  onClick?: (input?: any) => Promise<void> | void;
+  onClick?: (input?: any, rating?: any) => Promise<void> | void;
   modalType?: string;
 }
 
@@ -125,7 +125,7 @@ export const ReviewModal: React.FC<ComponentProps> = ({
 
 export const PostModal: React.FC<ComponentProps> = ({ onClick }) => {
   const [input, setInput] = useState<string>("");
-
+  const [rating, setRating] = useState<number>(0);
   return (
     <>
       <ModalPopup.Title>
@@ -140,7 +140,7 @@ export const PostModal: React.FC<ComponentProps> = ({ onClick }) => {
         </Typography>
         <Icon name={"Chat30"} size={24} fill="accent_100" />
 
-        <StarRating />
+        <StarRating onRatingChange={setRating} />
       </ModalPopup.Title>
       <ModalPopup.Contents>
         <Input
@@ -156,7 +156,7 @@ export const PostModal: React.FC<ComponentProps> = ({ onClick }) => {
         onConfirm={(_, hide) => {
           hide();
 
-          onClick && onClick(input);
+          onClick && onClick(input, rating);
         }}
       />
     </>

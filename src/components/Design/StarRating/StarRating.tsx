@@ -7,6 +7,7 @@ interface StarRatingProps {
   initialRating?: number;
   totalStars?: number;
   defaultRating?: number;
+  onRatingChange?: (rating: number) => void;
 }
 
 interface StarProps {
@@ -26,6 +27,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   initialRating = 0,
   totalStars = 5,
   defaultRating,
+  onRatingChange,
 }) => {
   const [rating, setRating] = useState(
     defaultRating ? defaultRating : initialRating
@@ -33,6 +35,7 @@ const StarRating: React.FC<StarRatingProps> = ({
 
   const handleStarClick = (index: number) => {
     setRating(index + 1);
+    onRatingChange && onRatingChange(index + 1);
   };
 
   const getStarFill = (index: number): number => {
