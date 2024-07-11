@@ -298,7 +298,6 @@ import {
   ClubRemoveTagsMessageEnum3,
   ClubRemoveTagsMessageEnum4,
   ClubReviewDetailResponseDto,
-  ClubReviewPaginationResponseDto,
   ClubReviewsPaginationResponseDto,
   ClubTagDeleteResponseDto,
   ClubTagsCommonResponseDto,
@@ -2650,7 +2649,7 @@ export class Club<SecurityDataType = unknown> {
    */
   clubFindBestClubReview = (clubId: string, params: RequestParams = {}) =>
     this.http.request<
-      ClubReviewPaginationResponseDto,
+      ClubReviewDetailResponseDto,
       | {
           /**
            * 에러 발생 시각

@@ -1052,45 +1052,6 @@ export interface ClubReviewsPaginationResponseDto {
   contents: ClubReviewsItemDto[];
 }
 
-export interface ClubReviewPaginationResponseDto {
-  /**
-   * 총 페이지 수
-   * @format integer
-   * @min 1
-   */
-  totalCount: number;
-  /**
-   * 한 요청에 대한 data 수
-   * @format integer
-   * @min 1
-   */
-  pageSize: number;
-  /**
-   * 현재 페이지 번호
-   * @format integer
-   * @min 1
-   */
-  currentPage: number;
-  /**
-   * 다음 페이지 번호, 다음 페이지가 없다면 null 반환
-   * @format integer
-   * @min 2
-   */
-  nextPage: number | null;
-  /**
-   * 다음 페이지 존재 여부
-   * @min 1
-   */
-  hasNext: boolean;
-  /**
-   * 마지막 페이지 번호
-   * @format integer
-   * @min 1
-   */
-  lastPage: number;
-  contents: ClubReviewDto[];
-}
-
 export interface PatchUpdateClubReviewRequestDto {
   /**
    * 동아리 후기 본문
@@ -6339,7 +6300,7 @@ export namespace Api {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = ClubReviewPaginationResponseDto;
+    export type ResponseBody = ClubReviewDetailResponseDto;
   }
   /**
    * No description
