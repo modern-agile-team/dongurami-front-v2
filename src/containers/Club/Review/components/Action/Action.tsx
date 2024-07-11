@@ -10,7 +10,7 @@ import * as S from "./emotion";
 
 interface ItemProps {
   review?: Swagger.ClubReviewDto;
-  openModal: (type: string) => void;
+  openModal: (type: string, review?: Swagger.ClubReviewDto) => void;
 }
 
 const Action = ({ review, openModal }: ItemProps) => {
@@ -19,7 +19,7 @@ const Action = ({ review, openModal }: ItemProps) => {
   return (
     <S.Container horizonAlign="distribute" verticalAlign="top">
       <Row.li>
-        <S.Btn
+        {/* <S.Btn
           style={{
             border: "none",
             padding: 8,
@@ -38,7 +38,7 @@ const Action = ({ review, openModal }: ItemProps) => {
           <Typography typoSize="Head12" typoColor="accent_100">
             좋아요
           </Typography>
-        </S.Btn>
+        </S.Btn> */}
       </Row.li>
       {user && user?.id && review?.userId && (
         <Row.li>
@@ -47,7 +47,7 @@ const Action = ({ review, openModal }: ItemProps) => {
               border: `1px solid ${lightThemeColor.neutral_20}`,
               marginRight: 9,
             }}
-            onClick={() => openModal("update")}
+            onClick={() => openModal("update", review)}
           >
             <Typography typoSize="Head12" typoColor="neutral_30">
               수정
@@ -57,7 +57,7 @@ const Action = ({ review, openModal }: ItemProps) => {
             style={{
               border: `1px solid ${lightThemeColor.neutral_20}`,
             }}
-            onClick={() => openModal("delete")}
+            onClick={() => openModal("delete", review)}
           >
             <Typography typoSize="Head12" typoColor="neutral_30">
               삭제

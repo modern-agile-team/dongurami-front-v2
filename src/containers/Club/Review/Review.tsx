@@ -9,7 +9,11 @@ import { Column } from "@/components/Layouts";
 import { Converter } from "@/utils";
 import { ReviewItem } from "@/components/UI/Review";
 import { clubAPI } from "@/apis";
-import { useClubReview, useClubReviewTotal } from "@/hooks/clubReview";
+import {
+  useClubReview,
+  useClubReviewTotal,
+  useClubBestReview,
+} from "@/hooks/clubReview";
 import { SwitchCase } from "@/components/Utilities";
 import { ModalPopup } from "@/components/Design";
 
@@ -17,12 +21,14 @@ import { Total } from "./components/Total";
 import { PostModal, ReviewModal } from "./components/Modal/Modal";
 
 export default function Review({ clubID }: { clubID: string }) {
-  const total = useClubReviewTotal(clubID);
+  const { data: total } = useClubReviewTotal(clubID);
+  const { data: best } = useClubBestReview(clubID);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useClubReview({ clubId: clubID });
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>("");
+  const [review, setReview] = useState<Swagger.ClubReviewDto>();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,14 +46,19 @@ export default function Review({ clubID }: { clubID: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  const openModal = (type: string) => {
+  const openModal = (type: string, review: Swagger.ClubReviewDto) => {
     setModalType(type);
+
     setIsOpen(true);
+
+    if (review) {
+      setReview(review);
+    }
   };
 
   const handleClickDelete = () => {};
 
-  const handleClickUpdate = async () => {};
+  console.log(review);
 
   const handleClickPost = async (input: string, rating: number) => {
     const query = {
@@ -55,7 +66,16 @@ export default function Review({ clubID }: { clubID: string }) {
       description: input,
       isAnonymous: false,
     };
-    await clubAPI.clubCreateClubReview(clubID, query);
+    if (review) {
+      await clubAPI.clubPatchUpdateClubReview(clubID, review.id, query);
+    } else {
+      try {
+        await clubAPI.clubCreateClubReview(clubID, query);
+      } catch (error) {
+        console.log(error);
+        alert("이미 리뷰를 등록하셨습니다");
+      }
+    }
   };
 
   return (
@@ -66,7 +86,8 @@ export default function Review({ clubID }: { clubID: string }) {
           totalCount={data?.pages[0]?.totalCount}
           openModal={openModal}
         />
-        <ReviewItem type="best" openModal={openModal} />
+
+        {best && <ReviewItem type="best" openModal={openModal} review={best} />}
 
         {data?.pages?.map(
           (page, pageIndex) =>
@@ -88,11 +109,13 @@ export default function Review({ clubID }: { clubID: string }) {
             delete: (
               <ReviewModal onClick={handleClickDelete} modalType={modalType} />
             ),
-            update: (
-              <ReviewModal onClick={handleClickUpdate} modalType={modalType} />
-            ),
+            update: <ReviewModal modalType={modalType} openModal={openModal} />,
             input: (
-              <PostModal onClick={handleClickPost} modalType={modalType} />
+              <PostModal
+                onClick={handleClickPost}
+                modalType={modalType}
+                review={review}
+              />
             ),
           }}
         />

@@ -14,7 +14,7 @@ import { lightThemeColor } from "@/styles/theme";
 interface ItemProps {
   type?: string;
   review?: Swagger.ClubReviewDto;
-  openModal: (type: string) => void;
+  openModal: (type: string, review?: any) => void;
 }
 
 const ReviewItem = ({ type, review, openModal }: ItemProps) => {

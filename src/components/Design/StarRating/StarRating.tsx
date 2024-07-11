@@ -56,7 +56,7 @@ const StarRating: React.FC<StarRatingProps> = ({
           key={index}
           fill={getStarFill(index)}
           onClick={() => {
-            defaultRating ? null : handleStarClick(index);
+            onRatingChange && handleStarClick(index);
           }}
         />
       ))}

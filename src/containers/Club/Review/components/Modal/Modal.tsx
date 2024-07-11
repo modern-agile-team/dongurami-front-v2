@@ -13,9 +13,10 @@ interface ModalTitleProps {
 }
 
 interface ComponentProps {
-  openModal?: (type: string) => void;
+  openModal?: (type: string, review?: any) => void;
   onClick?: (input?: any, rating?: any) => Promise<void> | void;
   modalType?: string;
+  review?: Swagger.ClubReviewDto;
 }
 
 const Input = styled.textarea`
@@ -123,9 +124,9 @@ export const ReviewModal: React.FC<ComponentProps> = ({
   );
 };
 
-export const PostModal: React.FC<ComponentProps> = ({ onClick }) => {
-  const [input, setInput] = useState<string>("");
-  const [rating, setRating] = useState<number>(0);
+export const PostModal: React.FC<ComponentProps> = ({ onClick, review }) => {
+  const [input, setInput] = useState<string>(review?.description ?? "");
+  const [rating, setRating] = useState<number>(review?.starRate ?? 0);
   return (
     <>
       <ModalPopup.Title>
@@ -140,7 +141,7 @@ export const PostModal: React.FC<ComponentProps> = ({ onClick }) => {
         </Typography>
         <Icon name={"Chat30"} size={24} fill="accent_100" />
 
-        <StarRating onRatingChange={setRating} />
+        <StarRating onRatingChange={setRating} defaultRating={rating} />
       </ModalPopup.Title>
       <ModalPopup.Contents>
         <Input
