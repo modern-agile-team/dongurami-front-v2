@@ -21,9 +21,9 @@ import { Total } from "./components/Total";
 import { PostModal, ReviewModal } from "./components/Modal/Modal";
 
 export default function Review({ clubID }: { clubID: string }) {
-  const { data: total } = useClubReviewTotal(clubID);
-  const { data: best } = useClubBestReview(clubID);
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data: total, refetch: refetchTotal } = useClubReviewTotal(clubID);
+  const { data: best, refetch: refetchBest } = useClubBestReview(clubID);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
     useClubReview({ clubId: clubID });
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -56,9 +56,13 @@ export default function Review({ clubID }: { clubID: string }) {
     }
   };
 
-  const handleClickDelete = () => {};
+  const handleClickDelete = async () => {
+    const response = await clubAPI.clubRemoveClubReview(clubID, review?.id);
 
-  console.log(review);
+    refetchTotal();
+    refetchBest();
+    refetch();
+  };
 
   const handleClickPost = async (input: string, rating: number) => {
     const query = {
@@ -66,15 +70,20 @@ export default function Review({ clubID }: { clubID: string }) {
       description: input,
       isAnonymous: false,
     };
-    if (review) {
-      await clubAPI.clubPatchUpdateClubReview(clubID, review.id, query);
-    } else {
-      try {
+
+    try {
+      if (review) {
+        await clubAPI.clubPatchUpdateClubReview(clubID, review.id, query);
+      } else {
         await clubAPI.clubCreateClubReview(clubID, query);
-      } catch (error) {
-        console.log(error);
-        alert("이미 리뷰를 등록하셨습니다");
       }
+
+      refetchTotal();
+      refetchBest();
+      refetch();
+    } catch (error) {
+      console.log(error);
+      alert("이미 리뷰를 등록하셨습니다");
     }
   };
 
