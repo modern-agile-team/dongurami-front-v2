@@ -138,7 +138,7 @@ export class User<SecurityDataType = unknown> {
    * @summary 유저 정보 단일 조회
    * @request GET:/api/users/{userId}
    */
-  userFindOneUserOrNotFound = (userId: number, params: RequestParams = {}) =>
+  userFindOneUserOrNotFound = (userId: string, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
       | {
@@ -221,7 +221,7 @@ export class User<SecurityDataType = unknown> {
    * @request PUT:/api/users/{userId}
    * @secure
    */
-  userPutUpdate = (userId: number, data: PutUpdateUserDto, params: RequestParams = {}) =>
+  userPutUpdate = (userId: string, data: PutUpdateUserDto, params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
       | {

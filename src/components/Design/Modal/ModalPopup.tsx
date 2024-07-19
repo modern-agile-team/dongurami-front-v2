@@ -203,9 +203,6 @@ ModalPopup.Bottom = Bottom;
 export default ModalPopup;
 
 const getPopupHeight = (width: 440 | 660, fitContent: boolean) => {
-  if (width === 660) {
-    return fitContent ? "auto" : "160px";
-  }
   return "auto";
 };
 

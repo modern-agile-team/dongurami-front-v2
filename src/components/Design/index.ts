@@ -9,3 +9,4 @@ export * from "./Loader";
 export * from "./Pagination";
 export * from "./TextField";
 export * from "./Modal";
+export * from "./StarRating";

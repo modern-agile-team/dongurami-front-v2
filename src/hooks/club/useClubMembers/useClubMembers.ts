@@ -7,10 +7,10 @@
 import { clubAPI } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useClubMembers(clubID: number) {
+export default function useClubMembers(clubID: string) {
   return useQuery({
     queryKey: ["GET_CLUB_MEMBERS", { clubID }],
     queryFn: async () =>
-      (await clubAPI.clubFindAllMembers(Number(clubID))).data,
+      (await clubAPI.clubFindAllMembers(String(clubID))).data,
   });
 }

@@ -19,15 +19,14 @@ import queryClient from "@/globalState/queryClient";
 
 const CLUB_TABS: Record<string, string> = {
   home: "홈",
-  community: "커뮤니티",
-  gallery: "갤러리",
-  calendar: "캘린더",
+  notice: "공지",
+  activity: "활동",
   review: "리뷰",
   apply: "지원하기",
   manage: "관리",
 };
 
-export default function ClubPage({ clubID }: { clubID: number }) {
+export default function ClubPage({ clubID }: { clubID: string }) {
   const router = useRouter();
 
   const currentTab = !router.query.tab
@@ -38,7 +37,7 @@ export default function ClubPage({ clubID }: { clubID: number }) {
 
   const [tab, setTab] = useState<string>(currentTab);
 
-  const { data: detail } = useClubDetail(Number(clubID));
+  const { data: detail } = useClubDetail(clubID);
 
   const changeTab = (to: string) => {
     router.push(
@@ -59,7 +58,6 @@ export default function ClubPage({ clubID }: { clubID: number }) {
       changeTab("home");
     }
   }, [tab]);
-
   if (!tab) return;
   return (
     <Row css={{ height: "100%" }}>
@@ -77,10 +75,10 @@ export default function ClubPage({ clubID }: { clubID: number }) {
           condition={tab}
           cases={{
             home: <Club.Home clubID={clubID} />,
-            community: <Club.Notice />,
-            gallery: <Club.Activity />,
+            notice: <Club.Notice />,
+            activity: <Club.Activity />,
             calendar: <Club.Schedule />,
-            review: <Club.Review />,
+            review: <Club.Review clubID={clubID} />,
             apply: <Club.Apply clubID={clubID} />,
             manage: <Club.Manage />,
           }}
@@ -102,13 +100,15 @@ export const getServerSideProps: GetServerSideProps = async ({
     await queryClient.prefetchQuery({
       queryKey: ["GET_CLUB_DETAIL", { clubID }],
       queryFn: async () =>
-        (await clubAPI.clubFindOneOrNotFound(Number(clubID))).data,
+        (await clubAPI.clubFindOneOrNotFound(String(clubID))).data,
     });
 
     await queryClient.prefetchQuery({
       queryKey: ["GET_CLUB_MEMBERS", { clubID }],
-      queryFn: async () =>
-        (await clubAPI.clubFindAllMembers(Number(clubID))).data,
+      queryFn: async () => {
+        const response = await clubAPI.clubFindAllMembers(String(clubID));
+        return response.data;
+      },
     });
 
     return {

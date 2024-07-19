@@ -16,7 +16,7 @@ import { Button } from "@/components/Design";
 
 import * as S from "./emotion";
 
-export default function Apply({ clubID }: { clubID: number }) {
+export default function Apply({ clubID }: { clubID: string }) {
   const router = useRouter();
 
   const { isLoading, data, isError, error } = useQuery({

@@ -32,7 +32,7 @@ export default function List({ pageSize }: ListProps) {
   const clubListAPI = useClubList({
     name: searchText,
     pageSize,
-    categoryId: selectedCategory?.id,
+    ...(selectedCategory?.id && { categoryId: String(selectedCategory.id) }),
   });
 
   const changeSearchText = (ev: React.ChangeEvent<HTMLInputElement>) => {
