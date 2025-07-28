@@ -5,12 +5,20 @@
  */
 
 import { Auth } from "./Auth";
+import { Admin } from "./Admin";
+import { Attachment } from "./Attachment";
 import { AuthSocial } from "./AuthSocial";
-import { FreePosts } from "./FreePosts";
+import { Dev } from "./Dev";
+import { FreePost } from "./FreePost";
+import { FreePostComment } from "./FreePostComment";
 import { Majors } from "./Majors";
-import { NoticePosts } from "./NoticePosts";
-import { Root } from "./Root";
-import { Users } from "./Users";
+import { NoticePost } from "./NoticePost";
+import { NoticePostComment } from "./NoticePostComment";
+import { Post } from "./Post";
+import { PostTag } from "./PostTag";
+import { User } from "./User";
+import { Club } from "./Club";
+import { ClubCategory } from "./ClubCategory";
 import { HttpClient } from "./http-client";
 import { validator } from "@/utils";
 
@@ -37,8 +45,16 @@ instance.interceptors.request.use((value) => {
 
 export const authAPI = new Auth(httpClient);
 export const authSocialAPI = new AuthSocial(httpClient);
-export const freePostsAPI = new FreePosts(httpClient);
+export const freePostsAPI = new FreePost(httpClient);
+export const freePostCommentAPI = new FreePostComment(httpClient);
 export const majorsAPI = new Majors(httpClient);
-export const noticePostsAPI = new NoticePosts(httpClient);
-export const rootAPI = new Root(httpClient);
-export const usersAPI = new Users(httpClient);
+export const noticePostsAPI = new NoticePost(httpClient);
+export const usersAPI = new User(httpClient);
+export const clubAPI = new Club(httpClient);
+export const clubCategoryAPI = new ClubCategory(httpClient);
+export const adminAPI = new Admin(httpClient);
+export const attachmentAPI = new Attachment(httpClient);
+export const devAPI = new Dev(httpClient);
+export const noticePostCommentAPI = new NoticePostComment(httpClient);
+export const postAPI = new Post(httpClient);
+export const postTagAPI = new PostTag(httpClient);

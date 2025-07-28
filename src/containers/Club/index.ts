@@ -10,3 +10,5 @@ export * from "./Home";
 export * from "./Notice";
 export * from "./Review";
 export * from "./Schedule";
+export * from "./Sidebar";
+export * from "./Manage";

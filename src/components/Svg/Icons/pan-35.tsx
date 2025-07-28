@@ -1,0 +1,53 @@
+import React, { forwardRef, Ref } from "react";
+import { IconProps } from "../Icon";
+import Svg from "../Svg";
+const SvgPan35 = forwardRef(
+  (
+    { size, title, desc, titleId, descId, ...props }: IconProps,
+    ref: Ref<SVGSVGElement>
+  ) => {
+    let ariaLabelledBy: string | undefined = titleId ? titleId : "";
+    ariaLabelledBy += desc && descId ? ` ${descId}` : "";
+    ariaLabelledBy = ariaLabelledBy ? ariaLabelledBy : undefined;
+    props["aria-labelledby"] = ariaLabelledBy;
+    return (
+      <Svg
+        width={size}
+        height={size}
+        viewBox="0 0 13 13"
+        xmlns="http://www.w3.org/2000/svg"
+        title={title}
+        titleId={titleId}
+        desc={desc}
+        descId={descId}
+        aria-labelledby={ariaLabelledBy}
+        aria-hidden={!ariaLabelledBy}
+        ref={ref}
+        {...props}
+      >
+        {!!title && <title id={titleId}>{title}</title>}
+        {!!desc && <desc id={descId}>{desc}</desc>}
+        <g id="solar:pen-2-bold">
+          <path
+            id="Vector"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M1.68262 11.5393C1.68262 11.4363 1.72354 11.3375 1.79638 11.2646C1.86922 11.1918 1.96801 11.1509 2.07102 11.1509H10.357C10.46 11.1509 10.5588 11.1918 10.6317 11.2646C10.7045 11.3375 10.7454 11.4363 10.7454 11.5393C10.7454 11.6423 10.7045 11.7411 10.6317 11.8139C10.5588 11.8868 10.46 11.9277 10.357 11.9277H2.07102C1.96801 11.9277 1.86922 11.8868 1.79638 11.8139C1.72354 11.7411 1.68262 11.6423 1.68262 11.5393Z"
+          />
+          <path
+            id="Vector_2"
+            d="M5.96509 7.8773L9.02935 4.81303C8.51379 4.59782 8.04556 4.28338 7.65128 3.88758C7.25525 3.49319 6.94062 3.02478 6.72532 2.50899L3.66055 5.57327C3.42129 5.81253 3.30166 5.93164 3.19912 6.0637C3.07779 6.2192 2.97377 6.38747 2.88891 6.56552C2.81693 6.71622 2.76359 6.87676 2.65639 7.19733L2.09294 8.88923C2.06708 8.96663 2.0633 9.04971 2.08203 9.12914C2.10075 9.20857 2.14123 9.28121 2.19894 9.33892C2.25664 9.39662 2.32928 9.43711 2.40871 9.45583C2.48814 9.47455 2.57122 9.47077 2.64862 9.44491L4.34 8.88147C4.66108 8.77426 4.82162 8.72092 4.97232 8.64842C5.15045 8.56391 5.31873 8.46005 5.47414 8.33873C5.6062 8.23567 5.72531 8.11604 5.96457 7.8773M9.8797 3.96267C10.031 3.81135 10.151 3.63172 10.2328 3.43402C10.3147 3.23633 10.3568 3.02445 10.3568 2.81047C10.3568 2.5965 10.3146 2.38463 10.2327 2.18695C10.1508 1.98927 10.0308 1.80966 9.87944 1.65838C9.72812 1.50709 9.54848 1.3871 9.35079 1.30523C9.1531 1.22337 8.94121 1.18125 8.72724 1.18127C8.51327 1.1813 8.3014 1.22347 8.10372 1.30537C7.90605 1.38728 7.72644 1.50732 7.57516 1.65864L7.20746 2.02633L7.22352 2.07294C7.35817 2.46083 7.61244 2.9699 8.09044 3.4479C8.48918 3.84891 8.97618 4.15111 9.51252 4.33036L9.8797 3.96267Z"
+          />
+        </g>
+      </Svg>
+    );
+  }
+);
+SvgPan35.defaultProps = {
+  size: 35,
+  focusable: false,
+  "aria-hidden": true,
+  role: "img",
+  fill: "currentcolor",
+};
+export default SvgPan35;

@@ -4,6 +4,14 @@
  * Copyright (c) 2023 Your Company
  */
 
-export default function Home() {
-  return <div>동아리 홈</div>;
+import { Column } from "@/components/Layouts";
+
+import * as C from "./components";
+
+export default function Home({ clubID }: { clubID: string }) {
+  return (
+    <Column css={{ width: "100%", height: "100%" }}>
+      <C.Information clubID={clubID} />
+    </Column>
+  );
 }

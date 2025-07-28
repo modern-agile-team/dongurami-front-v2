@@ -4,83 +4,120 @@
  * Copyright (c) 2023 Your Company
  */
 
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { dehydrate } from "@tanstack/react-query";
+import { GetServerSideProps } from "next";
 
-import { Button, Row, SwitchCase } from "@/components";
-import { Club } from "@/containers";
+import * as Club from "@/containers/Club";
+import { Row } from "@/components/Layouts";
+import { SwitchCase } from "@/components/Utilities";
+import { clubAPI } from "@/apis";
+import { useClubDetail } from "@/hooks/club";
+import queryClient from "@/globalState/queryClient";
 
-const CLUB_TABS = {
+const CLUB_TABS: Record<string, string> = {
   home: "홈",
   notice: "공지",
   activity: "활동",
-  schedule: "일정",
-  review: "후기",
-  apply: "지원서 작성",
+  review: "리뷰",
+  apply: "지원하기",
+  manage: "관리",
 };
 
-export default function ClubPage() {
+export default function ClubPage({ clubID }: { clubID: string }) {
   const router = useRouter();
-  const { clubID, tab } = router.query;
 
-  const currentTab = useMemo(
-    () =>
-      typeof tab === "string" ? (tab as keyof typeof CLUB_TABS) : undefined,
-    [tab]
-  );
+  const currentTab = !router.query.tab
+    ? "home"
+    : typeof router.query.tab === "string"
+      ? router.query.tab
+      : router.query.tab[0];
 
-  const changeTab = (to: keyof typeof CLUB_TABS) => {
+  const [tab, setTab] = useState<string>(currentTab);
+
+  const { data: detail } = useClubDetail(clubID);
+
+  const changeTab = (to: string) => {
     router.push(
       { pathname: router.pathname, query: { ...router.query, tab: to } },
       undefined,
       { shallow: true }
     );
-  };
 
-  const handleClickTabButton = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    const target = ev.currentTarget as HTMLButtonElement;
-    const tab = target.dataset["tab"] as keyof typeof CLUB_TABS;
-    changeTab(tab);
+    setTab(to);
   };
 
   useEffect(() => {
     if (!clubID) return;
-    if (!currentTab || !CLUB_TABS[currentTab]) {
+  }, [clubID]);
+
+  useEffect(() => {
+    if (!tab || !CLUB_TABS[tab]) {
       changeTab("home");
     }
-  }, [clubID, currentTab]);
-
-  if (!currentTab) return;
+  }, [tab]);
+  if (!tab) return;
   return (
-    <div>
+    <Row css={{ height: "100%" }}>
       <Head>
-        <title>동그라미 - {clubID} 동아리</title>
+        <title>동그라미 - {detail?.club.name}</title>
       </Head>
-      <Row.ul gap={8}>
-        {Object.entries(CLUB_TABS).map(([tabKey, tabValue]) => (
-          <Row.li key={tabKey}>
-            <Button
-              data-tab={tabKey}
-              filled="contained"
-              onClick={handleClickTabButton}
-            >
-              {tabValue}
-            </Button>
-          </Row.li>
-        ))}
-      </Row.ul>
-      <SwitchCase
-        condition={currentTab}
-        cases={{
-          home: <Club.Home />,
-          notice: <Club.Notice />,
-          activity: <Club.Activity />,
-          schedule: <Club.Schedule />,
-          review: <Club.Review />,
-          apply: <Club.Apply />,
+      <Club.Sidebar tabList={CLUB_TABS} changeTab={changeTab} />
+      <div
+        css={{
+          width: "100%",
+          height: "100%",
         }}
-      />
-    </div>
+      >
+        <SwitchCase
+          condition={tab}
+          cases={{
+            home: <Club.Home clubID={clubID} />,
+            notice: <Club.Notice />,
+            activity: <Club.Activity />,
+            calendar: <Club.Schedule />,
+            review: <Club.Review clubID={clubID} />,
+            apply: <Club.Apply clubID={clubID} />,
+            manage: <Club.Manage />,
+          }}
+        />
+      </div>
+    </Row>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  query,
+}) => {
+  const clubID = params?.clubID;
+
+  if (!clubID) throw "일치하는 동아리가 없습니다.";
+
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: ["GET_CLUB_DETAIL", { clubID }],
+      queryFn: async () =>
+        (await clubAPI.clubFindOneOrNotFound(String(clubID))).data,
+    });
+
+    await queryClient.prefetchQuery({
+      queryKey: ["GET_CLUB_MEMBERS", { clubID }],
+      queryFn: async () => {
+        const response = await clubAPI.clubFindAllMembers(String(clubID));
+        return response.data;
+      },
+    });
+
+    return {
+      props: {
+        clubID: typeof clubID === "string" ? Number(clubID) : Number(clubID[0]),
+        dehydratedProps: dehydrate(queryClient),
+      },
+    };
+  } catch {
+    throw Error("서버 요청에 실패했습니다. 개발자에게 문의해주세요.");
+  }
+};

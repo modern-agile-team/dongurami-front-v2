@@ -9,3 +9,4 @@ export * from "./breakPoint";
 export { default as domElementList } from "./domElement";
 export * from "./filterHTMLAttribute";
 export * from "./validator";
+export * from "./converter";

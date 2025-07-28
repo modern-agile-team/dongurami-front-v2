@@ -60,6 +60,13 @@ declare module "@emotion/react" {
     fontWeight: number;
     lineHeight: string;
   };
+
+  type BreakPoints = {
+    pc: string;
+    tablet: string;
+    mobile1: string;
+    mobile2: string;
+  };
   export interface Theme {
     color: ThemeColor;
     typography: {
@@ -69,6 +76,15 @@ declare module "@emotion/react" {
       Head4: ThemeTypography;
       Head5: ThemeTypography;
       Head6: ThemeTypography;
+      Head7: ThemeTypography;
+      Head8: ThemeTypography;
+      Head9: ThemeTypography;
+      Head10: ThemeTypography;
+      Head11: ThemeTypography;
+      Head12: ThemeTypography;
+      RHead13: ThemeTypography;
+      BHead14: ThemeTypography;
+      RHead14: ThemeTypography;
       SubTitle1: ThemeTypography;
       SubTitle2: ThemeTypography;
       SubTitle3: ThemeTypography;
@@ -76,6 +92,7 @@ declare module "@emotion/react" {
       Body1: ThemeTypography;
       Body2: ThemeTypography;
     };
+    breakpoints: BreakPoints;
     mode: "dark" | "light";
   }
 }

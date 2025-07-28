@@ -6,7 +6,7 @@
 
 import styled from "@emotion/styled";
 
-import { Column, Grid } from "@/components";
+import { Column, Grid } from "@/components/Layouts";
 
 export const Wrap = styled.div`
   border: 1px solid red;

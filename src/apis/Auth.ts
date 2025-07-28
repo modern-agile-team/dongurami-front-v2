@@ -10,17 +10,17 @@
  */
 
 import {
-  AuthGetAccessTokenCodeEnum,
-  AuthGetAccessTokenMessageEnum,
   AuthGetProfileCodeEnum,
+  AuthGetProfileCodeEnum1,
   AuthGetProfileMessageEnum,
+  AuthGetProfileMessageEnum1,
   AuthSignInCodeEnum,
   AuthSignInCodeEnum1,
   AuthSignInMessageEnum,
   AuthSignInMessageEnum1,
+  CustomValidationError,
   SignInRequestBodyDto,
   UserDetailResponseDto,
-  ValidationError,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
@@ -66,7 +66,7 @@ export class Auth<SecurityDataType = unknown> {
           /** error message */
           message?: AuthSignInMessageEnum;
           /** 해당 필드는 request parameter 가 잘못된 경우에만 리턴됩니다. */
-          errors?: ValidationError[];
+          errors?: CustomValidationError[];
         }
       | {
           /**
@@ -109,69 +109,50 @@ export class Auth<SecurityDataType = unknown> {
   authGetProfile = (params: RequestParams = {}) =>
     this.http.request<
       UserDetailResponseDto,
-      {
-        /**
-         * 에러 발생 시각
-         * @format date-time
-         */
-        timestamp?: string;
-        /**
-         * http status code
-         * @format integer
-         * @min 400
-         * @example 401
-         */
-        statusCode?: number;
-        /**
-         * error code
-         * @example 3
-         */
-        code?: AuthGetProfileCodeEnum;
-        /** error message */
-        message?: AuthGetProfileMessageEnum;
-      }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 401
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 3
+           */
+          code?: AuthGetProfileCodeEnum;
+          /** error message */
+          message?: AuthGetProfileMessageEnum;
+        }
+      | {
+          /**
+           * 에러 발생 시각
+           * @format date-time
+           */
+          timestamp?: string;
+          /**
+           * http status code
+           * @format integer
+           * @min 400
+           * @example 500
+           */
+          statusCode?: number;
+          /**
+           * error code
+           * @example 0
+           */
+          code?: AuthGetProfileCodeEnum1;
+          /** error message */
+          message?: AuthGetProfileMessageEnum1;
+        }
     >({
       path: `/api/auth/profile`,
-      method: "GET",
-      secure: true,
-      format: "json",
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags auth
-   * @name AuthGetAccessToken
-   * @summary 개발용으로 생성된 accessToken 생성 api
-   * @request GET:/api/auth/access-token/{userId}
-   * @secure
-   */
-  authGetAccessToken = (userId: number, params: RequestParams = {}) =>
-    this.http.request<
-      UserDetailResponseDto,
-      {
-        /**
-         * 에러 발생 시각
-         * @format date-time
-         */
-        timestamp?: string;
-        /**
-         * http status code
-         * @format integer
-         * @min 400
-         * @example 401
-         */
-        statusCode?: number;
-        /**
-         * error code
-         * @example 3
-         */
-        code?: AuthGetAccessTokenCodeEnum;
-        /** error message */
-        message?: AuthGetAccessTokenMessageEnum;
-      }
-    >({
-      path: `/api/auth/access-token/${userId}`,
       method: "GET",
       secure: true,
       format: "json",

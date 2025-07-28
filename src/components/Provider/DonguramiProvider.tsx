@@ -15,20 +15,12 @@ import {
   typographyTheme,
   lightThemeColor,
   darkThemeColor,
+  breakpointsTheme,
 } from "@/styles/theme";
 import { themeModeAtom } from "@/globalState";
 import { useClientEffect } from "@/hooks";
 import ErrorBoundary from "./ErrorBoundary";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 1000,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    },
-  },
-});
+import queryClient from "@/globalState/queryClient";
 
 const store = createStore();
 
@@ -58,7 +50,7 @@ const DonguramiThemeProvider = (props: HTMLAttributes<HTMLElement>) => {
         break;
       }
       case "light": {
-        document.body.style.backgroundColor = "#f7f7f7";
+        document.body.style.backgroundColor = "#fff";
         break;
       }
     }
@@ -70,6 +62,7 @@ const DonguramiThemeProvider = (props: HTMLAttributes<HTMLElement>) => {
         color: mode === "light" ? lightThemeColor : darkThemeColor,
         typography: typographyTheme,
         mode,
+        breakpoints: breakpointsTheme,
       }}
     >
       {props.children}

@@ -2,10 +2,17 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import * as S from "./emotion";
-import { Typography } from "@/components";
+import { useAuth } from "@/hooks";
+import { Typography } from "@/components/Utilities";
+import { Icon } from "@/components/Svg";
 
-export default function SearchWriter() {
+interface BoardType {
+  type: string;
+}
+
+export default function SearchWriter({ type }: BoardType) {
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
 
   const [query, setQuery] = useState<string>("");
 
@@ -15,7 +22,8 @@ export default function SearchWriter() {
 
   function handleClickPostWrite() {
     router.push({
-      pathname: `free/write/`,
+      pathname: `board/write/`,
+      query: type,
     });
   }
 
@@ -36,18 +44,26 @@ export default function SearchWriter() {
 
         <S.Input
           type="text"
-          placeholder="Enter your search query"
+          placeholder="검색어를 입력하세요"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={handleKeyPress}
         />
       </S.WrapSearch>
 
-      <S.WrapButton onClick={handleClickPostWrite}>
-        <Typography typoColor="white" typoSize="Head5">
-          글쓰기
-        </Typography>
-      </S.WrapButton>
+      {/* 관리자 구분 값 필요 */}
+      {isLoggedIn ? (
+        <S.WrapButton onClick={handleClickPostWrite}>
+          <Icon name="Pan35" size={40} fill="neutral_10" />
+          <Typography
+            typoColor="white"
+            typoSize="Head5"
+            style={{ marginLeft: 11 }}
+          >
+            글쓰기
+          </Typography>
+        </S.WrapButton>
+      ) : null}
     </S.Container>
   );
 }

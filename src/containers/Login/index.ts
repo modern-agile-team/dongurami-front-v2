@@ -4,5 +4,5 @@
  * Copyright (c) 2023 Your Company
  */
 
-export * from "./Layout";
+export * from "./LoginModal";
 export * from "./Form";

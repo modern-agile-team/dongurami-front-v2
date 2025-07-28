@@ -1,0 +1,8 @@
+/*
+ * Created on Fri Jan 19 2024
+ *
+ * Copyright (c) 2024 Your Company
+ */
+
+export { default as Modal } from "./Modal";
+export { default as ModalPopup } from "./ModalPopup";
